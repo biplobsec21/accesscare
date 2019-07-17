@@ -111,8 +111,7 @@
 										@else
 											<select class="form-control" name="physician_id">
 
-												<option value="{{ Auth::user()->id }}" selected
-												        disabled="">{{ Auth::user()->full_name }}</option>
+												<option value="{{ Auth::user()->id }}" selected>{{ Auth::user()->full_name }}</option>
 											</select>
 										@endif
 
@@ -145,7 +144,7 @@
 													<select
 														class="form-control  {{ $errors->has('patient_dob.month') ? ' is-invalid' : '' }}"
 														name="patient_dob[month]">
-														<option disabled hidden selected value="">Month</option>
+														<option hidden selected value="">Month</option>
 														<option value="1"
 														        @if(optional(optional(old('patient_dob')))['month'] == "1") selected @endif >
 															January
@@ -224,7 +223,7 @@
 											<label class="d-block">Gender</label>
 											<select name="patient_gender"
 											        class="form-control{{ $errors->has('patient_gender') ? ' is-invalid' : '' }}">
-												<option disabled hidden selected value="">-- Select --</option>
+												<option hidden selected value="">-- Select --</option>
 												<option value="1" {{old('patient_gender') == '1' ? 'selected' : ''}}>
 													Male
 												</option>
@@ -273,7 +272,7 @@
 										<select
 											class="form-control select2{{ $errors->has('drug_id') ? ' is-invalid' : '' }}"
 											name="drug_id">
-											<option disabled hidden selected value="">-- Select --</option>
+											<option hidden selected value="">-- Select --</option>
 											@foreach($drugs as $drug)
 												<option
 													value="{{ $drug->id }}" {{ old("drug_id") == $drug->id ? "selected":"" }}>{{ $drug->name }}</option>
@@ -327,8 +326,7 @@
 											</div>
 											<input type="text"
 											       class="datepicker form-control {{ $errors->has('req_date') ? ' is-invalid' : '' }}"
-											       name="req_date" id="req_date" value="{{ old('req_date') }}"
-											       required="required"/>
+											       name="req_date" id="req_date" value="{{ old('req_date') }}"/>
 											<div class="invalid-feedback">
 												{{ $errors->first('req_date') }}
 											</div>
@@ -404,7 +402,6 @@
                 if (month != 2) {
 
                     $("#dob_year_invalid").text("Date must have 2 digit!");
-                    $('.btnSubmit').attr("disabled", true);
 
                 } else {
 
@@ -419,7 +416,6 @@
                     }
 
                     $('#dob_year_invalid').text("");
-                    $('.btnSubmit').removeAttr("disabled");
 
                 }
 
@@ -431,8 +427,6 @@
                 if (year_length != 4) {
 
                     $("#dob_year_invalid").text("Year must have 4 digit!");
-                    $('.btnSubmit').attr("disabled", true);
-
                 } else {
 
                     if (parseInt($(".dob_year").val()) < parseInt(1910)) {
@@ -446,7 +440,6 @@
                     }
 
                     $('#dob_year_invalid').text("");
-                    $('.btnSubmit').removeAttr("disabled");
 
                 }
             });

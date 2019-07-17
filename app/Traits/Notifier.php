@@ -30,6 +30,7 @@ trait Notifier
 
 	protected function sendMail($notice, $mailer, $context, $user)
 	{
+		return;
 		$content = new \stdClass();
 		$content->subject = 'V2ADEV' . $mailer->subject;
 		$content->message = $this->applyTokens($mailer->html, $context);
