@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 trait WorksWithRIDs
 {
-	use \App\Helpers\Traits\GeneratesStrings, Hashable;
+	use \App\Traits\GeneratesStrings, Hashable;
 
 	/**
 	 * @var int $ridRandSectionLen The length of the random string in a rid number
@@ -30,6 +30,8 @@ trait WorksWithRIDs
 	 * @var string $appealSuffix The suffix for appeals
 	 */
 	private $appealSuffix = 'AP';
+
+	protected $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 
 	/**
 	 * Generate a rid number and check to ensure that it is unique
@@ -86,14 +88,18 @@ trait WorksWithRIDs
 		}
 	}
 
-	/**
+	/*
 	 * Generate a password for a rid
 	 *
 	 * @return array The `hashed' and `unhashed` passwords
 	 */
 	protected function generateRidPassword(): array
 	{
-		$string = $this->generate();
+		$string = '';
+		for ($i = 0; $i < config('eac.password_length'); $i++) {
+			$string .= $this->chars[mt_rand(0, strlen($this->chars) - 1)];
+		}
+
 		return [
 			'unhashed' => $string,
 			'hashed' => $this->makeHash($string),

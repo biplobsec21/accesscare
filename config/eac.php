@@ -34,6 +34,8 @@ return [
 		'maxIntervalLength' => 20,
 	],
 
+	'password_length' => 8,
+
 	/**
 	 * Storage settings
 	 */

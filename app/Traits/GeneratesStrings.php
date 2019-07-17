@@ -125,31 +125,31 @@ trait GeneratesStrings
  }
  
 
-  /*
-   * Generate a random string
-   *
-   * @param int $len The length of the desired string
-   * @return string The generated string
-   */
-  
-  public  function newID($model)
-  {
-
-    // $generatedWithPrefix = $model::getTablePrefix().substr(str_shuffle(MD5(microtime())), 0, 10);;
-    
-    // $result = $model::where('id', '=', $generatedWithPrefix);
-
-    // if ($result->count()) {
-    //   return $this->generateWithPrefixUnique($model);
-    // }
-    // return $generatedWithPrefix;
-    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    $str = '';
-    for ($i = 0; $i < 10; $i++) {
-      // $str .= self::$chars[random_int(0, strlen(self::$chars) - 1)];
-      $str .= $chars[random_int(0, strlen($chars) - 1)];
-    }
-    return $str;
-    // return $generatedWithPrefix;
-  }
+//  /*
+//   * Generate a random string
+//   *
+//   * @param int $len The length of the desired string
+//   * @return string The generated string
+//   */
+//
+//  public function newID($model)
+//  {
+//
+//    // $generatedWithPrefix = $model::getTablePrefix().substr(str_shuffle(MD5(microtime())), 0, 10);;
+//
+//    // $result = $model::where('id', '=', $generatedWithPrefix);
+//
+//    // if ($result->count()) {
+//    //   return $this->generateWithPrefixUnique($model);
+//    // }
+//    // return $generatedWithPrefix;
+//    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+//    $str = '';
+//    for ($i = 0; $i < 10; $i++) {
+//      // $str .= self::$chars[random_int(0, strlen(self::$chars) - 1)];
+//      $str .= $chars[random_int(0, strlen($chars) - 1)];
+//    }
+//    return $str;
+//    // return $generatedWithPrefix;
+//  }
 }
