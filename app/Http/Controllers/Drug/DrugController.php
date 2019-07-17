@@ -59,9 +59,9 @@ class DrugController extends Controller
 	public function create()
 	{
 		$this->drugInitiate();
-		$dosageForm = DosageForm::where('active', '=', 1);
-		$dosageUnit = DosageUnit::where('active', '=', 1);
-		$dosageStrength = DosageStrength::where('active', '=', 1);
+		$dosageForm = DosageForm::where('active', '=', 1)->get();
+		$dosageUnit = DosageUnit::where('active', '=', 1)->get();
+		$dosageStrength = DosageStrength::where('active', '=', 1)->get();
 
 		$companies = \App\Company::where('active', '=', 1)->get()->sortBy('name');
 		$countries = $this->getCountry(); //\App\Country::all()->sortBy('name');

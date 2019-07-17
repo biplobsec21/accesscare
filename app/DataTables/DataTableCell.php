@@ -1,5 +1,5 @@
 <?php
-namespace EAC\DataTables;
+namespace App\DataTables;
 
 use Illuminate\Support\Collection;
 

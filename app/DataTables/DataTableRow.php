@@ -1,7 +1,7 @@
 <?php
-namespace EAC\DataTables;
+namespace App\DataTables;
 
-use EAC\DataTables\DataTableCell;
+use App\DataTables\DataTableCell;
 use Illuminate\Support\Collection;
 
 class DataTableRow

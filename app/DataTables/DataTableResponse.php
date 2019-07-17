@@ -1,6 +1,6 @@
 <?php
 
-namespace EAC\DataTables;
+namespace App\DataTables;
 
 class DataTableResponse
 {
