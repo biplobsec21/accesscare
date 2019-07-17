@@ -1,0 +1,12 @@
+$primary: #005588;
+$blue: change-color($primary, $blue: 255);
+$pink: #cc4488;
+$red: #ff2b22;
+$orange: #ff9922;
+$yellow: #cccc44;
+$green: #88cc44;
+$purple: mix($red, $blue);
+$indigo: mix($primary, $blue);
+$dark: darken($primary, 15%);
+$warning: $orange;
+$enable-gradients: true;

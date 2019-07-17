@@ -1,0 +1,192 @@
+/* = = = = CUSTOM FORM DESIGN = = = = */
+ input::-webkit-inner-spin-button {
+  display:none;
+ }
+ input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+ }
+ .label, label {
+  font-weight: 700;
+  font-family: 'Nunito Sans';
+  text-transform: uppercase;
+  color: #585858;
+  font-size: 90%;
+  margin-bottom: 0;
+ }
+ .invalid-feedback {
+  font-weight: 600;
+  margin-top: .15rem;
+ }
+ .form-control.is-invalid, .was-validated .form-control:invalid {
+  padding-right: unset;
+  background-position: center right 1rem;
+  background-size: .9rem;
+ }
+
+ .alert, .btn, .dropdown-menu, .nav-tabs .nav-link, 
+ .list-group-item:first-child, .list-group-item:last-child, 
+ .card-header:first-child, .card-header:last-child, 
+ .btn-group-sm>.btn, .btn-sm, [class*=form-control], [class*=custom-select], [class*=input-group-]>[class*=form-control], 
+ [class*=input-group-]>[class*=input-group-]>.btn, [class*=input-group-],
+ [class*=input-group-]>[class*=input-group-]>[class*=input-group-],
+ .pagination, .page-item:first-child .page-link, .page-item:last-child .page-link {
+  border-radius: 0;
+ }
+ .form-group {}
+ .input-group {}
+ .input-group-text {
+  line-height: unset;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+ }
+ .input-group .form-control {
+  height: unset;
+ }
+
+ .form-control:disabled, .form-control[readonly] {
+  background-color: rgba(3, 79, 131, 0.09);
+  border-color: rgba(0, 0, 0, 0.1);
+ }
+ .input-group-text {
+  background-color: rgba(3, 79, 131, 0.09);
+  text-shadow: 1px 0 0 #fff;
+  color: rgba(0, 0, 0, 0.5);
+ }
+
+ .form-control-lg, 
+ .input-group-lg>[class*=input-group-]>.input-group-text, .custom-select-lg, 
+ .form-control-lg::-webkit-file-upload-button,
+ .input-group-lg>.custom-select, 
+ .input-group-lg>.form-control:not(textarea), 
+ .form-control, 
+ .input-group>[class*=input-group-]>.input-group-text, .custom-select, 
+ .form-control::-webkit-file-upload-button,
+ .input-group>.custom-select, 
+ .input-group>.form-control:not(textarea), 
+ .form-control-sm, 
+ .input-group-sm>[class*=input-group-]>.input-group-text, .custom-select-sm, 
+ .form-control-sm::-webkit-file-upload-button,
+ .input-group-sm>.custom-select, 
+ .input-group-sm>.form-control:not(textarea) {
+  height: auto;
+  margin: 0;
+  padding: 0;
+ }
+ select[multiple], select[size] {
+  height: auto;
+  padding-right: 0;
+ }
+
+ 
+ .form-control::-webkit-file-upload-button {
+  padding: .423rem .75rem;
+  margin: 0 0 0 -1rem;
+  line-height: 1;
+  font-size: 90%;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  background-color: rgba(3, 79, 131, 0.09);
+  border: 0;
+  border-right: 1px solid #ADB9C2;
+ }
+ .form-control-lg::-webkit-file-upload-button {
+  margin: 0 0 0 -1rem;
+  padding: .5rem 1rem;
+  line-height: 1;
+  font-size: 90%;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  background-color: rgba(3, 79, 131, 0.09);
+  border: 0;
+  border-right: 1px solid #ADB9C2;
+ }
+ .form-control-lg, .input-group-lg>.form-control:not(textarea),
+ .input-group-text-lg, .custom-select-lg,
+ .input-group-lg>.input-group-append>.input-group-text,
+ .input-group-lg>.input-group-prepend>.input-group-text {
+  line-height: 1;
+  height: auto;
+  padding: .5rem 1rem;
+ }
+ .form-control, .input-group>.form-control:not(textarea),
+ .input-group-text, .custom-select,
+ .input-group>.input-group-append>.input-group-text,
+ .input-group>.input-group-prepend>.input-group-text {
+  line-height: 1;
+  height: auto;
+  padding: .25rem .35rem;
+ }
+ .form-control-sm, .input-group-sm>.form-control:not(textarea),
+ .input-group-text-sm, .custom-select-sm,
+ .input-group-sm>.input-group-append>.input-group-text,
+ .input-group-sm>.input-group-prepend>.input-group-text {
+  height: auto;
+  line-height: 1;
+  padding: .15rem .5rem;
+ }
+ .form-control-sm::-webkit-file-upload-button {
+  margin: 0 0 0 -1rem;
+  padding: .2rem .5rem;
+  font-size: 90%;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  background-color: rgba(3, 79, 131, 0.09);
+  line-height: 1;
+  border: 0;
+  border-right: 1px solid #ADB9C2;
+ }
+ input[type=file].form-control,
+ input[type=file].form-control-sm,
+ input[type=file].form-control-lg {
+  padding: 0 1rem;
+ }
+
+ [class*=form-control], [class*=custom-select] {
+  border-color: rgba(0, 0, 0, 0.15);
+  transition: background-color .85s, color .85s;
+ }
+
+ [class*=form-control]::placeholder, [class*=custom-select]::placeholder {
+  font-size: 1em;
+  font-weight: 400;
+  font-style: italic;
+  font-family: 'Nunito Sans';
+  color: #afafaf;
+ }
+ [class*=form-control]:focus, [class*=custom-select]:focus,
+ [class*=form-control].focus, [class*=custom-select].focus {
+  box-shadow: none;
+  border-color: rgba(247, 146, 35,1);
+  background-color: rgba(247, 146, 35,.1);
+ }
+ [class*=form-control] option {
+  background-color: #fff;
+  border-color: #ccc;
+ }
+ .input-group-text, .form-control, [class*=custom-select] {
+  padding-top: .15rem;
+  padding-bottom: .15rem;
+  font-size: .95em;
+  padding-left: .35rem;
+  line-height: inherit;
+  height: calc(1.5em + 10px);
+ }
+/* = = = = /END CUSTOM FORM DESIGN = = = = */
+
+@media (max-width: 569px) {
+ .input-group-text, .form-control, [class*=custom-select],
+ .select2-container--default .select2-selection--single .select2-selection__rendered {
+  font-size: .8em;
+ }
+ .input-group-text, .form-control, [class*=custom-select] {
+  padding-left: .2rem;
+ }
+ .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: calc(.9em + 1rem);
+ }
+ .input-group-text, .form-control, [class*=custom-select],
+ .select2-container .select2-selection--single,
+ .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: calc(.9em + 1rem);
+ }
+}

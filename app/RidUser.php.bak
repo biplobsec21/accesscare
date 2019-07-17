@@ -1,0 +1,108 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Relations\Pivot;
+
+
+/**
+ * Class RidUser
+ * @package EAC
+ * @author Andrew Mellor <ggogan@quasars.com>
+ */
+class RidUser extends Pivot {
+
+
+	/**
+	 * Indicates if the model should automatically increment the id
+	 * @var bool
+	 */
+	public $incrementing = false;
+
+	/**
+	 * The event map for the model.
+	 * @var array
+	 */
+	protected $dispatchesEvents = ['saved' => \App\Events\ChangeLogEvent::class,];
+
+	/**
+	 * Indicates if the model should be timestamped.
+	 * @var bool
+	 */
+	public $timestamps = true;
+
+	/**
+	 * The table associated with the model.
+	 * @var string
+	 */
+	protected $table = 'rid_users';
+
+	/**
+	 * The prefix for the id
+	 * @var string
+	 */
+	protected $prefix = "RIDUSER";
+
+	/**
+	 * Relation for users
+	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	 */
+	public function user() {
+		return $this->belongsTo('App\\User');
+	}
+
+	/**
+	 * Relation for role
+	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	 */
+	public function role() {
+		return $this->belongsTo('App\\Role');
+	}
+
+	/**
+	 * Relation for rids
+	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	 */
+	public function rid() {
+		return $this->belongsTo('App\\Rid');
+	}
+
+	public function permissionLevel() {
+		$arr = json_decode($this->level, true);
+		return $arr;
+	}
+
+	public function roleIsInherited() {
+		$level = json_decode($this->level, true);
+		if ($level == 'Inherited') {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public function getRole() {
+		if ($this->roleIsInherited()) {
+			if ($this->user->role) {
+				return $this->user->role->name . " (Inherited)";
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			if (!$this->role) {
+				return false;
+			}
+			else {
+				if ($this->user->role_id == $this->role_id) {
+					return $this->role->name . " (Explicit)";
+				}
+				else {
+					return $this->role->name;
+				}
+			}
+		}
+	}
+}

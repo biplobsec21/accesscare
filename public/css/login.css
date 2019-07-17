@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i|Open+Sans:400,600');
+
+body {
+ font-family: 'Open Sans';
+ font-weight: 400;
+ background-color: #c6d6e0;
+}
+a:hover, a:focus {
+ text-decoration: none
+}
+.card {
+ border-radius: 0;
+ border: 0;
+ background-color: transparent;
+}
+.card #header {
+ background-color: transparent;
+}
+.alert {
+ border-radius: 0;
+}
+
+.alert h4 {
+ text-transform: uppercase;
+ font-weight: 600;
+}
+.alert h6 {
+ color: #000;
+}
+.card .card-header {
+ border: 0;
+ background-color: transparent;
+}
+
+.nav.nav-pills {
+ font-size: 95%;
+}
+
+.card .card-body {
+ background-color: #FAFAFA;
+ -moz-box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.2);
+ -webkit-box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.2);
+ box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.2);
+}
+.card .card-body h2 {
+ text-transform: uppercase;
+ font-weight: 600;
+}
+
+.card .card-body h4 {
+ font-style: italic;
+ font-size: 1.3rem;
+ font-family: 'Libre Baskerville';
+ margin-bottom: 1.5rem;
+}
+
+.card .card-body .row {
+ margin-bottom: 1rem;
+}
+
+label {
+ margin: 0;
+ text-transform: uppercase;
+ font-weight: 600;
+}
+
+.form-control, .custom-select {
+ border-radius: 0;
+ font-size: .95rem;
+ font-weight: 400;
+ font-family: 'Libre Baskerville';
+ padding: .25rem .5rem;
+ line-height: inherit;
+ height: inherit;
+}
+.form-control + div.text-right {
+ font-size: 85%;
+}
+.form-control + div.text-right a {
+ color: #555;
+ font-weight: 600;
+ text-transform: uppercase;
+}
+.form-control + div.text-right a:hover, .form-control + div.text-right a:focus {
+ color: #000;
+}
+
+button + div {
+ font-size: 95%;
+ font-weight: 600;
+ padding: .5rem 0 0;
+}
+
+.card .card-footer {
+ border: 0;
+ font-size: 90%;
+ background-color: rgba(0,0,0,.08);
+}
+.card .card-footer a {
+ font-weight: 600;
+ color: #000; 
+}
+@media screen and (min-width: 540px) {
+ .card .card-header {
+  padding: 1rem 1rem 0;
+ }
+ .nav.nav-pills .nav-item .nav-link {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: .45rem .85rem;
+  font-weight: 600;
+  color: rgba(0,79,131,.6);
+  text-transform: uppercase;
+ }
+
+ .nav.nav-pills .nav-item .nav-link.active, .nav.nav-pills .nav-item .show>.nav-link {
+  background-color: #FAFAFA;
+  -moz-box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.2);
+  color: #034F83;
+ }
+}
