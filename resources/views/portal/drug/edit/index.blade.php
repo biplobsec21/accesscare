@@ -93,7 +93,7 @@
 	<div class="viewData">
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 			<a href="{{ route('eac.portal.drug.show', $drug->id) }}" class="btn btn-secondary">
-				<i class="fal fa-angle-double-left"></i> Return to View Drug
+				View Drug
 			</a>
 			<div>
 				<div class="btn-group" role="group">

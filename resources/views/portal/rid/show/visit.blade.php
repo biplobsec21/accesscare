@@ -114,14 +114,9 @@
 								@endif
 							</td>
 							<td>
+								{{ $visitDocument->type->name }}
 								@if($visitDocument->template_file_id)
-									<a href="{{ route('eac.portal.file.download', $visitDocument->template_file_id) }}"
-									   class="" data-toggle="tooltip" data-placement="bottom"
-									   title="Download Template">
-										{{ $visitDocument->type->name }}
-									</a>
-								@else
-									{{ $visitDocument->type->name }}
+									@include('include.portal.file-btns', ['id' => $visitDocument->template_file_id])
 								@endif
 							</td>
 							<td class="text-center">
@@ -138,19 +133,21 @@
 									   data-target="#FileUploadModal{{ $visitDocument->id }}">
 										<i class="@if(\Auth::user()->type->name == 'Physician') fas @else far @endif fa-upload"></i>
 									</a>
-								@endif
+									@endif
 								@elseif(!$visitDocument->redacted_file_id)
 									@access('rid.document.edit')
 									<a href="#" data-toggle="modal" class="" title="Upload Redacted File"
 									   data-target="#AddRedactedModal{{ $visitDocument->id }}">
 										<i class="fas fa-upload text-primary"></i>
 									</a>
-								@endif
+									@endif
 								@else
+									@access('rid.document.edit')
 									<a href="#" data-toggle="modal" class="" title="Edit Uploaded Files"
 									   data-target="#DocumentEditModal{{ $visitDocument->id }}">
 										<i class="far fa-fw fa-edit"></i>
 									</a>
+									@endif
 								@endif
 							</td>
 						</tr>

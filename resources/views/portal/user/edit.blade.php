@@ -123,7 +123,7 @@
 		@endif
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 			<a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-secondary">
-				<i class="fal fa-angle-double-left"></i> Return to View User
+				View User
 			</a>
 			<a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-info">
 				<i class="fal fa-redo"></i> Resend Welcome Email

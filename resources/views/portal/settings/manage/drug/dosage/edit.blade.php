@@ -59,7 +59,7 @@
   <div class="viewData">
    <div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
     <a href="{{ route('eac.portal.settings.manage.drug.dosage.index') }}" class="btn btn-secondary">
-     <i class="fal fa-angle-double-left"></i> Return to Drug Dosage Manager
+     View Drug Dosage Manager
     </a>
     <div>
      <a href="{{ route($page['cancelAction']) }}" class="btn btn-warning{{ $active == 'dosage' ? ' active after' : ''}}" >

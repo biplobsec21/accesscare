@@ -84,7 +84,7 @@
 			<input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
 			<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 				<a href="{{route('eac.portal.depot.list.all')}}" class="btn btn-light">
-					<i class="fa-fw fas fa-arrow-left"></i> Return to Depots List
+					Depots List
 				</a>
 				<div>
 					<button type="button" onclick="Confirm_Delete('{{ $depot->id }}')" class="btn btn-danger"

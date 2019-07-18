@@ -88,7 +88,7 @@
  <div class="viewData">
   <div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
  		<a href="{{ route("eac.portal.pharmacy.list.all") }}" class="btn btn-light">
-    <i class="fa-fw fas fa-arrow-left"></i> Return to Pharmacies List
+    Pharmacies List
  		</a>
    <div>
   		<a href="{{ route("eac.portal.pharmacy.edit", $pharmacy->id) }}" class="btn btn-info">

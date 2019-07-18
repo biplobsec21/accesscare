@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+@php
+	\Debugbar::disable();
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" ng-app="eacApp">
 <head>
 	<meta charset="utf-8"/>

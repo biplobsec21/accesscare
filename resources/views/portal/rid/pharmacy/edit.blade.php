@@ -76,7 +76,7 @@
 			<input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
 			<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 				<a href="{{ route("eac.portal.pharmacy.show", $pharmacy->id) }}" class="btn btn-secondary">
-					<i class="fal fa-angle-double-left"></i> Return to View Pharmacy
+					View Pharmacy
 				</a>
 			</div>
 			<div class="row thisone m-0 mb-xl-5">

@@ -19,6 +19,7 @@ use App\Traits\Filer;
 use App\Traits\Notifier;
 use App\User;
 use App\UserCertificate;
+use App\UserGroup;
 use App\UserType;
 use Illuminate\Http\Request;
 use Session;
@@ -105,7 +106,10 @@ class UserController extends PermissionsController
 		 * Fill user data
 		 */
 		$user->title = $request->input('title');
-		$user->status = 'Registering';
+		if ($request->input('type') == UserType::where('name', 'physician')->first()->id)
+			$user->status = 'Registering';
+		else
+			$user->status = 'Approved';
 		$user->type_id = $request->input('type');
 		$user->first_name = $request->input('first_name');
 		$user->last_name = $request->input('last_name');
@@ -198,6 +202,15 @@ class UserController extends PermissionsController
 		$user = User::where('id', '=', $id)->firstOrFail();
 		if ($user->status == 'Pending') {
 			$this->createNotice('user_approved', $user, $user);
+			if($user->type->name == 'Physican'){
+				$group = new UserGroup();
+				$group->id = $this->newID(UserGroup::class);
+				$group->type_id = $request->input('type_id');
+				$group->parent_user_id = $request->input('parent_id');
+				$group->name = $request->input('name');
+				$group->group_members = json_encode(array_values($users));
+				$group->saveOrFail();
+			}
 		}
 		$user->status = 'Approved';
 		$user->save();

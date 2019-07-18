@@ -15,20 +15,15 @@ use App\Mail\GenericEmail;
 trait Filer
 {
 
-	protected $extensions = [
+	public $extensions = [
 		'pdf',
-		'doc',
-		'docx',
-		'jpeg',
-		'png',
-		'pdf',
-		'odt'
+		'jpg'
 	];
 
 	protected function createFile($requestFile, $type)
 	{
-		if(!array_key_exists($requestFile->getClientOriginalExtension(), $this->extensions)) {
-			return abort(500, 'File type .' . $requestFile->getClientOriginalExtension() . ' not supported');
+		if(!in_array($requestFile->getClientOriginalExtension(), $this->extensions)) {
+			return abort(500, 'File type "' . $requestFile->getClientOriginalExtension() . '" not supported');
 		}
 		$file = new File();
 		$file->id = $this->newID(File::class);
@@ -44,7 +39,7 @@ trait Filer
 		$filename = config('eac.storage.name.' . $type) . $file_id . '.' . $requestFile->getClientOriginalExtension();
 		$dir = config('eac.storage.file.' . $type);
 
-		$requestFile->storeAs($dir, $filename);
+		$requestFile->storeAs('public' . $dir, $filename);
 		return ['name' => $filename, 'dir' => $dir];
 	}
 
@@ -56,6 +51,17 @@ trait Filer
 
 	protected function downloadFrom($path, $name)
 	{
-		return \Storage::download($path . '/' . $name);
+		return \Storage::download('public' . $path . '/' . $name);
+	}
+
+	protected function display($id)
+	{
+		$file = File::where('id', '=', $id)->firstOrFail();
+		return $this->displayFrom($file->path, $file->name);
+	}
+
+	protected function displayFrom($path, $name)
+	{
+		return response()->file(storage_path('app/public' .$path . '/' . $name));
 	}
 }

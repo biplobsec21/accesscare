@@ -152,7 +152,7 @@
       <div class="row">
        <div class="col-sm-auto col-lg">
         <a href="http://v2adev.earlyaccesscare.com/portal/rid/list" class="btn btn-light">
-         <i class="fa-fw fas fa-arrow-left"></i> Return to RID List
+         RID List
         </a>
        </div>
        <div class="col-sm col-lg-auto ml-lg-auto">

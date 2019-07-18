@@ -93,7 +93,7 @@
 		<div class="viewData">
 			<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 				<a href="{{ route('eac.portal.settings.manage.user.role') }}" class="btn btn-light">
-					<i class="fa-fw fas fa-arrow-left"></i> Return to Role Manager
+					Role Manager
 				</a>
 				<div>
 					<button class="btn btn-success" type="submit">Save All Permissions</button>

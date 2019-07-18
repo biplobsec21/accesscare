@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Settings\Manage\Document\Type;
+
 use App\Http\Requests\Document\CreateRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -18,21 +19,22 @@ use Validator;
  */
 class DocumentTypeController extends Controller
 {
-        public $_data = [
-        // route load
-            'editButton' => 'eac.portal.settings.document.type.edit',
-            'createButton' => 'eac.portal.settings.document.type.create',
-            'deleteButton' => 'eac.portal.settings.document.type.delete',
-            'storeAction' => 'eac.portal.settings.document.type.stroe',
-            'updateAction' => 'eac.portal.settings.document.type.update',
-            'listAll' => 'eac.portal.settings.document.type',
-            'cancelAction' => 'eac.portal.settings.document.type',
-            // blade load
-            'indexView' => 'portal.settings.manage.document.type.index',
-            'createView' => 'portal.settings.manage.document.type.create',
-            'editView' => 'portal.settings.manage.document.type.edit',
-            'ajaxView' => 'portal.settings.manage.document.type.ajaview',
-        ];
+	public $_data = [
+		// route load
+		'editButton' => 'eac.portal.settings.document.type.edit',
+		'createButton' => 'eac.portal.settings.document.type.create',
+		'deleteButton' => 'eac.portal.settings.document.type.delete',
+		'storeAction' => 'eac.portal.settings.document.type.stroe',
+		'updateAction' => 'eac.portal.settings.document.type.update',
+		'listAll' => 'eac.portal.settings.document.type',
+		'cancelAction' => 'eac.portal.settings.document.type',
+		// blade load
+		'indexView' => 'portal.settings.manage.document.type.index',
+		'createView' => 'portal.settings.manage.document.type.create',
+		'editView' => 'portal.settings.manage.document.type.edit',
+		'ajaxView' => 'portal.settings.manage.document.type.ajaview',
+	];
+
 	/**
 	 * DocumentTypeController constructor.
 	 */
@@ -48,149 +50,143 @@ class DocumentTypeController extends Controller
 	{
 		return view('portal.settings.manage.document.type.index', [
 			'docTypes' => DocumentType::all(),
-                        'page'=> $this->_data
+			'page' => $this->_data
 		]);
 	}
 
-	public function documentAjaxlist(){
+	public function documentAjaxlist()
+	{
 
 		$sql = DocumentType::where('active', '!=', null);
-        return \DataTables::of($sql)
-        		->setRowClass(function ($row) {
-               
-                if ($row->active == '1') {
-                 $class = 'v-active';
-                } else {
+		return \DataTables::of($sql)
+			->setRowClass(function ($row) {
 
-                   $class='v-inactive';
+				if ($row->active == '1') {
+					$class = 'v-active';
+				} else {
 
-                }
-                return $class;
+					$class = 'v-inactive';
 
-                })
-        		->addColumn('active', function ($row) {
-                    return $row->active == '1' ? '<span class="badge badge-success">
+				}
+				return $class;
+
+			})
+			->addColumn('active', function ($row) {
+				return $row->active == '1' ? '<span class="badge badge-success">
                 Active
                 </span>' : '<span class="badge badge-danger">
                 Inactive
                 </span>';
-                })
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-                ->addColumn('template', function ($row) {
-                	if($row->template == NULL){
-                		return '<span>N/A</span>';
-                	}
-                	else{
-                		$doc = \App\File::where('id',$row->template)->first();
-                		return '<a href="' . route('eac.portal.file.download', $doc->id) .'"  class="btn btn-link">
+			})
+			->addColumn('name', function ($row) {
+				return $row->name;
+			})
+			->addColumn('template', function ($row) {
+				if ($row->template == NULL) {
+					return '<span>N/A</span>';
+				} else {
+					$doc = \App\File::where('id', $row->template)->first();
+					return '<a href="' . route('eac.portal.file.download', $doc->id) . '"  class="btn btn-link">
 												<i class="far fa-download"></i>
 											</a>';
-                	
-                	}
-                     
-                })
 
-                ->addColumn('desc', function ($row) {
-                	if($row->desc == NULL){
-                		return '<span>N/A</span>';
-                	}
-                	else{
-                	  return $row->desc;	
-                	}
+				}
 
-                })
-                 ->addColumn('created_at', function ($row) {
-                	if($row->created_at == NULL){
-                		return '<span>N/A</span>';
-                	}
-                	else{
-                	  return $row->updated_at->format(config('eac.date_format'));	
-                	}
+			})
+			->addColumn('desc', function ($row) {
+				if ($row->desc == NULL) {
+					return '<span>N/A</span>';
+				} else {
+					return $row->desc;
+				}
 
-                })
-                
-                ->addColumn('ops_btns', function ($row) {
-                    return '
+			})
+			->addColumn('created_at', function ($row) {
+				if ($row->created_at == NULL) {
+					return '<span>N/A</span>';
+				} else {
+					return $row->updated_at->format(config('eac.date_format'));
+				}
+
+			})
+			->addColumn('ops_btns', function ($row) {
+				return '
 
                 <a title="Edit Document" href="' . route('eac.portal.settings.document.type.edit', $row->id) . '">
                  <i class="far fa-edit" aria-hidden="true"></i> <span class="sr-only">Edit Document</span>
                 </a>
                 
                 ';
-                })
-                ->rawColumns([
-                    'active',
-                    'name',
-                    'template',
-                    'desc',
-                    'created_at',
-                    'ops_btns'
-                ])
-                ->filterColumn('name', function ($query, $keyword) {
-                    $query->where('name', 'like', "%" . $keyword . "%");
-                })
-                ->filterColumn('desc', function ($query, $keyword) {
-                    $query->where('desc', 'like', "%" . $keyword . "%");
-                })
-                ->filterColumn('created_at', function ($query, $keyword) {
-                    $query->where('updated_at', 'like', "%" . $keyword . "%");
-                })
-                
-                ->order(function ($query) {
-                    $columns = [
-                        
-						'active' => 0,
-						'name' => 1,
-						'template' => 2,
-						'desc' => 3,
-						'created_at' => 4,
-						'ops_btns' => 5,
-                    ];
+			})
+			->rawColumns([
+				'active',
+				'name',
+				'template',
+				'desc',
+				'created_at',
+				'ops_btns'
+			])
+			->filterColumn('name', function ($query, $keyword) {
+				$query->where('name', 'like', "%" . $keyword . "%");
+			})
+			->filterColumn('desc', function ($query, $keyword) {
+				$query->where('desc', 'like', "%" . $keyword . "%");
+			})
+			->filterColumn('created_at', function ($query, $keyword) {
+				$query->where('updated_at', 'like', "%" . $keyword . "%");
+			})
+			->order(function ($query) {
+				$columns = [
 
-                    $direction = request('order.0.dir');
+					'active' => 0,
+					'name' => 1,
+					'template' => 2,
+					'desc' => 3,
+					'created_at' => 4,
+					'ops_btns' => 5,
+				];
 
-                    if (request('order.0.column') == $columns['name']) {
-                        $query->orderBy('name', $direction);
-                    }
+				$direction = request('order.0.dir');
 
-                    if (request('order.0.column') == $columns['desc']) {
-                        $query->orderBy('desc', $direction);
-                    }
+				if (request('order.0.column') == $columns['name']) {
+					$query->orderBy('name', $direction);
+				}
 
-                    if (request('order.0.column') == $columns['template']) {
-                        $query->orderBy('template', $direction);
-                    }
-                    if (request('order.0.column') == $columns['created_at']) {
-                        $query->orderBy('updated_at', $direction);
-                    }
+				if (request('order.0.column') == $columns['desc']) {
+					$query->orderBy('desc', $direction);
+				}
 
-                    if (request('order.0.column') == $columns['active']) {
-                        $query->orderBy('active', $direction);
-                    }
-                })
-                ->smart(0)
-                ->toJson();
+				if (request('order.0.column') == $columns['template']) {
+					$query->orderBy('template', $direction);
+				}
+				if (request('order.0.column') == $columns['created_at']) {
+					$query->orderBy('updated_at', $direction);
+				}
+
+				if (request('order.0.column') == $columns['active']) {
+					$query->orderBy('active', $direction);
+				}
+			})
+			->smart(0)
+			->toJson();
 	}
-    public function create(Request $request)
+
+	public function create(Request $request)
 	{
 		return view('portal.settings.manage.document.type.create', [
 			'docTypes' => DocumentType::all(),
-                        'page'=> $this->_data
+			'page' => $this->_data
 		]);
 	}
-    public function store(Request $request)
+
+	public function store(Request $request)
 	{
-		// dd($request);
 
-	  
 
-          $request->validate([
-			   'name' => 'required',
-                
-			]);
+		$request->validate([
+			'name' => 'required',
 
+		]);
 
 
 		$documentType = new DocumentType();
@@ -202,65 +198,45 @@ class DocumentTypeController extends Controller
 		$documentType->is_document = ($request->input('documented') == 'on') ? 1 : 0;
 
 
-			if ($request->file('template_file')) {
+		if ($request->file('template_file')) {
 			$requestFile = $request->file('template_file');
 			$dir = '/drug/documents';
 			$filename = 'template_' . rand(10000000, 99999999) . '.' . $requestFile->getClientOriginalExtension();
-				$path = $requestFile->storeAs($dir, $filename);				
-				$file = new File();
-				$file->id = $this->newID(File::class);
-				$file->path = $dir;
-				$file->name = $filename;
-				$file->save();
-				$file_id = $file->id;
-			// }
+			$path = $requestFile->storeAs($dir, $filename);
+			$file = new File();
+			$file->id = $this->newID(File::class);
+			$file->path = $dir;
+			$file->name = $filename;
+			$file->save();
+			$file_id = $file->id;
 			$documentType->template = $file_id;
 			$documentType->save();
-			    return redirect(route($this->_data['listAll']))
-			    					->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);                        
-			}
-			else{
-				$documentType->save();
-				return redirect(route($this->_data['listAll']))
-			    					->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);   
-			}
-		// end file upload
-            
-		// return view('portal.settings.manage.document.type.index', [
-		// 	'docTypes' => DocumentType::all(),
-  //                       'page'=> $this->_data
-		// ]);
+			return redirect(route($this->_data['listAll']))
+				->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+		} else {
+			$documentType->save();
+			return redirect(route($this->_data['listAll']))
+				->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+		}
 	}
-    public function edit(Request $request,$id)
+
+	public function edit(Request $request, $id)
 	{
-
-
-		$docTypes = DocumentType::find($id);
-		// dd($docTypes);
-	return view('portal.settings.manage.document.type.edit', [
+		$docTypes = DocumentType::where('id', $id)->first();
+		return view('portal.settings.manage.document.type.edit', [
 			'docTypes' => $docTypes,
-            'page'=> $this->_data
+			'page' => $this->_data
 		]);
 
 	}
-    public function update(Request $request)
+
+	public function update(Request $request)
 	{
-		// dd($request);
-		
-		// $validator = Validator::make(
-  //                   $request->all(), [
-  //                   'name' => 'required',
-  //               ], [
-  //               	'name.required' => 'Name Field is Required',
-  //                       ]
-        // );
-        // dd($request);
-        $request->validate([
-			    'name' => 'required',
-			]);
-        // dd($request);
-        $documentType = new DocumentType();
-        $docTypes = DocumentType::find($request->doc_id);
+		$request->validate([
+			'name' => 'required',
+		]);
+		$documentType = new DocumentType();
+		$docTypes = DocumentType::find($request->doc_id);
 		$documentType = DocumentType::find($request->doc_id);
 		$documentType->name = $request->name;
 		$documentType->desc = $request->desc;
@@ -268,59 +244,55 @@ class DocumentTypeController extends Controller
 		$documentType->is_resource = ($request->input('resource') == 'on') ? 1 : 0;
 		$documentType->is_document = ($request->input('documented') == 'on') ? 1 : 0;
 
-			if ($request->file('template_file')) {
+		if ($request->file('template_file')) {
 			$requestFile = $request->file('template_file');
 			$dir = '/drug/documents';
 			$filename = 'template_' . rand(10000000, 99999999) . '.' . $requestFile->getClientOriginalExtension();
-				$path = $requestFile->storeAs($dir, $filename);				
-				$file = new File();
-				$file->id = $this->newID(File::class);
-				$file->path = $dir;
-				$file->name = $filename;
-				$file->save();
-				$file_id = $file->id;
-			// }
+			$path = $requestFile->storeAs($dir, $filename);
+			$file = new File();
+			$file->id = $this->newID(File::class);
+			$file->path = $dir;
+			$file->name = $filename;
+			$file->save();
+			$file_id = $file->id;
 			$documentType->template = $file_id;
 			$documentType->save();
-			    return redirect(route($this->_data['listAll']))
-			    					->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);                        
-			}
-			else{
-				$documentType->template = $docTypes->template;
-				$documentType->save();
-				
-				return redirect(route($this->_data['listAll']))
-			    					->with("alerts", ['type' => 'success', 'msg' => 'Data updated successfully']);   
-			}
+			return redirect(route($this->_data['listAll']))
+				->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+		} else {
+			$documentType->template = $docTypes->template;
+			$documentType->save();
 
-
-		// return view('portal.settings.manage.document.type.index', [
-		// 	'docTypes' => DocumentType::all(),
-  //                       'page'=> $this->_data
-		// ]);
+			return redirect(route($this->_data['listAll']))
+				->with("alerts", ['type' => 'success', 'msg' => 'Data updated successfully']);
+		}
 	}
-        public function delete(Request $request,$id)
+
+	public function delete(Request $request, $id)
 	{
 		return view('portal.settings.manage.document.type.index', [
 			'docTypes' => DocumentType::all(),
-                        'page'=> $this->_data
+			'page' => $this->_data
 		]);
 	}
-        
-        public function logs(){
-            $logData = $this->getLogs(DocumentType::class);
-            return view('portal.settings.manage.document.type.log', [
+
+	public function logs()
+	{
+		$logData = $this->getLogs(DocumentType::class);
+		return view('portal.settings.manage.document.type.log', [
 			'logData' => $logData,
-                        'page'=> $this->_data
+			'page' => $this->_data
 		]);
-        }
-        public function logsview(Request $request,$id){
-            $logData = \App\Log::where('subject_id','=',$id);
-            return view('portal.settings.manage.document.type.log_view', [
+	}
+
+	public function logsview(Request $request, $id)
+	{
+		$logData = \App\Log::where('subject_id', '=', $id);
+		return view('portal.settings.manage.document.type.log_view', [
 			'logData' => $logData,
-                        'page'=> $this->_data
+			'page' => $this->_data
 		]);
-        }
+	}
 
 	public function ajaxUpdate(Request $request)
 	{

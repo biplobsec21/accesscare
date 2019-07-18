@@ -199,7 +199,7 @@
 					<div class="row">
 						<div class="col-sm-auto col-lg">
 							<a href="{{ route("eac.portal.rid.list") }}" class="btn btn-light">
-								<i class="fa-fw fas fa-arrow-left"></i> Return to RID List
+								RID List
 							</a>
 						</div>
 						<div class="col-sm col-lg-auto ml-lg-auto">
@@ -237,9 +237,8 @@
 						@foreach($rid->drug->resources->sortBy('name') as $resource)
 							@if($resource->active)
 								<li class="">
-									<a href="{{ route('eac.portal.file.download', $resource->file_id) }}" class="">
-										{{ $resource->name }}
-									</a>
+									{{ $resource->name }}
+									@include('include.portal.file-btns', ['id' => $resource->file_id])
 									<p class="small mb-0">
 										{{-- {{$resource->desc}} --}}
 										{!! $resource->desc ? $resource->desc : '<br> ' !!}

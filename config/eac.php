@@ -47,9 +47,9 @@ return [
 			],
 			'rid' => [
 				'supporting' => '/rid/support',
-				'template' => '/rid/documents/template',
-				'doc' => '/rid/documents/upload',
-				'redacted' => '/rid/documents/redacted',
+				'template' => '/rid/template',
+				'doc' => '/rid/upload',
+				'redacted' => '/rid/redacted',
 			],
 			'user' => [
 				'cv' => '/user/cv',

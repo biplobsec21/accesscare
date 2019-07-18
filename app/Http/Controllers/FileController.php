@@ -34,4 +34,15 @@ class FileController extends Controller
 	{
 		return $this->download($id);
 	}
+
+	/**
+	 * View file by ID
+	 *
+	 * @param string $id
+	 * @return mixed
+	 */
+	public function view(string $id)
+	{
+		return $this->display($id);
+	}
 }

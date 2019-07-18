@@ -15,9 +15,7 @@
   				{{ $resource->name }}
       @if($resource->file_id)
       <small class="d-block ml-2">
-       <a href="{{ route('eac.portal.file.download', $resource->file_id) }}" class="text-info">
-        <i class="fal fa-download text-muted"></i> Resource
-       </a>
+	      @include('include.portal.file-btns', ['id' => $resource->file_id])
       </small>
       @endif
   			</td>

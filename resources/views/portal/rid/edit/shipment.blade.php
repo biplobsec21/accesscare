@@ -79,7 +79,7 @@
 			<div class="row justify-content-between">
 				<div class="col-sm-3 col-xl-auto">
 					<a class="btn btn-secondary btn-sm" href="{{ route("eac.portal.rid.show", $rid->id) }}">
-						<i class="fal fa-angle-double-left"></i> Return to RID
+						View RID
 					</a>
 				</div>
 				<div class="col pl-sm-0">

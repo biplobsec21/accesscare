@@ -26,7 +26,7 @@
   {{ csrf_field() }}
   <div class="actionBar">
     <a href="{{ route("eac.portal.user.list") }}" class="btn btn-light">
-    <i class="fa-fw fas fa-arrow-left"></i> Return to User List
+    User List
     </a>
     <button class="btn btn-primary" type="submit">
     <i class="far fa-check"></i> Merge Selected
