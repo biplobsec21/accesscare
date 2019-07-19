@@ -82,13 +82,9 @@
 						@endif
 						@endif
 						@access('rid.drug.view')
-						@php
-							$available_country = \App\Rid::where('rids.id','=', $rid->id)->Leftjoin('drug', 'drug.id', '=', 'rids.drug_id')->groupBy('rids.id')->select(['drug.countries_available as countries','drug.pre_approval_req as pre_approval_req'])->firstOrFail();
-						@endphp
-						@php $con = json_decode($available_country->countries, true); @endphp
 						<div class="mb-2">
 							<strong>Pre-Approval Req:</strong>
-							@if($available_country->pre_approval_req == 0)
+							@if($rid->drug->pre_approval_req)
 								NO
 							@else
 								YES

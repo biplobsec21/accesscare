@@ -5,6 +5,7 @@
 /storage/debugbar
 /vendor
 /.idea
+composer.lock
 .env
 .phpunit.result.cache
 Homestead.json

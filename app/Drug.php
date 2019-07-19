@@ -76,6 +76,17 @@ class Drug extends Model
 		return $this->lots->pluck('depot')->flatten()->unique();
 	}
 
+	public function getCountriesAttribute()
+	{
+		$countries = collect([]);
+
+		foreach (json_decode($this->countries_available) as $array_item) {
+			$countries->push(\App\Country::find($array_item));
+		}
+
+		return $countries;
+	}
+
 	/**
 	 * Relation for User Groups
 	 *

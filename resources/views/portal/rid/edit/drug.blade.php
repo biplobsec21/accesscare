@@ -19,12 +19,12 @@
 <div class="row d-none">
 	@php
 		$available_country = \App\Rid::where('rids.id','=', $rid->id)->Leftjoin('drug', 'drug.id', '=', 'rids.drug_id')->groupBy('rids.id')->select(['drug.countries_available as countries','drug.pre_approval_req as pre_approval_req'])->firstOrFail();
-		$con = json_decode($available_country->countries, true);
+		$countries = json_decode($available_country->countries, true);
 	@endphp
 	@if($available_country->countries && $available_country->countries != '0' && $available_country->countries != 'null')
   <div class="col-lg-7 col-xl-8 mb-3">
    <label class="d-block">Available Countries</label>
- 		@foreach($con as $key=>$cdata)
+ 		@foreach($countries as $key=>$cdata)
  			@php $country = \App\Country::where('id','=', $cdata)->first(); @endphp
  			@if($country)
      @if(($country->haa_info) || ($country->notes))
