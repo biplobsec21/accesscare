@@ -21,11 +21,10 @@
 </div>
 <div class="mb-2">
 	@php
-		$available_country = \App\Rid::where('rids.id','=', $rid->id)->Leftjoin('drug', 'drug.id', '=', 'rids.drug_id')->groupBy('rids.id')->select(['drug.countries_available as countries','drug.pre_approval_req as pre_approval_req'])->firstOrFail();
+		$countries = $rid->drug->countries;
 	@endphp
-	@php $countries = json_decode($available_country->countries, true); @endphp
 	<label class="d-block">Available Countries</label>
-	@if($available_country->countries && $available_country->countries != '0' && $available_country->countries != 'null')
+	@if($countries)
 		@foreach($countries as $key=>$cdata)
 			@php $country = \App\Country::where('id','=', $cdata)->first(); @endphp
 			@if($country)
@@ -41,7 +40,7 @@
 </div>
 <div class="mb-2">
 	<label class="d-block">Pre-Approval Required</label>
-	@if($available_country->pre_approval_req == 0)
+	@if($rid->drug->pre_approval_req)
 		<span class="badge badge-light">No</span>
 	@else
 		<span class="badge badge-dark">Yes</span>

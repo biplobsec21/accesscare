@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
 		    //$this->app->register(DuskServiceProvider::class);
 	    }
 	    if (env('APP_ENV') === 'production') {
-		    URL::forceSchema('https');
+		    //URL::forceSchema('https');
 	    }
 //	    URL::forceScheme('https');
 	    Blade::directive('serverRender', function ($view) {

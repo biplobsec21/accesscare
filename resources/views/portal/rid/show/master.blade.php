@@ -82,6 +82,9 @@
 						@endif
 						@endif
 						@access('rid.drug.view')
+						@php
+							$countries = $rid->drug->countries;
+						@endphp
 						<div class="mb-2">
 							<strong>Pre-Approval Req:</strong>
 							@if($rid->drug->pre_approval_req)
