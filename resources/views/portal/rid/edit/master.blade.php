@@ -268,11 +268,9 @@
 								<i class="fas d-sm-inline fa-ban"></i>
 								Not Approved
 							</a>
-							<a class="btn btn-primary mr-3" title="More Information Needed" href="#">
+							<a class="btn btn-primary mr-3" title="More Information Needed" href="{{route('eac.portal.rid.moreinfo', $rid->id)}}">
 								<i class="fas d-sm-inline fa-exclamation-triangle"></i>
-								More Info
-								<span class="d-sm-inline">rmation</span>
-								Needed
+								More Info<span class="d-sm-inline">rmation</span> Needed
 							</a>
 							<a class="btn btn-success" title="Approve Rid" href="{{route('eac.portal.rid.approve', $rid->id)}}">
 								<i class="fas d-sm-inline fa-check"></i>

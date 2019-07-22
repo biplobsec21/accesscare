@@ -142,7 +142,7 @@
 						<span>User Groups</span>
 					</a>
 					@access('user.note.view')
-					@if($user->notes()->count() > 0)
+					@if($user->notes->count() > 0)
 						<a class="nav-link complete" id="xnotes-tab" data-toggle="pill" href="#xnotes" role="tab" aria-controls="xnotes" aria-selected="false">
 							<span>User Notes</span>
 						</a>
@@ -274,7 +274,6 @@
 												Curriculum Vitae/Resume
 												@include('include.portal.file-btns', ['id' => $user->certificate->cv_file])
 											</li>
-											@include('include.portal.file-btns', ['id' => $resource->file_id])
 										@endif
 										@if($user->certificate->medicalLicense)
 											<li>
@@ -291,8 +290,7 @@
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xassigned" role="tabpanel" aria-labelledby="xassigned-tab">
 						<div class="card-body">
-							<h5 class="">
-								Assigned Items </h5>
+							<h5 class="">Assigned Items </h5>
 							Rids
 							@if($rids)
 								<span class="badge badge-success">{{$rids->count()}}</span>
@@ -362,9 +360,9 @@
 						<div class="card-body">
 							<h5 class="">
 								User Notes </h5>
-							@if($user->notes()->count() > 0)
+							@if($user->notes->count() > 0)
 								<ul class="list-group m-0 list-group-flush">
-									@foreach($user->notes()->sortBy('created_at') as $note)
+									@foreach($user->notes->sortBy('created_at') as $note)
 										<li class="list-group-item pt-2 pl-0 pr-0 pb-2">
 											<label class="d-block">
 												<a href="{{ route('eac.portal.user.show', $note->author->id) }}">

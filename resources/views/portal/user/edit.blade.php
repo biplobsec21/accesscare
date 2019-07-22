@@ -154,7 +154,7 @@
 					   aria-selected="false">
 						<span>User Groups</span>
 					</a>
-					<a class="nav-link @if($user->notes()->count() > 0) complete @endif" id="xnotes-tab"
+					<a class="nav-link @if($user->notes->count() > 0) complete @endif" id="xnotes-tab"
 					   data-toggle="pill" href="#xnotes" role="tab" aria-controls="xnotes" aria-selected="false">
 						<span>User Notes</span>
 					</a>
@@ -513,7 +513,7 @@
 							</h5>
 							@if($user->notes->count() > 0)
 								<ul class="list-group list-group-flush m-0">
-									@foreach($user->notes()->orderBy('created_at', 'DESC') as $note)
+									@foreach($user->notes->orderBy('created_at', 'DESC') as $note)
 										<li class="list-group-item">
 											<a href="{{ route('eac.portal.note.delete', $note->id) }}"
 											   class="btn text-danger float-right" title="Delete Note">

@@ -59,7 +59,7 @@ class RidShipment extends Model
 	 */
 	public function rid()
 	{
-		return $this->belongsTo('App\\Rid', 'rid_id', 'id');
+		return $this->belongsTo('App\\Rid');
 	}
 
 

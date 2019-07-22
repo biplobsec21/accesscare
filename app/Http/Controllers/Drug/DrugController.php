@@ -624,7 +624,7 @@ class DrugController extends Controller
 	public function removeInterval()
 	{
 		$id = $_POST['id'];
-		$supplies = DrugSupply::where('drug_id', $_POST['drug_id'])->orderBy('supply_start');
+		$supplies = DrugSupply::where('drug_id', $_POST['drug_id'])->orderBy('supply_start')->get();
 		$index = $supplies->search(function($supply) use($id) {
 			return $supply->id === $id;
 		});
@@ -645,7 +645,7 @@ class DrugController extends Controller
 	public function loadIntervals()
 	{
 
-		return json_encode(DrugSupply::where('drug_id', $_POST['drug_id'])->orderBy('supply_start')->toArray());
+		return json_encode(DrugSupply::where('drug_id', $_POST['drug_id'])->orderBy('supply_start')->get()->toArray());
 	}
 
 	public function druginfolist()
