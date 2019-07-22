@@ -1,0 +1,105 @@
+<?php
+
+namespace App\Http\Controllers\Drug;
+
+use App\Drug;
+use App\Role;
+use App\User;
+use App\DrugUser;
+use App\Permission;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Drug\User\CreateRequest;
+use App\Http\Requests\Drug\User\UpdateRequest;
+use Illuminate\Http\Request;
+
+/**
+ * Class DrugUserController
+ * @package App\Http\Controllers\Drug
+ *
+ * @author Andrew Mellor <andrew@quasars.com>
+ */
+class DrugUserController extends Controller
+{
+
+	public function inviteUser(CreateRequest $request)
+	{
+		// dd($request->all());
+
+		$user = new User();
+		$user->id = $this->newID(User::class);
+		$user->password = \Hash::make($user->id);
+		$user->email = $request->input('email');
+		$user->first_name = $request->input('first_name');
+		$user->last_name = $request->input('last_name');
+		$user->role_id = $request->input('role_id');
+		$user->type = 'Pharmaceutical';
+		$user->save();
+
+		$drugUser = new DrugUser();
+		$drugUser->id = $this->newID(DrugUser::class);
+		$drugUser->drug_id = $request->input('drug_id');
+		$drugUser->user_id = $user->id;
+		$drugUser->role_id = 'inherited';
+		$drugUser->level = " ";
+		$drugUser->save();
+
+		return redirect()->back();
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(CreateRequest $request)
+	{
+		$drugUser = new DrugUser();
+		$role = Role::where('id', $request->input('role_id'))->first();
+		$user = User::where('id', $request->input('user_id'))->first();
+
+		$drugUser->id = $this->newID(DrugUser::class);
+		$drugUser->drug_id = $request->input('drug_id');
+		$drugUser->user_id = $user->id;
+		$drugUser->role_id = $request->input('role_id');
+		$drugUser->level =  json_encode(json_decode($role->base_level)->drug);
+
+		$drugUser->save();
+		return redirect()->back();
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(UpdateRequest $request)
+	{
+		$drugUser = DrugUser::where('id', $request->input('id'))->first();
+		if ($request->input('role_id') == $drugUser->role_id) {
+			$levelJSON = json_encode($request->level);
+			$drugUser->level = str_replace('"on"', '"1"', $levelJSON);
+		} else {
+			$role = Role::where('id', $request->input('role_id'))->first();
+			$drugUser->role_id = $role->id;
+			$drugUser->level = json_encode(json_decode($role->base_level)->drug);
+		}
+		$drugUser->save();
+		return redirect()->back();
+	}
+
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id)
+	{
+		$drugUser = DrugUser::where('id', $id)->first();
+		$drugUser->delete();
+		return redirect()->back();
+	}
+}

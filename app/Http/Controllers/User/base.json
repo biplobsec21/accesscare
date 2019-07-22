@@ -1,0 +1,219 @@
+{
+  "rid": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "info": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "patient": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "drug": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "user": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "visit": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "regimen": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "document": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "shipment": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "pharmacy": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "note": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "drug": {
+    "index": {
+      "index": {},
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "info": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "document": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "component": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "depot": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "resource": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "user": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "note": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "user": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "permission": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "role": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "group": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "note": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "company": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "contact": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "note": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    },
+    "user": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "group": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "pharmacy": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "pharmacist": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "depot": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  },
+  "lot": {
+    "index": {
+      "view": 0,
+      "update": 0,
+      "create": 0,
+      "delete": 0
+    }
+  }
+}

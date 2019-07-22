@@ -1,0 +1,21 @@
+.navbar-brand {
+ padding: 0;
+ img {
+  max-height: 50px;
+ }
+}
+
+.scroll-to-top {
+ position: fixed;
+ right: 20px;
+ bottom: 20px;
+ display: none;
+ padding: 6px 5px;
+ text-align: center;
+ color: #fff;
+ background-color: rgba($primary, .4);
+ &:focus, &:hover {
+  color: #fff;
+  @include gradient-y($blue, $primary);
+ }
+}

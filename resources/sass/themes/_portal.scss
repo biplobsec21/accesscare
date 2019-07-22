@@ -1,0 +1,10 @@
+
+#content {
+ background-color: rgba($primary, .04);
+ border-color: rgba($primary, .1);
+}
+.aside {
+ &.show {
+  background-color: rgba($primary, .1);
+ }
+}

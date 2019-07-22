@@ -1,0 +1,58 @@
+body {
+ overflow-anchor: none;
+}
+header {
+ padding: 1rem 0;
+}
+#wrapper {
+ .aside {
+  flex: 0;
+  overflow: hidden;
+  &.show {
+   overflow: visible;
+   flex: 0 0 100px;   
+  }
+  &:not(#rightSide) {
+   @include media-breakpoint-up(md) {
+    overflow: visible;
+    flex: 0 0 230px;
+    &.show {
+     overflow: visible;
+     flex: 0 0 150px;  
+    } // minimize sidebar on .show
+   }
+  }
+ }
+ #content {}
+
+ #rightSide {
+  &.show {
+   flex: 0 0 300px;
+  }
+  .bottom {
+   position: absolute;
+   bottom: 0;
+   display: block;
+   border: 1px #f00 solid;
+  }
+ }
+}
+
+.aside, #content {
+ position: relative;
+ @include transition(all .4s ease-in-out);
+}
+.aside {
+ .bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  border: 1px #f00 solid;
+ }
+}
+#content {
+ border-width: 2px 1px;
+ border-style: solid;
+ border-color: transparent;
+}

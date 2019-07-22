@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono|Open+Sans:300,400,600,700|Open+Sans+Condensed:300,700');
+
+body {
+ overflow-x: hidden;
+ font-family: 'Open Sans';
+}
+pre, code {
+ background-color: #EEEEEE;
+ text-shadow: 1px 0 0 #fff;
+}
+strong, b, .strong, .b {
+ font-weight: 700;
+}
+.alert, .card, [class*=list-group-item], .card-img-top {
+ border-radius: 0;
+}
+.text-unset {
+ color: inherit;
+}
+.text-gold {
+ color: #BB992F;
+}
+.upper, .text-upper {
+ text-transform: uppercase;
+}
+.text-monospace {
+ font-family: 'Cutive Mono';
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+ font-weight: 400;
+ line-height: inherit;
+}
+h1, .h1 {
+ line-height: 2.75rem;
+ font-size: 2rem;
+}
+h2, .h2 {
+ line-height: 2rem;
+ font-size: 1.75rem;
+}
+h3, .h3 {
+ line-height: 1.75rem;
+ font-size: 1.5rem;
+}
+h4, .h4 {
+ line-height: 1.5rem;
+ font-size: 1.25rem;
+}
+h5, .h5 {
+ line-height: 1.35rem;
+ font-size: 1rem;
+}
+h6, .h6 {
+ line-height: 1.25rem;
+ font-size: .9rem;
+}
+.display-1, .display-2, .display-3, .display-4, .display-5 {
+ font-family: 'Open Sans Condensed';
+ font-weight: 300;  
+}
+.display-1 {
+ font-size: 4rem;
+}
+.display-2 {
+ font-size: 3.5rem;
+}
+.display-3 {
+ font-size: 3rem;
+}
+.display-4 {
+ font-size: 2.5rem;
+}
+.display-5 {
+ font-size: 2rem;
+ line-height: 1.2;
+}
+@media screen and (min-width: 569px) {
+ h1, .h1 {
+  font-size: 2.5rem;
+ }
+ h2, .h2 {
+  font-size: 2rem;
+ }
+ h3, .h3 {
+  font-size: 1.75rem;
+ }
+ h4, .h4 {
+  font-size: 1.5rem;
+ }
+ h5, .h5 {
+  font-size: 1.1rem;
+ }
+ h6, .h6 {
+  font-size: 1rem;
+ }
+ h1 small, .h1 small, h1.small, .h1.small {
+  font-size: 1.75rem;
+  font-weight: 300;
+ }
+ h2 small, .h2 small, h2.small, .h2.small {
+  font-size: 1.5rem;
+  font-weight: 300;
+ }
+ h3 small, .h3 small, h3.small, .h3.small {
+  font-size: 1.25rem;
+  font-weight: 300;
+ }
+ h4 small, .h4 small, h4.small, .h4.small {
+  font-size: 1rem;
+  font-weight: 400;
+ }
+ h5 small, .h5 small, h5.small, .h5.small {
+  font-size: .85rem;
+  font-weight: 400;
+ }
+ h6 small, .h6 small, h6.small, .h6.small {
+  text-transform: uppercase;
+  font-size: .75rem;
+  font-weight: 400;
+ }
+ .small, small {
+  font-size: 90%;
+ }
+}
+label small, label .small {
+ font-size: 75%;
+ font-weight: 600;
+}
+.dropdown-toggle::after {
+ content: "\f107";
+ font-size: 92%; 
+ line-height: 1;
+ font-family: "Font Awesome 5 Pro";
+ top: .15em;
+ position: relative;
+ margin: 0 0 0 .5em;
+ border: 0;
+}
+
+
+.titleBar h1, .titleBar h2, .titleBar h3, .titleBar h4, .titleBar h5, .titleBar h6,
+.titleBar .h1, .titleBar .h2, .titleBar .h3, .titleBar .h4, .titleBar .h5, .titleBar .h6 {
+ margin: 0;
+ padding: 0;
+}
+.titleBar:after {
+}
+
+.titleBar .badge {
+ font-size: 85%;
+ text-transform: uppercase;
+ padding: .22rem .5rem;
+ line-height: inherit;
+}
+.titleBar nav {
+ margin: 0 0 .5rem 0;
+}
+.titleBar .breadcrumb {
+ font-size: .9rem;
+ margin: 0 0 .5rem;
+ padding: 0;
+ background-color: transparent;
+}
+/* = = = = web content styling = = = = */
+ .section {
+  position: relative;
+ }
+ .section[class*=alert] {
+  margin: 0;
+ }
+ .section > [class*=container], #footer > [class*=container] {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+ }
+
+ @media (min-width: 991px) {
+  .section > [class*=container] {
+   padding-top: 3rem;
+   padding-bottom: 3rem;
+  }
+ }
+/* = = = = /end web content styling = = = = */
+.scroll-to-top {
+ position: fixed;
+ right: 15px;
+ bottom: 15px;
+ display: none;
+ width: 50px;
+ height: 50px;
+ text-align: center;
+ color: #fff;
+ background: rgba(52, 58, 64, 0.5);
+ line-height: 46px;
+}
+
+.scroll-to-top:focus, .scroll-to-top:hover {
+ color: white;
+}
+
+.scroll-to-top:hover {
+ background: #343a40;
+}
+
+.scroll-to-top i {
+ font-weight: 800;
+}
