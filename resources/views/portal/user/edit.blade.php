@@ -513,7 +513,7 @@
 							</h5>
 							@if($user->notes->count() > 0)
 								<ul class="list-group list-group-flush m-0">
-									@foreach($user->notes->orderBy('created_at', 'DESC') as $note)
+									@foreach($user->notes->sortByDesc('created_at') as $note)
 										<li class="list-group-item">
 											<a href="{{ route('eac.portal.note.delete', $note->id) }}"
 											   class="btn text-danger float-right" title="Delete Note">
