@@ -105,7 +105,7 @@ class UserController extends PermissionsController
 		 * Fill user data
 		 */
 		$user->title = $request->input('title');
-		if ($request->input('type') == UserType::where('name', 'physician')->first()->id)
+		if ($request->input('type') == UserType::where('name', 'physician')->first()->id && !$request->input('is_delegate'))
 			$user->status = 'Registering';
 		else
 			$user->status = 'Approved';
@@ -114,6 +114,7 @@ class UserController extends PermissionsController
 		$user->last_name = $request->input('last_name');
 		$user->email = $request->input('email');
 		$user->password = \Hash::make($user->id);
+		$user->is_delagate = $request->input('is_delegate');
 
 		/*
 		 * Fill address data

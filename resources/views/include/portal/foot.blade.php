@@ -20,10 +20,9 @@
 	</div>
 	<div class="tasklist">
 		<div class="notificationlist">
-			@php $user = Auth::user() @endphp
-			@if($user->notifications()->count() > 0)
+			@if(Auth::user()->notifications()->count() > 0)
 				<ul class="list-unstyled">
-					@foreach($user->notifications() as $notification)
+					@foreach(Auth::user()->notifications() as $notification)
 						<li class="{{ ($notification->read_at) ? 'read': 'unread'}}">
 							<a onclick="notificationSingleRead('{{$notification->id}}')"
 							   href="{{$notification->subject->view_route}}"

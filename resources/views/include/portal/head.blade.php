@@ -84,7 +84,8 @@
 							</div>
 						</div>
 						<a class="text-info toggleRight ml-3 ml-md-4" href="#">
-							@php $allnotification = \App\Notification::where('user_id','=',(Auth::user()->id))->count(); @endphp
+							
+							@php $allnotification = \App\Notification::where('user_id','=',(Auth::user()->id))->where('read_at', null)->count(); @endphp
 							<i class="fas fa-bell text-primary"></i>
 							Notifications
 							@if($allnotification > 0 )
