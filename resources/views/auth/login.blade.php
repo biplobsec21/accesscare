@@ -1,4 +1,4 @@
-@extends('layouts.frame')
+@extends('layouts.app')
 
 @section('title')
 	Sign In
