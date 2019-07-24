@@ -264,18 +264,15 @@ class PharmacyController extends Controller
 						<tr class="">
 							<td>
 								<input type="text" name="name[]" placeholder="Pharmacist Name"
-								       class="form-control"
-								       >
+								       class="form-control">
 							</td>
 							<td>
 								<input type="email" name="email[]" placeholder="Email"
-								       class="form-control"
-								       >
+								       class="form-control">
 							</td>
 							<td>
 								<input type="text" name="phone[]" placeholder="Phone"
-								       class="form-control"
-								       >
+								       class="form-control">
 							</td>
 							<td>
 							</td>

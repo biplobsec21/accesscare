@@ -137,7 +137,7 @@
 							<div id="noteSlider" class="carousel slide" data-ride="carousel">
 								@php $i = 0; @endphp
 								<div class="carousel-inner">
-									@foreach($rid->notes as $note)
+									@foreach($rid->notes->sortBy('created_at') as $note)
 										@php $i++ @endphp
 										<div class="carousel-item @if($i == 1) active @endif">
 											<label class="d-block mb-2">
