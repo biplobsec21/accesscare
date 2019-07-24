@@ -244,7 +244,7 @@
 			<div class="">
 				<div class="row">
 					<div class="col-md-auto col-lg-3 mb-2 col-xl-auto text-lg-center">
-						@if($shipment->shipped_on_date)
+						@if($shipment->shipped_on_date && $shipment->delivery_date && $shipment->tracking_number)
 							<span class="badge badge-success ">
 								<i class="fas fa-check"></i> Complete!
 							</span>

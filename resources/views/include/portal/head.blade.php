@@ -168,7 +168,7 @@
 					@if(\Auth::user()->type->name == 'Physician' && !Auth::user()->certificate && \Auth::user()->status != 'Registering')
 						<div class="alert alert-danger alert-dismissible fade show" role="alert">
 							You have not added your professional documents,
-							<a href="#">click here to upload.</a>
+							<a href="{{ route('eac.portal.user.certify')}}">click here to upload.</a>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>

@@ -239,10 +239,14 @@ class UserController extends PermissionsController
 		$user = User::where('id', '=', $id)->firstOrFail();
 		$access = $this->userAuth($user);
 		$userType = \App\UserType::all();
+		$rids = $this->listRidAccess($user);
+		$drugs = $this->listDrugAccess($user);
 		return view('portal.user.edit', [
 			'user' => $user,
 			'countries' => $countries,
 			'user_types' => $userType,
+			'rids' => $rids,
+			'drugs' => $drugs,
 			'access' => $access
 		]);
 	}

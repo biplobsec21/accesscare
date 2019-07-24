@@ -425,9 +425,7 @@
 						<div class="card card-body mb-0">
 							<div class="row mb-3">
 								<div class="col">
-									<h5 class="mb-0">Form List @access('drug.document.view', $drug->id)
-										<span class="badge badge-dark">{{ $drug->documents->count() }}</span>
-										@endif
+									<h5 class="mb-0">Form List
 									</h5>
 								</div>
 								<div class="col-auto">

@@ -262,7 +262,7 @@
 							</div>
 						</div>
 					</div>
-					@if(true)
+					@if(\Auth::user()->type->name == 'Early Access Care')
 						<div class="bg-gradient-dark p-3 d-flex justify-content-between">
 							<a class="btn btn-danger" title="Deny Rid" href="{{route('eac.portal.rid.deny', $rid->id)}}">
 								<i class="fas d-sm-inline fa-ban"></i>
