@@ -22,7 +22,7 @@
 	</ul>
 	<div class="tab-content" id="RequestTabsContent">
 		@access('rid.index.update')
-		<div class="bg-gradient-primary text-white p-3">
+		<div class="bg-gradient-dark text-white p-3">
 			<div class="row">
 				<div class="col-sm">
 					<h5 class="mb-0 strong d-inline-block">Viewing RID: {{ $rid->number }}</h5>
@@ -196,37 +196,29 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-gradient-primary text-white p-3">
-				<div class="{{-- actionBar --}}">
-					<div class="row">
-						<div class="col-sm-auto col-lg">
-							<a href="{{ route("eac.portal.rid.list") }}" class="btn btn-light">
-								RID List
-							</a>
-						</div>
-						<div class="col-sm col-lg-auto ml-lg-auto">
-							@access('rid.note.view')
-							<a href="#" class="btn btn-success ml-xl-3" data-toggle="modal" data-target="#RidNoteAdd">
-								<i class="fa fa-plus"></i>
-								Add Note
-							</a>
-							@endif
-							<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-xl-3">
-								<i class="fa-fw fas fa-edit"></i>
-								Edit RID Master
-							</a>
-							<a title="Schedule Dates" class="btn btn-info ml-xl-3 @if(!$rid->visits->count()) disabled @endif" href="{{route('eac.portal.rid.resupply', $rid->id)}}">
-								<i class="fa-fw fas fa-redo"></i>
-								Manage Visits
-							</a>
-							@if(true)
-								<a title="" href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-info ml-xl-3">
-									<i class="fa-fw fas fa-upload"></i>
-									Post Approval Documents
-								</a>
-							@endif
-						</div>
-					</div><!-- /.row -->
+			<div class="bg-gradient-dark text-white p-3 d-flex justify-content-between">
+				<div>
+					<a href="#" class="btn btn-light">
+						<i class="fa-fw fas fa-users"></i> Assign User Group
+					</a>
+					@if(true)
+						<a href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-light ml-2">
+							<i class="fa-fw fas fa-upload"></i> Post Approval Documents
+						</a>
+					@endif
+					@access('rid.note.view')
+					<a href="#" class="btn btn-success ml-2" data-toggle="modal" data-target="#RidNoteAdd">
+						<i class="fa-fw fas fa-comment-alt-edit"></i> Add Note
+					</a>
+					@endif
+				</div>
+				<div>
+					<a href="{{route('eac.portal.rid.resupply', $rid->id)}}" class="btn btn-info ml-2 @if(!$rid->visits->count()) disabled @endif">
+						<i class="fa-fw fas fa-calendar-edit"></i> Manage Visits
+					</a>
+					<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-2">
+						<i class="fa-fw fas fa-edit"></i> Edit RID Master
+					</a>
 				</div>
 			</div>
 		</div>

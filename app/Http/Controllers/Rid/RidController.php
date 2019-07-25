@@ -40,6 +40,7 @@ class RidController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	/**
@@ -134,7 +135,7 @@ class RidController extends Controller
 		$shipment->id = $visit->shipment_id = $this->newID(RidShipment::class);
 		$visit->parent_id = $shipment->rid_id = $rid->id;
 		$visit->index = 1;
-		$visit->physician_id = \Auth::user()->id;
+		$visit->physician_id = $request->input('physician_id');
 		$visit->visit_date = $data['req_date'];
 		$visit->status_id = RidStatus::where('index', 0)->first()->id;
 		$visit->sub_status = RidSubStatus::where('index', 0)->first()->id;

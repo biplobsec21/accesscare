@@ -47,8 +47,8 @@ Route::group([
 	/**
 	 * Rid awaiting list
 	 */
-	Route::post('/ajax/ridawaitinglist', [
-		'as' => 'eac.portal.rid.ajax.ridawaitinglist',
+	Route::post('/shipment/list', [
+		'as' => 'eac.portal.shipment.list',
 		'uses' => 'RidShipmentController@ridawaitinglist'
 	]);
 

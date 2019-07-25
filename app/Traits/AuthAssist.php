@@ -7,6 +7,7 @@ use App\Rid;
 use App\Role;
 use App\Support\AuthCollection;
 use App\User;
+use App\UserGroup;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -100,6 +101,24 @@ trait AuthAssist
 			$users = $users->merge($group->users());
 
 		return $users->unique('id');
+	}
+
+	/**
+	 * List all drugs the authorized user can view
+	 *
+	 * @return Collection drugs viewable by the authorized user
+	 */
+	protected function listGroupAccess()
+	{
+		$this->user = Auth::user();
+		switch($this->preGateCheck()) {
+			case 1;
+				return UserGroup::all();
+			case -1:
+				return null;
+		}
+
+		return $this->user->groups();
 	}
 
 	/**

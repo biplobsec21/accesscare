@@ -23,6 +23,7 @@ class DrugLotController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	/**

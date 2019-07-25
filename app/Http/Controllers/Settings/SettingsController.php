@@ -16,6 +16,7 @@ class SettingsController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 	/**
 	 * Show the settings page

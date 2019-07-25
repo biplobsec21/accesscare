@@ -38,6 +38,7 @@ class UserController extends PermissionsController
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+		
 	}
 
 	public function listUsers(Request $request)
@@ -202,7 +203,7 @@ class UserController extends PermissionsController
 		$user = User::where('id', '=', $id)->firstOrFail();
 		if ($user->status == 'Pending') {
 			$this->createNotice('user_approved', $user, $user);
-			if($user->type->name == 'Physican'){
+			if ($user->type->name == 'Physican') {
 				$group = new UserGroup();
 				$group->id = $this->newID(UserGroup::class);
 				$group->type_id = $request->input('type_id');

@@ -33,6 +33,28 @@ class DrugController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
+//		$this->middleware(function ($request, $next) {
+//			$title = str_replace(array("\r\n", "\r", "\n", "\t"), '', \View::getSection('title'));
+//			$url = $request->url();
+//			if ($title == 'Dashboard')
+//				$request->session()->forget('history');
+//
+//			if (!$request->session()->has('history'))
+//				$request->session()->put('history', []);
+//
+//			$slice_offset = array_search($title, array_column(session('history'), 'title'));
+//			if ($slice_offset !== false)
+//				$request->session()->put('history', array_slice(session('history'), 0, $slice_offset));
+//
+//			$request->session()->push('history', [
+//				'title' => $title,
+//				'url' => $url,
+//				'time' => time()
+//			]);
+//
+//			return $next($request);
+//		});
 	}
 
 	/*
@@ -77,7 +99,7 @@ class DrugController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
@@ -236,18 +258,18 @@ class DrugController extends Controller
 				$component->save();
 
 
-				$dosIndex = $i+2;
-				if($request->input('form_id'.$dosIndex)){
+				$dosIndex = $i + 2;
+				if ($request->input('form_id' . $dosIndex)) {
 
 					$dosage = new Dosage();
 					$dosage->id = $this->newID(Dosage::class);
 					$dosage->component_id = $component->id;
-					$dosage->form_id = $request->input('form_id'.$dosIndex);
-					$dosage->temperature = $request->input('temperature'.$dosIndex);
-					$dosage->amount = $request->input('amount'.$dosIndex);
-					$dosage->unit_id = $request->input('unit_id'.$dosIndex);
-					$dosage->strength_id = $request->input('strength_id'.$dosIndex);
-					$dosage->active = ($request->input('active'.$dosIndex)) ? 1 : 0;
+					$dosage->form_id = $request->input('form_id' . $dosIndex);
+					$dosage->temperature = $request->input('temperature' . $dosIndex);
+					$dosage->amount = $request->input('amount' . $dosIndex);
+					$dosage->unit_id = $request->input('unit_id' . $dosIndex);
+					$dosage->strength_id = $request->input('strength_id' . $dosIndex);
+					$dosage->active = ($request->input('active' . $dosIndex)) ? 1 : 0;
 					$dosage->save();
 				}
 			}
@@ -260,7 +282,7 @@ class DrugController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int $id
+	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 * @throws 403
 	 */
@@ -335,7 +357,7 @@ class DrugController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int $id
+	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 * @throws 403
 	 */
@@ -404,45 +426,45 @@ class DrugController extends Controller
 		]);
 	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $drug = Drug::where('id', $request->input('drug_id'))->firstOrFail();
-        $drug->name = $request->input('name');
-        $drug->lab_name = $request->input('lab_name');
-        $drug->company_id = $request->input('company_id');
-        $drug->desc = $request->input('desc');
-        $drug->save();
-        return redirect()->back();
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request)
+	{
+		$drug = Drug::where('id', $request->input('drug_id'))->firstOrFail();
+		$drug->name = $request->input('name');
+		$drug->lab_name = $request->input('lab_name');
+		$drug->company_id = $request->input('company_id');
+		$drug->desc = $request->input('desc');
+		$drug->save();
+		return redirect()->back();
+	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function updateAvailibility(Request $request)
 	{
-        $drug = Drug::where('id', $request->input('drug_id'))->firstOrFail();
-        $drug->countries_available = json_encode($request->input('countries_available'));
-        $drug->hide_countries = $request->input('hide_countries');
-        $drug->pre_approval_req = $request->input('pre_approval_req');
-        $drug->ship_without_approval = $request->input('ship_without_approval');
-        $drug->allow_remote = $request->input('allow_remote');
-        $drug->save();
-        return redirect()->back();
+		$drug = Drug::where('id', $request->input('drug_id'))->firstOrFail();
+		$drug->countries_available = json_encode($request->input('countries_available'));
+		$drug->hide_countries = $request->input('hide_countries');
+		$drug->pre_approval_req = $request->input('pre_approval_req');
+		$drug->ship_without_approval = $request->input('ship_without_approval');
+		$drug->allow_remote = $request->input('allow_remote');
+		$drug->save();
+		return redirect()->back();
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int $id
+	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
@@ -625,15 +647,15 @@ class DrugController extends Controller
 	{
 		$id = $_POST['id'];
 		$supplies = DrugSupply::where('drug_id', $_POST['drug_id'])->orderBy('supply_start')->get();
-		$index = $supplies->search(function($supply) use($id) {
+		$index = $supplies->search(function ($supply) use ($id) {
 			return $supply->id === $id;
 		});
 
 		$target = $supplies[$index];
 
 		// if index is not null, and not 0
-		if($index) {
-			$previous = $supplies[$index-1];
+		if ($index) {
+			$previous = $supplies[$index - 1];
 			$previous->supply_end = $target->supply_end;
 			$previous->save();
 		}

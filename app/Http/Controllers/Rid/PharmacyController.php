@@ -30,6 +30,7 @@ class PharmacyController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	/**

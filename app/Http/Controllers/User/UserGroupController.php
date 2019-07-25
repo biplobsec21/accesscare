@@ -26,6 +26,7 @@ class UserGroupController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	public function list()
@@ -150,8 +151,7 @@ class UserGroupController extends Controller
 
 	public function ajaxlist()
 	{
-
-		$groups = UserGroup::all();
+		$groups = $this->listGroupAccess();
 		$response = new DataTableResponse(User::class, null);
 
 		foreach ($groups as $group) {
