@@ -7,6 +7,7 @@ use App\DataTables\DataTableResponse;
 use App\DataTables\DataTableRow;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\GroupCreateRequest;
+use App\Traits\AuthAssist;
 use App\Traits\Notifier;
 use App\User;
 use App\UserGroup;
@@ -20,7 +21,7 @@ use Illuminate\Http\Request;
  */
 class UserGroupController extends Controller
 {
-	use Notifier;
+	use Notifier, AuthAssist;
 
 	public function __construct()
 	{
