@@ -23,7 +23,7 @@
 							<label class="d-block label_required ">Dosage Form</label>
 							<select class="form-control {{ $errors->has('form_id') ? ' is-invalid' : '' }}" name="form_id" required="required">
 								<option  value="">-- Select --</option>
-								@foreach(\EAC\DosageForm::all()->sortBy('name') as $form)
+								@foreach(\App\DosageForm::all()->sortBy('name') as $form)
 									<option value="{{$form->id}}" {{ old('form_id') ==  $form->id? 'selected' : '' }}>{{ $form->name }}</option>
 								@endforeach
 							</select>
@@ -49,7 +49,7 @@
 								<label class="label_required">Unit</label>
 								<select class="form-control border-left-0 {{ $errors->has('unit_id') ? ' is-invalid' : '' }}" name="unit_id" required="required">
 									<option  value="">-- Select --</option>
-									@foreach(\EAC\DosageUnit::all()->sortBy('name') as $unit)
+									@foreach(\App\DosageUnit::all()->sortBy('name') as $unit)
 										<option value="{{$unit->id}}" {{ old('unit_id') ==  $unit->id? 'selected' : '' }}>{{ $unit->name }}</option>
 									@endforeach
 								</select>
@@ -64,7 +64,7 @@
 							<label class="d-block label_required">Relevant Age Group</label>
 							<select class="form-control {{ $errors->has('strength_id') ? ' is-invalid' : '' }}" name="strength_id" required="required">
 								<option  value="">-- Select --</option>
-								@foreach(\EAC\DosageStrength::all()->sortBy('name') as $strength)
+								@foreach(\App\DosageStrength::all()->sortBy('name') as $strength)
 									<option value="{{$strength->id}}" {{ old('strength_id') ==  $strength->id? 'selected' : '' }}>{{ $strength->name }}</option>
 								@endforeach
 							</select>
