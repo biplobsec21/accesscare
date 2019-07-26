@@ -77,6 +77,10 @@
 		@if(Auth::user()->type->name == 'Early Access Care')
 			@if($user->status === 'Pending')
 				<div class="alert alert-warning mb-3" role="alert">
+                
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                 </button>
 					<h5 class="text-danger">
 						<i class="fas fa-exclamation-triangle"></i>
 						User Pending
@@ -88,6 +92,9 @@
 				</div><!-- end alert -->
 			@elseif($user->status === 'Approved')
 				<div class="alert alert-success mb-3" role="alert">
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                 </button>
 					<h5 class="text-primary">
 						<i class="fas fa-check-circle"></i>
 						Authorized
@@ -99,6 +106,10 @@
 				</div>
 			@else
 				<div class="alert alert-warning mb-3" role="alert">
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                 </button>
+                
 					<h5 class="text-danger">
 						<i class="fas fa-exclamation-triangle"></i>
 						Not Authorized
