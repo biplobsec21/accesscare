@@ -28,7 +28,6 @@ class DashboardController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
-
 	}
 
 	public function index()
@@ -36,12 +35,10 @@ class DashboardController extends Controller
 		$rids = $this->listRidAccess();
 		$drugs = $this->listDrugAccess();
 		$users = $this->listUserAccess();
-		$groups = $this->listGroupAccess();
 		return view('portal.dashboard', [
 			'rids' => $rids,
 			'drugs' => $drugs,
 			'users' => $users,
-			'groups' => $groups,
 		]);
 	}
 
@@ -416,7 +413,7 @@ class DashboardController extends Controller
 
 			if ($kind == 'item') {
 
-				return '<a title="Edit Drug" href="' . route('eac.portal.settings.manage.drug.dosage.strength.edit', $sql->id) . '">
+				return '<a title="Edit DrugD" href="' . route('eac.portal.settings.manage.drug.dosage.strength.edit', $sql->id) . '">
                  ' . $sql->name . '
                 </a>';
 			}
@@ -430,7 +427,7 @@ class DashboardController extends Controller
 		$user_id = $id;
 		$date = date('Y-m-d H:i:s');
 		\App\Notification::where('user_id', $user_id)
-			->where('read_at', null)
+			->where('read_at', '')
 			->update(['read_at' => $date]);
 		return redirect()->back();
 

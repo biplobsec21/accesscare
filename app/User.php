@@ -235,7 +235,7 @@ class User extends Authenticatable
 	 */
 	public function notifications()
 	{
-		return Notification::where('user_id', $this->id)->orderBy('created_at', 'desc')->take(20)->get();
+		return Notification::where('user_id', $this->id)->orderBy('created_at', 'desc')->take(20);
 	}
 
 	/**

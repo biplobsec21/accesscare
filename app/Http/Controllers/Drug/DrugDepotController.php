@@ -25,7 +25,6 @@ class DrugDepotController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
-
 	}
 
 	/**

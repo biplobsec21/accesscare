@@ -187,6 +187,9 @@
    }
 
    //    });
+ </script>
+
+	<script type="text/javascript">
 		// Data Tables
 		$(document).ready(function () {
 			$('.btn-edit').click(function(){

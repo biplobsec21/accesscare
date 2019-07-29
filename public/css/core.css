@@ -154,10 +154,6 @@ label small, label .small {
 }
 .titleBar nav {
  margin: 0 0 .5rem 0;
- display: none!important; /* quick fix for removing breadcrumbs */
-}
-.titleBar nav + [class*=-none] {
- display: block!important;
 }
 .titleBar .breadcrumb {
  font-size: .9rem;

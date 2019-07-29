@@ -83,7 +83,7 @@
 								<select class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}"
 								        name="country">
 									<option disabled hidden selected value="">-- Select --</option>
-									@foreach(\App\Country::where('active', 1)->get()->sortBy('index') as $country)
+									@foreach(\App\Country::select(['id', 'abbr', 'name'])->where('active', '=', true)->sortBy('name') as $country)
 										<option value="{{ $country->id }}">{{ $country->name }}</option>
 									@endforeach
 								</select>

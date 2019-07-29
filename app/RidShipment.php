@@ -59,7 +59,7 @@ class RidShipment extends Model
 	 */
 	public function rid()
 	{
-		return $this->belongsTo('App\\Rid');
+		return $this->belongsTo('App\\Rid', 'rid_id', 'id');
 	}
 
 
@@ -127,11 +127,6 @@ class RidShipment extends Model
 			$todo->push('Add a pharmacist');
 		if ($this->regimensNeeded()->count())
 			$todo->push('Add a regimen');
-		if (!($this->delivery_date && $this->tracking_number && $this->shipped_on_date))
-			$todo->push('Add Shipping Details');
-
-		if($todo->isEmpty())
-			$todo='Ready';
 
 		return $todo;
 	}

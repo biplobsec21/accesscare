@@ -23,7 +23,7 @@ trait Filer
 	protected function createFile($requestFile, $type)
 	{
 		if(!in_array($requestFile->getClientOriginalExtension(), $this->extensions)) {
-			return abort(415, 'The file type "' . strtoupper($requestFile->getClientOriginalExtension()) . '" is not supported for security reasons.</br> Please only use PDFs or JPGs in the future.');
+			return abort(500, 'File type "' . $requestFile->getClientOriginalExtension() . '" not supported');
 		}
 		$file = new File();
 		$file->id = $this->newID(File::class);

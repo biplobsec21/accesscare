@@ -33,7 +33,6 @@ class PharmacistController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
-
 	}
 	/**
 	 * Display a listing of the resource.

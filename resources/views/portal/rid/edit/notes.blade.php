@@ -48,13 +48,8 @@
 							</button>
 						</div>
 						<div class="modal-body p-3">
-							@if(\Auth::user()->type->name == 'Early Access Care')
-								<label class="d-block">
-									<input name="physican_viewable" type="checkbox" value="1" /> Viewable by Physician
-								</label>
-							@else
-								<input name="physican_viewable" type="hidden" value="1" />
-							@endif
+							<label class="inline-block">Physician Viewable</label>
+							<input name="physican_viewable" class="form-control" type="checkbox" value="1"/>
 							<label
 								class="d-block">{{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
 								<small>{{date('Y-m-d H:i')}}</small>

@@ -2,9 +2,6 @@
 	<h5 class="mb-1">
 		Drug Distribution Schedule
 	</h5>
-	<div class="alert alert-info mb-3 small">
-		Enter the first visit number into the first field, then enter the total number of pills to be distributed into the second field. When a change is needed, enter the first visit number of the new change then the new distribution count. The last distribution count entered will be always be 'Ongoing'.
-	</div>
 	<input type="hidden" name="drug_id" value="{{$drug->id}}">
 	<div class="table-responsive">
 		<!-- Don't make this a DataTable -->

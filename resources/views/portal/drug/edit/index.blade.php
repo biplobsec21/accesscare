@@ -9,32 +9,32 @@
 		.group-member-template {
 			display: none;
 		}
-		
+
 		.drug-logo {
 			max-width: 200px;
 		}
-		
+
 		@media screen and (min-width: 1200px) {
 			:root {
 				--leftCol: 250px;
 				--rightCol: 675px;
 			}
-			
+
 			.actionBar, .viewData {
 				max-width: calc(var(--leftCol) + var(--rightCol));
 			}
-			
+
 			.viewData .row.thisone > [class*=col]:first-child {
 				max-width: var(--leftCol);
 				min-width: var(--leftCol);
 			}
-			
+
 			.viewData .row.thisone > [class*=col]:last-child {
 				max-width: var(--rightCol);
 				min-width: var(--rightCol);
 			}
 		}
-		
+
 		@media screen and (min-width: 1400px) {
 			html {
 				--rightCol: 800px;
@@ -89,7 +89,7 @@
 	@if(Session::has('alerts'))
 		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
 	@endif
-	
+
 	<div class="viewData">
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 			<a href="{{ route('eac.portal.drug.show', $drug->id) }}" class="btn btn-secondary">
@@ -97,61 +97,85 @@
 			</a>
 			<div>
 				<div class="btn-group" role="group">
-					<button id="btnGroupDrop3" type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Change Status
-						<i class="fa-fw fas fa-caret-down"></i>
+					<button id="btnGroupDrop3" type="button" class="btn btn-primary" data-toggle="dropdown"
+					        aria-haspopup="true"
+					        aria-expanded="false">
+						Change Status <i class="fa-fw fas fa-caret-down"></i>
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
-						<a class="dropdown-item" href="{{ route('eac.portal.drug.status.change', ['status'=>0,'id'=>$drug->id]) }}">Not approved</a>
-						<a class="dropdown-item" href="{{ route('eac.portal.drug.status.change', ['status'=>2,'id'=>$drug->id]) }}">Pending</a>
-						<a class="dropdown-item" href="{{ route('eac.portal.drug.status.change', ['status'=>1,'id'=>$drug->id]) }}">Approved</a>
+						<a class="dropdown-item"
+						   href="{{ route('eac.portal.drug.status.change', ['status'=>0,'id'=>$drug->id]) }}">Not
+							approved</a>
+						<a class="dropdown-item"
+						   href="{{ route('eac.portal.drug.status.change', ['status'=>2,'id'=>$drug->id]) }}">Pending</a>
+						<a class="dropdown-item"
+						   href="{{ route('eac.portal.drug.status.change', ['status'=>1,'id'=>$drug->id]) }}">Approved</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row thisone m-0 mb-xl-5">
 			<div class="col-sm-3 col-xl-auto mb-2 mb-sm-0 p-0">
-				<div class="wizardSteps symbols nav flex-row flex-sm-column mt-sm-3" id="tab" role="tablist" aria-orientation="vertical">
-					<a class="nav-link complete active" id="xdetailsT" data-toggle="pill" href="#xdetails" role="tab" aria-controls="xdetails" aria-selected="true">
+				<div class="wizardSteps symbols nav flex-row flex-sm-column mt-sm-3" id="tab" role="tablist"
+				     aria-orientation="vertical">
+					<a class="nav-link complete active" id="xdetailsT" data-toggle="pill" href="#xdetails" role="tab"
+					   aria-controls="xdetails" aria-selected="true">
 						<span>Drug Details</span>
 					</a>
-					<a class="nav-link complete" id="xavailabilityT" data-toggle="pill" href="#xavailability" role="tab" aria-controls="xavailability" aria-selected="false">
+					<a class="nav-link complete" id="xavailabilityT" data-toggle="pill" href="#xavailability" role="tab"
+					   aria-controls="xavailability" aria-selected="false">
 						<span>Availability</span>
 					</a>
-					<a class="nav-link complete" id="xdrugImageT" data-toggle="pill" href="#xdrugImage" role="tab" aria-controls="xdrugImage" aria-selected="false">
+					<a class="nav-link complete" id="xdrugImageT" data-toggle="pill" href="#xdrugImage"
+					   role="tab"
+					   aria-controls="xdrugImage" aria-selected="false">
 						<span>Drug Image</span>
 					</a>
-					<a class="nav-link complete" id="xwebdescT" data-toggle="pill" href="#xwebdesc" role="tab" aria-controls="xwebdesc" aria-selected="false">
+					<a class="nav-link complete" id="xwebdescT" data-toggle="pill" href="#xwebdesc" role="tab"
+					   aria-controls="xwebdesc" aria-selected="false">
 						<span>Website Description</span>
 					</a>
-					<a class="nav-link @if($isComplete['completeCmpDsg'] == 1) complete @endif" id="xcomponentsT" href="#xcomponents" data-toggle="pill" role="tab" aria-controls="xcomponents" aria-selected="false">
-						<span>Components &amp; Dosages</span>
+					<a class="nav-link @if($isComplete['completeCmpDsg'] == 1) complete @endif" id="xcomponentsT"
+					   href="#xcomponents"
+					   data-toggle="pill" role="tab" aria-controls="xcomponents"
+					   aria-selected="false">
+						<span>Components &amp; Dosages </span>
 					</a>
-					
-					<a class="nav-link @if($isComplete['completeDpotLot'] == 1) complete @endif" id="xdepotsT" href="#xdepots" data-toggle="pill" role="tab" aria-controls="xdepots" aria-selected="false">
-						
+
+					<a class="nav-link @if($isComplete['completeDpotLot'] == 1) complete @endif" id="xdepotsT"
+					   href="#xdepots"
+					   data-toggle="pill" role="tab" aria-controls="xdepots" aria-selected="false">
+
 						<span>Depots &amp; Lots</span>
 					</a>
-					<a class="nav-link @if($supply_info->count()) complete @endif" id="xdrugdistT" href="#xdrugdistTa" data-toggle="pill" role="tab" aria-controls="xdrugdistTa" aria-selected="false">
-						
+					<a class="nav-link @if($supply_info->count()) complete @endif" id="xdrugdistT" href="#xdrugdistTa"
+					   data-toggle="pill" role="tab" aria-controls="xdrugdistTa" aria-selected="false">
+
 						<span>Drug Distribution Schedule</span>
 					</a>
-					<a class="nav-link @if($drug->user_groups->count()) complete @endif" id="xgroupsT" data-toggle="pill" href="#xgroups" role="tab" aria-controls="xgroups" aria-selected="false">
+					<a class="nav-link @if($drug->user_groups->count()) complete @endif" id="xgroupsT"
+					   data-toggle="pill" href="#xgroups" role="tab" aria-controls="xgroups" aria-selected="false">
 						<span>Assigned Groups</span>
 					</a>
-					<a class="nav-link @if($drug->documents->count()) complete @endif" id="xdocumentsT" data-toggle="pill" href="#xdocuments" role="tab" aria-controls="xdocuments" aria-selected="false">
+					<a class="nav-link @if($drug->documents->count()) complete @endif" id="xdocumentsT"
+					   data-toggle="pill" href="#xdocuments" role="tab" aria-controls="xdocuments"
+					   aria-selected="false">
 						<span>Form List</span>
 					</a>
-					<a class="nav-link @if($drug->resources->count()) complete @endif" id="xresourcesT" data-toggle="pill" href="#xresources" role="tab" aria-controls="xresources" aria-selected="false">
+					<a class="nav-link @if($drug->resources->count()) complete @endif" id="xresourcesT"
+					   data-toggle="pill" href="#xresources" role="tab" aria-controls="xresources"
+					   aria-selected="false">
 						<span>Reference Documents</span>
 					</a>
-					<a class="nav-link @if($drug->rids->count()) complete @endif" id="xridsT" data-toggle="pill" href="#xrids" role="tab" aria-controls="xrids" aria-selected="false">
-						<strong class="text-warning">{{$drug->rids->count()}}</strong>
-						Requests
+					<a class="nav-link @if($drug->rids->count()) complete @endif" id="xridsT"
+					   data-toggle="pill" href="#xrids" role="tab"
+					   aria-controls="xrids" aria-selected="false">
+						<strong class="text-warning">{{$drug->rids->count()}}</strong> Requests
 					</a>
-					<a class="nav-link @if($drug->notes->count()) complete @endif" id="xnotesT" data-toggle="pill" href="#xnotes" role="tab" aria-controls="xnotes" aria-selected="false">
-						<strong class="text-warning">{{$drug->notes->count()}}</strong>
-						Notes
+					<a class="nav-link @if($drug->notes->count()) complete @endif" id="xnotesT"
+					   data-toggle="pill" href="#xnotes" role="tab"
+					   aria-controls="xnotes" aria-selected="false">
+						<strong class="text-warning">{{$drug->notes->count()}}</strong> Notes
 					</a>
 				</div>
 			</div>
@@ -161,7 +185,8 @@
 					@include('portal.drug.show.details')
 					@endif
 					<div class="tab-pane fade show active" id="xdetails" role="tabpanel" aria-labelledby="xdetails-tab">
-						<form method="post" action="{{ route('eac.portal.drug.update') }}" enctype="multipart/form-data">
+						<form method="post" action="{{ route('eac.portal.drug.update') }}"
+						      enctype="multipart/form-data">
 							@csrf
 							<input type="hidden" name="drug_id" value="{{$drug->id}}">
 							<div class="card-body">
@@ -179,14 +204,13 @@
 						</form>
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xavailability" role="tabpanel" aria-labelledby="xavailability-tab">
-						<form method="post" action="{{ route('eac.portal.drug.update.availibility') }}" enctype="multipart/form-data">
+						<form method="post" action="{{ route('eac.portal.drug.update.availibility') }}"
+						      enctype="multipart/form-data">
 							@csrf
 							<input type="hidden" name="drug_id" value="{{$drug->id}}">
 							<div class="card-body">
 								<h5 class="mb-1">
-									Drug is available in these
-									<strong>countries</strong>
-									:
+									Drug is available in these <strong>countries</strong>:
 								</h5>
 								@access('drug.info.update', $drug->id)
 								<div class="mb-3">
@@ -205,28 +229,33 @@
 									</select>
 									<label class="h5 mb-0 d-block mt-2" for="hide_countries">
 										<input type="hidden" name="hide_countries" value="0">
-										<input type="checkbox" name="hide_countries" id="hide_countries" @if($drug->hide_countries) checked @endif value="1"/>
+										<input type="checkbox" name="hide_countries" id="hide_countries"
+										       @if($drug->hide_countries) checked @endif value="1"/>
 										Hide Countries on EAC website
 									</label>
 								</div>
 								<div class="mb-3">
 									<label class="h5 mb-0 d-block" for="pre_approval_req">
 										<input type="hidden" name="pre_approval_req" value="0">
-										<input type="checkbox" name="pre_approval_req" id="pre_approval_req" @if($drug->pre_approval_req) checked @endif value="1">
+										<input type="checkbox" name="pre_approval_req" id="pre_approval_req"
+										       @if($drug->pre_approval_req) checked @endif value="1">
 										Pre-Approval is Required
 									</label>
 								</div>
 								<div class="mb-3">
 									<label class="h5 mb-0 d-block" for="ship_without_approval">
 										<input type="hidden" name="ship_without_approval" value="0">
-										<input type="checkbox" name="ship_without_approval" id="ship_without_approval" value="1" @if($drug->ship_without_approval) checked @endif>
+										<input type="checkbox" name="ship_without_approval"
+										       id="ship_without_approval" value="1"
+										       @if($drug->ship_without_approval) checked @endif>
 										Ship Without Approval
 									</label>
 								</div>
 								<div class="mb-3">
 									<label class="h5 mb-0 d-block" for="allow_remote">
 										<input type="hidden" name="allow_remote" value="0">
-										<input type="checkbox" name="allow_remote" id="allow_remote" @if($drug->allow_remote) checked @endif value="1">
+										<input type="checkbox" name="allow_remote" id="allow_remote"
+										       @if($drug->allow_remote) checked @endif value="1">
 										Allow Remote Visits
 									</label>
 								</div>
@@ -234,7 +263,8 @@
 								<div class="mb-3">
 									@if($drug->countries_available && $drug->countries_available != 'null' && $drug->countries_available != '0' )
 										@foreach(\App\Country::find(json_decode($drug->countries_available, true)) as $country)
-											<a href="#" data-toggle="modal" data-target="#Modal{{$country->id}}">{{$country->name}}</a>,
+											<a href="#" data-toggle="modal"
+											   data-target="#Modal{{$country->id}}">{{$country->name}}</a>,
 											@include('include.portal.modals.rid.country.available_country', $country)
 										@endforeach
 										<div class="mt-2">
@@ -274,7 +304,7 @@
 									@endif
 								</div>
 								@endif
-							
+
 							</div>
 							<div class="card-footer">
 								<button type="submit" class="btn btn-success">
@@ -284,21 +314,25 @@
 						</form>
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xdrugImage" role="tabpanel" aria-labelledby="xdrugimage-tab">
-						<form method="post" action="{{ route('eac.portal.drug.image.update',$drug->id) }}" enctype="multipart/form-data">
+						<form method="post" action="{{ route('eac.portal.drug.image.update',$drug->id) }}"
+						      enctype="multipart/form-data">
 							{{ csrf_field() }}
 							<div class="card-body">
-								
+
 								<div class="pre-scrollable small">
 									@if(isset($drugLogo->name))
-										<img id="imgdrug" class="drug-logo" alt="drug image" src="{{ asset('/images')}}/{{$drugLogo->name}}"/>
+										<img id="imgdrug" class="drug-logo" alt="drug image"
+										     src="{{ asset('/images')}}/{{$drugLogo->name}}"/>
 									@else
-										<img id="imgdrug" class="drug-logo" alt="drug image" src="{{ asset('/images')}}/default.png"/>
-									
+										<img id="imgdrug" class="drug-logo" alt="drug image"
+										     src="{{ asset('/images')}}/default.png"/>
+
 									@endif
 									<input type="hidden" name="drug_id" value="{{$drug->id}}">
-									<input type="file" name="drug_image" onchange="document.getElementById('imgdrug').src = window.URL.createObjectURL(this.files[0])">
+									<input type="file" name="drug_image"
+									       onchange="document.getElementById('imgdrug').src = window.URL.createObjectURL(this.files[0])">
 								</div>
-							
+
 							</div>
 							<div class="card-footer">
 								<button type="submit" class="btn btn-success">Save Changes</button>
@@ -306,14 +340,15 @@
 						</form>
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xwebdesc" role="tabpanel" aria-labelledby="xwebdesc-tab">
-						<form method="post" action="{{ route('eac.portal.drug.description.update',$drug->id) }}" enctype="multipart/form-data">
+						<form method="post" action="{{ route('eac.portal.drug.description.update',$drug->id) }}"
+						      enctype="multipart/form-data">
 							{{ csrf_field() }}
 							<div class="card-body">
 								<h5 class="mb-3">
-									<strong>Description</strong>
-									to be viewed on the EAC website
+									<strong>Description</strong> to be viewed on the EAC website
 								</h5>
-								<textarea class="form-control basic-editor" name="short_desc" rows="10">{{ $drug->short_desc }}</textarea>
+								<textarea class="form-control basic-editor" name="short_desc"
+								          rows="10">{{ $drug->short_desc }}</textarea>
 							</div>
 							<div class="card-footer">
 								<button type="submit" class="btn btn-success">Save Changes</button>
@@ -323,10 +358,12 @@
 					<div class="tab-pane fade" id="xcomponents" role="tabpanel" aria-labelledby="xcomponents-tab">
 						<div class="card card-body mb-0">
 							<h5>
-								Components @access('drug.component.view', $drug->id)
+								Components
+								@access('drug.component.view', $drug->id)
 								<span class="badge badge-dark">{{ $drug->components->count() }}</span>
 								@endif
-								and Dosages @access('drug.component.view', $drug->id)
+								and Dosages
+								@access('drug.component.view', $drug->id)
 								<span class="badge badge-dark">{{ $dosg->count() }}</span>
 								@endif
 							</h5>
@@ -336,14 +373,14 @@
 							@include('portal.drug.show.dosages')
 							@else
 								<p class="text-danger m-0">
-									<i class="far fa-lock"></i>
-									Content unavailable
+									<i class="far fa-lock"></i> Content unavailable
 								</p><!-- need to hide entire block if else ^^ -->
 							@endif
 						</div>
 						@access('drug.component.create', $drug->id)
 						<div class="card-footer d-flex justify-content-start">
-							<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newComponentModal">
+							<button type="button" class="btn btn-success window-btn" data-toggle="modal"
+							        data-target="#newComponentModal">
 								Add Component
 							</button>
 						</div>
@@ -353,7 +390,40 @@
 					<div class="tab-pane fade" id="xdepots" role="tabpanel" aria-labelledby="xdepots-tab">
 						<div class="card card-body mb-0">
 							<h5 class="text-gold mb-2">
-								Depots and Lots
+								Depots
+								@access('drug.depot.view', $drug->id)
+								<span class="badge badge-dark">
+									@php $deptcont = collect(); @endphp
+									@php $lotCnt = collect(); @endphp
+
+									@if($depots->count())
+										@foreach ($depots as $dpt)
+
+											@if ($dpt->lots() && $dpt->lotsWithDrug($drug->id))
+												@php $deptcont->push($dpt); @endphp
+											@endif
+											{{--
+											@if ($dpt->lotsWithDrug($drug->id))
+											   @foreach($dpt->lotsWithDrug($drug->id) as $lot)
+												   @php $lotCnt->push($dpt); @endphp
+											   @endforeach
+											@endif --}}
+										@endforeach
+										{{ $deptcont->count() }}
+									@endif
+								</span>
+								@endif
+								and Lots
+								@if($depots->count())
+									@foreach ($depots as $dpt)
+										@if ($dpt->lots() && $dpt->lotsWithDrug($drug->id))
+											@foreach($dpt->lotsWithDrug($drug->id) as $lot)
+												@php $lotCnt->push($lot); @endphp
+											@endforeach
+										@endif
+									@endforeach
+									<span class="badge badge-dark">{{ $lotCnt->count() }}</span>
+								@endif
 							</h5>
 							@access('drug.depot.update', $drug->id)
 							@include('portal.drug.edit.depots')
@@ -361,21 +431,20 @@
 							@include('portal.drug.show.depots')
 							@else
 								<p class="text-danger m-0">
-									<i class="far fa-lock"></i>
-									Content unavailable
+									<i class="far fa-lock"></i> Content unavailable
 								</p>
 							@endif
 						</div>
 						@access('drug.depot.create', $drug->id)
 						<div class="card-footer d-flex justify-content-start">
 							@if($dosg->count())
-								<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newLotModal">
+								<button type="button" class="btn btn-success window-btn" data-toggle="modal"
+								        data-target="#newLotModal">
 									Add Lot
 								</button>
 							@else
 								<p class="text-danger m-0">
-									<i class="far fa-lock"></i>
-									Please add dosages first
+									<i class="far fa-lock"></i> Please add dosages first
 								</p>
 							@endif
 						</div>
@@ -383,15 +452,14 @@
 						@endif
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xdrugdistTa" role="tabpanel" aria-labelledby="xdrugdistTa-tab">
-						
+
 						@access('drug.supply.update', $drug->id)
 						@include('portal.drug.edit.supply')
 						@elseaccess('drug.supply.view', $drug->id)
 						@include('portal.drug.show.supply_info')
 						@else
 							<p class="text-danger m-0">
-								<i class="far fa-lock"></i>
-								Content unavailable
+								<i class="far fa-lock"></i> Content unavailable
 							</p>
 						@endif
 					</div><!-- /.tab-pane -->
@@ -403,18 +471,18 @@
 							@include('portal.drug.show.groups')
 							@else
 								<p class="text-danger m-0">
-									<i class="far fa-lock"></i>
-									Content unavailable
+									<i class="far fa-lock"></i> Content unavailable
 								</p>
 							@endif
 						</div>
 						@access('drug.user.create', $drug->id)
 						<div class="card-footer d-flex justify-content-start">
 							{{-- <button type="button" class="btn btn-primary window-btn" data-toggle="modal"
-							data-target="#">
-							Add Existing Group
+									data-target="#">
+								Add Existing Group
 							</button> --}}
-							<button type="button" class="ml-3 btn btn-success window-btn" data-toggle="modal" data-target="#AddModal">
+							<button type="button" class="ml-3 btn btn-success window-btn" data-toggle="modal"
+							        data-target="#AddModal">
 								Add New Group
 							</button>
 						</div>
@@ -426,17 +494,20 @@
 							<div class="row mb-3">
 								<div class="col">
 									<h5 class="mb-0">Form List
+										@access('drug.document.view', $drug->id)
+										<span class="badge badge-dark">{{ $drug->documents->count() }}</span>
+										@endif
 									</h5>
 								</div>
 								<div class="col-auto">
 									<div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
 										<label class="btn btn-secondary active btn-sm" onclick="showactiveOrAll(1)">
-											<input type="radio" name="show_active" value="1" autocomplete="off" checked>
-											View Active
+											<input type="radio" name="show_active" value="1"
+											       autocomplete="off" checked>View Active
 										</label>
 										<label class="btn btn-secondary  btn-sm" onclick="showactiveOrAll(0)">
-											<input type="radio" name="show_active" value="0" autocomplete="off">
-											View All
+											<input type="radio" name="show_active" value="0"
+											       autocomplete="off"> View All
 										</label>
 									</div>
 								</div>
@@ -447,14 +518,14 @@
 							@include('portal.drug.show.documents')
 							@else
 								<p class="text-danger m-0">
-									<i class="far fa-lock"></i>
-									Content unavailable
+									<i class="far fa-lock"></i> Content unavailable
 								</p><!-- need to hide entire block if else ^^ -->
 							@endif
 						</div>
 						@access('drug.document.create', $drug->id)
 						<div class="card-footer d-flex justify-content-start">
-							<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newDocumentModal">
+							<button type="button" class="btn btn-success window-btn" data-toggle="modal"
+							        data-target="#newDocumentModal">
 								Add Form
 							</button>
 						</div>
@@ -470,7 +541,8 @@
 						<div class="card card-body mb-0">
 							<div class="row mb-3">
 								<div class="col">
-									<h5 class="mb-0">Reference Documents @access('drug_resource.view', $drug->id)
+									<h5 class="mb-0">Reference Documents
+										@access('drug_resource.view', $drug->id)
 										<span class="badge badge-dark">{{ $drug->resources->count() }}</span>
 										@endif
 									</h5>
@@ -478,12 +550,12 @@
 								<div class="col-auto">
 									<div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
 										<label class="btn btn-secondary active btn-sm" onclick="showactiveOrAll(1)">
-											<input type="radio" name="show_active" value="1" autocomplete="off" checked>
-											View Active
+											<input type="radio" name="show_active" value="1"
+											       autocomplete="off" checked> View Active
 										</label>
 										<label class="btn btn-secondary  btn-sm" onclick="showactiveOrAll(0)">
-											<input type="radio" name="show_active" value="0" autocomplete="off">
-											View All
+											<input type="radio" name="show_active" value="0"
+											       autocomplete="off"> View All
 										</label>
 									</div>
 								</div>
@@ -494,14 +566,14 @@
 							@include('portal.drug.show.resources')
 							@else
 								<p class="text-danger m-0">
-									<i class="far fa-lock"></i>
-									Content unavailable
+									<i class="far fa-lock"></i> Content unavailable
 								</p>
 							@endif
 						</div>
 						@access('drug.resource.create', $drug->id)
 						<div class="card-footer d-flex justify-content-start">
-							<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newResourceModal">
+							<button type="button" class="btn btn-success window-btn" data-toggle="modal"
+							        data-target="#newResourceModal">
 								Add Document
 							</button>
 						</div>
@@ -568,10 +640,10 @@
 	<script type="text/javascript">
         $(document).ready(function () {
 
-// let $groupSection = $("#type_select");
-// $groupSection.find('option').each(function () {
-// 			$(this).hide();
-// 	});
+            // let $groupSection = $("#type_select");
+            // $groupSection.find('option').each(function () {
+            // 			$(this).hide();
+            // 	});
 
             $(".tab-pane").each(function () {
                 let errorCount = $(this).find('.is-invalid').length;
@@ -604,7 +676,7 @@
 
             });
 
-// On remove button click, remove a group member
+            // On remove button click, remove a group member
             $(document).on('click', 'a.remove', function (e) {
                 e.preventDefault();
                 $(this).closest('.group-member').remove();
@@ -616,7 +688,7 @@
                 });
             });
 
-// On Type Change
+            // On Type Change
             $("#type_select").change(function () {
                 let $type_id = $(this).val();
                 let $memberSection = $("tr");
@@ -780,7 +852,7 @@
                 error: function (xhr, status, errorThrown) {
                     xhr.status;
 
-//The message added to Response object in Controller can be retrieved as following.
+                    //The message added to Response object in Controller can be retrieved as following.
                     xhr.responseText;
                     if (xhr.status === 0) {
                         alert('Not connected.\nPlease verify your network connection.');
@@ -817,7 +889,7 @@
             });
             $(".cancel").click(function () {
                 console.log('reset data');
-// $('.newdosageModal')[0].reset();
+                // $('.newdosageModal')[0].reset();
 
                 $('input').removeClass('is-invalid');
                 $('select').removeClass('is-invalid');
@@ -826,8 +898,8 @@
             });
 		</script>
 	@endif
-	
-	
+
+
 	<script type="text/javascript">
 
         function Confirm_Delete(param) {
@@ -853,7 +925,7 @@
                             {
                                 id: param
                             });
-// return false;
+                        // return false;
                         swal.close();
 
                         location.reload(true);
@@ -887,7 +959,7 @@
                             {
                                 id: param
                             });
-// return false;
+                        // return false;
                         swal.close();
 
                         location.reload(true);

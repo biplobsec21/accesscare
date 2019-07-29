@@ -68,7 +68,7 @@
 						<div class="row">
 							<div class="col-md-6 card card-body mb-0"><p>{{$document->name}}</p></div>
 							<div class="col-md-6 card card-body mb-0">
-								@if($doc->uploaded_file_id ?? null)
+								@if($doc && $doc->uploaded_file_id)
 									<a title="Add" class="upload-add" data-toggle="modal" data-target="#UploadModal{{$document->id}}" aria-hidden="true">
 										<i class="far fa-plus text-success"></i>
 										<span class="text-success">Uploaded (Click to change)</span>
@@ -109,11 +109,14 @@
 												<label class="d-block">Attach Document
 													<small>(PDF/JPG)</small>
 												</label>
-												@if($doc->uploaded_file_id ?? null){
+												<?php
+												if($doc && $doc->uploaded_file_id){
+												$file = \App\File::where('id', $doc->uploaded_file_id)->first();
+												?>
 												<div>
 													<div class="row">
 														<div class="col-sm">
-															{{$doc->file->name}}
+															{{$file->name}}
 														</div>
 														<div class="col-sm-auto">
 															<a class="btn btn-danger btn-sm" href="#" onclick="removeDocument('{{$doc->id}}',event)">
@@ -123,11 +126,11 @@
 														</div>
 													</div>
 												</div>
-												@else
-													<div class="input-group">
-														<input type="file" class="form-control" name="upload_file" value="filename.extension" required/>
-													</div>
-												@endif
+												<?php } else{ ?>
+												<div class="input-group">
+													<input type="file" class="form-control" name="upload_file" value="filename.extension" required/>
+												</div>
+												<?php } ?>
 											
 											</div>
 											<div class="">
@@ -164,8 +167,8 @@
 											</button>
 										</div>
 										<div class="alert-secondary p-2 border-bottom text-center">
-											@if($document->file)
-												@include('include.portal.file-btns', ['id' => $document->file->id])
+											@if($file->id)
+												@include('include.portal.file-btns', ['id' => $file->id])
 											@endif
 										</div>
 										<div class="modal-body p-3">
@@ -281,6 +284,7 @@
 						</div>
 					@endif
 				@endforeach
+			
 			</div>
 		
 		</div>

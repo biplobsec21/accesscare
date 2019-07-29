@@ -83,7 +83,7 @@ class DBMigrate extends Command
 	protected $signature = 'qis:migrate 
                          {--y|yes : Pre-confirm all prompts (TO BE IMPLEMENTED)}
                          {--p|no-progress : Do not display any progress bars (TO BE IMPLEMENTED)}
-                         {to=mysql : Connection to receive the data} 
+                         {to=mysql_dest : Connection to receive the data} 
                          {from=mysql_src : Connection to send the data}';
 
 	/**

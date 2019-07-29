@@ -29,8 +29,8 @@
 			{{$rid->number}}
 		</h2>
 	</div><!-- end .titleBar -->
-	
-	
+
+
 	<div class="row">
 		<div class="col-lg-8 col-xl-4">
 			@if(Session::has('alerts'))
@@ -38,66 +38,73 @@
 			@endif
 			<div class="actionBar">
 				<a href="{{ route("eac.portal.rid.show", $rid->id) }}" class="btn btn-secondary">
-					<i class="fal fa-angle-double-left"></i>
-					View RID
+					<i class="fal fa-angle-double-left"></i> View RID
 				</a>
 			</div><!-- end .actionBar -->
 		</div>
 	</div><!-- /.row -->
-	
+
 	<div class="viewData">
-		
 		<div class="row">
 			<div class="col-lg-8 col-xl-4">
 				<form action="{{ route('eac.portal.rid.resupply.store') }}" method="post">
 					@csrf
 					<input type="hidden" name="rid_id" value="{{ $rid->id }}">
 					<div class="mb-3 mb-xl-4">
-						@if($drug_supply)
-							<div class="card card-body mb-0">
-								<div class="row">
-									<div class="col-md-6 mb-3">
-										<label class="d-block">Delivery Date</label>
-										<input name="first_visit_date" type="text" id="first_visit_date" data-minimum="{{$rid->last_visit()->visit_date ?? date('Y-m-d')}}" value="{{ old('first_visit_date') ? old('first_visit_date') : ''}}" class="shipment-datepicker form-control {{ $errors->has('first_visit_date') ? ' is-invalid' : '' }}">
-										<div class="invalid-feedback">
-											{{ $errors->first('first_visit_date') }}
-										</div>
+						<div class="card card-body mb-0">
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label class="d-block">Delivery Date</label>
+									<input name="first_visit_date" type="text" id="first_visit_date"
+									       data-minimum="{{$rid->last_visit()->visit_date ?? date('Y-m-d')}}"
+									       value="{{ old('first_visit_date') ? old('first_visit_date') : ''}}"
+									       class="shipment-datepicker form-control {{ $errors->has('first_visit_date') ? ' is-invalid' : '' }}">
+									<div class="invalid-feedback">
+										{{ $errors->first('first_visit_date') }}
 									</div>
-									<div class="col-md-6 mb-3">
-										<label class="d-block">Days to Deliver</label>
-										<input name="days_to_deliver" type="number" value="{{ $country->avg_days_to_deliver_drug ?? null}}" class="form-control {{ $errors->has('days_to_deliver') ? 'is-invalid' : '' }}">
-										<div class="invalid-feedback">
-											{{ $errors->first('days_to_deliver') }}
-										</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="d-block">Days to Deliver</label>
+									<input name="days_to_deliver" type="number"
+									       value="{{ $country->avg_days_to_deliver_drug ?? null}}"
+									       class="form-control {{ $errors->has('days_to_deliver') ? 'is-invalid' : '' }}">
+									<div class="invalid-feedback">
+										{{ $errors->first('days_to_deliver') }}
 									</div>
-									<div class="col-md-12 mb-3">
-										<label class="d-block">Number of Visits</label>
-										<input name="number_of_visits" type="number" step="1" value="{{ old('number_of_visits') ? old('number_of_visits') : 1 }}" class="form-control {{ $errors->has('number_of_visits') ? ' is-invalid' : '' }}"/>
-										<div class="invalid-feedback">
-											{{ $errors->first('number_of_visits') }}
-										</div>
+								</div>
+								<div class="col-md-12 mb-3">
+									<label class="d-block">Number of Visits</label>
+									<input name="number_of_visits" type="number" step="1"
+									       value="{{ old('number_of_visits') ? old('number_of_visits') : 1 }}"
+									       class="form-control {{ $errors->has('number_of_visits') ? ' is-invalid' : '' }}"/>
+									<div class="invalid-feedback">
+										{{ $errors->first('number_of_visits') }}
 									</div>
-									<div class="col-md-12 mb-3">
-										<label class="d-block">Supply Length</label>
-										<input name="supply_length" type="number" value="{{ old('supply_length') ? old('supply_length') : $drug_supply->supply_qty }}" class="form-control {{ $errors->has('supply_length') ? 'is-invalid' : '' }}">
-										<div class="invalid-feedback">
-											{{ $errors->first('supply_length') }}
-										</div>
+								</div>
+								<div class="col-md-12 mb-3">
+									<label class="d-block">Supply Length</label>
+									<input name="supply_length" type="number"
+									       value="{{ old('supply_length') ? old('supply_length') : $drug_supply->supply_qty }}"
+									       class="form-control {{ $errors->has('supply_length') ? 'is-invalid' : '' }}">
+									<div class="invalid-feedback">
+										{{ $errors->first('supply_length') }}
 									</div>
-								</div><!-- /.row -->
-							</div>
-							<div class="card-footer d-flex justify-content-center">
-								<button class="btn btn-success" type="submit">
-									<i class="far fa-check"></i>
-									Save Changes
-								</button>
-							</div>
-						@else
-							<span>Drug distrobution schedule has not been set</span>
-						@endif
+								</div>
+							</div><!-- /.row -->
+
+						</div>
+						<div class="card-footer d-flex justify-content-center">
+							<button class="btn btn-success" type="submit">
+								<i class="far fa-check"></i> Save Changes
+							</button>
+						</div>
 					</div>
 				</form>
 			</div>
+			<!--
+				Styling from JQuery UI documentation
+				See "styles" section
+			 -->
 			<div class="col-lg-4 col-xl-8">
 				<form action="{{ route('eac.portal.rid.supply.update') }}" method="post">
 					@csrf
@@ -110,7 +117,8 @@
 								<span class="shipment-date">
 									{{$shipment->deliver_by_date ?? 'N/A'}}
 								</span>
-								<a class="delete-shipment-btn badge badge-danger" href="#" style="display: none">
+								<a class="delete-shipment-btn badge badge-danger"
+								   href="#" style="display: none">
 									Delete
 								</a>
 							</div>
@@ -118,9 +126,9 @@
 							<ul class="list-group connectedSortable" style="min-height: 25px; border: solid black 1px">
 								@foreach($shipment->visits->sortBy('visit_date') as $visit)
 									<li class="list-group-item ui-state-active visit">
-										<input type="hidden" data-field="shipment_id" name="visits[{{$visit->id}}]" value="{{$shipment->id}}"/>
-										Visit {{$visit->index}} -
-										<span class="visit-date">{{$visit->visit_date}}</span>
+										<input type="hidden" data-field="shipment_id" name="visits[{{$visit->id}}]"
+										       value="{{$shipment->id}}"/>
+										Visit {{$visit->index}} - <span class="visit-date">{{$visit->visit_date}}</span>
 									</li>
 								@endforeach
 							</ul>
@@ -128,12 +136,10 @@
 						@php $i++ @endphp
 					@endforeach
 					<button class="btn btn-success" type="submit">
-						<i class="far fa-check"></i>
-						Save Changes
+						<i class="far fa-check"></i> Save Changes
 					</button>
 					<a class="text-white btn bg-gradient-indigo" href="#" onClick="window.location.reload();">
-						<i class="far fa-times"></i>
-						Cancel
+						<i class="far fa-times"></i> Cancel
 					</a>
 				</form>
 			</div>

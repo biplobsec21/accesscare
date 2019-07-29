@@ -38,7 +38,6 @@ class UserController extends PermissionsController
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
-		
 	}
 
 	public function listUsers(Request $request)
@@ -85,6 +84,7 @@ class UserController extends PermissionsController
 			}
 		}
 
+		$this->authorize('user.index.create', User::class);
 		$roles = \App\Role::all();
 		$userType = \App\UserType::all();
 		$countries = $this->getCountry();
@@ -106,7 +106,7 @@ class UserController extends PermissionsController
 		 * Fill user data
 		 */
 		$user->title = $request->input('title');
-		if ($request->input('type') == UserType::where('name', 'physician')->first()->id && !$request->input('is_delegate'))
+		if ($request->input('type') == UserType::where('name', 'physician')->first()->id)
 			$user->status = 'Registering';
 		else
 			$user->status = 'Approved';
@@ -115,7 +115,6 @@ class UserController extends PermissionsController
 		$user->last_name = $request->input('last_name');
 		$user->email = $request->input('email');
 		$user->password = \Hash::make($user->id);
-		$user->is_delegate = $request->input('is_delegate');
 
 		/*
 		 * Fill address data
@@ -146,7 +145,7 @@ class UserController extends PermissionsController
 		$user->save();
 		$address->save();
 
-		$this->createNotice('user_registration_submitted', $user, $user);
+
 		if (Session::has('redirect_url')) {
 			$redirect_url = Session::get('redirect_url');
 			Session::forget('redirect_url');
@@ -203,7 +202,7 @@ class UserController extends PermissionsController
 		$user = User::where('id', '=', $id)->firstOrFail();
 		if ($user->status == 'Pending') {
 			$this->createNotice('user_approved', $user, $user);
-			if ($user->type->name == 'Physican') {
+			if($user->type->name == 'Physican'){
 				$group = new UserGroup();
 				$group->id = $this->newID(UserGroup::class);
 				$group->type_id = $request->input('type_id');
@@ -240,14 +239,10 @@ class UserController extends PermissionsController
 		$user = User::where('id', '=', $id)->firstOrFail();
 		$access = $this->userAuth($user);
 		$userType = \App\UserType::all();
-		$rids = $this->listRidAccess($user);
-		$drugs = $this->listDrugAccess($user);
 		return view('portal.user.edit', [
 			'user' => $user,
 			'countries' => $countries,
 			'user_types' => $userType,
-			'rids' => $rids,
-			'drugs' => $drugs,
 			'access' => $access
 		]);
 	}

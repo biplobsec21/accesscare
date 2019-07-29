@@ -98,7 +98,7 @@
 
   function ConfirmDoseDelete(param)
   {
-    
+       
     swal({
       title: "Are you sure?",
       text: "Want to delete it",
@@ -115,7 +115,7 @@
           text: 'Content deleted!',
           icon: 'success'
         }).then(function() {
-            $.get("{{route('eac.portal.settings.manage.rid.denial.reasondelete')}}",
+            $.get("{{route('eac.portal.settings.manage.rid.denial.reasondelete')}}", 
               {
                id: param
              });

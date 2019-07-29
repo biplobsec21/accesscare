@@ -35,6 +35,7 @@ class RidRegimenController extends Controller
 		$RidShipment = RidShipment::where('id', $_POST['rid_shipment_id'])->firstOrFail();
 		$regimen = new RidRegimen();
 		$regimen->id = $this->newID(RidRegimen::class);
+		$regimen->visit_id = $_POST['visit_id'];
 		$regimen->shipment_id = $_POST['rid_shipment_id'];
 
 		if ($_POST['drug_lot_id'] == '0') {

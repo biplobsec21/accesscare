@@ -30,13 +30,14 @@ trait Notifier
 
 	protected function sendMail($notice, $mailer, $context, $user)
 	{
+		return;
 		$content = new \stdClass();
 		$content->subject = 'V2ADEV' . $mailer->subject;
 		$content->message = $this->applyTokens($mailer->html, $context);
 		$content->receiver = $user->full_name;
 		$content->context = $context;
 
-		//return Mail::to('office@quasars.com')->send(new GenericEmail($content));
+		return Mail::to('office@quasars.com')->send(new GenericEmail($content));
 	}
 
 	public function applyTokens($str, $context)
