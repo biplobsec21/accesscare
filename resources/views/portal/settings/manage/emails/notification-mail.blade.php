@@ -45,7 +45,7 @@
  				<tr>
  					<th>Name</th>
  					<th>Subject</th>
- 					<th>From Address</th>
+                    <th>Created At</th>
  					<th class="no-sort"></th>
  				</tr>
  				</thead>
@@ -54,7 +54,7 @@
  				<tr>
  					<th>Name</th>
  					<th>Subject</th>
- 					<th>From Address</th>
+                    <th>Created At</th>
  					<th class="no-search"></th>
  				</tr>
  				</tfoot>
@@ -62,237 +62,28 @@
  		</div>
  	</div>
 	</div><!-- end .viewData -->
-
-
-	
 @endsection
 
 @section('scripts')
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-	<script type="text/javascript">
-		// Data Tables
-		$(document).ready(function () {
-			// $('.btn-del').click(function(){
-			// 	console.log('asd');
-			// });
-			
-
-			$('#mailListTBL tfoot th').each(function () {
-				if ($(this).hasClass("no-search"))
-					return;
-				var title = $(this).text();
-				$(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-			});
-
-			var dataTable = $('#mailListTBL').DataTable({
-				"paginationDefault": 10,
-        "paginationOptions": [10, 25, 50, 75, 100],
-				// "responsive": true,
-				'order': [[0, 'asc']],
-				"ajax": {
-					url: "{{ route('eac.portal.settings.mail.ajax.list') }}",
-					type: "post"
-				},
-				"processing": true,
-				"serverSide": true,
-				"columns": [
-					{
-						"data": "name",
-						'name': 'name',
-						searchable: true
-					},
-					{
-						"data": "subject",
-						'name': 'subject',
-						searchable: true
-					},
-					{
-						"data": "from_email",
-						'name': 'from_email',
-						searchable: true
-
-					},
-					{
-						"data": "ops_btns",
-						orderable: false,
-						searchable: false
-					},
-				]
-			});
-
-			dataTable.columns().every(function () {
-				var that = this;
-
-				$('input', this.footer()).on('keyup change', function () {
-					if (that.search() !== this.value) {
-						that
-							.search(this.value)
-							.draw();
-					}
-				});
-			});
-
-			dataTable.columns().every(function () {
-				var that = this;
-				$('input', this.footer()).on('keyup change', function () {
-					if (that.search() !== this.value) {
-						that.search(this.value).draw();
-					}
-				});
-			});
-
-			$.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-				swal({
-					title: "Oh Snap!",
-					text: "Something went wrong on our side. Please try again later.",
-					icon: "warning",
-				});
-			};
-
-		}); // end doc ready
-	</script>
- <script>
-  function ConfirmDelete(param) {
-  // alert(param);
-  //          var x = confirm("Are you sure you want to delete?");
-  //          if (x){
-  //            $.ajax({
-  //                url: "{{route('documentType.ajaxDelete')}}",
-  //                type: 'POST',
-  //                data: {
-  //                    'id': param
-  //                },
-  //                success: function (response) {
-  //                    console.log(response);
-  //                    if(response.result == 'Success'){
-  //                        $("#unique_"+param).remove();
-  //                    }
-  ////                    $('#'+param').remove();
-  //                }
-  //            });
-  //               return true;
-  //          }else{
-  //              return false;
-  //          }      
-  //        swal({
-  //            title: "Are you sure?",
-  //            text: "If you delete this content will be deleted permanently.",
-  //            type: "warning",
-  //            showCancelButton: true,
-  //            closeOnConfirm: false,
-  //            showLoaderOnConfirm: true,
-  //            confirmButtonClass: "btn-danger",
-  //            confirmButtonText: "Yes, delete it!",
-  //       }).then(function() {
-  //           $.post("{{route('documentType.ajaxDelete')}}", {
-  //               id: param
-  //             },
-  //             function(data) {
-  //               swal({
-  //                 title: "Deleted!",
-  //                 text: "Your content has been deleted.",
-  //                 type: "success"
-  //               }, );
-  //               $("#unique_"+param).remove();
-  //             }
-  //           );
-  //
-  //       });
-    swal({
-     title: "Are you sure?",
-     text: "You will not be able to recover !",
-     icon: "warning",
-     buttons: [
-      'No, cancel it!',
-      'Yes, I am sure!'
-     ],
-     dangerMode: true,
-    }).then(function (isConfirm) {
-     if (isConfirm) {
-      swal({
-       title: 'Successfull!',
-       text: 'Content deleted!',
-       icon: 'success'
-      }).then(function () {
-       $.post("{{route('mailType.ajaxDelete')}}", {
-        id: param
-       });
-       $(location).attr('href','{{route('eac.portal.settings.mail.notification-mail')}}');
-      });
-     } else {
-      swal("Cancelled", "Operation cancelled", "error");
-     }
-    })
-
-  //       swal({
-  //        title: "Are you sure?",
-  //        text: "You will not be able to recover this data!",
-  //        type: "warning",
-  //        showCancelButton: true,
-  //        confirmButtonColor: "#DD6B55",
-  //        confirmButtonText: "Yes, delete it!",
-  //        closeOnConfirm: false
-  //    }, function (isConfirm) {
-  //        if (!isConfirm) return;
-  //        $.ajax({
-  //            url: "{{route('documentType.ajaxDelete')}}",
-  //            type: "POST",
-  //            data: {
-  //                'id': param
-  //            },
-  //            success: function (response) {
-  //                if(response.result == 'Success'){
-  //                        $("#unique_"+param).remove();
-  //                        swal("Done!", "It was succesfully deleted!", "success");
-  //                }
-  //            },
-  //            error: function (xhr, ajaxOptions, thrownError) {
-  //                swal("Error deleting!", "Please try again", "error");
-  //            }
-  //        });
-  //    });
-   }
-
-   //    });
- </script>
-	<script>
-
-		$(document).ready(function () {
-			$( ".btn-del" ).on( "click", function() {
-			  console.log( 'sdsad' );
-			});
-
-			$("input").change(function () {
-				var id = $(this).closest(".card").attr('data-id');
-				var field = $(this).attr('data-field');
-				var val = $(this).val();
-				writeToDB(id, field, val);
-			});
-
-			function writeToDB(id, field, val) {
-				$.ajax({
-					url: "{{route('eac.portal.settings.mail.notification-mail.ajax')}}",
-					type: 'POST',
-					data: {
-						'id': id,
-						'field': field,
-						'val': val
-					},
-					success: function (response) {
-						console.log(response);
-					}
-				});
-			}
-
-			$('.trumbo-e').trumbowyg().on('tbwchange', function () {
-				var id = $(this).attr('data-id');
-				var field = $(this).attr('data-field');
-				var val = $(this).trumbowyg('html');
-				writeToDB(id, field, val);
-			});
-
-
-		});
-	</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let $url = "{{ route('eac.portal.settings.dataTables', 'Mailer') }}";
+            // Data Tables
+            $('#mailListTBL').initDT({
+                ajax: {
+                    url: $url,
+                    type: "post",
+                },
+                order: [[0, 'desc']],
+                columns: [
+                    "name",
+                    "subject",
+                    "created_at",
+                    "btns",
+                ],
+            });
+        }); // end doc ready
+    </script>
 @endsection

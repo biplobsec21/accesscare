@@ -81,9 +81,10 @@
 @endsection
 @section('scripts')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
+    
+    <script type="text/javascript">
         $(document).ready(function () {
-            let $url = "{{route('eac.portal.pharmacy.ajaxlist')}}";
+            let $url = "{{ route('eac.portal.settings.dataTables', 'Pharmacy') }}";
             // Data Tables
             $('#pharmacyTBL').initDT({
                 ajax: {
