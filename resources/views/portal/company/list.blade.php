@@ -33,7 +33,7 @@
   <a href="{{ route('eac.portal.company.create') }}" class="btn btn-success">
    <i class="fa-fw fas fa-building"></i> Add Company
   </a>
-	</div><!-- end .actionBar --> 
+	</div><!-- end .actionBar -->
 
 	<div class="viewData">
   <div class="card mb-1 mb-md-4">
@@ -67,30 +67,29 @@
 		</div>
 	</div><!-- end .viewData -->
 @endsection
-
 @section('scripts')
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function () {
-			// Data Tables
-			$('#companyListTBL').initDT({
-				ajax: {
-					url: "{{route('eac.portal.company.ajax.list')}}",
-					type: "post"
-				},
-				order: [[0, 'asc']],
-				columns: [
-					"name",
-					"status",
-					"drug_count",
-					"rid_count",
-					"user_count",
-					"created_at",
-					"ops_btns"
-				],
-			});
-		}); // end doc ready
-	</script>
-	</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let $url = "{{route('eac.portal.company.ajax.list')}}";
+            // Data Tables
+            $('#companyListTBL').initDT({
+                ajax: {
+                    url: $url,
+                    type: "post"
+                },
+                order: [[0, 'desc']],
+                columns: [
+                    "name",
+                    "status",
+                    "drug_count",
+                    "rid_count",
+                    "user_count",
+                    "created_at",
+                    "btns",
+                ],
+            });
+        }); // end doc ready
+    </script>
 @endsection

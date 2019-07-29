@@ -113,7 +113,7 @@ class RidController extends Controller
 		$rid = new Rid();
 		$rid->id = $this->newID(Rid::class);
 		$rid->number = $this->generateRidNumber($company);
-		$rid->physician_id = \Auth::user()->id;
+		$rid->physician_id = $data['physician_id'];
 		$rid->drug_id = $drug->id;
 		$rid->status_id = $newMasterStatus->id;
 		$rid->patient_gender = strtolower($data['patient_gender']);
@@ -135,7 +135,7 @@ class RidController extends Controller
 		$shipment->id = $visit->shipment_id = $this->newID(RidShipment::class);
 		$visit->parent_id = $shipment->rid_id = $rid->id;
 		$visit->index = 1;
-		$visit->physician_id = $request->input('physician_id');
+		$visit->physician_id = $data['physician_id'];
 		$visit->visit_date = $data['req_date'];
 		$visit->status_id = RidStatus::where('index', 0)->first()->id;
 		$visit->sub_status = RidSubStatus::where('index', 0)->first()->id;
@@ -298,26 +298,6 @@ class RidController extends Controller
 			);
 			$response->addRow($row);
 		}
-
-//		$direction = request('order.0.dir');
-//		if (request('order.0.column') == $columns['number']) {
-//			$query->orderBy('rids.number', $direction)->orderBy('rids.number', $direction);
-//		}
-//		if (request('order.0.column') == $columns['status']) {
-//			$query->orderBy('rid_master_statuses.name', $direction);
-//		}
-//		if (request('order.0.column') == $columns['physician_name']) {
-//			$query->orderBy('users.first_name', $direction);
-//		}
-//		if (request('order.0.column') == $columns['drug_name']) {
-//			$query->orderBy('drug.name', $direction);
-//		}
-//		if (request('order.0.column') == $columns['req_date']) {
-//			$query->orderBy('rids.created_at', $direction);
-//		}
-//		if (request('order.0.column') == $columns['visits']) {
-//			$query->orderBy('visits', $direction);
-//		}
 		return $response->toJSON();
 	}
 

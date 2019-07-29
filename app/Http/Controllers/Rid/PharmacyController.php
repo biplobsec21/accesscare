@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Rid;
 
 use App\Address;
+use App\Company;
+use App\DataTables\DataTableResponse;
+use App\DataTables\DataTableRow;
 use App\DEVUPDATESCRIPTTABLE;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rid\Pharmacy\CreateRequest;
@@ -323,125 +326,50 @@ class PharmacyController extends Controller
 
 	public function ajaxlist()
 	{
-		$sql = Pharmacy::Leftjoin('addresses', 'addresses.id', '=', 'pharmacies.address_id')
-			->Leftjoin('countries', 'countries.id', '=', 'addresses.country_id')
-			->Where('pharmacies.id', '!=', '')
-			->select([
-				'pharmacies.id as id',
-				'pharmacies.name as name',
-				'pharmacies.active as active',
+        $pharmacies = Pharmacy::all();
+        $response = new DataTableResponse(Company::class, $pharmacies);
 
-				'addresses.addr1 as addr1',
-				'addresses.addr2 as addr2',
+        foreach ($pharmacies as $pharmacy) {
+            $row = new DataTableRow($pharmacy->id);
 
-				'countries.name as country_name',
-				'pharmacies.physician_id as pid',
-				'pharmacies.created_at as created_at',
-				'pharmacies.updated_at as updated_at']);
-
-		return \DataTables::of($sql)
-			->setRowClass(function ($row) {
-				if ($row->active == '1') {
-					$class = 'v-active';
-				} else {
-					$class = 'v-inactive';
-				}
-				return $class;
-
-			})
-			->addColumn('name', function ($row) {
-				return $row->name;
-			})
-			->addColumn('active', function ($row) {
-				if ($row->active) {
-					return '<span class="badge badge-success">Active </span>';
-				} else {
-					return '<span class="badge badge-danger">Inactive </span>';
-				}
-			})
-			->addColumn('pharmacist_id', function ($row) {
-				$pharmacists = $row->pharmacists;
-				$str = '';
-				for ($i = 0; $i < $pharmacists->count(); $i++) {
-					$str .= ucwords($pharmacists[$i]->name);
-					if ($i < $pharmacists->count() - 1)
-						$str .= ' + ';
-				}
-				return '<span class="badge badge-mw badge-outline-warning" title="' . $str . '"> ' . $pharmacists->count() . '</span>';
-			})
-			->addColumn('address', function ($row) {
-				$a1 = $row->addr1 ? $row->addr1 : '';
-				$a2 = $row->addr2 ? $row->addr2 : '';
-				return $a1 . ' ' . $a2;
-			})
-			->addColumn('physician_id', function ($row) {
-				return $row->country_name;
-			})
-			->addColumn('created_at', function ($row) {
-				return $row->updated_at->format(config('eac.date_format'));
-			})
-			->addColumn('ops_btns', function ($row) {
-				return '
-				<a title="View Pharmacy" href="' . route('eac.portal.pharmacy.show', $row->id) . '">
-				<i class="far fa-search-plus" aria-hidden="true"></i> <span class="sr-only">View Pharmacy</span>
-				</a>
-                <a title="Edit Pharmacy" href="' . route('eac.portal.pharmacy.edit', $row->id) . '">
-                 <i class="far fa-edit" aria-hidden="true"></i> <span class="sr-only">Edit Pharmacy</span>
-                </a>
-               
-                ';
-			})
-			->rawColumns([
-				'name',
-				'active',
-				'pharmacist_id',
-				'address',
-				'physician_id',
-				'created_at',
-				'ops_btns'
-			])
-			->filterColumn('name', function ($query, $keyword) {
-				$query->where('pharmacies.name', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('address', function ($query, $keyword) {
-				$query->where('addresses.addr1', 'like', "%" . $keyword . "%")
-					->orWhere('addresses.addr2', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('physician_id', function ($query, $keyword) {
-				$query->where('countries.name', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('created_at', function ($query, $keyword) {
-				$query->where('pharmacies.updated_at', 'like', "%" . $keyword . "%");
-			})
-			->order(function ($query) {
-				$columns = [
-
-					'name' => 0,
-					'active' => 1,
-					'pharmacist_id' => 2,
-					'address' => 3,
-					'country' => 4,
-					'created_at' => 5,
-
-				];
-
-				$direction = request('order.0.dir');
-
-				if (request('order.0.column') == $columns['name']) {
-					$query->orderBy('pharmacies.name', $direction);
-				}
-				if (request('order.0.column') == $columns['active']) {
-					$query->orderBy('pharmacies.active', $direction);
-				}
-				if (request('order.0.column') == $columns['address']) {
-					$query->orderBy('addresses.addr1', $direction);
-				}
-				if (request('order.0.column') == $columns['country']) {
-					$query->orderBy('countries.name', $direction);
-				}
-			})
-			->smart(0)
-			->toJson();
+            $row->setColumn('name', $pharmacy->name
+            );
+            $row->setColumn('status', $pharmacy->status,
+                $pharmacy->status
+            );
+            $str = '';
+            for ($i = 0; $i < $pharmacy->pharmacists->count(); $i++) {
+                $str .= ucwords($pharmacy->pharmacists[$i]->name);
+                if ($i < $pharmacy->pharmacists->count() - 1)
+                    $str .= ' + ';
+            }
+            $row->setColumn('pharmacists', $pharmacy->pharmacists->count(),
+                '<span class="badge badge-mw badge-outline-warning" title="' . $str . '"> ' . $pharmacy->pharmacists->count() . '</span>'
+            );
+            $row->setColumn('active', $pharmacy->users->count(),
+                '<a href="' . route('eac.portal.company.show', $pharmacy->id) . '#xusers" class="badge badge-mw badge-outline-info"> ' . $pharmacy->users->count() . '</a>'
+            );
+            $row->setColumn('created_at', strtotime($pharmacy->created_at),
+                '<span style="display: none">' . $pharmacy->created_at->format('Y-m-d') . '</span>' . $pharmacy->created_at->format(config('eac.date_format'))
+            );
+            $row->setColumn('btns', $pharmacy->id,
+                '<div class="btn-group dropleft" role="group">' .
+                '<a class="btn btn-link" href="#" id="dropdownMenuButton' . $pharmacy->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
+                '<span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>' .
+                '</a>' .
+                '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $pharmacy->id . '">' .
+                '<a title="View Pharmacy" href="' . route('eac.portal.pharmacy.show', $row->id) . '">' .
+                '<i class="far fa-search-plus" aria-hidden="true"></i> <span class="sr-only">View Pharmacy</span>' .
+                '</a>' .
+                '<a title="Edit Pharmacy" href="' . route('eac.portal.pharmacy.edit', $row->id) . '">' .
+                '<i class="far fa-edit" aria-hidden="true"></i> <span class="sr-only">Edit Pharmacy</span>' .
+                '</a>' .
+                '</div>' .
+                '</div>'
+            );
+            $response->addRow($row);
+        }
+        return $response->toJSON();
 	}
 
 	public function ajaxlistmerge()
@@ -809,7 +737,7 @@ class PharmacyController extends Controller
 
 	public function newpharmacist(Request $request)
 	{
-		// dd($request->all());	
+		// dd($request->all());
 		if ($request->input('name') && $request->input('name')[0] != null) {
 			$name = array_values($request->input('name'));
 			$email = array_values($request->input('email'));

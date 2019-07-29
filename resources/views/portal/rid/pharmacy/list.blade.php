@@ -79,56 +79,26 @@
 		</div>
 	</div><!-- end .viewData -->
 @endsection
-
 @section('scripts')
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script>
-
-		$(document).ready(function () {
-			$('#pharmacyTBL tfoot th').each(function () {
-				if ($(this).hasClass("no-search"))
-					return;
-				var title = $(this).text();
-				$(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-			});
-
-			var dataTable = $('#pharmacyTBL').DataTable({
-				"paginationDefault": 10,
-				"paginationOptions": [10, 25, 50, 75, 100],
-				// "responsive": true,
-				// 'order': [[4, 'desc']],
-				'order': [[0, 'asc']],
-				"ajax": {
-					url: "{{route('eac.portal.pharmacy.ajaxlist')}}",
-					type: "post"
-				},
-				"processing": true,
-				"serverSide": true,
-				columnDefs: [{
-					targets: 'no-sort',
-					orderable: false,
-				}],
-				"columns": [
-					{"data": "name", 'name': 'name'},
-					{"data": "pharmacist_id", 'name': 'pharmacist_id'},
-					{"data": "active", 'name': 'active'},
-					{"data": "created_at", 'name': 'created_at'},
-					{"data": "ops_btns"},
-				]
-			});
-
-			dataTable.columns().every(function () {
-				var that = this;
-
-				$('input', this.footer()).on('keyup change', function () {
-					if (that.search() !== this.value) {
-						that
-							.search(this.value)
-							.draw();
-					}
-				});
-			});
-
-		}); // end doc ready
-	</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let $url = "{{route('eac.portal.pharmacy.ajaxlist')}}";
+            // Data Tables
+            $('#pharmacyTBL').initDT({
+                ajax: {
+                    url: $url,
+                    type: "post"
+                },
+                order: [[0, 'desc']],
+                columns: [
+                    "name",
+                    "pharmacists",
+                    "active",
+                    "created_at",
+                    "btns",
+                ],
+            });
+        }); // end doc ready
+    </script>
 @endsection

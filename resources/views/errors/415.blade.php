@@ -35,7 +35,6 @@
 			{!! $exception->getMessage() !!}
 		</p>
 		<p class="mt-5 text-center">
-			@dump(session())
 			<a href="{{url()->previous()}}" class="btn btn-primary btn-lg">
 				Return to
 				<img src="/images/brand_white_iso.png" style="max-height: 30px;" />
