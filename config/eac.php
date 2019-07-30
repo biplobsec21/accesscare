@@ -42,6 +42,7 @@ return [
 	'storage' => [
 		'file' => [
 		    'maxSize' => '15 mb',
+            'type' => 'JPG or PDF',
 			'drug' => [
 				'doc' => '/drug/documents',
 				'resource' => '/drug/resources',
