@@ -40,6 +40,7 @@ class RidController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	/**
@@ -134,7 +135,7 @@ class RidController extends Controller
 		$shipment->id = $visit->shipment_id = $this->newID(RidShipment::class);
 		$visit->parent_id = $shipment->rid_id = $rid->id;
 		$visit->index = 1;
-		$visit->physician_id = \Auth::user()->id;
+		$visit->physician_id = $request->input('physician_id');
 		$visit->visit_date = $data['req_date'];
 		$visit->status_id = RidStatus::where('index', 0)->first()->id;
 		$visit->sub_status = RidSubStatus::where('index', 0)->first()->id;
@@ -398,6 +399,14 @@ class RidController extends Controller
 		return redirect()->back();
 	}
 
+	public function moreinfo($id)
+	{
+		$rid = Rid::where('id', $id)->firstOrFail();
+		return view('portal.rid.letter.moreinfo', [
+			'rid' => $rid,
+		]);
+	}
+
 	public function autoUpdate()
 	{
 		$request = $_POST;
@@ -483,107 +492,6 @@ class RidController extends Controller
 		return redirect()->back();
 	}
 
-	public function ridawaitinglist()
-	{
-
-		$ridAwaiting = RidVisit::Leftjoin('rids', 'rids.id', '=', 'rid_records.parent_id')
-			->Leftjoin('rid_shipments', 'rid_shipments.id', '=', 'rid_records.shipment_id')
-			->Leftjoin('drug', 'drug.id', '=', 'rids.drug_id')
-			->Leftjoin('rid_master_statuses', 'rid_master_statuses.id', '=', 'rids.status_id')
-			->Leftjoin('users', 'users.id', '=', 'rids.physician_id')
-			->Leftjoin('addresses', 'addresses.id', '=', 'users.address_id')
-			->Leftjoin('countries', 'countries.id', '=', 'addresses.country_id')
-			->where('rid_master_statuses.name', '!=', 'Fulfillment')
-			// ->groupBy('rids.id')
-			->whereDate('rid_shipments.ship_by_date', '>', Carbon::now()->subDays(30))
-			->whereDate('rid_shipments.ship_by_date', '<', Carbon::now()->addDays(30))
-			->select([
-				'rids.id as rid_id',
-				'rid_records.id as id',
-				'rids.number as number',
-				'drug.name as drug_name',
-				'drug.id as drug_id',
-				'rid_shipments.id as s_id',
-				'rid_shipments.ship_by_date as ship_by_date',
-				'rid_shipments.deliver_by_date as delivery_date',
-				'countries.name as destination',
-				'rid_master_statuses.name as status',
-				'rids.req_date as req_date',
-				'rids.created_at as created_at'
-			]);
-
-		return \DataTables::of($ridAwaiting)->addColumn('number', function ($row) {
-			return '<a title="RID Number" href="' . route('eac.portal.rid.show', $row->rid_id) . '">' .
-				$row->number
-				. '</a>';
-		})->setRowClass(function ($row) {
-			$class = '';
-			$ShipbyDate = Carbon::parse($row->ship_by_date, 'America/New_York');
-
-			if ($ShipbyDate->lessThan(Carbon::today())) {
-				$class = 'text-danger';
-			} else {
-
-				if ($ShipbyDate->lessThanOrEqualTo(Carbon::today()->addDays(7))) {
-					$class = 'text-warning';
-				}
-
-			}
-
-			return $class;
-
-		})->addColumn('drug', function ($row) {
-			// return $row->drug_name;
-			return '<a title="Drug Requested" href="' . route('eac.portal.drug.show', $row->drug_id) . '">' .
-				$row->drug_name
-				. '</a>';
-		})->addColumn('ship_by_date', function ($row) {
-			return \Carbon\Carbon::parse($row->ship_by_date)->format(config('eac.date_format'));
-		})->addColumn('delivery_date', function ($row) {
-			return \Carbon\Carbon::parse($row->delivery_date)->format(config('eac.date_format'));
-		})->addColumn('destination', function ($row) {
-			return $row->destination ?? 'N/A';
-		})->addColumn('btns', function ($row) {
-			$visit = RidVisit::where('id', $row->id)->firstOrFail();
-			$rid = $visit->rid;
-
-			$buttonStatus = 'btn-secondary';
-			$route = route('eac.portal.rid.visit.edit', $row->id . '?warning=required');
-
-			if (($rid->drug->components->count() == $visit->shipment->regimen->count()) && ($visit->shipment->pharmacy_id)) {
-				$buttonStatus = 'btn-success';
-				$route = route('eac.portal.rid.visit.edit', $row->id) . '#xshipping';
-			}
-
-			return '
-			  <a title="Ship RID" class="btn ' . $buttonStatus . ' btn-sm" href="' . $route . '">
-			   <i class="fas fa-ambulance"></i> Ship
-			  </a>
-			';
-		})->rawColumns(['number', 'drug', 'ship_by_date', 'delivery_date', 'destination', 'btns'])
-			->filterColumn('number', function ($query, $keyword) {
-				$query->where('rids.number', 'like', "%" . $keyword . "%");
-			})->filterColumn('drug', function ($query, $keyword) {
-				$query->where('drug.name', 'like', "%" . $keyword . "%");
-			})->filterColumn('ship_by_date', function ($query, $keyword) {
-				$query->where('rid_shipments.ship_by_date', 'like', "%" . $keyword . "%");
-			})->filterColumn('delivery_date', function ($query, $keyword) {
-				$query->where('rid_shipments.delivery_date', 'like', "%" . $keyword . "%");
-			})->order(function ($query) {
-				$columns = ['number' => 0, 'drug_name' => 1, 'ship_by_date' => 2, 'delivery_date' => 3, 'destination' => 4];
-
-				$direction = request('order.0.dir');
-
-				if (request('order.0.column') == $columns['number']) {
-					$query->orderBy('rids.number', $direction)->orderBy('rids.number', $direction);
-				}
-				if (request('order.0.column') == $columns['ship_by_date']) {
-					$query->orderBy('rid_shipments.ship_by_date', $direction);
-				}
-
-			})->smart(0)->toJson();
-	}
-
 	public function ridstatus($id)
 	{
 
@@ -595,16 +503,8 @@ class RidController extends Controller
 
 	public function postreview($id)
 	{
-
-		// $detail = new RidPostApprovalActions();
-		// $detail->id = $this->newID(RidPostApprovalActions::class);
-		// $detail->type = 'Uploadable';
-		// $detail->type = 'Acknowledgeable';
-		// $detail->name = 'Patient Informed Consent';
-		// $detail->save();
-		// dd('done');
 		$rid = Rid::where('id', $id)->firstOrFail();
-		$ridPADocs = RidPostApprovalActions::where('is_active', 1)->orderBy('serial', 'asc');
+		$ridPADocs = RidPostApprovalActions::where('is_active', 1)->orderBy('serial', 'asc')->get();
 
 		return view('portal.rid.post.index', ['rid' => $rid, 'ridPADocs' => $ridPADocs]);
 

@@ -37,10 +37,6 @@
 												{{ $lot->stock }} / {{ $lot->minimum }}
 											</td>
 											<td>
-												{{-- <a href="{{route('eac.portal.lot.edit', $lot->id)}}"
-												   class="btn btn-info btn-sm btn-block window-btn">
-													Edit
-												</a> --}}
 												<button type="button" class="btn btn-info btn-sm btn-block window-btn"
 														data-toggle="modal"
 														data-target="#newLotModal{{ $lot->id}}">

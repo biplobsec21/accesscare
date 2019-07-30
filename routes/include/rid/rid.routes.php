@@ -47,9 +47,9 @@ Route::group([
 	/**
 	 * Rid awaiting list
 	 */
-	Route::post('/ajax/ridawaitinglist', [
-		'as' => 'eac.portal.rid.ajax.ridawaitinglist',
-		'uses' => 'RidController@ridawaitinglist'
+	Route::post('/shipment/list', [
+		'as' => 'eac.portal.shipment.list',
+		'uses' => 'RidShipmentController@ridawaitinglist'
 	]);
 
 	Route::post('/store', [
@@ -125,6 +125,11 @@ Route::group([
 	Route::post('/visit/edit/status/save', [
 		'as' => 'eac.portal.rid.visit.edit.status.save',
 		'uses' => 'RidVisitController@setStatus',
+	]);
+
+	Route::get('/moreinfo/{id}', [
+		'as' => 'eac.portal.rid.moreinfo',
+		'uses' => 'RidController@moreinfo',
 	]);
 
 	/**
@@ -279,7 +284,8 @@ Route::group([
 		'as' => 'eac.portal.rid.modal.review.doc.delete',
 		'uses' => 'RidController@reviewdocdelete',
 	]);
-// End Rid Post Approval Document
+
+	//Rid Reassign
 	Route::post('/modal/rid/reassign/save', [
 		'as' => 'eac.portal.rid.visit.edit.reassign.save',
 		'uses' => 'RidController@reassign',

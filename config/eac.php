@@ -41,6 +41,7 @@ return [
 	 */
 	'storage' => [
 		'file' => [
+		    'maxSize' => '15 mb',
 			'drug' => [
 				'doc' => '/drug/documents',
 				'resource' => '/drug/resources',

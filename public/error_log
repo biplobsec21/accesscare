@@ -1,0 +1,348 @@
+[19-Jul-2019 12:49:05 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:51:22 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:51:36 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:51:38 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:03 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:10 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:33 UTC] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[19-Jul-2019 12:53:33 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:42 UTC] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[19-Jul-2019 12:53:42 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:51 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:53:58 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:54:42 UTC] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[19-Jul-2019 12:54:42 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:54:49 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:54:52 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:55:48 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 12:56:24 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:00:43 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:03:49 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:03:50 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:11:10 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:15:57 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:16:33 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:21:19 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:21:36 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:21:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:27:49 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:27:59 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:27:59 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:27:59 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:27:59 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:00 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:14 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:15 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:15 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:16 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:16 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:26 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:26 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:26 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:28:26 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:31:02 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:31:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:34:59 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:37:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:37:29 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:39:14 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:39:18 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:41:04 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:41:14 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:41:16 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:42:46 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:43:37 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:44:42 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:04 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:04 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:05 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:05 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:05 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:06 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:06 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:38 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:38 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:38 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:44 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:46:45 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:47:55 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:48:26 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:48:27 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 13:48:30 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 14:02:51 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/bootstrap/app.php on line 15
+[19-Jul-2019 14:07:37 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/bootstrap/app.php on line 15
+[19-Jul-2019 14:12:25 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 14:12:28 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 14:39:19 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:39:19 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:00 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:00 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:02 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:02 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:04 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:04 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:05 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:05 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:05 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:05 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:05 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:05 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:09 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:41:09 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:44:15 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:44:15 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:45:56 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:45:56 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:45:58 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 14:45:58 UTC] PHP Fatal error:  Uncaught ReflectionException: Class translator does not exist in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php:790
+Stack trace:
+#0 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(790): ReflectionClass->__construct('translator')
+#1 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(667): Illuminate\Container\Container->build('translator')
+#2 /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php(615): Illuminate\Container\Container->resolve('translator', Array)
+#3 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(767): Illuminate\Container\Container->make('translator', Array)
+#4 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(121): Illuminate\Foundation\Application->make('translator', Array)
+#5 /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(909): app('translator')
+#6 /home/v2adev/storage/framework/views/bfe94b7cda4ce24 in /home/v2adev/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 790
+[19-Jul-2019 16:10:50 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:10:53 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:10:55 UTC] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[19-Jul-2019 16:10:55 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:10:57 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:12:22 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:12:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:13:29 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:13:30 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:38 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:40 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:40 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:40 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:56 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:14:57 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:15:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:15:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:15:55 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:15:55 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:15:55 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:16:34 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:16:35 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:16:51 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:00 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:08 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:10 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:10 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:10 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:10 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:13 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:17:42 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:18:22 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:18:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:18:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:18:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:18:24 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:21:19 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:24:48 UTC] PHP Warning:  require(/home/v2adev/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home/v2adev/public/index.php on line 24
+[19-Jul-2019 16:24:48 UTC] PHP Fatal error:  require(): Failed opening required '/home/v2adev/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/v2adev/public/index.php on line 24
+[19-Jul-2019 16:26:39 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:26:40 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:29:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:30:50 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:30:51 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:31:06 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:31:07 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:31:33 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:31:55 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:33:33 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:33:34 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:33:34 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:18 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:19 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:20 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:20 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:20 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:20 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:36:21 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:23 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:24 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:24 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:24 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:42 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:37:54 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:38:31 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500
+[19-Jul-2019 16:38:32 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/v2adev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 500

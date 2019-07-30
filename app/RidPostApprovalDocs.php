@@ -51,4 +51,9 @@ class RidPostApprovalDocs extends Model
 	 * @var string
 	 */
 	protected $prefix = "RidPostApprovalDocs";
+
+	public function file()
+	{
+		return $this->belongsTo('App\\File', 'uploaded_file_id');
+	}
 }

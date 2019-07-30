@@ -30,7 +30,9 @@ class PharmacyController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -47,7 +49,7 @@ class PharmacyController extends Controller
 
 	public function create()
 	{
-		$countries =$this->getCountry();
+		$countries = $this->getCountry();
 		$states = \App\State::all()->sortBy('name');
 		return view('portal.rid.pharmacy.create', [
 			'states' => $states,
@@ -137,6 +139,26 @@ class PharmacyController extends Controller
 			$pharmacy->save();
 		} else {
 			$shipment->pharmacy_id = $request->input('pharmacy_id');
+			if ($request->input('name') && $request->input('name')[0] != null) {
+				$name = array_values($request->input('name'));
+				$email = array_values($request->input('email'));
+				$phone_number = array_values($request->input('phone'));
+				for ($i = 0; $i < count($name); $i++) {
+					$pharmacist = new Pharmacist();
+					$pharmacist->id = $this->newID(Pharmacist::class);
+					$pharmacist->pharmacy_id = $request->input('pharmacy_id');
+					$pharmacist->name = $name[$i];
+					$pharmacist->email = $email[$i];
+					$phone = new Phone();
+					$phone->id = $pharmacist->phone = $this->newID(Phone::class);
+					$phone->number = $phone_number[$i];
+					$phone->country_id = $request->country_name;
+					$phone->is_primary = 1;
+					$phone->save();
+					$pharmacist->save();
+				}
+				$shipment->pharmacist_id = $pharmacist->id;
+			}
 		}
 
 		if ($request->input('pharmacist_id')) {
@@ -185,8 +207,8 @@ class PharmacyController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  int $id
+	 * @param \Illuminate\Http\Request $request
+	 * @param int $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update($id)
@@ -195,10 +217,9 @@ class PharmacyController extends Controller
 		$pharmacy = Pharmacy::where('id', '=', $id)->firstOrFail();
 		$address = Address::where('id', '=', $pharmacy->address_id)->firstOrFail();
 		$pharmacy->name = $_POST['pharmacy_name'];
-		if(isset($_POST['active'])){
+		if (isset($_POST['active'])) {
 			$pharmacy->active = 1;
-		}
-		else{
+		} else {
 			$pharmacy->active = 0;
 
 		}
@@ -222,19 +243,77 @@ class PharmacyController extends Controller
 		$str = '<strong>' . $pharmacy->name . '</strong></br>';
 		$str .= $pharmacy->address->strDisplay();
 		$str .= '<hr/>';
-		$str .= '<select id="pharmacistSelect" name="pharmacist_id" class="form-control">';
-		if ($pharmacy->pharmacists->count() == 0)
-			$str .= '<option value="">No Pharmacists</option>';
-		foreach ($pharmacy->pharmacists as $contact)
-			$str .= '<option value="' . $contact->id . '">' . $contact->name . '</option>';
-		$str .= '</select>';
+		if ($pharmacy->pharmacists->count() == 0) {
+			// get all pharmacist
+			$pharmacy = '<select  name="pharmacist_id" class="form-control select2">';
+			$pharmacy .= '<option disabled hidden selected value="">-- Select --</option>';
+			foreach (Pharmacist::all() as $user)
+				$pharmacy .= '<option value="' . $user->id . '">' . $user->name . '</option>';
+			$pharmacy .= '</select>';
+			// add more layout
+			$str .= '<div class="table-responsive">
+				<table class="table table-sm table-responsive table-striped table-hover group-member-templatetable">
+						<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody id="memberSection">
+						<tr class="">
+							<td>
+								<input type="text" name="name[]" placeholder="Pharmacist Name"
+								       class="form-control">
+							</td>
+							<td>
+								<input type="email" name="email[]" placeholder="Email"
+								       class="form-control">
+							</td>
+							<td>
+								<input type="text" name="phone[]" placeholder="Phone"
+								       class="form-control">
+							</td>
+							<td>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					</div>
+					<!-- <div class="d-flex justify-content-between mt-3">
+						<a href="#" class="btn btn-link" id="addMemberBtn" onclick="addMember()">
+							<i class="fal fa-plus"></i> Add Another
+						</a>
+					</div> -->
+					<div class="d-flex justify-content-between mt-3 ">
+						<a href="#" class="btn btn-link" onclick="templateShow()">
+							<i class="fal fa-plus"></i>  Add New Pharmacist
+						</a>
+					</div>
+					<br>
+						OR
+					<br><br>
+					<label class="d-block">Assign Pharmacist</label>	
+					<div class="row m-sm-0">
+						<div class="col-sm mb-3 mb-sm-0 p-sm-0">' . $pharmacy . '
+						</div>
+						</div>
+						';
+		} else {
+			$str .= "<label class='d-block label_required'>Pharmacist </label>";
+			$str .= '<select id="pharmacistSelect" name="pharmacist_id" class="form-control">';
+			foreach ($pharmacy->pharmacists as $contact)
+				$str .= '<option value="' . $contact->id . '">' . $contact->name . '</option>';
+			$str .= '</select>';
+		}
 		return $str;
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int $id
+	 * @param int $id
 	 * @return mixed
 	 */
 	public function destroy($id)
@@ -262,34 +341,33 @@ class PharmacyController extends Controller
 
 		return \DataTables::of($sql)
 			->setRowClass(function ($row) {
-                if ($row->active == '1') {
-                 $class = 'v-active';
-                } else {
-                   $class='v-inactive';
-                }
-                return $class;
+				if ($row->active == '1') {
+					$class = 'v-active';
+				} else {
+					$class = 'v-inactive';
+				}
+				return $class;
 
-                })
+			})
 			->addColumn('name', function ($row) {
 				return $row->name;
 			})
 			->addColumn('active', function ($row) {
-				if($row->active){
+				if ($row->active) {
 					return '<span class="badge badge-success">Active </span>';
-				}
-				else{
+				} else {
 					return '<span class="badge badge-danger">Inactive </span>';
 				}
 			})
 			->addColumn('pharmacist_id', function ($row) {
 				$pharmacists = $row->pharmacists;
 				$str = '';
-				for($i = 0; $i < $pharmacists->count(); $i++) {
+				for ($i = 0; $i < $pharmacists->count(); $i++) {
 					$str .= ucwords($pharmacists[$i]->name);
-					if($i < $pharmacists->count() - 1)
+					if ($i < $pharmacists->count() - 1)
 						$str .= ' + ';
 				}
-				return '<span class="badge badge-mw badge-outline-warning" title="' . $str . '"> ' .  $pharmacists->count() . '</span>';
+				return '<span class="badge badge-mw badge-outline-warning" title="' . $str . '"> ' . $pharmacists->count() . '</span>';
 			})
 			->addColumn('address', function ($row) {
 				$a1 = $row->addr1 ? $row->addr1 : '';
@@ -727,15 +805,17 @@ class PharmacyController extends Controller
 				'result' => 'success'
 			];
 		endif;
-	}	
-	public function newpharmacist(Request $request){
+	}
+
+	public function newpharmacist(Request $request)
+	{
 		// dd($request->all());	
-		if($request->input('name') && $request->input('name')[0] != null){
+		if ($request->input('name') && $request->input('name')[0] != null) {
 			$name = array_values($request->input('name'));
 			$email = array_values($request->input('email'));
 			$phone_number = array_values($request->input('phone'));
 
-			for($i=0;$i<count($name);$i++){
+			for ($i = 0; $i < count($name); $i++) {
 				$pharmacist = new Pharmacist();
 				$pharmacist->id = $this->newID(Pharmacist::class);
 				$pharmacist->pharmacy_id = $request->input('pharmacy_id');
@@ -743,7 +823,7 @@ class PharmacyController extends Controller
 				$pharmacist->email = $email[$i];
 
 				$phone = new Phone();
-				$phone->id = $pharmacist->phone =  $this->newID(Phone::class);
+				$phone->id = $pharmacist->phone = $this->newID(Phone::class);
 				$phone->number = $phone_number[$i];
 				$phone->country_id = $request->country_name;
 				$phone->is_primary = 1;
@@ -752,8 +832,8 @@ class PharmacyController extends Controller
 
 			}
 			return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Pharmacist information inserted successfully']);
-		}	
-		return redirect()->back();	
+		}
+		return redirect()->back();
 	}
 
 }

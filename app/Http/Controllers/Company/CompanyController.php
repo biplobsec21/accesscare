@@ -25,6 +25,7 @@ class CompanyController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	public function listCompanies()
@@ -129,8 +130,6 @@ class CompanyController extends Controller
 
 	public function postCreate(CreateRequest $request)
 	{
-		// dd($request);
-		// dd($request);
 		$company = new Company();
 		$address = new Address();
 		$phone = new Phone();

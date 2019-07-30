@@ -1,0 +1,44 @@
+
+
+$blue: #034F83;
+$pink: #c44389;
+$red: #f62d51;
+$orange: #F79223;
+$yellow: #dec836;
+$green: #75ab36;
+$teal: #43c4bf;
+$cyan: #268cd5;
+
+$primary: $blue;
+$warning: $orange;
+
+$purple: mix($red, $blue);
+$indigo: mix($primary, $blue);
+$dark: darken($primary, 15%);
+
+$font-weight-bold: 700;
+$font-family-monospace: 'Cutive Mono';
+$font-family-sans-serif: 'Open Sans';
+$enable-gradients: true;
+$enable-rounded: false;
+
+$badge-font-size: 80%;
+$badge-font-weight: 500;
+$badge-padding-y: .15em;
+$btn-transition: all .3s ease-in-out;
+$input-border-color: rgba($black, .1);
+$input-btn-padding-y: .25rem;
+$input-btn-padding-x: .5rem;
+$input-btn-padding-y-sm: .15rem;
+$input-btn-padding-x-sm: .3rem;
+$input-btn-padding-y-lg: .75rem;
+$input-btn-padding-x-lg: 1rem;
+$input-disabled-bg: rgba($primary, .09);
+$input-group-addon-bg: rgba($primary, .09);
+$input-group-addon-color: rgba($black, .5);
+$input-placeholder-color: $gray-500;
+$input-transition: background-color .85s, color .85s;
+$link-hover-decoration: none;
+$navbar-brand-padding-y: 0;
+
+

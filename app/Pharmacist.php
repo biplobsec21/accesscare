@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pharmacist extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -71,6 +71,17 @@ class Pharmacist extends Model
 	{
 		return $this->belongsTo('App\\Pharmacy');
 	}
+
+    /**
+     * Relation for phone
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function getPhoneNumAttribute()
+    {
+        $phoneid = $this->phone;
+        return \App\Phone::where('id', $phoneid)->first()->number;
+    }
 
 	/**
 	 * Relation for phone

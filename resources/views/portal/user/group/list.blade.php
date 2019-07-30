@@ -35,7 +35,7 @@
 	<div class="viewData">
 		<div class="card mb-1 mb-md-4">
 			<div class="table-responsive">
-				<table class="table table-sm table-striped table-hover" id="routeTBL">
+				<table class="table table-sm table-striped table-hover" id="groupTBL">
 					<thead>
 					<tr>
 						<th>Group Name</th>
@@ -66,114 +66,25 @@
 
 @section('scripts')
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('#routeTBL tfoot th').each(function () {
-				if ($(this).hasClass("no-search"))
-					return;
-				var title = $(this).text();
-				$(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-			});
-			var dataTable = $('#routeTBL').DataTable({
-				"paginationDefault": 10,
-				"paginationOptions": [10, 25, 50, 75, 100],
-				// "responsive": true,
-				columnDefs: [{
-					targets: 'no-sort',
-					orderable: false,
-				}],
-				'order': [[0, 'asc']],
-				"ajax": {
-					url: "{{ route('eac.portal.user.grouplist.ajaxlist') }}",
-					type: "post"
-				},
-				"processing": true,
-				"serverSide": true,
-				"columns": [
-					{
-						"data": "name",
-						'name': 'name',
-						searchable: true,
-						orderable: true,
-					},
-					{
-						"data": "type",
-						'name': 'type',
-						searchable: true
-					},
-					{
-						"data": "parent",
-						'name': 'parent',
-						searchable: true,
-						orderable: true,
-					},
-					{
-						"data": "members",
-						'name': 'members',
-						searchable: false
-					},
-					{
-						"data": "created_at",
-						"name": "created_at",
-						orderable: true,
-						searchable: true
-					},
-					{
-						"data": "ops_btns",
-						orderable: false,
-						searchable: false
-					}
-				]
-			});
-			dataTable.columns().every(function () {
-				var that = this;
-				$('input', this.footer()).on('keyup change', function () {
-					if (that.search() !== this.value) {
-						that
-							.search(this.value)
-							.draw();
-					}
-				});
-			});
-			$.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-				swal({
-					title: "Oh Snap!",
-					text: "Something went wrong on our side. Please try again later.",
-					icon: "warning",
-				});
-			};
-		}); // end doc ready
-		$(".alert").delay(2000).slideUp(200, function () {
-			$(this).alert('close');
-		});
-		$( '#ViewModal' ).on( 'show.bs.modal', function (e) {
-			$('.g-name').html('');
-			$('.g-type').html('');
-			$('.g-member').html('');
-			$('.g-leader').html('');
-			$('.g-url').attr('href','');
-		    var target = e.relatedTarget;
-		    // get values for particular rows
-		    var tr = $( target ).closest( 'tr' );
-		    var tds = tr.find( 'td' );
-		    // set edit url
-		    var id = tds[5].innerText;
-			var url = '{{ route("eac.portal.user.group.edit", ":slug") }}';
-			url = url.replace(':slug', id);
-		    $('.g-name').html(tds[0].innerText);
-		    $('.g-type').text(''+tds[1].innerText+'');
-		    $('.g-member').html(tds[0].innerHTML.replace(tds[0].innerText, '').replace('<div style="display:none">', '').replace('</div>', ''));
-		    $('.g-leader').html(tds[2].innerHTML);
-			$('.g-url').attr('href',url);
-		    // console.log(tds[0].innerText);
-		    // console.log(tds[1].innerText);
-		    // console.log(tds[5].innerText);
-		    // console.log(tds[0].innerHTML);
-		    // var html = tds[0].innerHTML;
-		    // var arr = html.split('<div style="display:none">');
-		    // var final=arr[1].split('</div>');
-		    //  $('.g-member').html(final[0]);
-
-		});
+	<script type="text/javascript">
+        $(document).ready(function () {
+            let $url = "{{route('eac.portal.user.grouplist.ajaxlist')}}";
+            // Data Tables
+            $('#groupTBL').initDT({
+                ajax: {
+                    url: $url,
+                    type: "post"
+                },
+                order: [[0, 'asc']],
+                columns: [
+                    "name",
+                    "type",
+                    "parent",
+                    "members",
+                    "created_at",
+                    "btns",
+                ],
+            });
+        }); // end doc ready
 	</script>
 @endsection

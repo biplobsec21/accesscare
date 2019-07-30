@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @author Andrew Mellor <andrew@quasars.com>
  */
 class Dosage extends Model {
-	
+
 
 
 	/**
@@ -63,6 +63,10 @@ class Dosage extends Model {
 	public function strength() {
 		return $this->hasOne('App\\DosageStrength', 'id', 'strength_id');
 	}
+
+    public function getDoseAttribute() {
+        return $this->amount . ' ' . $this->unit->name;
+    }
 
 	public function display() {
 		$str = '<div>';

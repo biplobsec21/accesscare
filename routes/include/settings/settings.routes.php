@@ -12,6 +12,10 @@ Route::group([
 		'as' => 'eac.portal.settings',
 		'uses' => 'SettingsController@index',
 	]);
+    Route::post('/dataTables/{model}', [
+        'as' => 'eac.portal.settings.dataTables',
+        'uses' => 'SettingsController@responseDT',
+    ]);
 	Route::view('/mockup', 'portal.settings.mockup');
 
 	Route::group([

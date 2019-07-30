@@ -102,6 +102,44 @@
 										{{ $errors->first('name') }}
 									</div>
 								</div>
+								 @if(\Auth::user()->type->name == 'Early Access Care')
+ 								<div class="row">
+ 									<div class="col-sm mb-3">
+ 										<label class="d-block label_required">Group Leader</label>
+ 										<select name="parent_id" id="parent_id"
+ 										        class="form-control select2 {{ $errors->has('parent_id') ? ' is-invalid' : '' }}">
+ 											<option disabled hidden selected value="">-- Select --</option>
+ 											@foreach($users as $user)
+ 												<option value="{{ $user->id }}"
+ 												        data-type="{{ $user->type->id }}" {{ (old('parent_id') && old('parent_id') == $user->id) ? 'selected' : '' }}>{{ $user->full_name }}
+ 													({{ $user->email }})
+ 												</option>
+ 											@endforeach
+ 										</select>
+ 										<div class="invalid-feedback">
+ 											{{ $errors->first('parent_id') }}
+ 										</div>
+ 									</div>
+ 									<div class="col-sm col-lg-5 mb-3">
+ 										<label class="d-block label_required">Type of Group</label>
+ 										<select name="type_id" id="type_select"
+ 										        class="form-control {{ $errors->has('type_id') ? ' is-invalid' : '' }}">
+ 											<option disabled hidden selected value="">-- Select --</option>
+ 											@foreach(\EAC\UserType::all()->sortBy('name') as $type)
+ 												<option
+ 													value="{{ $type->id }}" {{ (old('type_id') && old('type_id') == $type->id) ? 'selected' : '' }}>{{ $type->name }}</option>
+ 											@endforeach
+ 										</select>
+ 										<div class="invalid-feedback">
+ 											{{ $errors->first('type_id') }}
+ 										</div>
+ 									</div>
+ 								</div>
+        @else
+         <input type="hidden" name="parent_id" value="{{ \Auth::user()->id }}"/>
+         <input type="hidden" name="type_id" value="{{ \Auth::user()->type->id }}"/>
+        @endif
+				
 								<div class="row">
 									<div class="col-sm mb-3">
 										<label class="d-block label_required">Group Leader</label>
