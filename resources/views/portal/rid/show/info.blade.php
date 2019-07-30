@@ -22,35 +22,33 @@
  } // endif
 @endphp
 
-<h5 class="text-gold mb-2 d-none d-sm-block">RID Information</h5>
 <div class="mb-2">
- <label class="d-block">RID Number</label>
- {{ $rid->number }}
+ <strong class="d-block">Request Date</strong>
+ {{ \Carbon\Carbon::parse($rid->req_date)->format(config('eac.date_format')) }}
 </div>
 <div class="mb-2">
- <label class="{{-- d-block --}} d-none">Status</label>
- @if($rid->status_id)<span class="badge badge-{{$bColor}}">{{$rid->status->name}}</span>@endif
+ <strong class="d-block">Requested By</strong>
+ @if(\Auth::user()->type->name == 'Early Access Care')
+  <a href="{{route('eac.portal.user.show', $rid->physician->id)}}">
+   {{ $rid->physician->full_name }}
+  </a>
+ @else
+  {{ $rid->physician->full_name }}
+ @endif
 </div>
-<div class="mb-2">
- <label class="d-block">Requested By</label>
- {{ $rid->physician->full_name }}
-</div>
-<div class="mb-2">
- <label class="d-block">Request Date</label>
- {{ $rid->req_date }}
-</div>
-<div class="mb-2">
-	<label class="d-block">Shipping To</label>
-	@if($rid->physician->address)
-	@php 
-		$country = $rid->physician->address->country;
-	@endphp 
-	<a href="#" data-toggle="modal" data-target="#Modal{{$country->id}}" >
-		{{ $country->name}}
-	</a>
-	@include('include.portal.modals.rid.country.available_country', $country)
-	@else 
-	No data available
-	@endif
-	
-</div>
+@if($rid->physician->address)
+ <div class="mb-2">
+  <strong class="d-block">Ship To</strong>
+  @if($rid->physician->address)
+   @php 
+    $country = $rid->physician->address->country;
+   @endphp 
+   <a href="#" data-toggle="modal" data-target="#Modal{{$country->id}}" >
+    {{ $country->name}}
+   </a>
+   @include('include.portal.modals.rid.country.available_country', $country)
+  @else 
+   No data available
+  @endif
+ </div>
+@endif

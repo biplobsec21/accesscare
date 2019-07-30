@@ -1,3 +1,8 @@
+@if((\Auth::user()->type->name == 'Physician') && ($rid->user_groups->count() > 0))
+ <div class="alert alert-danger mb-3">
+  Please assign a user group to this request
+ </div>
+@endif
 <div class="masterBox mb-3 mb-xl-5">
 	<ul class="nav nav-tabs" id="RequestTabs" role="tablist">
 		<li class="nav-item">
@@ -46,183 +51,143 @@
 		</div>
 		@endif
 		<div class="tab-pane fade active show" id="master" role="tabpanel" aria-labelledby="master-tab">
-			<div class="card card-body mb-0 poppins">
-				<div class="row">
-					<div class="col-lg-6 col-xl-4">
-						@access('rid.drug.view')
-						<div class="mb-2">
-							<strong>Drug:</strong>
-							<a href="{{ route('eac.portal.drug.show', $rid->drug->id) }}" class="mono">
-								{{ $rid->drug->name }}
-							</a>
-							({{$rid->drug->lab_name}})
-							<span> -
-								<a href="{{ route('eac.portal.company.show', $rid->drug->company->id) }}">
-									{{ $rid->drug->company->name }}
-								</a>
-							</span>
-						</div>
-						@endif
-						@access('rid.info.view')
-						<div class="mb-2">
-							<strong>Request Date:</strong>
-							{{ \Carbon\Carbon::parse($rid->req_date)->format(config('eac.date_format')) }}
-						</div>
-						<div class="mb-2">
-							<strong>Requested By:</strong>
-							{{ $rid->physician->full_name }}
-						</div>
-						@if($rid->physician->address)
-							<div class="mb-2">
-								<strong>Ship To:</strong>
-								@php
-									$country = $rid->physician->address->country;
-								@endphp
-								{{ $country->name}}
-								<a href="#" data-toggle="modal" data-target="#Modal{{$country->id}}">
-									<span class="fal fa-info-circle"></span>
-								</a>
-								@include('include.portal.modals.rid.country.available_country', $country)
-							</div>
-						@endif
-						@endif
-						@access('rid.drug.view')
-						@php
-							$countries = $rid->drug->countries;
-						@endphp
-						<div class="mb-2">
-							<strong>Pre-Approval Req:</strong>
-							@if($rid->drug->pre_approval_req)
-								NO
-							@else
-								YES
-							@endif
-						</div>
-						@endif
-					</div>
-					<div class="col-lg-6 col-xl-4">
-						@access('rid.patient.view')
-						<div class="mb-2">
-							<strong>Patient:</strong>
-							{{ $rid->patient_gender }}, age {{ $rid->getPatientAge() }}
-							({{ \Carbon\Carbon::parse($rid->patient_dob)->format(config('eac.date_format')) }})
-						</div>
-						@if(isset($rid->patient_weight)&& ($rid->patient_weight)>0 )
-							<div class="mb-2">
-								<strong>Patient weight:</strong>
-								{{ $rid->patient_weight }}KG
-							</div>
-						@endif
-						@if(isset($rid->patient_ethnicity))
-							<div class="mb-2">
-								<strong>Patient Ethnicity:</strong>
-								{{  \App\Ethnicity::where('id','=',$rid->patient_ethnicity)->firstOrFail()->name  }}
-							</div>
-						@endif
-						@if(isset($rid->reason))
-							<div class="mb-2">
-								<strong>Reason for Request:</strong>
-								{{ $rid->reason }}
-							</div>
-						@endif
-						@if($rid->proposed_treatment_plan)
-							<div class="mb-2">
-								<strong>Proposed Treatment:</strong>
-								{{ $rid->proposed_treatment_plan }}
-							</div>
-						@endif
-						@endif
-					</div>
-					<div class="d-none d-xl-block col-xl-4">
-						@access('rid.note.view')
-						@if($rid->notes->count() > 0)
-							<div id="noteSlider" class="carousel slide" data-ride="carousel">
-								@php $i = 0; @endphp
-								<div class="carousel-inner">
-									@foreach($rid->notes->sortBy('created_at') as $note)
-										@php $i++ @endphp
-										<div class="carousel-item @if($i == 1) active @endif">
-											<label class="d-block mb-2">
-												@if($i == 1)
-													Last Note:
-												@endif
-												{{ $note->created_at->format('d M, Y') }}
-												({{ $note->author->full_name ?? 'N/A' }})
-											</label>
-											<p class="m-0">{{ $note->text }}</p>
-										</div>
-									@endforeach
-								</div>
-								<div class="row">
-									<div class="col-auto">
-										<a class="" href="#noteSlider" role="button" data-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="sr-only">Previous</span>
-											<
-										</a>
-									</div>
-									<div class="col text-center">
-										{{$rid->notes->count()}} Total Notes
-									</div>
-									<div class="col-auto">
-										<a class="" href="#noteSlider" role="button" data-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="sr-only">Next</span>
-											>
-										</a>
-									</div>
-								</div>
-							</div>
-						@else
-							<p class="text-muted mb-0">No note to display</p>
-						@endif
-						@endif
-					</div>
-				</div><!-- /.row -->
-				<div class="row d-none">
-					<div class="col-sm-6 col-md-12 col-lg">
-						@access('rid.info.view')
-						@include('portal.rid.show.info')
-						@endif
-					</div>
-					<div class="col-sm-6 col-md-12 col-lg">
-						@access('rid.patient.view')
-						<hr class="d-sm-none mt-2 mb-2"/>
-						@include('portal.rid.show.patient')
-						@endif
-					</div>
-					<div class="col-sm-6 col-md-12 col-lg">
-						@access('rid.drug.view')
-						@include('portal.rid.show.drug')
-						@endif
-					</div>
-				</div>
-			</div>
-			<div class="bg-gradient-dark text-white p-3 d-flex justify-content-between">
-				<div>
-					<a href="#" class="btn btn-light">
-						<i class="fa-fw fas fa-users"></i> Assign User Group
-					</a>
-					@if(true)
-						<a href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-light ml-2">
-							<i class="fa-fw fas fa-upload"></i> Post Approval Documents
-						</a>
-					@endif
-					@access('rid.note.view')
-					<a href="#" class="btn btn-success ml-2" data-toggle="modal" data-target="#RidNoteAdd">
-						<i class="fa-fw fas fa-comment-alt-edit"></i> Add Note
-					</a>
-					@endif
-				</div>
-				<div>
-					<a href="{{route('eac.portal.rid.resupply', $rid->id)}}" class="btn btn-info ml-2 @if(!$rid->visits->count()) disabled @endif">
-						<i class="fa-fw fas fa-calendar-edit"></i> Manage Visits
-					</a>
-					<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-2">
-						<i class="fa-fw fas fa-edit"></i> Edit RID Master
-					</a>
-				</div>
-			</div>
+   <div class="border border-info border-top-0 border-bottom-0 bg-white">
+    <div class="row">
+     <div class="col-md">
+      <div class="row">
+       <div class="col-sm">
+        <div class="p-3">
+         @access('rid.drug.view')
+         <div class="mb-2">
+          @include('portal.rid.show.drug')
+         </div>
+         @endif
+         @access('rid.info.view')
+          @include('portal.rid.show.info')
+         @endif
+         @access('rid.drug.view')
+          <div class="mb-2">
+           <strong class="d-block">Pre-Approval Req</strong>
+           @if($rid->drug->pre_approval_req)
+            NO
+           @else
+            YES
+           @endif
+          </div>
+         @endif
+        </div>
+       </div>
+       @access('rid.patient.view')
+        <div class="col-sm-5">
+         <div class="p-3">
+          @include('portal.rid.show.patient')          
+         </div>
+        </div>
+       @endif
+      </div>
+     </div>
+     <div class="col-md-5">
+      <div class="alert-light text-dark h-100">
+       @access('rid.note.view')
+       <div class="table-responsive">
+        @if($rid->notes->count() > 0)
+         @php $i = 0; @endphp
+         <table class="notesTbl small table" data-page-length="5" >
+          <thead>
+           <tr>
+            <th><strong>{{$rid->notes->count()}}</strong> Notes</th>
+           </tr>
+          </thead>
+          <tbody>
+           @foreach($rid->notes as $note)
+            @php
+             // strip tags to avoid breaking any html
+             $string = strip_tags($note->text);
+             if (strlen($string) > 100) {
+              // truncate string
+              $stringCut = substr($string, 0, 100);
+              $endPoint = strrpos($stringCut, ' ');
+              //if the string doesn't contain any space then it will cut without word basis.
+              $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+              $string .= '...<a data-toggle="modal" class="badge badge-info float-right" data-target="#dispNote'.$note->id.'" href="#dispNote{{$note->id}}">Read More</a>';
+             }
+            @endphp
+            @php $i++ @endphp
+            <tr>
+             <td data-order="{{date('Y-m-d', strtotime($note->created_at))}}">
+              <div class="d-flex justify-content-between align-items-center">
+               <strong>{{ $note->author->full_name ?? 'N/A' }}</strong>
+               <div class="text-muted">
+                {{ $note->created_at->format('d M, Y') }}
+               </div>
+              </div>
+              {!! $string !!}
+             </td>
+            </tr>
+            @if (strlen($string) > 75)
+             <div class="modal fade" id="dispNote{{$note->id}}" tabindex="-1" role="dialog" aria-labelledby="dispNote{{$note->id}}Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+               <div class="modal-content">
+                <div class="modal-header p-2">
+                 <h5 class="m-0">
+                  View Note
+                 </h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="fal fa-times"></i>
+                 </button>
+                </div>
+                <div class="modal-body p-3">
+                 <div class="d-flex justify-content-between align-items-center">
+                  <strong>{{ $note->author->full_name ?? 'N/A' }}</strong>
+                  <div class="text-muted">
+                   {{ $note->created_at->format('d M, Y') }}
+                  </div>
+                 </div>
+                 {{$note->text}}
+                </div>
+                <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+               </div>
+              </div>
+             </div>
+            @endif
+           @endforeach
+          </tbody>
+         </table>
+        @endif
+       </div>
+       @endif
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="bg-gradient-primary text-white p-3 d-flex justify-content-between">
+    <div>
+     <a href="#" class="btn btn-light">
+      <i class="fa-fw fas fa-users"></i> Assign User Group
+     </a>
+     @if(true)
+      <a href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-light ml-2">
+       <i class="fa-fw fas fa-upload"></i> Post Approval Documents
+      </a>
+     @endif
+     @access('rid.note.view')
+     <a href="#" class="btn btn-success ml-2" data-toggle="modal" data-target="#RidNoteAdd">
+      <i class="fa-fw fas fa-comment-alt-edit"></i> Add Note
+     </a>
+     @endif
+    </div>
+    <div>
+     <a href="{{route('eac.portal.rid.resupply', $rid->id)}}" class="btn btn-info ml-2 @if(!$rid->visits->count()) disabled @endif">
+      <i class="fa-fw fas fa-calendar-edit"></i> Manage Visits
+     </a>
+     <a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-2">
+      <i class="fa-fw fas fa-edit"></i> Edit RID Master
+     </a>
+    </div>
+   </div>
+
 		</div>
 		@access('rid.drug.view')
 		<div class="tab-pane fade" id="drug" role="tabpanel" aria-labelledby="drug-tab">
@@ -303,3 +268,17 @@
 		</div>
 	</form>
 </div>
+@section('scripts')
+ <script>
+  $(document).ready( function () {
+   $('.notesTbl').DataTable({
+    "stateSave": true,
+    "info":     false,
+    "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+    "order": [[ 0, "desc" ]],
+    "searching": false,
+    "dom": 't<"d-flex justify-content-between flex-wrap small p-2"lp>'
+   });
+  });
+ </script>
+@endsection

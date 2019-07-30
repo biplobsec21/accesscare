@@ -1,19 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700|Roboto+Mono:400,500,700|Roboto:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700|Nunito+Sans:300,400,600,700');
 @import 'branding.css';
-body {
- font-family: 'Roboto';
- font-weight: 400;
-}
-.mono, .form-control, .select2 {
- font-family: 'Roboto Mono';
-}
 
 .tab-content .mce-edit-area.mce-panel iframe{
  min-height: 30vh;
-}
-.small, small {
- font-weight: 400;
- font-family: 'Roboto';
 }
 
 .infinite {
@@ -444,7 +433,7 @@ h4 .badge, .h4.badge {
 .bg-gradient-dark {
  background: linear-gradient(45deg, #4C555B 0, #19252C 100%);
 } 
-.hack #shownotes button[type=submit] {
+.hack #showRIDnotes button[type=submit] {
  display: none;
 }
 .permissions .list-group-item > .row > [class*=col]:first-of-type {
@@ -968,6 +957,28 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
   border-color: rgb(210, 222, 232);
   background-color: #f0f4f7;
  }
+ @media print {
+  @page {
+   margin-top: 0.75in;
+   margin-bottom: 0.75in;
+   margin-left: 0.3in;
+   margin-right: 0.3in;
+  }
+  .titleBar nav, .titleBar h6.title {
+   display: none;
+  } 
+  .titleBar .small.d-sm-none {
+   margin-top: .5rem;
+   display: block!important;
+  }
+  #content-wrapper {
+   display: block!important;
+   width: 100%!important;
+  }
+  #cc_main {
+   border: 0;
+  }
+ }
  #footer {
   color: #fff;
  }
@@ -1109,9 +1120,7 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
 .table {
  width: 100%;
  min-width: 100%;
-}
-.table-sm {
- font-size: 95%;
+ /*font-size: 95%*/;
 }
 .table a:not(.badge):not(.btn) > [class*=fa]:not(.fa-stack) {
  font-size: 120%;
@@ -1405,7 +1414,7 @@ div.dataTables_wrapper label {
  font-size: .9em;
  font-weight: 400;
 }
-.table tr td:last-child a:not(.btn):not(.dropdown-item) {
+.table tr td:last-child:not(:only-child) a:not(.btn):not(.dropdown-item) {
  text-decoration: none!important;
  text-align: center;
  min-width: 1.5em;
@@ -1413,25 +1422,25 @@ div.dataTables_wrapper label {
  color: #000;
  margin-right: .15em;
 }
-.table tr td:last-child .btn-link, .table tr td:last-child .btn-sm.btn-link, .table tr td:last-child .btn-lg.btn-link {
+.table tr td:last-child:not(:only-child) .btn-link, .table tr td:last-child:not(:only-child) .btn-sm.btn-link, .table tr td:last-child:not(:only-child) .btn-lg.btn-link {
  padding: 0 .25rem;
  color: #888;
 }
-.table tr td:last-child .btn-link:hover, .table tr td:last-child .btn-sm.btn-link:hover, .table tr td:last-child .btn-lg.btn-link:hover {
+.table tr td:last-child:not(:only-child) .btn-link:hover, .table tr td:last-child:not(:only-child) .btn-sm.btn-link:hover, .table tr td:last-child:not(:only-child) .btn-lg.btn-link:hover {
  color: #000;
 }
-.table tr td:last-child .dropdown-menu {
+.table tr td:last-child:not(:only-child) .dropdown-menu {
  min-width: 8rem;
  padding: 0;
  font-size: .85rem;
  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2);
 }
-.table tr td:last-child .dropdown-item {
+.table tr td:last-child:not(:only-child) .dropdown-item {
  padding: .45rem .7rem;
  font-weight: 600;
  color: #000;
 }
-.table tr td:last-child .dropdown-item [class*=fa] {
+.table tr td:last-child:not(:only-child) .dropdown-item [class*=fa] {
  font-size: .9rem;
  color: #B5B5B5;
 }
@@ -1459,10 +1468,10 @@ div.dataTables_wrapper label {
  font-size: 90%;
 }
 
-.table tr td:last-child a:not(.btn):not(.dropdown-item):hover {
+.table tr td:last-child:not(:only-child) a:not(.btn):not(.dropdown-item):hover {
  color: red;
 }
-.table tr td:last-child a:not(.btn):not(.dropdown-item):last-child {
+.table tr td:last-child:not(:only-child) a:not(.btn):not(.dropdown-item):last-child {
  margin-right: 0
 }
 div.table-responsive>div.dataTables_wrapper>div.row:last-of-type>div[class^="col-"]:first-child {
@@ -1778,6 +1787,25 @@ div.dataTables_wrapper div.dataTables_info {
  border-radius: 50%;
  z-index: 1;
  text-align: center;
+}
+@media print {
+ .viewData > .bg-dark.d-flex, .row.thisone > [class*=col]:first-child {
+  display: none!important;
+ }
+ .row.thisone > [class*=col]:last-child {
+  flex: 0 0 100%;
+  max-width: 100%;
+ }
+ .wizardContent.tab-content>.tab-pane {
+  display: block;
+  position: relative;
+ }
+ .wizardContent.tab-content>.tab-pane + .tab-pane {
+  margin-top: 50px;
+ }
+ .wizardContent .fade:not(.show) {
+  opacity: 1;
+ }
 }
 .wizardSteps .stepheader {
  font-weight: 500;
