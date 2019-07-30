@@ -1,24 +1,20 @@
 <div class="masterBox mb-3 mb-xl-5">
 	<ul class="nav nav-tabs" id="RequestTabs" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab"
-			   aria-controls="master"
-			   aria-selected="true">
+			<a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">
 				Request Details
 			</a>
 		</li>
 		@access('rid.user.view')
 		<li class="nav-item">
-			<a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users"
-			   aria-selected="false">
+			<a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">
 				Assigned Groups
 			</a>
 		</li>
 		@endif
 		@access('rid.drug.view')
 		<li class="nav-item">
-			<a class="nav-link" id="drug-tab" data-toggle="tab" href="#drug" role="tab" aria-controls="drug"
-			   aria-selected="false">
+			<a class="nav-link" id="drug-tab" data-toggle="tab" href="#drug" role="tab" aria-controls="drug" aria-selected="false">
 				Reference Documents
 			</a>
 		</li>
@@ -26,17 +22,18 @@
 	</ul>
 	<div class="tab-content" id="RequestTabsContent">
 		@access('rid.index.update')
-		<div class="bg-gradient-primary text-white p-3">
+		<div class="bg-gradient-dark text-white p-3">
 			<div class="row">
 				<div class="col-sm">
 					<h5 class="mb-0 strong d-inline-block">Viewing RID: {{ $rid->number }}</h5>
-					<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="small"
-					   style="color: var(--yellow)">
+					<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="small" style="color: var(--yellow)">
 						[edit RID]
 					</a>
 				</div>
 				<div class="col-sm col-lg-auto">
-					<h5 class="mb-0 strong">Status: <span class="upper">{{$rid->status->name}}</span></h5>
+					<h5 class="mb-0 strong">Status:
+						<span class="upper">{{$rid->status->name}}</span>
+					</h5>
 				</div>
 			</div>
 		</div>
@@ -50,12 +47,13 @@
 							<strong>Drug:</strong>
 							<a href="{{ route('eac.portal.drug.show', $rid->drug->id) }}">
 								{{ $rid->drug->name }}
-							</a> ({{$rid->drug->lab_name}})
+							</a>
+							({{$rid->drug->lab_name}})
 							<span> -
-									<a href="{{ route('eac.portal.company.show', $rid->drug->company->id) }}">
-										{{ $rid->drug->company->name }}
-									</a>
-								</span>
+								<a href="{{ route('eac.portal.company.show', $rid->drug->company->id) }}">
+									{{ $rid->drug->company->name }}
+								</a>
+							</span>
 						</div>
 						@endif
 						@access('rid.info.view')
@@ -102,6 +100,11 @@
 							{{ $rid->patient_gender }}, age {{ $rid->getPatientAge() }}
 							({{ \Carbon\Carbon::parse($rid->patient_dob)->format(config('eac.date_format')) }})
 						</div>
+						@if(\Auth::user()->type->name == 'Early Access Care' || \Auth::user()->type->name == 'Physician')
+							<a href="#ridLogin{{$rid->id}}" data-toggle="modal" data-target="#ridLogin{{$rid->id}}">
+								<span class="fas fa-lock-alt"></span>
+							</a>
+						@endif
 						@if(isset($rid->patient_weight)&& ($rid->patient_weight)>0 )
 							<div class="mb-2">
 								<strong>Patient weight:</strong>
@@ -134,7 +137,7 @@
 							<div id="noteSlider" class="carousel slide" data-ride="carousel">
 								@php $i = 0; @endphp
 								<div class="carousel-inner">
-									@foreach($rid->notes as $note)
+									@foreach($rid->notes->sortBy('created_at') as $note)
 										@php $i++ @endphp
 										<div class="carousel-item @if($i == 1) active @endif">
 											<label class="d-block mb-2">
@@ -193,37 +196,29 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-gradient-primary text-white p-3">
-				<div class="{{-- actionBar --}}">
-					<div class="row">
-						<div class="col-sm-auto col-lg">
-							<a href="{{ route("eac.portal.rid.list") }}" class="btn btn-light">
-								RID List
-							</a>
-						</div>
-						<div class="col-sm col-lg-auto ml-lg-auto">
-							@access('rid.note.view')
-							<a href="#" class="btn btn-success ml-xl-3" data-toggle="modal"
-							   data-target="#RidNoteAdd">
-								<i class="fa fa-plus"></i> Add Note
-							</a>
-							@endif
-							<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-xl-3">
-								<i class="fa-fw fas fa-edit"></i> Edit RID Master
-							</a>
-							<a title="Schedule Dates"
-							   class="btn btn-info ml-xl-3 @if(!$rid->visits->count()) disabled @endif"
-							   href="{{route('eac.portal.rid.resupply', $rid->id)}}">
-								<i class="fa-fw fas fa-redo"></i> Manage Visits
-							</a>
-							@if(true)
-								<a title="" href="{{route('eac.portal.rid.postreview', $rid->id)}}"
-								   class="btn btn-info ml-xl-3">
-									<i class="fa-fw fas fa-upload"></i> Post Approval Documents
-								</a>
-							@endif
-						</div>
-					</div><!-- /.row -->
+			<div class="bg-gradient-dark text-white p-3 d-flex justify-content-between">
+				<div>
+					<a href="#" class="btn btn-light">
+						<i class="fa-fw fas fa-users"></i> Assign User Group
+					</a>
+					@if(true)
+						<a href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-light ml-2">
+							<i class="fa-fw fas fa-upload"></i> Post Approval Documents
+						</a>
+					@endif
+					@access('rid.note.view')
+					<a href="#" class="btn btn-success ml-2" data-toggle="modal" data-target="#RidNoteAdd">
+						<i class="fa-fw fas fa-comment-alt-edit"></i> Add Note
+					</a>
+					@endif
+				</div>
+				<div>
+					<a href="{{route('eac.portal.rid.resupply', $rid->id)}}" class="btn btn-info ml-2 @if(!$rid->visits->count()) disabled @endif">
+						<i class="fa-fw fas fa-calendar-edit"></i> Manage Visits
+					</a>
+					<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-2">
+						<i class="fa-fw fas fa-edit"></i> Edit RID Master
+					</a>
 				</div>
 			</div>
 		</div>
@@ -266,7 +261,7 @@
 		@endif
 	</div>
 </div>
-
+@include('include.portal.modals.rid.patient.ridlogin', $rid)
 <div class="modal fade" id="RidNoteAdd" tabindex="-1" role="dialog" aria-hidden="true">
 	<form method="post" action="{{ route('eac.portal.note.create') }}">
 		{{ csrf_field() }}
@@ -275,29 +270,31 @@
 			<div class="modal-content">
 				<div class="modal-header p-2">
 					<h5 class="m-0">
-						Add Note to <strong>RID: {{ $rid->number }}</strong>
+						Add Note to
+						<strong>RID: {{ $rid->number }}</strong>
 					</h5>
-					<button type="button" class="close" data-dismiss="modal"
-					        aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<i class="fal fa-times"></i>
 					</button>
 				</div>
 				<div class="modal-body p-3">
-					<label class="inline-block">Physician Viewable</label>
-					<input name="physican_viewable" class="form-control" type="checkbox" value="1"/>
-					<label
-						class="d-block">{{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
+					@if(\Auth::user()->type->name == 'Early Access Care')
+						<label class="d-block">
+							<input name="physican_viewable" type="checkbox" value="1"/>
+							Viewable by Physician
+						</label>
+					@else
+						<input name="physican_viewable" type="hidden" value="1"/>
+					@endif
+					<label class="d-block">{{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
 						<small>{{date('Y-m-d H:i')}}</small>
 					</label>
-					<textarea name="text" class="note_text form-control" rows="3"
-					          placeholder="Enter note..."></textarea>
+					<textarea name="text" class="note_text form-control" rows="3" placeholder="Enter note..."></textarea>
 				</div>
 				<div class="modal-footer p-2 d-flex justify-content-between">
-					<button type="button" class="btn btn-secondary"
-					        data-dismiss="modal" tabindex="-1">Cancel
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="-1">Cancel
 					</button>
-					<button type="submit" name="submit" class="btn btn-success"
-					        value="Add Note">Submit
+					<button type="submit" name="submit" class="btn btn-success" value="Add Note">Submit
 					</button>
 				</div>
 			</div>

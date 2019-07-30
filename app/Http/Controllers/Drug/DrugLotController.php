@@ -23,6 +23,7 @@ class DrugLotController extends Controller
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
+
 	}
 
 	/**
@@ -40,32 +41,33 @@ class DrugLotController extends Controller
 		$drugs = Drug::all();
 
 		$depot = null;
-		if($request->input('depot'))
-			$depot = Depot::where('id',$request->input('depot'))->first();
+		if ($request->input('depot'))
+			$depot = Depot::where('id', $request->input('depot'))->first();
 
 		$depots = Depot::all()->sortBy('name');
 		return view('portal.drug.lot.create', ['drugs' => $drugs, 'depots' => $depots, 'depot' => $depot]);
 	}
 
 	public function edit($id, Request $request)
-	{	$drugs=collect();
+	{
+		$drugs = collect();
 		$lot = DrugLot::where('id', $id)->firstOrFail();
 		$drug_all = Drug::all();
-		if($lot && $lot->dosage){
-			$drugs = Drug::where('id','=',$lot->dosage->component->drug_id);
+		if ($lot && $lot->dosage) {
+			$drugs = Drug::where('id', '=', $lot->dosage->component->drug_id);
 		}
 		$depot = null;
-		if($request->input('depot'))
-			$depot = Depot::where('id',$request->input('depot'))->first();
+		if ($request->input('depot'))
+			$depot = Depot::where('id', $request->input('depot'))->first();
 
 		$depots = Depot::all()->sortBy('name');
-		return view('portal.drug.lot.edit', ['drugs' => $drugs, 'depots' => $depots, 'lot' => $lot,'drug_all' =>$drug_all, 'depot' => $depot]);
+		return view('portal.drug.lot.edit', ['drugs' => $drugs, 'depots' => $depots, 'lot' => $lot, 'drug_all' => $drug_all, 'depot' => $depot]);
 	}
 
 	/**
 	 * Update the specified resource in storage.
-	 * @param  Request $request
-	 * @param  string $id
+	 * @param Request $request
+	 * @param string $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id)
@@ -104,7 +106,7 @@ class DrugLotController extends Controller
 			if ($request->input('redirect')) {
 				return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
 			} else {
-				return redirect(route('eac.portal.lot.list.all'))
+				return redirect()->back()
 					->with("alerts", ['type' => 'success', 'msg' => 'Lot Has Been Updated.']);
 			}
 		}
@@ -142,12 +144,11 @@ class DrugLotController extends Controller
 		$lot->minimum = $request->input('minimum');
 		$lot->save();
 
-		 if ($request->input('redirect')) {
-			 return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
-		 }
-		 else {
-			 return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
-		 }
+		if ($request->input('redirect')) {
+			return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
+		} else {
+			return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
+		}
 	}
 
 	public function delete(Request $request)
@@ -195,7 +196,7 @@ class DrugLotController extends Controller
 				'depots.name  as depot_name',
 				'depots.id  as depot_id'
 			]);
-		if($request->input('depot'))
+		if ($request->input('depot'))
 			$sql = $sql->where('depot_id', $request->input('depot'));
 
 		return \DataTables::of($sql)
@@ -489,35 +490,37 @@ class DrugLotController extends Controller
 		}
 
 	}
-	public function getDosage(Request $request){
+
+	public function getDosage(Request $request)
+	{
 
 		$string = '';
 		$i = 0;
 		$drug = Drug::find($request->input('drug_id'));
-		$string .='<label class="d-block label_required">Component and Dosage</label>
+		$string .= '<label class="d-block label_required">Component and Dosage</label>
 								<select name="dosage_id"  class="form-control" required="required">';
-		if($drug->components){
+		if ($drug->components) {
 			$string .= '<option disabled hidden selected value="">-- Select --</option>';
-	        foreach($drug->components as $component){
-	         $string .='<optgroup label="'.$component->name.'">';
-	          foreach($component->dosages as $dosage){
-	          	if($dosage->active == 1){
-					$i++;
-					$string .='<option value="'.$dosage->id.'">';
-					$string .= $dosage->form->name." ".$dosage->amount;
-					$string .='<small>'. $dosage->unit->name .'</small>';
-					$string .='</option>';			
-	      		 }
-	          }
-	         $string .='</optgroup>';
-	       }
+			foreach ($drug->components as $component) {
+				$string .= '<optgroup label="' . $component->name . '">';
+				foreach ($component->dosages as $dosage) {
+					if ($dosage->active == 1) {
+						$i++;
+						$string .= '<option value="' . $dosage->id . '">';
+						$string .= $dosage->form->name . " " . $dosage->amount;
+						$string .= '<small>' . $dosage->unit->name . '</small>';
+						$string .= '</option>';
+					}
+				}
+				$string .= '</optgroup>';
+			}
 		}
-       $string .='<select>';
+		$string .= '<select>';
 
-       if($i < 1){
-       		$string .='<span class="text-warning"> No active dosage found <i><small><a href="'.route('eac.portal.drug.edit',$request->input('drug_id')).'" target="_blank">Add dosage </a></small></i></span>';
-       }
-		
+		if ($i < 1) {
+			$string .= '<span class="text-warning"> No active dosage found <i><small><a href="' . route('eac.portal.drug.edit', $request->input('drug_id')) . '" target="_blank">Add dosage </a></small></i></span>';
+		}
+
 		return $string;
 	}
 }

@@ -98,6 +98,11 @@
 			<a href="{{ route("eac.portal.drug.list") }}" class="btn btn-light">
 				Drug List
 			</a>
+{{--			@if(($history_length = count(session('history'))) > 1)--}}
+{{--				<a href="{{ session('history')[$history_length - 2]['url'] }}" class="btn btn-light">--}}
+{{--					<i class="far fa-angle-double-left"></i> {{ session('history')[$history_length - 2]['title'] }}--}}
+{{--				</a>--}}
+{{--			@endif--}}
 			<div>
 				@access('drug.index.update', $drug->id)
 				<a href="{{ route("eac.portal.drug.edit", $drug->id) }}" class="btn btn-info">

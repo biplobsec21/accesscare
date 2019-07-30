@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Company;
 use App\Drug;
 use App\Rid;
 use App\Role;
@@ -35,7 +34,7 @@ trait AuthAssist
 	/**
 	 * List all rids the authorized user can view
 	 *
-	 * @return Collection rids viewable by the authorized user
+	 * @return Collection Rids viewable by the authorized user
 	 */
 	protected function listRidAccess($user = null)
 	{
@@ -82,9 +81,9 @@ trait AuthAssist
 	}
 
 	/**
-	 * List all users the authorized user can view
+	 * List all drugs the authorized user can view
 	 *
-	 * @return Collection users viewable by the authorized user
+	 * @return Collection drugs viewable by the authorized user
 	 */
 	protected function listUserAccess()
 	{
@@ -105,9 +104,9 @@ trait AuthAssist
 	}
 
 	/**
-	 * List all groups the authorized user can view
+	 * List all drugs the authorized user can view
 	 *
-	 * @return Collection groups viewable by the authorized user
+	 * @return Collection drugs viewable by the authorized user
 	 */
 	protected function listGroupAccess()
 	{
@@ -121,24 +120,6 @@ trait AuthAssist
 
 		return $this->user->groups();
 	}
-
-    /**
-     * List all companies the authorized user can view
-     *
-     * @return Collection companies viewable by the authorized user
-     */
-    protected function listCompanyAccess()
-    {
-        $this->user = Auth::user();
-        switch($this->preGateCheck()) {
-            case 1;
-                return Company::all();
-            case -1:
-                return null;
-        }
-
-        return $this->user->company;
-    }
 
 	/**
 	 * List all open gates the current user has to a RID

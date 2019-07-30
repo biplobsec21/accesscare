@@ -84,7 +84,8 @@
 							</div>
 						</div>
 						<a class="text-info toggleRight ml-3 ml-md-4" href="#">
-							@php $allnotification = \App\Notification::where('user_id','=',(Auth::user()->id))->count(); @endphp
+							
+							@php $allnotification = \App\Notification::where('user_id','=',(Auth::user()->id))->where('read_at', null)->count(); @endphp
 							<i class="fas fa-bell text-primary"></i>
 							Notifications
 							@if($allnotification > 0 )
@@ -167,7 +168,7 @@
 					@if(\Auth::user()->type->name == 'Physician' && !Auth::user()->certificate && \Auth::user()->status != 'Registering')
 						<div class="alert alert-danger alert-dismissible fade show" role="alert">
 							You have not added your professional documents,
-							<a href="#">click here to upload.</a>
+							<a href="{{ route('eac.portal.user.certify')}}">click here to upload.</a>
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>

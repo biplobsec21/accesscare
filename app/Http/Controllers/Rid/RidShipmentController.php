@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Rid;
 
 use App\Address;
+use App\DataTables\DataTableResponse;
+use App\DataTables\DataTableRow;
 use App\RidShipment;
 use App\Drug;
 use App\Http\Controllers\Controller;
@@ -12,6 +14,7 @@ use App\Rid;
 use App\RidVisit;
 use App\Traits\AuthAssist;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Traits\WorksWithRIDs;
 
@@ -54,7 +57,7 @@ class RidShipmentController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function updateDates(Request $request)
@@ -73,7 +76,7 @@ class RidShipmentController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function updateInfo(Request $request)
@@ -86,14 +89,56 @@ class RidShipmentController extends Controller
 		return redirect()->back();
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int $id
-	 * @return mixed
-	 */
-	public function destroy($id)
+
+	public function ridawaitinglist(Request $request)
 	{
-		//
+
+		$shipments = RidShipment::all();
+		$response = new DataTableResponse(Rid::class, $request->all());
+		foreach ($shipments as $shipment) {
+			$row = new DataTableRow($shipment->id);
+
+			if(!$shipment->rid || !$shipment->deliver_by_date)
+				continue;
+
+			$row->setColumn('number', $shipment->rid->number,
+				'<a title="RID Number" href="' . route('eac.portal.rid.show', $shipment->rid->id) . '">' .
+				$shipment->rid->number .
+				'</a>'
+			);
+			$row->setColumn('drug', $shipment->rid->drug->name,
+				'<a title="Drug Requested" href="' . route('eac.portal.drug.show', $shipment->rid->drug_id) . '">' .
+				$shipment->rid->drug->name .
+				'</a>'
+			);
+			$row->setColumn('deliver_by_date', strtotime($shipment->deliver_by_date),
+				'<span style="display: none">' . Carbon::parse($shipment->deliver_by_date)->format('Y-m-d') . '</span>' . Carbon::parse($shipment->deliver_by_date)->format(config('eac.date_format'))
+			);
+			$row->setColumn('ship_by_date', strtotime($shipment->ship_by_date),
+				'<span style="display: none">' . Carbon::parse($shipment->ship_by_date)->format('Y-m-d') . '</span>' . Carbon::parse($shipment->ship_by_date)->format(config('eac.date_format'))
+			);
+			$row->setColumn('created_at', strtotime($shipment->created_at),
+				'<span style="display: none">' . $shipment->created_at->format('Y-m-d') . '</span>' . $shipment->created_at->format(config('eac.date_format'))
+			);
+			$row->setColumn('btns', $shipment->id,
+				'<a class="btn btn-success" title="Ship" href="' . route('eac.portal.rid.shipment.edit', $shipment->id) . '">' .
+				'<i class="fal fa-fw fa-ambulance"></i> Ship' .
+				'</a>'
+			);
+			$response->addRow($row);
+		}
+		return $response->toJSON();
 	}
-}
+
+		/**
+		 * Remove the specified resource from storage.
+		 *
+		 * @param int $id
+		 * @return mixed
+		 */
+		public
+		function destroy($id)
+		{
+			//
+		}
+	}

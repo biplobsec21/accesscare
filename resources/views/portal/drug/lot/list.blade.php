@@ -44,7 +44,7 @@
 	<div class="viewData">
 		<div class="card mb-1 mb-md-4">
 			<div class="table-responsive">
-				<table class="table  table-sm table-striped table-hover" id="lotTBL">
+				<table class="table  table-sm table-striped table-hover" id="lotlist">
 					<thead>
 					<tr>
 						<th>Lot Number</th>
@@ -76,28 +76,101 @@
 @endsection
 
 @section('scripts')
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
-    <script type="text/javascript">
-        $(document).ready(function () {
-            let $url = "{{ route('eac.portal.settings.dataTables', 'DrugLot') }}";
-            // Data Tables
-            $('#lotTBL').initDT({
-                ajax: {
-                    url: $url,
-                    type: "post"
-                },
-                order: [[0, 'desc']],
-                columns: [
-                    "number",
-                    "dosage-component-drug-name",
-                    "dosage",
-                    "depot-name",
-                    "stock",
-                    "created_at",
-                    "btns",
-                ],
-            });
-        }); // end doc ready
-    </script>
+<script type="text/javascript">
+
+  $(document).ready(function () {
+   $('#lotlist tfoot th').each(function () {
+     if ($(this).hasClass("no-search"))
+     return;
+     var title = $(this).text();
+     $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+   });
+
+   var dataTable = $('#lotlist').DataTable({
+     "paginationDefault": 10,
+      "paginationOptions": [10, 25, 50, 75, 100],
+     // "responsive": true,
+     'order': [[0, 'asc']],
+     "ajax": {
+		url: "{{route('eac.portal.lot.ajaxlist')}}",
+		type: "get"
+     },
+     "processing": true,
+     "serverSide": true,
+     "columns": [
+     
+
+     {
+       "data": "number",
+       "name": "number",
+       searchable: true
+     },
+     // {
+     //   "data": "route",
+     //   "name": "route",
+     //   searchable: true
+     // },
+     {
+       "data": "drug",
+       "name": "drug",
+       searchable: true
+     },
+     {
+       "data": "dosage",
+       "name": "dosage",
+        orderable: true,
+       searchable: true   
+      },
+     
+     {
+       "data": "depot",
+       "name": "depot",
+       orderable: false,
+       searchable: true
+     },
+     {
+       "data": "stock",
+       "name": "stock",
+       orderable: false,
+       searchable: false
+     },
+     {
+       "data": "created_date",
+       "name": "created_date",
+       searchable: true
+     },
+     {
+       "data": "ops_btns",
+       orderable: false,
+       searchable: false
+     }
+     ]
+   });
+
+   dataTable.columns().every(function () {
+     var that = this;
+
+     $('input', this.footer()).on('keyup change', function () {
+     if (that.search() !== this.value) {
+       that
+         .search(this.value)
+         .draw();
+     }
+     });
+   });
+
+   $.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
+     swal({
+     title: "Oh Snap!",
+     text: "Something went wrong on our side. Please try again later.",
+     icon: "warning",
+     });
+   };
+
+  }); // end doc ready
+  $(".alert").delay(2000).slideUp(200, function () {
+   $(this).alert('close');
+  });
+
+	</script>
 @endsection
