@@ -2165,7 +2165,7 @@ table.dataTable>tfoot .form-control:focus, table.dataTable>tfoot .form-control.f
   display: inline;
   line-height: 16px;
   font-size: 16px;
-  padding: 0 11px;
+  padding: 2px 11px;
   border-radius: 2px;
   background: #efefef;
   background: linear-gradient(45deg, #efefef 0%, #fefefe  100%);

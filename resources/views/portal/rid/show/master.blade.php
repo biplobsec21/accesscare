@@ -155,6 +155,8 @@
            @endforeach
           </tbody>
          </table>
+        @else
+         <div class="p-3">No notes to display</div>
         @endif
        </div>
        @endif
