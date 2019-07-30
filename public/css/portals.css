@@ -4,7 +4,7 @@ body {
  font-family: 'Roboto';
  font-weight: 400;
 }
-.mono, .form-control, table {
+.mono, .form-control, .select2 {
  font-family: 'Roboto Mono';
 }
 
@@ -1109,7 +1109,9 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
 .table {
  width: 100%;
  min-width: 100%;
- /*font-size: 95%*/;
+}
+.table-sm {
+ font-size: 95%;
 }
 .table a:not(.badge):not(.btn) > [class*=fa]:not(.fa-stack) {
  font-size: 120%;
