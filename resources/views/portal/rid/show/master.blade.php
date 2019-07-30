@@ -19,13 +19,20 @@
 			</a>
 		</li>
 		@endif
+  @if(\Auth::user()->type->name == 'Early Access Care' || \Auth::user()->type->name == 'Physician')
+   <li class="nav-item ml-xl-auto">
+    <a class="nav-link" href="#ridLogin{{$rid->id}}" data-toggle="modal" data-target="#ridLogin{{$rid->id}}">
+     <span class="fas fa-lock-alt"></span> Patient Password
+    </a>
+   </li>
+  @endif
 	</ul>
 	<div class="tab-content" id="RequestTabsContent">
 		@access('rid.index.update')
 		<div class="bg-gradient-dark text-white p-3">
 			<div class="row">
 				<div class="col-sm">
-					<h5 class="mb-0 strong d-inline-block">Viewing RID: {{ $rid->number }}</h5>
+					<h5 class="mb-0 strong d-inline-block">Viewing RID: <span class="mono">{{ $rid->number }}</span></h5>
 					<a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="small" style="color: var(--yellow)">
 						[edit RID]
 					</a>
@@ -45,7 +52,7 @@
 						@access('rid.drug.view')
 						<div class="mb-2">
 							<strong>Drug:</strong>
-							<a href="{{ route('eac.portal.drug.show', $rid->drug->id) }}">
+							<a href="{{ route('eac.portal.drug.show', $rid->drug->id) }}" class="mono">
 								{{ $rid->drug->name }}
 							</a>
 							({{$rid->drug->lab_name}})
@@ -100,11 +107,6 @@
 							{{ $rid->patient_gender }}, age {{ $rid->getPatientAge() }}
 							({{ \Carbon\Carbon::parse($rid->patient_dob)->format(config('eac.date_format')) }})
 						</div>
-						@if(\Auth::user()->type->name == 'Early Access Care' || \Auth::user()->type->name == 'Physician')
-							<a href="#ridLogin{{$rid->id}}" data-toggle="modal" data-target="#ridLogin{{$rid->id}}">
-								<span class="fas fa-lock-alt"></span>
-							</a>
-						@endif
 						@if(isset($rid->patient_weight)&& ($rid->patient_weight)>0 )
 							<div class="mb-2">
 								<strong>Patient weight:</strong>
@@ -271,7 +273,7 @@
 				<div class="modal-header p-2">
 					<h5 class="m-0">
 						Add Note to
-						<strong>RID: {{ $rid->number }}</strong>
+						<strong>RID: <span class="mono">{{ $rid->number }}</span></strong>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<i class="fal fa-times"></i>

@@ -1,8 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700|Nunito+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700|Roboto+Mono:400,500,700|Roboto:300,400,500,700,900');
 @import 'branding.css';
+body {
+ font-family: 'Roboto';
+ font-weight: 400;
+}
+.mono, .form-control, table {
+ font-family: 'Roboto Mono';
+}
 
 .tab-content .mce-edit-area.mce-panel iframe{
  min-height: 30vh;
+}
+.small, small {
+ font-weight: 400;
+ font-family: 'Roboto';
 }
 
 .infinite {
