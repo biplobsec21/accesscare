@@ -126,14 +126,11 @@
 					</a>
 					<a class="nav-link @if($isComplete['completeCmpDsg'] == 1) complete @endif" id="xcomponentsT" href="#xcomponents" data-toggle="pill" role="tab" aria-controls="xcomponents" aria-selected="false">
 						<span>Components &amp; Dosages</span>
-					</a>
-					
-					<a class="nav-link @if($isComplete['completeDpotLot'] == 1) complete @endif" id="xdepotsT" href="#xdepots" data-toggle="pill" role="tab" aria-controls="xdepots" aria-selected="false">
-						
+					</a>					
+					<a class="nav-link @if($isComplete['completeDpotLot'] == 1) complete @endif" id="xdepotsT" href="#xdepots" data-toggle="pill" role="tab" aria-controls="xdepots" aria-selected="false">						
 						<span>Depots &amp; Lots</span>
 					</a>
-					<a class="nav-link @if($supply_info->count()) complete @endif" id="xdrugdistT" href="#xdrugdistTa" data-toggle="pill" role="tab" aria-controls="xdrugdistTa" aria-selected="false">
-						
+					<a class="nav-link @if($supply_info->count()) complete @endif" id="xdrugdistT" href="#xdrugdistTa" data-toggle="pill" role="tab" aria-controls="xdrugdistTa" aria-selected="false">						
 						<span>Drug Distribution Schedule</span>
 					</a>
 					<a class="nav-link @if($drug->user_groups->count()) complete @endif" id="xgroupsT" data-toggle="pill" href="#xgroups" role="tab" aria-controls="xgroups" aria-selected="false">
@@ -382,8 +379,7 @@
 						@include('include.portal.modals.drugs.lot.new')
 						@endif
 					</div><!-- /.tab-pane -->
-					<div class="tab-pane fade" id="xdrugdistTa" role="tabpanel" aria-labelledby="xdrugdistTa-tab">
-						
+					<div class="tab-pane fade" id="xdrugdistTa" role="tabpanel" aria-labelledby="xdrugdistTa-tab">						
 						@access('drug.supply.update', $drug->id)
 						@include('portal.drug.edit.supply')
 						@elseaccess('drug.supply.view', $drug->id)
@@ -425,8 +421,7 @@
 						<div class="card card-body mb-0">
 							<div class="row mb-3">
 								<div class="col">
-									<h5 class="mb-0">Form List
-									</h5>
+									<h5 class="mb-0">Form List</h5>
 								</div>
 								<div class="col-auto">
 									<div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">

@@ -2,6 +2,7 @@
  <table class="table table-sm SOint">
  	<thead>
   	<tr>
+    <th></th>
     <th>Title</th>
     <th class="text-center">Public</th>
     {{-- <th class="text-center">Active</th> --}}
@@ -11,18 +12,26 @@
  	<tbody>
   	@foreach($drug->resources->sortBy('name') as $resource)
   		<tr class="{{ $resource->active ? 'v-active' : 'v-inactive'}}">
+     <td class="text-center">
+      @if($resource->active === 1)
+       <i class="fas fa-circle fa-xs text-success"></i>
+       <span class="sr-only">Active</span>
+      @else
+       <i class="fas fa-circle fa-xs text-light"></i>
+      @endif
+     </td>
   			<td>
   				{{ $resource->name }}
       @if($resource->file_id)
-      <small class="d-block ml-2">
-	      @include('include.portal.file-btns', ['id' => $resource->file_id])
-      </small>
+       <div class="small">
+ 	      @include('include.portal.file-btns', ['id' => $resource->file_id])
+       </div>
       @endif
   			</td>
      <td class="text-center">
-      <span class="d-none">@if($resource->public) yes @else no @endif</span>
       @if($resource->public === 1)
        <i class="far fa-check text-success"></i>
+       <span class="sr-only">Public</span>
       @else
        <i class="far fa-times text-light"></i>
       @endif

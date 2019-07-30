@@ -20,8 +20,7 @@
       <label class="d-block">Attach Document <small>(PDF/JPG)</small></label>
       <div class="input-group">
        <input type="file" class="form-control" name="" value="filename.extension" />
-      </div>
-      
+      </div>      
       @ if document has been uploaded
       <div class="row">
        <div class="col-sm">

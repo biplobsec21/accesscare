@@ -17,12 +17,11 @@
     </div>
     <div class="modal-body p-3">
      <div class="mb-3">
-      <label class="d-block mb-1">Attach Document <small>({{config('eac.storage.file.type')}})</small></label>
-      <label class="d-block"><small>Maximum filesize: {{config('eac.storage.file.maxSize')}}</small></label>
+      <label class="d-block">Attach Document <small>({{config('eac.storage.file.type')}})</small></label>
       <div class="input-group">
        <input type="file" class="form-control" name="" value="filename.extension" />
       </div>
-
+      <label class="d-block"><small>Maximum filesize: {{config('eac.storage.file.maxSize')}}</small></label>
       @ if document has been uploaded
       <div class="row">
        <div class="col-sm">

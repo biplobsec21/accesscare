@@ -42,40 +42,43 @@
 						</div>
 					</div>
 				@endif
+    <div class="row m-lg-0">
+     <div class="col-lg p-3 border-right">
+      <div class="mb-3">
+       <label class="d-block">Uploaded File <small>({{config('eac.storage.file.type')}})</small></label>
+       @if($visitDocument->file_id)
+        <div class="row flex-lg-nowrap">
+         <div class="col col-lg-9">
+          <div class="text-truncate">{{$visitDocument->type->name}}</div>
+          @if($visitDocument->file_id)
+           <div class="small">
+            @include('include.portal.file-btns', ['id' => $visitDocument->file_id])
+           </div>
+          @endif
+         </div>
+         <div class="col-auto col-lg text-lg-right">
+          <a class="badge badge-danger" href="#" onclick="removeTemplateDocument('{{ $visitDocument->id }}', event,'upload_file')" data-toggle="tooltip" data-placement="bottom" title="Remove File">
+           <i class="far fa-times"></i> Remove
+          </a>
+         </div>
+        </div>
+       @else
+        <div class="input-group m-0">
+         <input class="form-control" type="file" name="upload_file" id="upload_file_{{ $visitDocument->id }}"/>
+        </div>
+        <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
+       @endif
+      </div>
+     </div>
+     <div class="col-lg p-3 border-right">
+      asd
+     </div>
+    </div>
 				<ul class="list-group flex-lg-row align-items-lg-stretch">
-					<li class="list-group-item flex-grow-1 mb-lg-0 border-light">
-						<div class="d-sm-flex justify-content-sm-between align-items-center">
-							<label class="d-block">Uploaded File</label>
-							@if($visitDocument->file_id)
-								<a class="badge badge-danger" href="#" onclick="removeTemplateDocument('{{ $visitDocument->id }}', event,'upload_file')" data-toggle="tooltip" data-placement="bottom" title="Delete File">
-									<i class="fas fa-times"></i>
-									Delete
-								</a>
-							@endif
-						</div>
-						@if($visitDocument->file_id)
-							@include('include.portal.file-btns', ['id' => $visitDocument->file_id])
-						@else
-							<div class="input-group m-0">
-								<input class="form-control" type="file" name="upload_file" id="upload_file_{{ $visitDocument->id }}"/>
-							</div>
-						@endif
-						<hr class="mt-3 mb-3"/>
-						<label class="d-block">Notes</label>
-						@if(\Auth::user()->type->name == 'Early Access Care')
-							@if($visitDocument->desc)
-								{!! $visitDocument->desc !!}
-							@else
-								<small class="text-muted">N/A</small>
-							@endif
-						@elseif(\Auth::user()->type->name == 'Physician')
-							<textarea class="form-control form-control-sm" rows="2" name="desc">{{ $visitDocument->desc }}</textarea>
-						@endif
-					</li>
 					@if(\Auth::user()->type->name == 'Early Access Care')
 						<li class="list-group-item flex-grow-1 mb-lg-0 border-bottom border-light">
 							<div class="d-sm-flex justify-content-sm-between align-items-center">
-								<label class="d-block">Redacted File</label>
+								<label class="d-block">Redacted File <small>({{config('eac.storage.file.type')}})</small></label>
 								@if($visitDocument->redacted_file_id)
 									<a class="badge badge-danger" href="#" onclick="removeTemplateDocument('{{$visitDocument->redacted_file_id}}', event,'redacted_file')">
 										<i class="fas fa-times"></i>
@@ -84,11 +87,14 @@
 								@endif
 							</div>
 							@if($visitDocument->redacted_file_id)
-								@include('include.portal.file-btns', ['id' => $visitDocument->redacted_file_id])
+        <div class="small">
+ 								@include('include.portal.file-btns', ['id' => $visitDocument->redacted_file_id])
+        </div>
 							@else
 								<div class="input-group m-0">
 									<input class="form-control" type="file" id="new_template_{{ $visitDocument->id }}" name="redacted_file" required="required"/>
 								</div>
+        <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
 							@endif
 							<hr class="mt-3 mb-3"/>
 							<label class="d-block">Notes</label>
