@@ -38,7 +38,7 @@ class UserController extends PermissionsController
 	{
 		$this->middleware('auth');
 		$this->middleware('user.approved');
-		
+
 	}
 
 	public function listUsers(Request $request)
@@ -115,7 +115,7 @@ class UserController extends PermissionsController
 		$user->last_name = $request->input('last_name');
 		$user->email = $request->input('email');
 		$user->password = \Hash::make($user->id);
-		$user->is_delegate = $request->input('is_delegate');
+		$user->is_delegate = $request->input('is_delegate') ?? 0;
 
 		/*
 		 * Fill address data

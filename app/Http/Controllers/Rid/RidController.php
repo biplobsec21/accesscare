@@ -113,7 +113,7 @@ class RidController extends Controller
 		$rid = new Rid();
 		$rid->id = $this->newID(Rid::class);
 		$rid->number = $this->generateRidNumber($company);
-		$rid->physician_id = \Auth::user()->id;
+		$rid->physician_id = $data['physician_id'];
 		$rid->drug_id = $drug->id;
 		$rid->status_id = $newMasterStatus->id;
 		$rid->patient_gender = strtolower($data['patient_gender']);
@@ -135,7 +135,7 @@ class RidController extends Controller
 		$shipment->id = $visit->shipment_id = $this->newID(RidShipment::class);
 		$visit->parent_id = $shipment->rid_id = $rid->id;
 		$visit->index = 1;
-		$visit->physician_id = $request->input('physician_id');
+		$visit->physician_id = $data['physician_id'];
 		$visit->visit_date = $data['req_date'];
 		$visit->status_id = RidStatus::where('index', 0)->first()->id;
 		$visit->sub_status = RidSubStatus::where('index', 0)->first()->id;
