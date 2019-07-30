@@ -32,6 +32,17 @@
 		</a>
 	</div><!-- end .actionBar -->
 	<div class="viewData">
+  <div class="d-flex justify-content-between">
+   <a href="#" class="btn btn-outline-dark">
+    Physician
+   </a>
+   <a href="#" class="btn btn-outline-dark">
+    Pharmaceutical
+   </a>
+   <a href="#" class="btn btn-outline-dark">
+    EAC
+   </a>
+  </div>
 		<div class="card mb-1 mb-md-4" style="max-width: 991px">
 			<div class="table-responsive">
 				<table class="table table-sm table-striped">
