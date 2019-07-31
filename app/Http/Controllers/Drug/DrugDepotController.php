@@ -85,7 +85,7 @@ class DrugDepotController extends Controller
 			return $row->name;
 		})->addColumn('lot', function ($row) {
 			return '<span class="badge badge-dark">' . $row->lots . '</span>';
-			
+
 		})->addColumn('address', function ($row) {
 			$ad1 = $row->addr1 ? $row->addr1 : '';
 			$ad2 = $row->addr2 ? $row->addr2 : '';
@@ -103,11 +103,11 @@ class DrugDepotController extends Controller
 				      </a>
 						';
 		})->rawColumns([
-			'name', 
-			'lot', 
-			'address', 
-			'country', 
-			'created_date', 
+			'name',
+			'lot',
+			'address',
+			'country',
+			'created_date',
 			'ops_btns'
 		])
 		->filterColumn('name', function ($query, $keyword) {
@@ -126,10 +126,10 @@ class DrugDepotController extends Controller
 		->filterColumn('created_at', function ($query, $keyword) {
 			$query->where('depots.updated_at', 'like', "%" . $keyword . "%");
 		})
-		
+
 		->order(function ($query) {
                     $columns = [
-                        
+
 						'name' => 0,
 						'lot' => 1,
 						'address' => 2,
@@ -154,8 +154,8 @@ class DrugDepotController extends Controller
                      if (request('order.0.column') == $columns['created_at']) {
                         $query->orderBy('depots.updated_at', $direction);
                     }
-                    
-                   
+
+
                 })
                 ->smart(0)
                 ->toJson();
@@ -239,10 +239,10 @@ class DrugDepotController extends Controller
 	// merge view selected
 	public function mergeselected(Request $request){
 		if(!$request->primary){
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		if(empty($request->merge)){
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
 		}
 		$primary_id = $request->primary;
 		$rowsPrimary = Depot::where('id',$primary_id);
@@ -260,8 +260,8 @@ class DrugDepotController extends Controller
 
 	public function mergepost(Request $request){
 
-		if(!$request->primary_id){ 	
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+		if(!$request->primary_id){
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		$primary_data = $request->primary_id;
 		$merge_data = $request->merged_id;
@@ -274,7 +274,7 @@ class DrugDepotController extends Controller
 		$data->primary_id = $primary_data;
 
 		$data->primary_old_id = $this->findOldprimaryId($primary_data);
-		
+
 		$data->merge_id = $merged_id;
 		$data->table_name = $table_name;
 		// find out old ids
@@ -284,7 +284,7 @@ class DrugDepotController extends Controller
 		$data->migration_old_id = $migration_old_id;
 		$data->save();
 
-		 
+
 		// replace depot_id in rid_shipment and drug_lots table by primary id
 		$ridShipment = RidShipment::whereIn('depot_id',$merge_data)->update(['depot_id'=>$primary_data]);
 		$updatedShipment=RidShipment::whereIn('depot_id',$merge_data);
@@ -293,18 +293,18 @@ class DrugDepotController extends Controller
 
 		$drugLot = DrugLot::whereIn('depot_id',$merge_data)->update(['depot_id'=>$primary_data]);
 		$updatedDrugLot=DrugLot::whereIn('depot_id',$merge_data);
-		
-		// remove primary id from selected merge data 
+
+		// remove primary id from selected merge data
 		$temparray = array($primary_data);
 		$result = array_diff($merge_data, $temparray);
 		$remove = Depot::whereIn('id', $result)->delete();
 
 		return redirect(route('eac.portal.depot.list.merge'))
                             ->with("alerts_merge", ['type' => 'success', 'msg' => $updatedShipment->count()." Rid shipments depots and ".$updatedDrugLot->count()." drug lot's depot updated"])
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Depot Merged successfully']);
-		
+                            ->with("alert", ['type' => 'success', 'msg' => 'Depot Merged successfully']);
+
 	}
-	// migration old_id 
+	// migration old_id
 	public function findOldId($array){
 		$data = DEVUPDATESCRIPTTABLE::whereIn('id_new',$array)->select('id_old');
 		// dd($data->toJson());
@@ -315,7 +315,7 @@ class DrugDepotController extends Controller
 			}
 			return json_encode($singleArray,TRUE);
 		}
-		
+
 
 		return json_encode($singleArray,TRUE);
 	}
@@ -327,7 +327,7 @@ class DrugDepotController extends Controller
 			return $data;
 		}else{
 			return '0';
-			
+
 		}
 	}
 
@@ -341,6 +341,6 @@ class DrugDepotController extends Controller
                 ];
             endif;
         endif;
-    
+
 	}
 }

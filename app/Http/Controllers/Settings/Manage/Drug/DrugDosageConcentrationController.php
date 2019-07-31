@@ -61,7 +61,7 @@ class DrugDosageConcentrationController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -74,12 +74,12 @@ class DrugDosageConcentrationController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -95,7 +95,7 @@ class DrugDosageConcentrationController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -108,7 +108,7 @@ class DrugDosageConcentrationController extends Controller {
             $rows->active = ($request->input('active') == 'on') ? 1 : 0;
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
     }
     public function create(Request $request) {
@@ -126,7 +126,7 @@ class DrugDosageConcentrationController extends Controller {
 
         return \DataTables::of($sql)
                 ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {

@@ -23,13 +23,7 @@
    @yield('title')
   </h2>
  </div><!-- end .titleBar -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
    <i class="fal fa-plus"></i> Add New
@@ -118,7 +112,7 @@
        "data": "sequence",
        "name": "sequence",
         orderable: false,
-       searchable: false   
+       searchable: false
       },
      
      {

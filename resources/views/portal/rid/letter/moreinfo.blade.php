@@ -28,7 +28,7 @@
 						<strong>Last Updated:</strong>
 						@php
 							$time = $rid->updated_at;
-							$time->tz = "America/New_York";
+							
 							echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
 						@endphp
 					</div>
@@ -45,14 +45,12 @@
 			<strong>Last Updated:</strong>
 			@php
 				$time = $rid->updated_at;
-				$time->tz = "America/New_York";
+				
 				echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
 			@endphp
 		</div>
 	</div><!-- end .titleBar -->
-	@if(Session::has('alerts'))
-		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-	@endif
+	@include('include.alerts')
 	<div class="viewData">
 		<div class="row">
 			<textarea class="form-control{{ $errors->has('html') ? ' is-invalid' : '' }} editor" rows="10" id="html" name="html" data-field="text"></textarea>

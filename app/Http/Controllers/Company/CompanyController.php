@@ -91,7 +91,7 @@ class CompanyController extends Controller
 		return redirect()->back()->with('confirm', 'User was added to company');
 	}
 	public function PostassignUser(Request $request)
-	{	
+	{
 		$select_user = $request->select_users;
 		// dd($select_user);
 		$company_id = $request->company_id;
@@ -102,10 +102,10 @@ class CompanyController extends Controller
 				$user->company_id = $company_id;
 				$user->save();
 			}
-			
+
 		}
 
-		
+
 		return redirect()->back()->with('confirm', 'User was added to company');
 	}
 
@@ -120,7 +120,7 @@ class CompanyController extends Controller
 	{
 		$user = User::where('id', $user_id)->first();
 		if ($company_id !== $user->company_id) {
-			return redirect()->back()->with('alert', 'Failed to remove user from company: user is not associated with this company.');
+			return redirect()->back()->with('error', 'Failed to remove user from company: user is not associated with this company.');
 		} else {
 			$user->company_id = 0;
 			$user->save();
@@ -168,7 +168,7 @@ class CompanyController extends Controller
 		$address->save();
 
 		$company->save();
-		return redirect()->route('eac.portal.company.show', $company->id)->with("alerts", ['type' => 'success', 'msg' => ' Company named<i>'. $request->input('name').'</i> added successfully']);
+		return redirect()->route('eac.portal.company.show', $company->id)->with("alert", ['type' => 'success', 'msg' => ' Company named<i>'. $request->input('name').'</i> added successfully']);
 	}
 
 	public function ajaxCompanyData()
@@ -483,7 +483,7 @@ class CompanyController extends Controller
 
 
 		$company->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => ' Company details information updated  successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => ' Company details information updated  successfully']);
 
 	}
 
@@ -515,7 +515,7 @@ class CompanyController extends Controller
 		$company = Company::where('id', $company_id)->first();
 		$company->status = "Not Approved";
 		$company->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Suspend successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Suspend successfully']);
 	}
 
 	public function reactivate($id)
@@ -524,7 +524,7 @@ class CompanyController extends Controller
 		$company = Company::where('id', $company_id)->first();
 		$company->status = "Approved";
 		$company->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Reactivate successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Reactivate successfully']);
 	}
 
 	public function approve($id)
@@ -533,7 +533,7 @@ class CompanyController extends Controller
 		$company = Company::where('id', $company_id)->first();
 		$company->status = "Approved";
 		$company->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Approval successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Approval successfully']);
 	}
 
 	public function updatedesc(Request $request){
@@ -541,6 +541,6 @@ class CompanyController extends Controller
 		$company = Company::where('id', $company_id)->first();
 		$company->desc = $request->input('desc');
 		$company->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Description updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Description updated successfully']);
 	}
 }

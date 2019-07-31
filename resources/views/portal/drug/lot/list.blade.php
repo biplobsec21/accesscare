@@ -34,13 +34,7 @@
       <i class="fal fa-code-merge"></i> Merge Lot
     </a>
 	</div><!-- end .actionBar -->
-	@php
-   if(Session::has('alerts')) {
-    $alert = Session::get('alerts');
-    $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-    echo $alert_dismiss;
-   }
-  @endphp
+	@include('include.alerts')
 	<div class="viewData">
 		<div class="card mb-1 mb-md-4">
 			<div class="table-responsive">
@@ -119,7 +113,7 @@
        "data": "dosage",
        "name": "dosage",
         orderable: true,
-       searchable: true   
+       searchable: true
       },
      
      {

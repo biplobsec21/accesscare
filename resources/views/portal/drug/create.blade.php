@@ -45,17 +45,10 @@
 			@yield('title')
 		</h2>
 	</div><!-- end .titleBar -->
-	@php
-		if(Session::has('alerts')) {
-		 $alert = Session::get('alerts');
-		 $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-		 echo $alert_dismiss;
-		}
-	@endphp
+	@include('include.alerts')
 	<div class="actionBar">
-		<a href="{{ url()->previous() }}" class="btn btn-light">
-			<i class="far fa-angle-double-left"></i>
-			Go back
+		<a href="{{ route('eac.portal.drug.list') }}" class="btn btn-light">
+			Drug List
 		</a>
 	</div><!-- end .actionBar -->
 	<form method="post" action="{{ route('eac.portal.drug.store') }}" enctype="multipart/form-data">

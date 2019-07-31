@@ -50,18 +50,12 @@
    @yield('title')
   </h2>
  </div><!-- end .titleBar -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
  <form name="" method="POST" action="{{ route('eac.portal.company.create') }}">
   {{ csrf_field() }}
   <div class="actionBar">
-   <a href="{{ url()->previous() }}" class="btn btn-light">
-    <i class="far fa-angle-double-left"></i> Go back
+   <a href="{{ route('eac.portal.company.list') }}" class="btn btn-light">
+    Company List
    </a>
   </div><!-- end .actionBar -->
 
@@ -127,7 +121,7 @@
            {{ $errors->first('email') }}
           </div>
          </div>
-        </div>        
+        </div>
        </div>
        <div class="card-footer d-flex justify-content-end p-2">
         <a href="#" class="next btn btn-success">
@@ -147,7 +141,7 @@
         </div>
         <h5 class="mb-3">
          Please provide <strong> address details</strong>
-        </h5>         
+        </h5>
         <div class="mb-3">
          <label class="d-block">Street Address</label>
          <input type="text" class="form-control mb-1{{ $errors->has('addr1') ? ' is-invalid' : '' }}" name="addr1" value="{{ old('addr1') }}" placeholder="Street Address">
@@ -211,7 +205,7 @@
       </div><!-- /.tab-pane -->
      </div>
     </div>
-   </div> 
+   </div>
   </div><!-- /.viewData -->
   </form>
 @endsection

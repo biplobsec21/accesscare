@@ -53,19 +53,12 @@
             @yield('title')
         </h2>
     </div><!-- end .titleBar -->
-    @php
-        if(Session::has('alerts')) {
-         $alert = Session::get('alerts');
-         $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-         echo $alert_dismiss;
-        }
-    @endphp
+    @include('include.alerts')
     <form name="" method="POST" action="{{ route('eac.portal.user.group.store') }}">
         {{ csrf_field() }}
         <div class="actionBar">
-            <a href="{{ url()->previous() }}" class="btn btn-light">
-                <i class="far fa-angle-double-left"></i>
-                Go back
+            <a href="{{ route('eac.portal.user.group.list') }}" class="btn btn-light">
+                Group List
             </a>
         </div><!-- end .actionBar -->
         
@@ -128,8 +121,8 @@
                                         </div>
                                     </div>
                                 @else
-                                    <input type="hidden" name="parent_id" value="{{ \Auth::user()->id }}"/>
-                                    <input type="hidden" name="type_id" value="{{ \Auth::user()->type->id }}"/>
+                                    <input type="hidden" id="parent_id" name="parent_id" value="{{ \Auth::user()->id }}"/>
+                                    <input type="hidden" id="type_select" name="type_id" value="{{ \Auth::user()->type->id }}"/>
                                 @endif
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -220,16 +213,23 @@
         }
 
         $(document).ready(function () {
+
+            // On start, filter the selects for relevant data
+            $(".group-member").find('option').each(function () {
+                if ($(this).data('typeid') === $("#type_select").val())
+                    $(this).show();
+                else
+                    $(this).hide();
+            });
+            
             $("a.next").click(function () {
                 let currentLink = $('.nav-link.active');
                 setWizardStep(currentLink.index() + 1);
             });
-
+            
             $("#parent_id").on('change', function () {
-
                 let $type_id = $('option:selected', this).attr('data-type');
                 let $groupSection = $("#type_select");
-
                 $groupSection.val($type_id);
                 $('#addMemberBtn').removeClass("disabled");
                 let $memberSection = $(".group-member");
@@ -243,13 +243,7 @@
                         $(this).hide();
                 });
             });
-            // On start, filter the selects for relevant data
-            $(".group-member").find('option').each(function () {
-                if ($(this).data('typeid') === $("#type_select").val())
-                    $(this).show();
-                else
-                    $(this).hide();
-            });
+            
             // On remove button click, remove a group member
             $(document).on('click', 'a.remove', function (e) {
                 $(this).closest('.group-member').remove();

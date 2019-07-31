@@ -35,7 +35,7 @@ class ShippingCourierController extends Controller {
         'logsv' => 'portal.settings.manage.rid.shipment.courier.log',
         'logsviewv' => 'portal.settings.manage.rid.shipment.courier.log_view',
     ];
-    
+
     public function __construct(){
 //     $this->middleware('auth'); // auth check from the route
     }
@@ -57,7 +57,7 @@ class ShippingCourierController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -69,12 +69,12 @@ class ShippingCourierController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -90,7 +90,7 @@ class ShippingCourierController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -102,7 +102,7 @@ class ShippingCourierController extends Controller {
             $rows->active = ($request->input('active') == 'on') ? 1 : 0;
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
     }
     public function create(Request $request) {
@@ -118,7 +118,7 @@ class ShippingCourierController extends Controller {
         $sql = ShippingCourier::Where('active', '!=', null);
         return \DataTables::of($sql)
                 ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {
@@ -139,7 +139,7 @@ class ShippingCourierController extends Controller {
                 Inactive
                 </span>';
                 })
-                
+
                 ->addColumn('created_at', function ($row) {
                     return $row->updated_at->format(config('eac.date_format'));
                 })
@@ -163,7 +163,7 @@ class ShippingCourierController extends Controller {
                 ->filterColumn('name', function ($query, $keyword) {
                     $query->where('name', 'like', "%" . $keyword . "%");
                 })
-               
+
                 ->filterColumn('created_at', function ($query, $keyword) {
                     $query->where('updated_at', 'like', "%" . $keyword . "%");
                 })
@@ -232,5 +232,5 @@ class ShippingCourierController extends Controller {
                         'page'=> $this->_data
         ]);
     }
-    
+
 }

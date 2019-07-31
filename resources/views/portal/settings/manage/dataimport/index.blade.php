@@ -45,13 +45,7 @@ Migration Manager
     </div>
 
 </div><!-- end .actionBar -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
 <div class="viewData">
   {{ csrf_field() }}
   <!-- end .actionBar -->
@@ -79,7 +73,7 @@ Migration Manager
                     class="form-control m-b-10 {{ $errors->has('access_credential') ? ' is-invalid' : '' }}" placeholder="Enter Password">
              <div class="invalid-feedback">
               {{ $errors->first('access_credential') }}
-             </div>         
+             </div>
             </div>
            </div>
           </div>
@@ -93,7 +87,7 @@ Migration Manager
         <a href="" class=" btn btn-danger" >
          <i class="far fa-times fa-fw"></i> Cancel
         </a>
-      </div> 
+      </div>
     </div>
     </form>
       </div>
@@ -111,7 +105,7 @@ Migration Manager
 @section('scripts')
 <script>
 $(document).ready(function () {
-//     $("#migration_trigger").on("click", function () { 
+//     $("#migration_trigger").on("click", function () {
 
 //         let hidden_value = "";
 //         // alert(hidden_value);
@@ -248,7 +242,7 @@ $(document).ready(function () {
 //     });
 
 
-   
+
 
 });
 

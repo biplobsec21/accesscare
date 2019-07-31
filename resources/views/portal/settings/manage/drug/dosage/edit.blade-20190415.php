@@ -66,13 +66,7 @@ Drug Dosage Manager
 
 </div>
 <!-- alert if any -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
  <div class="viewData">
 <form method="post" action="{{ route($page['updateAction'],request()->route('id')) }}">
   {{ csrf_field() }}

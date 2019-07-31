@@ -55,7 +55,7 @@ class WebsiteMenuController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -94,7 +94,7 @@ class WebsiteMenuController extends Controller {
                 $menuSlug = Menu::where('id','=',$request->parent_menu)->first()->slug;
                 $folder = $this->clean($menuSlug);
                 $fileName = $this->clean($request->slug);
-                
+
                 $semifilter = str_replace($folder,'',$fileName);
                 $path = resource_path( 'views/public/pages/'.$folder.'/'.$semifilter.'.blade.php' );
 
@@ -113,12 +113,12 @@ class WebsiteMenuController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -138,7 +138,7 @@ class WebsiteMenuController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -154,7 +154,7 @@ class WebsiteMenuController extends Controller {
             $rows->created_by = \Auth::user()->id;
             $rows->active = ($request->input('active') == 'on') ? 1 : 0;
             // check parent menu is not the root menu then write file//
-            
+
             // find out request parent menu is root or not //
             $menuSlug = Menu::where('id','=',$request->parent_menu)->first()->slug;
             // dd($menuName);
@@ -175,13 +175,13 @@ class WebsiteMenuController extends Controller {
                     }
                 }
                 $rows->file_name = $folder.'.index';
-                
+
             }else{
 
                 $menuSlug = Menu::where('id','=',$request->parent_menu)->first()->slug;
                 $folder = $this->clean($menuSlug);
                 $fileName = $this->clean($request->slug);
-                
+
                 $semifilter = str_replace($folder,'',$fileName);
                 $path = resource_path( 'views/public/pages/'.$folder.'/'.$semifilter.'.blade.php' );
 
@@ -195,10 +195,10 @@ class WebsiteMenuController extends Controller {
                 $rows->file_name = $folder.'.'.$semifilter;
             }
             // dd('here');
-          
+
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
     }
     public function create(Request $request) {
@@ -230,7 +230,7 @@ class WebsiteMenuController extends Controller {
                 // ->addColumn('drug', function ($row) {
                 //     return $row->drug_name;
                 // })
-                
+
                 ->addColumn('name', function ($row) {
                     return $row->name;
                 })
@@ -238,13 +238,13 @@ class WebsiteMenuController extends Controller {
                 //     return $row->route;
                 // })
                 ->addColumn('sub_menu', function ($row) {
-                    
+
                     return $this->sub_menu_data($row->id);
                 })
                 ->addColumn('sequence', function ($row) {
                     return $row->sequence;
                 })
-               
+
                 ->addColumn('active', function ($row) {
                     return $row->active == '1' ? '<span class="badge badge-success">Active
                 </span>' : '<span class="badge badge-danger">
@@ -271,7 +271,7 @@ class WebsiteMenuController extends Controller {
                     'created_at',
                     'ops_btns'
                 ])
-                
+
                 ->filterColumn('name', function ($query, $keyword) {
                     $query->where('name', 'like', "%" . $keyword . "%");
                 })
@@ -357,7 +357,7 @@ class WebsiteMenuController extends Controller {
         $data = Menu::where('parent_menu','=',$id)->orderBy('sequence','asc');
         if($data->count() > 0){
             foreach($data as $val){
-                $string .= 
+                $string .=
                 '<a href="'. route('eac.portal.settings.manage.website.menu.edit', $val->id).'" class="badge badge-warning m-1">
                                '.$val->name.'
                 </a>';
@@ -410,7 +410,7 @@ class WebsiteMenuController extends Controller {
 @endsection
         ';
     }
-  
+
     public function clean($string) {
 
         $filter = str_replace('-root',' ',$string);

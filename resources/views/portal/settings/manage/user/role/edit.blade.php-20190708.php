@@ -104,7 +104,7 @@
       <strong>Last Updated:</strong>
       @php
        $time = $role->updated_at;
-       $time->tz = "America/New_York";
+       
        echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
       @endphp
      </div>
@@ -121,7 +121,7 @@
    <strong>Last Updated:</strong>
    @php
     $time = $role->updated_at;
-    $time->tz = "America/New_York";
+    
     echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
    @endphp
   </div>

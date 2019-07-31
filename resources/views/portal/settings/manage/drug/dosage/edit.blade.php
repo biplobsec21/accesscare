@@ -49,13 +49,7 @@
  </div><!-- end .titleBar -->
  <form method="post" action="{{ route($page['updateAction'],request()->route('id')) }}">
   {{ csrf_field() }}
-  @php
-   if(Session::has('alerts')) {
-    $alert = Session::get('alerts');
-    $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-    echo $alert_dismiss;
-   }
-  @endphp
+  @include('include.alerts')
   <div class="viewData">
    <div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
     <a href="{{ route('eac.portal.settings.manage.drug.dosage.index') }}" class="btn btn-secondary">
@@ -174,10 +168,10 @@
  <script>
   $(".alert").delay(2000).slideUp(200, function() {
    $(this).alert('close');
-  }); 
+  });
   function ConfirmDoseDelete(param)
   {
-       
+    
     swal({
       title: "Are you sure?",
       text: "Want to delete it",
@@ -194,7 +188,7 @@
           text: 'Content deleted!',
           icon: 'success'
         }).then(function() {
-            $.get("{{route('eac.portal.settings.manage.drug.dosagedelete')}}", 
+            $.get("{{route('eac.portal.settings.manage.drug.dosagedelete')}}",
               {
                id: param
              });

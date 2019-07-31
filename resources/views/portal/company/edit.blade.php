@@ -65,7 +65,7 @@
        <strong>Last Updated:</strong>
        @php
         $time = $company->updated_at;
-        $time->tz = "America/New_York";
+        
         echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
        @endphp
       @endif
@@ -84,7 +84,7 @@
     <strong>Last Updated:</strong>
     @php
      $time = $company->updated_at;
-     $time->tz = "America/New_York";
+     
      echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
     @endphp
    @endif
@@ -94,13 +94,7 @@
  <div class="viewData">
   <form name="" method="POST" action="{{ route('eac.portal.company.update') }}">
    {{ csrf_field() }}
-   @php
-    if(Session::has('alerts')) {
-     $alert = Session::get('alerts');
-     $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-     echo $alert_dismiss;
-    }
-   @endphp
+   @include('include.alerts')
    <div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
     <a href="{{ route('eac.portal.company.show', $company->id) }}" class="btn btn-secondary">
      View Company
@@ -176,9 +170,9 @@
        </div>
        <div class="order-3 order-md-2 col-md col-xl-auto ml-xl-auto mr-xl-auto mb-3">
         @if(isset($company->address))
-         <div class="small"> 
+         <div class="small">
           {{ $company->address->addr1 }}{{$company->address->addr2 ? ', ' . $company->address->addr2 : "" }}<br/>
-          {{ $company->address->city }}, 
+          {{ $company->address->city }},
           @if($company->address->state){{  $company->address->state->abbr }}@endif {{ $company->address->zipcode }}, {{ $company->address->country->name }}
          </div>
         @endif
@@ -259,7 +253,7 @@
           </div>
          </div>
          <div class="col-sm-7 col-lg-6 mb-3">
-          <label class="d-block"  id="state_lbl">State</label>          
+          <label class="d-block"  id="state_lbl">State</label>
           <select class="form-control{{ $errors->has('company_state') ? ' is-invalid' : '' }}" name="company_state" id="state_option">
            <option disabled hidden selected value="">-- Select --</option>
            @foreach($state as $state)
@@ -368,7 +362,7 @@
          <i class="fal fa-info-circle"></i> No departments available
         </p>
        @endif
-      </div>      
+      </div>
       <div class="card-footer d-flex justify-content-end">
        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewDept">
         Add Department
@@ -444,7 +438,7 @@
          <div class="col-sm-auto mb-3 mb-sm-0 p-sm-0">
           <button  type="submit" class="btn btn-success">
            Assign Users
-          </button>          
+          </button>
          </div>
         </div>
        </form>
@@ -473,7 +467,7 @@
           <div class="col-sm col-md-3 col-lg-12 mb-3">
            <label class="d-block">Abbreviation</label>
            <input type="text" class="form-control" name="abbr" value="{{ $company->abbr }}">
-          </div>      
+          </div>
           <div class="col-md col-lg-12 mb-3">
            <label class="d-block">Company Website</label>
            <input type="text" class="form-control" name="website" value="{{ $company->site ? $company->site : '' }}">
@@ -535,7 +529,7 @@
           <div class="input-group mb-2" title="Main Phone">
            <div class="input-group-prepend">
             <span class="input-group-text">
-             <i class="fas fa-phone"></i> <span class="sr-only">Main Phone</span> 
+             <i class="fas fa-phone"></i> <span class="sr-only">Main Phone</span>
             </span>
            </div>
            <input type="text" class="form-control pl-1" name="phone_main" @if($company->phone_main) value="{{ $company->phone->number }}" @endif>
@@ -543,7 +537,7 @@
           <div class="input-group" title="Main Email">
            <div class="input-group-prepend">
             <span class="input-group-text">
-             <i class="fas fa-at"></i> <span class="sr-only">Main Email</span> 
+             <i class="fas fa-at"></i> <span class="sr-only">Main Email</span>
             </span>
            </div>
            <input type="text" class="form-control pl-1" name="email_main" @if($company->email_main) value="{{ $company->email_main }}" @endif>
@@ -551,7 +545,7 @@
          </div>
          @foreach($company->departments as $department)
           <div class="mb-2">
-           <label>{{ $department->name }}</label>      
+           <label>{{ $department->name }}</label>
            <div class="input-group mb-2" title="{{ $department->name }} Phone">
             <div class="input-group-prepend">
              <span class="input-group-text">
@@ -671,7 +665,7 @@
              @endif
             @endif
            </td>
-           <td class="text-center">              
+           <td class="text-center">
             @if($user->company_id)
              @if($user->company_id == $company->id)
               <a href="{{ route('eac.portal.company.user.remove', [$company->id, $user->id]) }}" class="btn btn-danger btn-sm" title="Remove User">

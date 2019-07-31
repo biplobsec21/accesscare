@@ -27,7 +27,7 @@
        <strong>Last Updated:</strong>
        @php
         $time = $user->updated_at;
-        $time->tz = "America/New_York";
+        
         echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
        @endphp
       @endif
@@ -46,7 +46,7 @@
     <strong>Last Updated:</strong>
     @php
      $time = $user->updated_at;
-     $time->tz = "America/New_York";
+     
      echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
     @endphp
    @endif

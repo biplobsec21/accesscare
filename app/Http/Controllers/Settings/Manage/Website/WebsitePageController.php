@@ -39,7 +39,7 @@ class WebsitePageController extends Controller {
 
     public function index(Request $request) {
         $rows = Page::all();
-       
+
 
         return view($this->_data['indexView'])
                         ->with('page', $this->_data)
@@ -59,7 +59,7 @@ class WebsitePageController extends Controller {
         );
         // dd($validator);
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -81,12 +81,12 @@ class WebsitePageController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -104,7 +104,7 @@ class WebsitePageController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -125,7 +125,7 @@ class WebsitePageController extends Controller {
             $rows->active = ($request->input('active') == 'on') ? 1 : 0;
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
     }
     public function create(Request $request) {
@@ -160,7 +160,7 @@ class WebsitePageController extends Controller {
                 //     return $row->drug_name;
                 // })
                 ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {
@@ -185,8 +185,8 @@ class WebsitePageController extends Controller {
                 ->addColumn('title', function ($row) {
                     return $row->title;
                 })
-                
-               
+
+
                 ->addColumn('active', function ($row) {
                     return $row->active == '1' ? '<span class="badge badge-success">Active
                 </span>' : '<span class="badge badge-danger">
@@ -215,7 +215,7 @@ class WebsitePageController extends Controller {
                     'created_at',
                     'ops_btns'
                 ])
-                
+
                 ->filterColumn('name', function ($query, $keyword) {
                     $query->where('pages.name', 'like', "%" . $keyword . "%");
                 })
@@ -322,7 +322,7 @@ class WebsitePageController extends Controller {
         $parent_id=Menu::where('id',$row->menu_id)->first();
 
         if($parent_id){
-            
+
             $parent_menu_id=Menu::where('id',$parent_id->parent_menu)->first();
             if($parent_menu_id){
                  $string .= $parent_menu_id->name;

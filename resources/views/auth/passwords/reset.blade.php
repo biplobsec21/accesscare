@@ -6,13 +6,7 @@
             <img src="https://www.earlyaccesscare.com/images/eac_mini.png" class="img-fluid">
         </div>
         <div class="card-body">
-            @php
-                if(Session::has('alerts')) {
-                  $alert = Session::get('alerts');
-                  $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-                  echo $alert_dismiss;
-                }
-            @endphp
+            @include('include.alerts')
             <div class="tab-content" id="LoginPContent">
                 <div class="col-md col-lg p-3 p-lg-4 p-xl-5 ml-lg-auto mr-lg-auto">
                     <div class="tab-content" id="LoginPContent">

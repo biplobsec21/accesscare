@@ -92,7 +92,7 @@ class PharmacyController extends Controller
 		$address->save();
 		$pharmacy->save();
 
-		return redirect()->route('eac.portal.pharmacy.edit', $pharmacy->id)->with("alerts", ['type' => 'success', 'msg' => 'Information inserted successfully']);
+		return redirect()->route('eac.portal.pharmacy.edit', $pharmacy->id)->with("alert", ['type' => 'success', 'msg' => 'Information inserted successfully']);
 
 	}
 
@@ -567,10 +567,10 @@ class PharmacyController extends Controller
 	public function mergeselected(Request $request)
 	{
 		if (!$request->primary) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		if (empty($request->merge)) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
 		}
 		$primary_id = $request->primary;
 		$rowsPrimary = Pharmacy::where('id', $primary_id);
@@ -591,7 +591,7 @@ class PharmacyController extends Controller
 	{
 
 		if (!$request->primary_id) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		$primary_data = $request->primary_id;
 		$merge_data = $request->merged_id;
@@ -629,7 +629,7 @@ class PharmacyController extends Controller
 
 		return redirect(route('eac.portal.pharmacy.list.merge'))
 			->with("alerts_merge", ['type' => 'success', 'msg' => $updatedShipment->count() . " Rid shipments pharmacy and " . $Pharmacist->count() . " pharmacist pharmacy info. updated"])
-			->with("alerts", ['type' => 'success', 'msg' => 'Pharmacy Merged successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Pharmacy Merged successfully']);
 
 	}
 
@@ -782,7 +782,7 @@ class PharmacyController extends Controller
 	{
 
 		if (empty($request->select)) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a pharmacist then submit!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a pharmacist then submit!']);
 		}
 
 		$pharmacy_id = $request->pharmacy_id;
@@ -791,7 +791,7 @@ class PharmacyController extends Controller
 		$Pharmacist = Pharmacist::whereIn('id', $pharmacistInfo)->update(['pharmacy_id' => $pharmacy_id]);
 
 		return redirect()->back()
-			->with("alerts", ['type' => 'success', 'msg' => 'Pharmacist added successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Pharmacist added successfully']);
 	}
 
 
@@ -809,7 +809,7 @@ class PharmacyController extends Controller
 
 	public function newpharmacist(Request $request)
 	{
-		// dd($request->all());	
+		// dd($request->all());
 		if ($request->input('name') && $request->input('name')[0] != null) {
 			$name = array_values($request->input('name'));
 			$email = array_values($request->input('email'));
@@ -831,7 +831,7 @@ class PharmacyController extends Controller
 				$pharmacist->save();
 
 			}
-			return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Pharmacist information inserted successfully']);
+			return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Pharmacist information inserted successfully']);
 		}
 		return redirect()->back();
 	}

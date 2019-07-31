@@ -73,12 +73,12 @@ class DrugDosageController extends Controller
 		if ($rows->isDirty()) {
 			$rows->save();
 			return redirect()->back()
-				->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+				->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
 		}
 
 		$rows->save();
 		return redirect(route($this->_data['listAll']))
-			->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
 
 		// $validator = Validator::make(
 		//                 $request->all(), [
@@ -91,7 +91,7 @@ class DrugDosageController extends Controller
 		// );
 
 		// if ($validator->fails()) {
-		//     return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+		//     return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
 		//                     ->with("errors", $validator->errors())
 		//                     ->withInput()
 		//                     ->with('page', $this->_data);
@@ -114,7 +114,7 @@ class DrugDosageController extends Controller
 		$rows->active = ($request->input('active') == 'on') ? 1 : 0;
 		$rows->save();
 		return redirect(route($this->_data['listAll']))
-			->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
 
 	}
 
@@ -455,10 +455,10 @@ class DrugDosageController extends Controller
 	public function mergeselected(Request $request)
 	{
 		if (!$request->primary) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		if (empty($request->merge)) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
 		}
 		$primary_id = $request->primary;
 		$rowsPrimary = Dosage::where('id', $primary_id);
@@ -479,7 +479,7 @@ class DrugDosageController extends Controller
 	{
 
 		if (!$request->primary_id) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		$primary_data = $request->primary_id;
 		$merge_data = $request->merged_id;
@@ -513,7 +513,7 @@ class DrugDosageController extends Controller
 
 		return redirect(route('eac.portal.settings.manage.drug.dosage.list.merge'))
 			->with("alerts_merge", ['type' => 'success', 'msg' => $updatedrugLots->count() . " Drug Lots  updated"])
-			->with("alerts", ['type' => 'success', 'msg' => 'Dosages  Merged successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Dosages  Merged successfully']);
 	}
 
 	// migration old_id

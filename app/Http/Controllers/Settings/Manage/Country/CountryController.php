@@ -30,7 +30,7 @@ class CountryController extends Controller {
         'editView' => 'portal.settings.manage.country.edit',
         'ajaxView' => 'portal.settings.manage.country.ajaview',
     ];
-    
+
     public function __construct(){
 //     $this->middleware('auth'); // auth check from the route
     }
@@ -55,7 +55,7 @@ class CountryController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -75,12 +75,12 @@ class CountryController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -101,7 +101,7 @@ class CountryController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -121,7 +121,7 @@ class CountryController extends Controller {
             $rows->active = ($request->input('active') == 'on') ? 1 : 0;
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
     }
     public function create(Request $request) {
@@ -139,7 +139,7 @@ class CountryController extends Controller {
         $sql = Country::Where('active', '!=', null);
         return \DataTables::of($sql)
                 ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {
@@ -213,7 +213,7 @@ class CountryController extends Controller {
                 })
                 ->order(function ($query) {
                     $columns = [
-                        
+
                         'name' => 0,
                         'abbr' => 1,
                         'days_to_deliver' => 2,
@@ -237,7 +237,7 @@ class CountryController extends Controller {
                     if (request('order.0.column') == $columns['days_to_deliver']) {
                         $query->orderBy('avg_days_to_deliver_drug', $direction);
                     }
-                    
+
                     if (request('order.0.column') == $columns['haa_info']) {
                         $query->orderBy('haa_info', $direction);
                     }
@@ -285,7 +285,7 @@ class CountryController extends Controller {
          $logData  = Log::where('subject_id', $id);
          // echo $logData->id;
          // dd($logData);
-    
+
          return view('portal.settings.manage.country.viewlogdetails')
                 ->with('logData', $logData)
                 ->with('page', $this->_data);
@@ -300,10 +300,10 @@ class CountryController extends Controller {
 
     public function storeindexes(Request $request){
         $orderedList = explode(',', $request->countries);
-        for ($i=0; $i < count($orderedList); $i++) { 
+        for ($i=0; $i < count($orderedList); $i++) {
             Country::where('id', $orderedList[$i])->update(['index' => ($i+1)]);
         }
-        return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Index Updated successfully']);
+        return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Index Updated successfully']);
 
     }
 

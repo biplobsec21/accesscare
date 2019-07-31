@@ -42,7 +42,7 @@ class RidUserController extends Controller
 		$ridUser->level = json_encode(json_decode($role->base_level)->rid);
 		$ridUser->save();
 
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
 
 	/**
@@ -63,7 +63,7 @@ class RidUserController extends Controller
 		$ridUser->role_id = $role->id;
 		$ridUser->level = json_encode(json_decode($role->base_level)->rid);
 		$ridUser->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
 
 	/**
@@ -85,7 +85,7 @@ class RidUserController extends Controller
 			// $ridUser->save();
 			$user->save();
 
-		} 
+		}
 
 		if($request->level){
 			$levelJSON = json_encode($request->level);
@@ -93,7 +93,7 @@ class RidUserController extends Controller
 		}
 
 		$ridUser->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
 
 	/**
@@ -106,6 +106,6 @@ class RidUserController extends Controller
 	{
 		$ridUser = RidUser::where('id', $id)->first();
 		$ridUser->delete();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Deleted successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Deleted successfully']);
 	}
 }

@@ -191,7 +191,7 @@ class DrugController extends Controller
 		$drug->allow_remote = ($request->input('allow_remote')) ? 1 : 0;
 		$drug->countries_available = json_encode($request->input('countries_available'));
 		$drug->active = 1;
-		// drug image file 
+		// drug image file
 		if ($request->file('drug_image')) {
 
 			$file = new File();
@@ -382,7 +382,7 @@ class DrugController extends Controller
 			// ->orderBy('created_at', 'asc')
 			->orderByRaw('CONVERT(supply_start, SIGNED INTEGER) asc')
 			->get();
-		// check active or inactive pill for depots and lots 
+		// check active or inactive pill for depots and lots
 		// $depotWithDrug = $depotInit->allWithDrug($id);
 		if ($depots->count() > 0) {
 			foreach ($depots as $lotWdpt) {
@@ -680,7 +680,7 @@ class DrugController extends Controller
 		$drugInfo = Drug::find($request->id);
 		$drugInfo->short_desc = $request->short_desc;
 		$drugInfo->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 
 	}
 
@@ -711,7 +711,7 @@ class DrugController extends Controller
 			$drug->save();
 		}
 
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Image Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Image Updated successfully']);
 
 	}
 
@@ -748,7 +748,7 @@ class DrugController extends Controller
 				if ($DrgDis->count() == 0) {
 					$drugDistribution = 'Drug Distribution Schedule';
 				}
-				return redirect()->back()->with("alerts", ['type' => 'warning', 'msg' => $dosagesComponents . ' ' . $depotsLots . ' ' . $drugDistribution . ' needs to be completed before drug can be approved']);
+				return redirect()->back()->with("alert", ['type' => 'warning', 'msg' => $dosagesComponents . ' ' . $depotsLots . ' ' . $drugDistribution . ' needs to be completed before drug can be approved']);
 			}
 
 		}
@@ -756,7 +756,7 @@ class DrugController extends Controller
 			$drugInfo->status = 'Pending';
 		}
 		$drugInfo->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
 
 	private function checkDepotsLot($id)

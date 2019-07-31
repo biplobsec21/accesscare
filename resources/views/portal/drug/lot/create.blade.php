@@ -38,9 +38,7 @@
 			</a>
 		</div><!-- end .actionBar -->
 
-		@if(Session::has('alerts'))
-			{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-		@endif
+		@include('include.alerts')
 		<div class="viewData">
 			<div class="row">
 				<div class="col-lg-4 col-xl order-lg-2">

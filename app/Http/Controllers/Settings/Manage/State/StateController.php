@@ -32,7 +32,7 @@ class StateController extends Controller {
         'editView' => 'portal.settings.manage.state.edit',
         'ajaxView' => 'portal.settings.manage.state.ajaview',
     ];
-    
+
     public function __construct(){
 //     $this->middleware('auth'); // auth check from the route
     }
@@ -58,7 +58,7 @@ class StateController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -74,12 +74,12 @@ class StateController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -87,23 +87,23 @@ class StateController extends Controller {
         // dd($request);
 
         $currentTimestamp = date('Y-m-d H:i:s');
-    
+
         $this->validate($request,[
                 'name' => 'required|max:40',
                 'abbr' => 'required|max:5',
                 'country_id' => 'required',
                 'index' => 'required',
-                
+
             ],[
                 'name.required' => ' The name field is required.',
                 'abbr.required' => ' The abbr field is required.',
                 'country_id.required' => ' The country field is required.',
                 'index.required' => 'The index field is required.',
-                
+
             ]);
 
         // if ($validator->fails()) {
-        //     return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+        //     return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
         //                     ->with("errors", $validator->errors())
         //                     ->withInput()
         //                     ->with('page', $this->_data);
@@ -120,8 +120,8 @@ class StateController extends Controller {
             // dd($rows);
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
-            // return redirect()->back()->with('success', 'Successfully added!'); 
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+            // return redirect()->back()->with('success', 'Successfully added!');
         // }
     }
     public function create(Request $request) {
@@ -150,11 +150,11 @@ class StateController extends Controller {
             'states.updated_at as updated_at',
             'states.active as active',
             'states.id as id'
-            
+
         ]);
         return \DataTables::of($sql)
                 ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {
@@ -253,8 +253,8 @@ class StateController extends Controller {
 
  //    public function delete(Request $request)
     // {
-        
-    
+
+
     // }
 
     public function edit($id) {
@@ -262,7 +262,7 @@ class StateController extends Controller {
         $country_id = $rows->country_id;
         $countydetails = Country::where('id',$country_id)->first();
         $allcountrylist = Country::all()->sortBy('name');
-        
+
         // dd($allcountrylist);
 
          return view($this->_data['editView'])
@@ -273,7 +273,7 @@ class StateController extends Controller {
                         ->with('active', 'edit');
 
 
-        
+
 
 
         // $dosage = array();
@@ -299,14 +299,14 @@ class StateController extends Controller {
     //             ];
     //         endif;
     //     endif;
-    // }   
+    // }
     public function delete(Request $request) {
             $stateId = $request->id;
         $states = State::find($stateId)->delete();
         return [
             "result" => "Success"
         ];
-    } 
+    }
     public function loglist() {
 
         $logData = $this->getLogs(State::class);
@@ -328,7 +328,7 @@ class StateController extends Controller {
 
 //          }
 
-            
+
          return view('portal.settings.manage.state.viewlogdetails')
                 ->with('logData', $logData)
                 ->with('page', $this->_data);

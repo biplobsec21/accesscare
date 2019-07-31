@@ -41,9 +41,7 @@
 			@yield('title')
 		</h2>
 	</div><!-- end .titleBar -->
-	@if(Session::has('alerts'))
-		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-	@endif
+	@include('include.alerts')
 	<div class="viewData">
 		<div class="card mb-1 mb-md-4" style="max-width: 991px">
 			<div class="card-header">Add User Role</div>

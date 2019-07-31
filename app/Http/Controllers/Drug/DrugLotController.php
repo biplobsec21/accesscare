@@ -90,7 +90,7 @@ class DrugLotController extends Controller
 		);
 
 		if ($validator->fails()) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
 				->with("errors", $validator->errors())
 				->withInput();
 		} else {
@@ -104,10 +104,10 @@ class DrugLotController extends Controller
 			$lot->save();
 
 			if ($request->input('redirect')) {
-				return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
+				return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alert", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
 			} else {
 				return redirect()->back()
-					->with("alerts", ['type' => 'success', 'msg' => 'Lot Has Been Updated.']);
+					->with("alert", ['type' => 'success', 'msg' => 'Lot Has Been Updated.']);
 			}
 		}
 	}
@@ -145,9 +145,9 @@ class DrugLotController extends Controller
 		$lot->save();
 
 		if ($request->input('redirect')) {
-			return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
+			return redirect()->route("eac.portal.depot.edit", $request->input('depot_id'))->with("alert", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
 		} else {
-			return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
+			return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Lot Created Successfully']);
 		}
 	}
 
@@ -399,10 +399,10 @@ class DrugLotController extends Controller
 	public function mergeselected(Request $request)
 	{
 		if (!$request->primary) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		if (empty($request->merge)) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
 		}
 		$primary_id = $request->primary;
 		$rowsPrimary = DrugLot::where('id', $primary_id);
@@ -423,7 +423,7 @@ class DrugLotController extends Controller
 	{
 
 		if (!$request->primary_id) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		$primary_data = $request->primary_id;
 		$merge_data = $request->merged_id;
@@ -450,14 +450,14 @@ class DrugLotController extends Controller
 		$updatedShipment = RidRegimen::whereIn('drug_lot_id', $merge_data);
 
 
-		// remove primary id from selected merge data 
+		// remove primary id from selected merge data
 		$temparray = array($primary_data);
 		$result = array_diff($merge_data, $temparray);
 		$remove = DrugLot::whereIn('id', $result)->delete();
 
 		return redirect(route('eac.portal.lot.list.merge'))
 			->with("alerts_merge", ['type' => 'success', 'msg' => $updatedShipment->count() . " Rid regimen lots  updated"])
-			->with("alerts", ['type' => 'success', 'msg' => 'Drug Lots Merged successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Drug Lots Merged successfully']);
 
 	}
 

@@ -51,8 +51,8 @@
 	<form method="post" action="{{ route('eac.portal.rid.review') }}">
 		{{ csrf_field() }}
 		<div class="actionBar">
-			<a href="{{ url()->previous() }}" class="btn btn-light">
-				<i class="far fa-angle-double-left"></i> Go back
+			<a href="{{ route('eac.portal.rid.list') }}" class="btn btn-light">
+				Rid List
 			</a>
 		</div><!-- end .actionBar -->
 

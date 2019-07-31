@@ -53,7 +53,7 @@ class RidRegimenController extends Controller
 		$regimen->save();
 		$RidShipment->depot_id = DrugLot::where('id', $_POST['drug_lot_id'])->first()->depot->id ?? '0';
 		$RidShipment->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Rid Regimen Added']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Rid Regimen Added']);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class RidRegimenController extends Controller
 		$RidShipment->saveOrFail();
 
 
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Rid regimen Updated']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Rid regimen Updated']);
 	}
 
 	/**
