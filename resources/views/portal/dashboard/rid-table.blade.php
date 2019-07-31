@@ -16,17 +16,6 @@
 		</tr>
 		</thead>
 		<tbody></tbody>
-		<tfoot>
-		<tr>
-			<th>Request Date</th>
-			<th>RID Number</th>
-			<th class="no-search">Visits</th>
-			<th class="no-search">Request Status</th>
-			<th>Physician</th>
-			<th>Drug Requested</th>
-			<th class="no-search no-sort"></th>
-		</tr>
-		</tfoot>
 	</table>
 </div>
 @section('scripts')

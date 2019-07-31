@@ -4,6 +4,14 @@
 	Dashboard
 @endsection
 
+@section('styles')
+ <style>
+  [class*=justify-content] > [class*=alert] {
+   min-width: 70px;
+  }
+ </style>
+@endsection
+
 @section('content')
 	<div class="d-flex justify-content-between align-items-center">
 		<h3 class="mb-3 mb-xl-4">

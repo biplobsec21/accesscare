@@ -9,15 +9,13 @@
 			View your notifications within the Early Access Care&trade; platform </p>
 	</div>
  @php $allnotification = \App\Notification::where('user_id','=',(Auth::user()->id))->where('read_at', null)->count(); @endphp
-	<div class="d-flex">
-		<div class="p-3 h4 mb-0 alert-success">
-			<a href="#" class="toggleRight text-success">
-    {!! $allnotification !!}
-   </a>
-		</div>
-		<a href="#" class="toggleRight btn btn-success btn-block btn-lg d-flex justify-content-between align-items-center">
-			Unread Notifications
-			<i class="fa-fw fas fa-bell"></i>
-		</a>
-	</div>
+ <a href="#" class="toggleRight btn btn-success border-0 btn-block h5 mb-0 p-0 d-flex justify-content-between align-items-stretch">
+  <div class="p-1 pl-2 pr-2 p-xl-3 alert-success">
+   {!! $allnotification !!}
+  </div>
+  <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center flex-fill">
+   <span>Unread Notifications</span>
+   <span class="fa-fw fas fa-bell"></span>
+  </div>
+ </a>
 </div>

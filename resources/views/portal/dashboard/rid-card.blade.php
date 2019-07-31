@@ -18,10 +18,11 @@
 				"Initiate New Request" initiates a drug order for investigational drug.
    </p>
 		</div>
-
-  <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-primary btn-block btn-lg d-flex justify-content-between align-items-center">
-   Initiate New Request
-   <i class="fa-fw fas fa-medkit"></i>
+  <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-primary border-0 btn-block h5 mb-0 p-0">
+   <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center">
+    <span>Initiate New Request</span>
+    <span class="fa-fw fas fa-medkit"></span>
+   </div>
   </a>
 	</div>
 @endif
