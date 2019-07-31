@@ -7,7 +7,7 @@
 @section('content')
 	<div class="d-flex justify-content-between align-items-center">
 		<h3 class="mb-3 mb-xl-4">
-			<span>Welcome to your</span>
+			Welcome to your
 			<strong>Dashboard,</strong>
 			<span class="text-info">{{\Auth::user()->first_name}}</span>
 		</h3>

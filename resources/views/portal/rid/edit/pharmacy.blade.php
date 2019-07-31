@@ -20,7 +20,7 @@
 			@if($shipment->pharmacist_id)
 				{{ $shipment->pharmacist->name }}<br/>
 				<i class="far fa-at"></i>
-				<a href="mailto:{{ $shipment->pharmacist->email }}">
+				<a target="_blank" href="mailto:{{ $shipment->pharmacist->email }}">
 					{{ $shipment->pharmacist->email }}
 				</a><br/>
 				<i class="far fa-phone"></i>

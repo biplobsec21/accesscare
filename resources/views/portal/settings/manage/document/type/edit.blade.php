@@ -87,20 +87,21 @@
 									<label class="d-block">Template
 										<small class="text-muted">(PDF or Doc)</small>
 									</label>
-									<div class="input-group">
-										@if($docTypes->template)
-											<input disabled class="form-control" placeholder="{{$docTypes->file->name}}">
-											<div class="form-control-append">
-												@include('include.portal.file-btns', ['id' => $docTypes->file->id])
-												<a class="btn btn-danger" onclick="removeTemplateDocument3('{{$docTypes->id}}',event)">
-													<i class="far fa-trash"></i>
-													Delete File
-												</a>
-											</div>
-										@else
+									@if($docTypes->template)
+										<input disabled class="form-control" placeholder="{{$docTypes->file->name}}">
+										<div class="form-control-append">
+											@include('include.portal.file-btns', ['id' => $docTypes->file->id])
+											<a class="btn btn-danger" onclick="removeTemplateDocument3('{{$docTypes->id}}',event)">
+												<i class="far fa-trash"></i>
+												Delete File
+											</a>
+										</div>
+									@else
+          <div class="input-group mb-0">
 											<input class="form-control" type="file" name="template_file"/>
-										@endif
-									</div>
+          </div>
+          <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
+									@endif
 									<div class="invalid-feedback">
 										{{ $errors->first('template_file') }}
 									</div>

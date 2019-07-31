@@ -8,7 +8,7 @@
          <a class="nav-link" href="tel:(888) 315-5797">(888) 315-5797</a>
         </li>
         <li class="nav-item">
-         <a class="nav-link" href="mailto:info@earlyaccesscare.com">info@earlyaccesscare.com</a>
+         <a class="nav-link" target="_blank" href="mailto:info@earlyaccesscare.com">info@earlyaccesscare.com</a>
         </li>
        </ul>
       </div>

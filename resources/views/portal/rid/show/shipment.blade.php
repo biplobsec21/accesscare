@@ -209,7 +209,7 @@
 					@if($visit->shipment->pharmacist_id)
 						<span class="d-block font-italic">{{ $shipment->pharmacist->name }}</span>
 						<i class="fal fa-at"></i>
-						<a href="mailto:{{ $visit->shipment->pharmacist->email }}">
+						<a target="_blank" href="mailto:{{ $visit->shipment->pharmacist->email }}">
 							{{ $visit->shipment->pharmacist->email }}
 						</a><br/>
 						<i class="fal fa-phone"></i>

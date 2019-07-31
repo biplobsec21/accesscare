@@ -55,7 +55,7 @@
         </a>
        </li>
        <li class="nav-item">
-        <a href="mailto:{{site()->email}}" class="nav-link">
+        <a target="_blank" href="mailto:{{site()->email}}" class="nav-link">
          <span class="fas small fa-fw fa-envelope text-muted"></span> {{site()->email}}
         </a>
        </li>

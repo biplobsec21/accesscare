@@ -183,7 +183,7 @@
 									@endif
 									@if($user->email)
 										<li class="nav-item">
-											<a href="mailto:{{ $user->email }}" class="small" data-toggle="tooltip" data-placement="bottom" title="Email {{ $user->email }}">
+											<a target="_blank" href="mailto:{{ $user->email }}" class="small" data-toggle="tooltip" data-placement="bottom" title="Email {{ $user->email }}">
 												<i class="text-secondary fa-fw fas fa-envelope fa-sm"></i>
 											</a>
 										</li>
@@ -236,7 +236,7 @@
 										@endif
 										@if($user->email)
 											<li class="nav-item">
-												<a href="mailto:{{ $user->email }}" class="btn btn-link p-0" data-toggle="tooltip" data-placement="bottom" title="Email {{ $user->email }}">
+												<a target="_blank" href="mailto:{{ $user->email }}" class="btn btn-link p-0" data-toggle="tooltip" data-placement="bottom" title="Email {{ $user->email }}">
 													<i class="text-secondary fa-fw fas fa-envelope"></i>
 													Email
 												</a>

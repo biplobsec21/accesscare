@@ -160,10 +160,11 @@
         </div>
        </div>
        <div class="mb-3">
-        <label for="" class="d-block">Company Logo</label>
+        <label for="" class="d-block">Company Logo <small>({{config('eac.storage.file.type')}})</small></label>
         <div class="input-group">
          <input type="file" class="form-control" name="company_logo" value="" />
         </div>
+        <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
        </div>
       </div>
       <div class="card-footer">

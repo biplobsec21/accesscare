@@ -145,11 +145,20 @@
 								
 								<div class="row">
 									<div class="col-md mb-3">
-										<label class="d-block label_required">Drug image</label>
-										<input type="file" name="drug_image" class="form-control{{ $errors->has('drug_image') ? ' is-invalid' : '' }}">
-										<div class="invalid-feedback">
-											{{ $errors->first('drug_image') }}
-										</div>
+										<label class="d-block">Drug image <small>({{config('eac.storage.file.type')}})</small></label>
+          <div class="input-group mb-0">
+ 										<input type="file" name="drug_image" class="form-control{{ $errors->has('drug_image') ? ' is-invalid' : '' }}">
+          </div>
+          <div class="d-flex justify-content-between flex-wrap">
+           <div>
+            <div class="invalid-feedback">
+             {{ $errors->first('drug_image') }}
+            </div>
+           </div>
+           <div>
+            <label class="d-block small">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
+           </div>
+          </div>
 									</div>
 								</div>
 							
