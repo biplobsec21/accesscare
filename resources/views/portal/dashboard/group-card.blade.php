@@ -22,7 +22,7 @@
 				<a href="{{route('eac.portal.user.group.list')}}" class="text-info">{{$groups->count()}}</a>
 			</div>
 			<a href="{{ route('eac.portal.user.group.create') }}" class="btn btn-info btn-block btn-lg d-flex justify-content-between align-items-center">
-				Create User Group
+				User Groups
 				<i class="fa-fw fas fa-users"></i>
 			</a>
 		</div>
