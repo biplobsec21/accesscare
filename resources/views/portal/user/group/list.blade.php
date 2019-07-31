@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@SetTab('users')
+@SetTab('user_groups')
 
 @section('title')
 	User Groups

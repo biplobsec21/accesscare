@@ -1,5 +1,6 @@
 @extends('layouts.portal')
 
+@SetTab('user_roles')
 @section('title')
 	Role Manager
 @endsection
@@ -32,18 +33,35 @@
 		</a>
 	</div><!-- end .actionBar -->
 	<div class="viewData">
-  <div class="d-flex justify-content-between">
-   <a href="#" class="btn btn-outline-dark">
-    Physician
-   </a>
-   <a href="#" class="btn btn-outline-dark">
-    Pharmaceutical
-   </a>
-   <a href="#" class="btn btn-outline-dark">
-    EAC
-   </a>
-  </div>
 		<div class="card mb-1 mb-md-4" style="max-width: 991px">
+   <form>
+    <div class="mb-2 ml-sm-2 mr-sm-2 mt-sm-2 d-flex justify-content-between btn-group-toggle novisual flex-wrap" data-toggle="buttons">
+     <label class="btn btn-outline-primary m-1 flex-fill">
+      <input type="radio" name="showThisType" value="Physician" />
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">Physician</span> Users
+      </span>
+     </label>
+     <label class="btn btn-outline-primary m-1 flex-fill">
+      <input type="radio" name="showThisType" value="Pharma" />
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">Pharma</span> Users
+      </span>
+     </label>
+     <label class="btn btn-outline-primary m-1 flex-fill">
+      <input type="radio" name="showThisType" value="EAC" />
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">EAC</span> Users
+      </span>
+     </label>
+     <label class="btn btn-outline-primary m-1 flex-fill active">
+      <input type="radio" name="showThisType" value="All" checked> 
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">All</span> Users
+      </span>
+     </label>
+    </div>
+   </form>
 			<div class="table-responsive">
 				<table class="table table-sm table-striped">
 					<thead>

@@ -87,7 +87,7 @@ table a {
 .btn-group-toggle > .btn:not(.active) {
  cursor: pointer;
 }
-.btn-group-toggle > .btn.active:before {
+.btn-group-toggle:not(.novisual) > .btn.active:before {
  font-weight: 900;
  content: "\f00c";
  opacity: .7;
