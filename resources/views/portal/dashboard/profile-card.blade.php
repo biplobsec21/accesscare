@@ -1,7 +1,7 @@
 @if(\Auth::user()->hasDefaultPassword())
 	<div class="bg-white border border-light p-3 h-100">
 		<h4 class="strong">
-			<a href="{{ route('eac.portal.user.create') }}">Modify Password</a>
+			<a href="#">Modify Password</a>
 		</h4>
 		<p class="flex-grow-1 mb-3">
 			Temporary password assigned, please update your password information </p>
