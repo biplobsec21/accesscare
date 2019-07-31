@@ -30,13 +30,7 @@
    @yield('title')
   </h2>
  </div><!-- end .titleBar -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
    <i class="fas fa-flag-alt"></i> Add New

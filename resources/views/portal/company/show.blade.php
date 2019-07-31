@@ -64,7 +64,7 @@
       <strong>Last Updated:</strong>
       @php
        $time = $company->updated_at;
-       $time->tz = "America/New_York";
+       
        echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
       @endphp
      </div>
@@ -81,7 +81,7 @@
    <strong>Last Updated:</strong>
    @php
     $time = $company->updated_at;
-    $time->tz = "America/New_York";
+    
     echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
    @endphp
   </div>
@@ -159,9 +159,9 @@
        </div>
        <div class="order-3 order-md-2 col-md col-xl-auto ml-xl-auto mr-xl-auto mb-3">
         @if(isset($company->address))
-         <div class="small"> 
+         <div class="small">
           {{ $company->address->addr1 }}{{$company->address->addr2 ? ', ' . $company->address->addr2 : "" }}<br/>
-          {{ $company->address->city }}, 
+          {{ $company->address->city }},
           @if($company->address->state){{  $company->address->state->abbr }}@endif {{ $company->address->zipcode }}, {{ $company->address->country->name }}
          </div>
         @endif
@@ -214,9 +214,9 @@
         </div>
         <div class="col-sm-7 col-md-9 col-xl-7">
          @if(isset($company->address))
-          <div class="mb-2"> 
+          <div class="mb-2">
            {{ $company->address->addr1 }}{{$company->address->addr2 ? ', ' . $company->address->addr2 : "" }}<br/>
-           {{ $company->address->city }}, 
+           {{ $company->address->city }},
            @if($company->address->state){{  $company->address->state->abbr }}@endif {{ $company->address->zipcode }}
            <br/>
            {{ $company->address->country->name }}
@@ -258,7 +258,7 @@
        </h5>
        @if($company->departments->count() > 0)
         <div class="row">
-         {{-- 
+         {{--
          <div class="col-auto col-sm-6 mb-3">
           <div class="p-3 mb-0 h-100" style="border: 1px dotted #ececec">
            <h6 class="upper">
@@ -522,7 +522,7 @@
         </li>
         <li class="list-group-item">
          <div>
-          <i class="fas fa-phone"></i> <span class="sr-only">Main Phone</span> 
+          <i class="fas fa-phone"></i> <span class="sr-only">Main Phone</span>
           @if($company->phone_main)
            <a href="tel:{{$company->phone->number}}">{{$company->phone->number}}</a>
           @else
@@ -530,7 +530,7 @@
           @endif
          </div>
          <div>
-          <i class="fas fa-at"></i> <span class="sr-only">Main Email</span> 
+          <i class="fas fa-at"></i> <span class="sr-only">Main Email</span>
           @if($company->email_main)
            <a href="mailto:{{$company->email_main}}">{{$company->email_main}}</a>
           @else
@@ -659,7 +659,7 @@
        </div>
       </div>
      </div>
-    </div> 
+    </div>
 
    </div>
   </div>--}}

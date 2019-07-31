@@ -67,11 +67,11 @@ class ForgotPasswordController extends Controller
 
             //
             return redirect()->back()
-                ->with("alerts", ['type' => 'success', 'msg' => "System Not Currently Sending Emails. New Password: {$new_password}"]);
+                ->with("alert", ['type' => 'success', 'msg' => "System Not Currently Sending Emails. New Password: {$new_password}"]);
 
             $this->sendMail('password_reset', $new_password, $user);
             return redirect()->back()
-                ->with("alerts", ['type' => 'success', 'msg' => "A temporary password is sent to your email address"]);
+                ->with("alert", ['type' => 'success', 'msg' => "A temporary password is sent to your email address"]);
         }
 
     }

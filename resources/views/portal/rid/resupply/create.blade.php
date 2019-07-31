@@ -33,9 +33,7 @@
 	
 	<div class="row">
 		<div class="col-lg-8 col-xl-4">
-			@if(Session::has('alerts'))
-				{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-			@endif
+			@include('include.alerts')
 			<div class="actionBar">
 				<a href="{{ route("eac.portal.rid.show", $rid->id) }}" class="btn btn-secondary">
 					<i class="fal fa-angle-double-left"></i>

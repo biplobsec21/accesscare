@@ -71,7 +71,7 @@
 						<strong>Last Updated:</strong>
 						@php
 							$time = $drug->updated_at;
-							$time->tz = "America/New_York";
+							
 							echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
 						@endphp
 					</div>
@@ -88,7 +88,7 @@
 			<strong>Last Updated:</strong>
 			@php
 				$time = $drug->updated_at;
-				$time->tz = "America/New_York";
+				
 				echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
 			@endphp
 		</div>

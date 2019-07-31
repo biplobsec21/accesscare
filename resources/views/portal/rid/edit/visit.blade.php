@@ -77,9 +77,7 @@
 		 echo $alert_dismiss;
 		}
 	@endphp
-	@if(Session::has('alerts'))
-		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-	@endif
+	@include('include.alerts')
 	<div class="viewData" style="max-width: calc(var(--leftCol) + var(--rightCol))">
 		@include('portal.rid.show.master')
 		@php $visit_index = $visit->index; @endphp

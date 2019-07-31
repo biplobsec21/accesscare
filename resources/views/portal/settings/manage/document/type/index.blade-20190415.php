@@ -55,13 +55,7 @@
 
     </div>  
 </div><!-- end .actionBar -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
 	<div class="viewData">
 		<div class="card">
 			<table class="table table-sm SObasic dt-responsive" id="-datatble-">

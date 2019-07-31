@@ -190,7 +190,7 @@ class UserController extends PermissionsController
 	public function changePassword($id)
 	{
 		if ($_POST['pass_1'] !== $_POST['pass_2'])
-			return redirect()->back()->with('alert', 'Passwords Did Not Match.');
+			return redirect()->back()->with('error', 'Passwords Did Not Match.');
 		$user = User::where('id', $id)->firstOrFail();
 		$user->password = \Hash::make($_POST['pass_1']);
 		$user->save();
@@ -550,10 +550,10 @@ class UserController extends PermissionsController
 	{
 
 		if (!$request->primary) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		if (empty($request->merge)) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a merge data!']);
 		}
 		$primary_id = $request->primary;
 		$rowsPrimary = User::where('id', $primary_id);
@@ -575,7 +575,7 @@ class UserController extends PermissionsController
 
 
 		if (!$request->primary_id) {
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a primary data!']);
 		}
 		$primary_data = $request->primary_id;
 		$merge_data = $request->merged_id;
@@ -656,7 +656,7 @@ class UserController extends PermissionsController
 		// dd($string);
 		return redirect(route('eac.portal.user.list.merge'))
 			->with("alerts_merge", ['type' => 'success', 'msg' => $string . "  updated"])
-			->with("alerts", ['type' => 'success', 'msg' => 'Users Merged successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Users Merged successfully']);
 
 	}
 

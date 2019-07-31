@@ -31,7 +31,7 @@ class WebsitePropertiesController extends Controller {
         'indexView' => 'portal.settings.manage.website.properties.index',
         'createView' => 'portal.settings.manage.website.properties.create',
         'detailView' => 'portal.settings.manage.website.properties.details',
-        
+
         'editView' => 'portal.settings.manage.website.properties.edit',
         // 'ajaxView' => 'portal.settings.manage.website.properties.ajaview',
         // 'logsv' => 'portal.settings.manage.website.properties.log',
@@ -43,7 +43,7 @@ class WebsitePropertiesController extends Controller {
     public function index() {
         $rows = WebsiteProperties::all();
          $rows_count = WebsiteProperties::all()->count();
-        
+
         // dd($rows);
        return view($this->_data['indexView'])
                         ->with('page', $this->_data)
@@ -59,13 +59,13 @@ class WebsitePropertiesController extends Controller {
                     return $row->name;
                 })
                 ->addColumn('city', function ($row) {
-                    
+
                     return $row->city;
                 })
                 ->addColumn('phone1', function ($row) {
                     return $row->phone1;
                 })
-               
+
                 ->addColumn('logo', function ($row) {
                     // $dir = public_path();
                     // $new_dir=str_replace("public", "public_html", $dir)."".$row->logo;
@@ -96,7 +96,7 @@ class WebsitePropertiesController extends Controller {
                     'created_at',
                     'ops_btns'
                 ])
-                
+
                 ->filterColumn('name', function ($query, $keyword) {
                     $query->where('name', 'like', "%" . $keyword . "%");
                 })
@@ -150,7 +150,7 @@ class WebsitePropertiesController extends Controller {
         }
 
 
-        
+
     }
 
     public function store(Request $request){
@@ -166,7 +166,7 @@ class WebsitePropertiesController extends Controller {
                'company_phone_1' => 'required',
                'company_email' => 'required',
                'company_url' => 'required',
-                
+
             ],
             [
         'company_name.required' => 'Name field is Required!',
@@ -179,7 +179,7 @@ class WebsitePropertiesController extends Controller {
         'company_email.required' => 'Email field is Required!',
         'company_url.required' => 'Company URL field is Required!',
     ]);
-        
+
         // dd($request);
             $rows = new WebsiteProperties();
             $rows->id = $this->newID(Page::class);
@@ -207,8 +207,8 @@ class WebsitePropertiesController extends Controller {
 
             $filename = 'logo_' . rand(10000000, 99999999) . '.' . $requestFile->getClientOriginalExtension();
             $path = $requestFile->move($new_dir, $filename);
-            // $path = $requestFile->move($dir, $filename);  
-            $savepath =$path;        
+            // $path = $requestFile->move($dir, $filename);
+            $savepath =$path;
             $rows->logo = "/images/".$filename;
 
             }
@@ -217,7 +217,7 @@ class WebsitePropertiesController extends Controller {
             }
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
 
         public function detail($id){
@@ -249,30 +249,30 @@ class WebsitePropertiesController extends Controller {
                'company_name' => 'required',
                'company_est' => 'required',
                'company_addr_1' => 'required',
-              
+
                'company_city' => 'required',
                'company_state' => 'required',
                'company_zip' => 'required',
                'company_phone_1' => 'required',
-               
+
                'company_email' => 'required',
                'company_url' => 'required',
-                
+
             ],
             [
         'company_name.required' => 'Name field is Required!',
         'company_est.required' => 'Establishedment field is Required!',
         'company_addr_1.required' => 'Address field is Required!',
-        
+
         'company_city.required' => 'City field is Required!',
         'company_state.required' => 'State field is Required!',
         'company_zip.required' => 'Zip Code field is Required!',
         'company_phone_1.required' => 'Phone field is Required!',
-       
+
         'company_email.required' => 'Email field is Required!',
         'company_url.required' => 'Company URL field is Required!',
     ]);
-        
+
         // dd($request);
             $rows = WebsiteProperties::find($id);
             $rows->name = $request->company_name;
@@ -295,18 +295,18 @@ class WebsitePropertiesController extends Controller {
 
             $filename = 'logo_' . rand(10000000, 99999999) . '.' . $requestFile->getClientOriginalExtension();
             $path = $requestFile->move($new_dir, $filename);
-            // $path = $requestFile->move($dir, $filename);  
-            $savepath =$path;        
+            // $path = $requestFile->move($dir, $filename);
+            $savepath =$path;
             $rows->logo = "/images/".$filename;
             }
             else{
                 $rows->logo = $rows->logo;
             }
-            
+
              $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
-        
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+
         }
 
         public function logoDelete(Request $request){
@@ -322,7 +322,7 @@ class WebsitePropertiesController extends Controller {
             $resourceData->saveOrFail();
 
             return ;
-            
+
 
 
 

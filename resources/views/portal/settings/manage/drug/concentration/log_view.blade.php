@@ -53,7 +53,7 @@ Dosage Units/Concentration Manager
     </div>
     <div class="col-md-6 text-right">
 
-    </div>  
+    </div>
 </div><!-- end .actionBar -->
 <div class="actionBar m-t-20">
     <div class="">
@@ -61,18 +61,12 @@ Dosage Units/Concentration Manager
         <h5>
             <a href="{{ route($page['logsr']) }}"class="btn btn-warning">
                 <i class="far fa-angle-double-left  fa-fw"> </i> Go Back
-            </a>  
+            </a>
             Log list For <span class="text-danger">[{{  \App\DosageUnit::where('id','=',request()->id)->firstOrFail()->name  }}]</span>
         </h5>
     </div>
 </div><!-- end .titleBar -->
- @php
-  if(Session::has('alerts')) {
-   $alert = Session::get('alerts');
-   $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-   echo $alert_dismiss;
-  }
- @endphp
+ @include('include.alerts')
 <div class="" >
     <div class="card">
         <table class="table table-sm SObasic dt-responsive">
@@ -97,11 +91,11 @@ Dosage Units/Concentration Manager
                 <tr data-id="{{$val->user_id}}">
                     <?php if($user>0){ ?><td>{{  \App\User ::where('id','=',$val->user_id)->firstOrFail()->first_name  }} {{  \App\User ::where('id','=',$val->user_id)->firstOrFail()->last_name  }}</td>
                     <?php  }else{
-                         echo '<td>N/A</td>';   
+                         echo '<td>N/A</td>';
                         } ?>
                     
                     <td><?php $cng = json_decode($val->desc, true); ?>
-                        @foreach($cng as $key=>$cdata)  
+                        @foreach($cng as $key=>$cdata)
                          <span style="font-weight: bold;">{{$key}}: </span>  {{$cdata}}<br>
                         @endforeach
                     </td>
@@ -120,14 +114,14 @@ Dosage Units/Concentration Manager
     $(document).ready(function () {
 
         $("#-datatble-").on("click", function () {
-            
+        
         });
 
     });
 
-        
+    
     function ConfirmDelete(param){
-       
+    
     }
 </script>
 @endsection

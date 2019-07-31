@@ -49,9 +49,7 @@
 			@yield('title')
 		</h2>
 	</div><!-- end .titleBar -->
-	@if(Session::has('alerts'))
-		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-	@endif
+	@include('include.alerts')
 	<div class="viewData">
 		{{ csrf_field() }}
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">

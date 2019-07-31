@@ -35,7 +35,7 @@ class DenialReasonController extends Controller {
         'logsv' => 'portal.settings.manage.rid.denial.reason.loglist',
         'logsviewv' => 'portal.settings.manage.rid.denial.reason.log_view',
     ];
-    
+
     public function __construct(){
 //     $this->middleware('auth'); // auth check from the route
     }
@@ -50,7 +50,7 @@ class DenialReasonController extends Controller {
       $sql = DenialReason::Where('id','!=','');
         return \DataTables::of($sql)
                 ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {
@@ -66,7 +66,7 @@ class DenialReasonController extends Controller {
                 })
                 ->addColumn('description', function ($row) {
                     return $row->description;
-                })    
+                })
                 ->addColumn('status', function ($row) {
                     return $row->active == '1' ? '<span class="badge badge-success">
                     Active
@@ -99,7 +99,7 @@ class DenialReasonController extends Controller {
                 ->filterColumn('description', function ($query, $keyword) {
                     $query->where('description', 'like', "%" . $keyword . "%");
                 })
-               
+
                 ->filterColumn('created_at', function ($query, $keyword) {
                     $query->where('updated_at', 'like', "%" . $keyword . "%");
                 })
@@ -109,7 +109,7 @@ class DenialReasonController extends Controller {
                         'description' => 1,
                         'status' => 2,
                         'created_at' => 3,
-                       
+
                     ];
 
                     $direction = request('order.0.dir');
@@ -132,7 +132,7 @@ class DenialReasonController extends Controller {
                 ->toJson();
     }
 
-    
+
     public function delete(Request $request) {
         $id = $request->id;
         $resourceData = DenialReason::find($id);
@@ -161,15 +161,15 @@ class DenialReasonController extends Controller {
         $validator = Validator::make(
                         $request->all(), [
                     'name' => 'required',
-                    
+
                         ], [
                     'name.required' => ' Name Field is Required',
-                    
+
                         ]
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -183,7 +183,7 @@ class DenialReasonController extends Controller {
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
         }
     }
 
@@ -205,14 +205,14 @@ class DenialReasonController extends Controller {
         $validator = Validator::make(
                         $request->all(), [
                     'name' => 'required',
-                   
+
                         ], [
                     'name.required' => ' Name Field is Required',
                         ]
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -221,17 +221,17 @@ class DenialReasonController extends Controller {
             $rows->name = $request->name;
             $rows->description = $request->description;
             $rows->active = ($request->input('active') == 'on') ? 1 : 0;
-         
+
 
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -250,6 +250,6 @@ class DenialReasonController extends Controller {
                         'page'=> $this->_data
         ]);
     }
-    
-    
+
+
 }

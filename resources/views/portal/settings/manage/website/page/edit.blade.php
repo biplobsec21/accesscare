@@ -34,13 +34,7 @@
   {{ csrf_field() }}
   <div class="row">
    <div class="col-lg-10 col-xl-8">
-    @php
-     if(Session::has('alerts')) {
-      $alert = Session::get('alerts');
-      $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-      echo $alert_dismiss;
-     }
-    @endphp
+    @include('include.alerts')
     <div class="actionBar">
      <a href="{{ route($page['cancelAction']) }}" class="btn btn-warning">
       <i class="fa-fw far fa-times"></i> Cancel
@@ -86,7 +80,7 @@
          @foreach($all_menus as $amenu)
           @if($amenu['id'] != '001aefrgth')
            <option value="{{ $amenu['id'] }}" {{ $rows->menu_id == $amenu['id'] ? 'selected="selected"' : '' }}>{!! $amenu['value'] !!}</option>
-          @endif        
+          @endif
          @endforeach
         @endif
        </select>
@@ -133,7 +127,7 @@
 <script>
 $(".alert").delay(2000).slideUp(200, function() {
  $(this).alert('close');
-}); 
+});
 $(document).ready(function () {
 
  // set up slug value

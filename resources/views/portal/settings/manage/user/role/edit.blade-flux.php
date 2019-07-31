@@ -92,7 +92,7 @@
 			<div class="d-none d-sm-block col-sm-auto ml-sm-auto">
 				<div class="small">
 					<strong>Last Updated:</strong>
-					@php $time = $role->updated_at; $time->tz = "America/New_York"; echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A'); @endphp
+					@php $time = $role->updated_at;  echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A'); @endphp
 				</div>
 			</div>
 		</div>
@@ -103,7 +103,7 @@
 		{{$role->name}} </h2>
 	<div class="small d-sm-none">
 		<strong>Last Updated:</strong>
-		@php $time = $role->updated_at; $time->tz = "America/New_York"; echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A'); @endphp
+		@php $time = $role->updated_at;  echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A'); @endphp
 	</div>
 </div><!-- end .titleBar -->@if(Session::has('alerts')){!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}@endif
 <form method="post" action="{{ route('eac.portal.settings.manage.user.role.save') }}">

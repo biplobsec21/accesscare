@@ -472,7 +472,7 @@ class RidController extends Controller
 			$visit->save();
 			$i++;
 		}
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Rid resupply visit added successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Rid resupply visit added successfully']);
 	}
 
 	public function updateSupply(Request $request)
@@ -573,7 +573,7 @@ class RidController extends Controller
 			$ackStore->save();
 		}
 
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Data updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Data updated successfully']);
 
 	}
 
@@ -591,7 +591,7 @@ class RidController extends Controller
 		$rid = Rid::find($rid_id);
 		$rid->status_id = $status;
 		$rid->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Status changed successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Status changed successfully']);
 	}
 
 	public function updateColors()
@@ -603,7 +603,7 @@ class RidController extends Controller
 			$status->save();
 		}
 
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Badge colors changed successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Badge colors changed successfully']);
 	}
 
 	public function reassign(Request $request)
@@ -611,7 +611,7 @@ class RidController extends Controller
 		$rid = RidVisit::find($request->visit_id);
 		$rid->physician_id = $request->physician_id;
 		$rid->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Rid assign successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Rid assign successfully']);
 
 	}
 }

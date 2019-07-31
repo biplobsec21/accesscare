@@ -26,13 +26,7 @@
    @yield('title')
   </h2>
  </div><!-- end .titleBar -->
- @php
- if(Session::has('alerts')) {
-  $alert = Session::get('alerts');
-  $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-  echo $alert_dismiss;
- }
-@endphp
+ @include('include.alerts')
  <form method="post" action="{{route('eac.portal.settings.manage.country.indexes.store')}}" id="country_order_form">
   {{ csrf_field() }}
   <div class="row">

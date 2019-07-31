@@ -30,13 +30,7 @@
   {{ csrf_field() }}
   <div class="row">
    <div class="col-lg-8 col-xl-6">
-    @php
-     if(Session::has('alerts')) {
-      $alert = Session::get('alerts');
-      $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-      echo $alert_dismiss;
-     }
-    @endphp
+    @include('include.alerts')
     <div class="actionBar">
      <a href="{{ route($page['cancelAction']) }}" class="btn btn-warning{{ $active == 'dosage' ? ' active after' : ''}}" >
       <i class="far fa-times"></i> Cancel
@@ -89,7 +83,7 @@
 
   function ConfirmDoseDelete(param)
   {
-       
+    
     swal({
       title: "Are you sure?",
       text: "Want to delete it",
@@ -106,7 +100,7 @@
           text: 'Content deleted!',
           icon: 'success'
         }).then(function() {
-            $.get("{{route('eac.portal.settings.manage.rid.shipment.courierdelete')}}", 
+            $.get("{{route('eac.portal.settings.manage.rid.shipment.courierdelete')}}",
               {
                id: param
              });

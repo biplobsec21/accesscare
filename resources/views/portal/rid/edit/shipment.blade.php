@@ -78,9 +78,7 @@
 			</ol>
 		</nav>
 	</div><!-- end .titleBar -->
-	@if(Session::has('alerts'))
-		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-	@endif
+	@include('include.alerts')
 	<div class="viewData" style="max-width: calc(var(--leftCol) + var(--rightCol))">
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3">
 			<div class="row justify-content-between">

@@ -27,14 +27,14 @@ class DrugGroupController extends Controller
 	{
 		$groupExist = DrugGroup::where('drug_id',$request->input('drug_id'))->where('user_group_id',$request->input('user_group_id'))->first();
 		if($groupExist){
-			return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Group Already Added!']);
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Group Already Added!']);
 		}
 		$drugGroup = new DrugGroup();
 		$drugGroup->id = $this->newID(DrugGroup::class);
 		$drugGroup->drug_id = $request->input('drug_id');
 		$drugGroup->user_group_id = $request->input('user_group_id');
 		$drugGroup->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
 	public function newgroupstore(Request $request){
 
@@ -73,7 +73,7 @@ class DrugGroupController extends Controller
 		$drugGroup->drug_id = $request->input('drug_id');
 		$drugGroup->user_group_id = $group->id;
 		$drugGroup->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 
 	}
 	/**
@@ -103,7 +103,7 @@ class DrugGroupController extends Controller
 		}
 
 		$drugUser->save();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Information Updated successfully']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
 
 	/**
@@ -116,6 +116,6 @@ class DrugGroupController extends Controller
 	{
 		$drugGroup = DrugGroup::where('id', $id)->first();
 		$drugGroup->delete();
-		return redirect()->back()->with("alerts", ['type' => 'success', 'msg' => 'Group Unassigned']);
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Group Unassigned']);
 	}
 }

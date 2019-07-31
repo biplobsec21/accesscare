@@ -28,9 +28,7 @@
 			@yield('title')
 		</h2>
 	</div><!-- end .titleBar -->
-	@if(Session::has('alerts'))
-		{!! view('layouts.alert-dismiss', ['type' => Session::get('alerts')['type'], 'message' => Session::get('alerts')['msg']]) !!}
-	@endif
+	@include('include.alerts')
 	<div class="actionBar">
 		<a href="{{ route('eac.portal.pharmacy.create') }}" class="btn btn-success">
 			<i class="fa-fw fas fa-clinic-medical"></i> New Pharmacy

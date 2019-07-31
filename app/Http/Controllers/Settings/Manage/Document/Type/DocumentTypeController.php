@@ -212,11 +212,11 @@ class DocumentTypeController extends Controller
 			$documentType->template = $file_id;
 			$documentType->save();
 			return redirect(route($this->_data['listAll']))
-				->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+				->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
 		} else {
 			$documentType->save();
 			return redirect(route($this->_data['listAll']))
-				->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+				->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
 		}
 	}
 
@@ -258,13 +258,13 @@ class DocumentTypeController extends Controller
 			$documentType->template = $file_id;
 			$documentType->save();
 			return redirect(route($this->_data['listAll']))
-				->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+				->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
 		} else {
 			$documentType->template = $docTypes->template;
 			$documentType->save();
 
 			return redirect(route($this->_data['listAll']))
-				->with("alerts", ['type' => 'success', 'msg' => 'Data updated successfully']);
+				->with("alert", ['type' => 'success', 'msg' => 'Data updated successfully']);
 		}
 	}
 

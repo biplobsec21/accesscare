@@ -35,13 +35,7 @@
     @if(Session::has('success'))
      <div class="alert alert-info">{{ Session::get('success') }}</div>
     @endif
-    @php
-     if(Session::has('alerts')) {
-      $alert = Session::get('alerts');
-      $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-      echo $alert_dismiss;
-     }
-    @endphp
+    @include('include.alerts')
     <div class="actionBar">
      <a href="{{route('eac.portal.settings.mail.notification-mail')}}" class="btn btn-warning" >
       <i class="far fa-times"></i> Cancel

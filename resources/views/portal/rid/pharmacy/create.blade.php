@@ -60,8 +60,8 @@
   {{ csrf_field() }}
   <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
   <div class="actionBar">
-   <a href="{{ url()->previous() }}" class="btn btn-light">
-    <i class="far fa-angle-double-left"></i> Go back
+   <a href="{{ route('eac.portal.pharmacy.list') }}" class="btn btn-light">
+    Pharmacy List
    </a>
   </div><!-- end .actionBar -->
   <div class="viewData">

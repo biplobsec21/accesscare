@@ -23,7 +23,7 @@ class EthnicityController extends Controller {
         'editView' => 'portal.settings.manage.ethnicity.edit',
         'ajaxView' => 'portal.settings.manage.ethnicity.ajaview',
     ];
-    
+
     public function __construct(){
 //     $this->middleware('auth'); // auth check from the route
     }
@@ -45,7 +45,7 @@ class EthnicityController extends Controller {
         );
 
         if ($validator->fails()) {
-            return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+            return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
                             ->with("errors", $validator->errors())
                             ->withInput()
                             ->with('page', $this->_data);
@@ -58,12 +58,12 @@ class EthnicityController extends Controller {
             if ($rows->isDirty()) {
                 $rows->save();
                 return redirect()->back()
-                                ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                                ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
             }
 
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data Updated successfully']);
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data Updated successfully']);
         }
     }
 
@@ -71,17 +71,17 @@ class EthnicityController extends Controller {
     	// dd($request);
 
         $currentTimestamp = date('Y-m-d H:i:s');
-    
+
         $this->validate($request,[
     			'name' => 'required|max:40',
-    			
+
     		],[
     			'name.required' => ' The name field is required.',
-    			
+
     		]);
 
         // if ($validator->fails()) {
-        //     return redirect()->back()->with("alerts", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
+        //     return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Error occured in the page!'])
         //                     ->with("errors", $validator->errors())
         //                     ->withInput()
         //                     ->with('page', $this->_data);
@@ -95,8 +95,8 @@ class EthnicityController extends Controller {
             // dd($rows);
             $rows->save();
             return redirect(route($this->_data['listAll']))
-                            ->with("alerts", ['type' => 'success', 'msg' => 'Data inserted successfully']);
-            // return redirect()->back()->with('success', 'Successfully added!'); 
+                            ->with("alert", ['type' => 'success', 'msg' => 'Data inserted successfully']);
+            // return redirect()->back()->with('success', 'Successfully added!');
         // }
     }
     public function create(Request $request) {
@@ -127,7 +127,7 @@ class EthnicityController extends Controller {
                     return $row->name;
                 })
                ->setRowClass(function ($row) {
-               
+
                 if ($row->active == '1') {
                  $class = 'v-active';
                 } else {
@@ -138,7 +138,7 @@ class EthnicityController extends Controller {
                 return $class;
 
                 })
-                
+
                 ->addColumn('notes', function ($row) {
                     return $row->notes;
                 })
@@ -172,7 +172,7 @@ class EthnicityController extends Controller {
                 ->filterColumn('name', function ($query, $keyword) {
                     $query->where('ethnicity.name', 'like', "%" . $keyword . "%");
                 })
-               
+
                 ->filterColumn('notes', function ($query, $keyword) {
                     $query->where('ethnicity.notes', 'like', "%" . $keyword . "%");
                 })
@@ -209,13 +209,13 @@ class EthnicityController extends Controller {
 
  //    public function delete(Request $request)
 	// {
-		
-	
+
+
 	// }
 
     public function edit($id) {
     	$rows = Ethnicity::where('id',$id)->first();
-    	
+
     	// dd($allcountrylist);
 
     	 return view($this->_data['editView'])
@@ -224,7 +224,7 @@ class EthnicityController extends Controller {
                         ->with('active', 'edit');
 
 
-    	
+
 
 
         // $dosage = array();
@@ -250,14 +250,14 @@ class EthnicityController extends Controller {
     //             ];
     //         endif;
     //     endif;
-    // }   
+    // }
     public function delete(Request $request) {
             $stateId = $request->id;
         $states = Ethnicity::find($stateId)->delete();
         return [
             "result" => "Success"
         ];
-    } 
+    }
     public function loglist() {
 
         $logData = $this->getLogs(Ethnicity::class);
@@ -279,7 +279,7 @@ class EthnicityController extends Controller {
 
 //          }
 
-            
+
          return view('portal.settings.manage.ethnicity.viewlogdetails')
                 ->with('logData', $logData)
                 ->with('page', $this->_data);

@@ -25,13 +25,7 @@
    @yield('title')
   </h2>
  </div><!-- end .titleBar -->
-  @php
-   if(Session::has('alerts')) {
-    $alert = Session::get('alerts');
-    $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
-    echo $alert_dismiss;
-   }
-  @endphp
+  @include('include.alerts')
 	<div class="actionBar">
 		<a href="{{ url()->previous() }}" class="btn btn-light">
     <i class="far fa-angle-double-left"></i> Go back
@@ -71,7 +65,7 @@
           </p>
           <input type="hidden" name="primary_id" value="{{ $val->id}}">
         </div>
-       @endforeach    
+       @endforeach
       @endif
     </div>
    </div>
@@ -103,16 +97,16 @@
           </p>
           <input type="hidden" name="merged_id[]" value="{{ $val->id}}">
           </div>
-       @endforeach    
+       @endforeach
       @endif
-       
+      
      
     </div>
    </div>
   <div class="col-md-12 col-lg-12 col-xl-12 mb-3">
     
      <h4 class="p-15  m-0 conf-text text-danger">
-      By continuing, The merged records will be removed and all records that pertained to the 
+      By continuing, The merged records will be removed and all records that pertained to the
       merged records will now show The Primary Record Selected. This can not be undone.
      </h4>
     
