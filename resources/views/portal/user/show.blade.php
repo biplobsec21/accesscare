@@ -300,41 +300,42 @@
 						</div>
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xassigned" role="tabpanel" aria-labelledby="xassigned-tab">
-						<div class="card-body">
-							<h5 class="">Assigned Items </h5>
-							Rids
-							@if($rids)
-								<span class="badge badge-success">{{$rids->count()}}</span>
-								<ul>
-									@foreach($rids as $rid)
-										<li>
-											<a href="{{$rid->view_route}}">{{$rid->number}}</a>
-										</li>
-									@endforeach
-								</ul>
-							@else
-								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No Accessible Rids
-								</p>
-							@endif
-							<hr>
-							Drugs
-							@if($drugs)
-								<ul>
-									@foreach($drugs as $drug)
-										<li>
-											<a href="{{$drug->view_route}}">{{$drug->name}}</a>
-										</li>
-									@endforeach
-								</ul>
-							@else
-								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No Accessible Drugs
-								</p>
-							@endif
-						</div>
+                        <div class="card-body">
+                            <h5 class="">Assigned Items </h5>
+                            Rids
+                            @if($rids)
+                                <span class="badge badge-success">{{$rids->count()}}</span>
+                                <ul>
+                                    @foreach($rids as $rid)
+                                        <li>
+                                            <a href="{{$rid->view_route}}">{{$rid->number}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-muted m-0">
+                                    <i class="fal fa-info-circle"></i>
+                                    No Accessible Rids
+                                </p>
+                            @endif
+                            <hr>
+                            Drugs
+                            @if($drugs)
+                                <span class="badge badge-success">{{$drugs->count()}}</span>
+                                <ul>
+                                    @foreach($drugs as $drug)
+                                        <li>
+                                            <a href="{{$drug->view_route}}">{{$drug->name}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-muted m-0">
+                                    <i class="fal fa-info-circle"></i>
+                                    No Accessible Drugs
+                                </p>
+                            @endif
+                        </div>
 					</div>
 					<div class="tab-pane fade " id="xgroups" role="tabpanel" aria-labelledby="xgroups-tab">
 						<div class="card-body">
@@ -343,22 +344,51 @@
 								<span class="badge badge-dark"></span>
 							</h5>
 							@if($user->groups())
-								<ul class="list-group list-group-flush">
-									@foreach($user->groups() as $team)
-										<li class="list-group-item">
-											<div class="row">
-												<div class="col-sm mb-3">
-													{{$team->name}}
-												</div>
-												<div class="col-sm mb-3">
-													{{$team->roleInTeam($user->id)->name}}
-													@if($user->id == $team->parent_user_id)
-														<strong>(Group Lead)</strong>@endif
-												</div>
-											</div>
-										</li>
-									@endforeach
-								</ul>
+                                <div class="row">
+                                    @foreach($user->groups()->sortBy('name') as $userGroup)
+                                        <div class="col-sm-6 mb-3">
+                                            <div class="card h-100 border-light bs-no border">
+                                                <div class="card-body p-3">
+                                                    <h6 class="mb-2 strong">
+                                                        {{$userGroup->name}} ({{$userGroup->type->name}} Group)
+                                                    </h6>
+                                                    
+                                                    <ul class="list-unstyled">
+                                                        <!-- Group leader -->
+                                                        @if($userGroup->parent())
+                                                            <li>
+                                                                <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link">
+                                                                    {{$userGroup->parent->full_name}}
+                                                                </a>
+                                                                <small class="d-block">
+                                                                    (Group Lead)
+                                                                </small>
+                                                            </li>
+                                                        @endif
+                                                    <!-- member -->
+                                                        @foreach($userGroup->users()->sortBy('first_name') as $user)
+                                                            @if($user)
+                                                                <li>
+                                                                    <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link">
+                                                                        {{$user->full_name}}
+                                                                    </a>
+                                                                    <small class="d-block">
+                                                                        
+                                                                        {{$userGroup->roleInTeam($user->id)->name}}
+                                                                        
+                                                                        @if($user->id == $userGroup->parent_user_id)(Group Lead)
+                                                                        @endif
+                                                                    
+                                                                    </small>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
 							@else
 								<p class="text-muted m-0">
 									<i class="fal fa-info-circle"></i>

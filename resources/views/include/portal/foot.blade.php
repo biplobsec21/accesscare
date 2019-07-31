@@ -2,49 +2,49 @@
 </div><!-- /.container-fluid --><!-- DO NOT REMOVE -->
 </div><!-- /#content-wrapper --><!-- DO NOT REMOVE -->
 <div class="rightSide">
-	<button class="toggleRight btn floater" type="button">
-		<i class="far fa-times"></i>
-	</button>
-	<div class="row align-items-center mt-3 ml-0 mr-0">
-		<div class="col">
-			<h5 class="m-0">
-				<i class="far fa-bell text-primary"></i>
-				Notifications
-			</h5>
-		</div>
-		<div class="col-auto ml-auto">
-			<a href="{{ route('eac.portal.notifications.read.all',Auth::user()->id) }}" class="btn btn-sm btn-light" tabindex="-1">
-				<i class="fa-fw far fa-check text-success"></i>
-				Mark All Read
-			</a>
-		</div>
-	</div>
-	<div class="tasklist">
-		<div class="notificationlist">
-			@if(Auth::user()->notifications()->count() > 0)
-				<ul class="list-unstyled">
-					@foreach(Auth::user()->notifications() as $notification)
-						<li class="{{ ($notification->read_at) ? 'read': 'unread'}}">
-							<a onclick="notificationSingleRead('{{$notification->id}}')" href="{{$notification->subject->view_route}}" class="strong">
-								{{ $notification->message }}
-								<small class="d-block date">
-									{{date('Y-m-d', strtotime($notification->created_at))}}
-								</small>
-							</a>
-						</li>
-					@endforeach
-				</ul>
-			@else
-				<p class="text-muted m-0 small">
-					<i class="fal fa-info-circle"></i>
-					No information available
-				</p>
-			@endif
-		</div>
-	</div>
+    <button class="toggleRight btn floater" type="button">
+        <i class="far fa-times"></i>
+    </button>
+    <div class="row align-items-center mt-3 ml-0 mr-0">
+        <div class="col">
+            <h5 class="m-0">
+                <i class="far fa-bell text-primary"></i>
+                Notifications
+            </h5>
+        </div>
+        <div class="col-auto ml-auto">
+            <a href="{{ route('eac.portal.notifications.read.all',Auth::user()->id) }}" class="btn btn-sm btn-light" tabindex="-1">
+                <i class="fa-fw far fa-check text-success"></i>
+                Mark All Read
+            </a>
+        </div>
+    </div>
+    <div class="tasklist">
+        <div class="notificationlist">
+            @if(Auth::user()->notifications()->count() > 0)
+                <ul class="list-unstyled">
+                    @foreach(Auth::user()->notifications() as $notification)
+                        <li class="{{ ($notification->read_at) ? 'read': 'unread'}}">
+                            <a onclick="notificationSingleRead('{{$notification->id}}')" href="{{$notification->subject->view_route}}" class="strong">
+                                {{ $notification->message }}
+                                <small class="d-block date">
+                                    {{date('Y-m-d', strtotime($notification->created_at))}}
+                                </small>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p class="text-muted m-0 small">
+                    <i class="fal fa-info-circle"></i>
+                    No information available
+                </p>
+            @endif
+        </div>
+    </div>
 </div></div><!--- /#wrapper -->
 <a class="scroll-to-top rounded" href="#page-top">
-	<i class="fas fa-angle-up"></i>
+    <i class="fas fa-angle-up"></i>
 </a></div><!-- /#DONOTREMOVE"> --><!-- DO NOT REMOVE -->
 <script>
     $(document).on("click", ".table tr td:last-child .btn", function () {
@@ -291,4 +291,36 @@
             $('.v-inactive').show();
         }
     }
+
+    $(document).on('change', 'input[type=file]', function () {
+        let name = $(this).val();
+        let type = $(this).attr('type');
+        $('.file-instruction').remove('');
+        $('.invalid-feedback').remove('');
+        if (type === 'file') {
+            // check file type if wrong show message
+            let ext = name.split('.').pop().toUpperCase();
+            if (['PDF', 'JPG'].indexOf(ext) === -1) {
+                let error_message = ext + " is not a allowed file type. Please try again";
+                $(this).addClass('is-invalid');
+                $(this).val('');
+                $(this).after("<div class='invalid-feedback'>" + error_message + "</div>").focus();
+                return false;
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).removeClass('invalid-feedback');
+            }
+            // file size
+            if (this.files[0].size > 2000000) {
+                let error_message = "Files should be less 2MB. Please try again";
+                $(this).addClass('is-invalid');
+                $(this).val('');
+                $(this).after("<div class='invalid-feedback'>" + error_message + "</div>").focus();
+                return false;
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).removeClass('invalid-feedback');
+            }
+        }
+    });
 </script>

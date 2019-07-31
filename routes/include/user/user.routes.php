@@ -53,6 +53,11 @@ Route::group([
 		'uses' => 'UserController@deny',
 	]);
 
+    Route::get('/status/welcomeEmail/{id}', [
+        'as' => 'eac.portal.user.userWelcome',
+        'uses' => 'UserController@userWelcome',
+    ]);
+
 	Route::get('/edit/{id}', [
 		'as' => 'eac.portal.user.edit',
 		'uses' => 'UserController@edit',

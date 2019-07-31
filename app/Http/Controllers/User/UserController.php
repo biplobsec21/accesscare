@@ -198,6 +198,14 @@ class UserController extends PermissionsController
 		return redirect()->back()->with('confirm', 'Password Has Been Changed.');
 	}
 
+    public function userWelcome($id)
+    {
+        $user = User::where('id', '=', $id)->firstOrFail();
+        $this->createNotice('user_registration_submitted', $user, $user);
+        $user->save();
+        return redirect()->back()->with('confirm', 'User welcome email sent');
+    }
+
 	public function approve($id)
 	{
 		$user = User::where('id', '=', $id)->firstOrFail();

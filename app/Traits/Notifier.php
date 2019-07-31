@@ -25,10 +25,10 @@ trait Notifier
 		$notice->message = strip_tags($this->applyTokens($mailer->html, $context));
 		$notice->save();
 
-		$this->sendMail($notice, $mailer, $context, $user);
+		$this->sendMail($mailer, $context, $user);
 	}
 
-	protected function sendMail($notice, $mailer, $context, $user)
+	public function sendMail($mailer, $context, $user)
 	{
 		$content = new \stdClass();
 		$content->subject = 'V2ADEV' . $mailer->subject;
@@ -39,7 +39,7 @@ trait Notifier
 		//return Mail::to('office@quasars.com')->send(new GenericEmail($content));
 	}
 
-	public function applyTokens($str, $context)
+	private function applyTokens($str, $context)
 	{
 		$tokens = array(
 			'{rid.view}',
@@ -54,7 +54,8 @@ trait Notifier
 			'{user.last_name}',
 			'{user.full_name}',
 			'{user.dashboard}',
-			'{user.id}'
+			'{user.id}',
+            '&nbsp;'
 		);
 		$val = array(
 			route('eac.portal.rid.show', $context->id),
@@ -69,7 +70,8 @@ trait Notifier
 			$context->last_name ?? '',
 			$context->full_name ?? '',
 			route('eac.portal.getDashboard'),
-			$context->id ?? ''
+			$context->id ?? '',
+            ' '
 		);
 		$str = str_replace($tokens, $val, $str);
 		return $str;
