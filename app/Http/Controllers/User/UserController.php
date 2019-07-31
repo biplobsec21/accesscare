@@ -326,7 +326,7 @@ class UserController extends PermissionsController
 				'<span class="badge badge-' . config('eac.user.status')[$user->status] . '">' . $user->status . '</span>'
 			);
 			$row->setColumn('email', $user->email,
-				'<a href="mailto:' . $user->email . '">' . $user->email . '</a>'
+				'<a target="_blank" href="mailto:' . $user->email . '">' . $user->email . '</a>'
 			);
 			$row->setColumn('user_type', $user->type->name
 			);
@@ -476,7 +476,7 @@ class UserController extends PermissionsController
 				return '<span class="badge badge-' . config('eac.user.status')[$row->status] . '">' . $row->status . '</span>';
 			})
 			->addColumn('email', function ($row) {
-				return '<a href="mailto:' . $row->email . '">' . $row->email . '</a>';
+				return '<a target="_blank" href="mailto:' . $row->email . '">' . $row->email . '</a>';
 			})
 			->addColumn('user_type', function ($row) {
 				return $row->type;
