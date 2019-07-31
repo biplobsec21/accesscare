@@ -115,8 +115,7 @@
 			<div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
 				@foreach(\App\RidMasterStatus::all() as $masterStatus)
 					<a class="dropdown-item" href="{{route('eac.portal.rid.changestatus', ['rid_id' => $rid->id,'status' => $masterStatus->id])}}">{{ $masterStatus->name}}</a>
-				@endforeach
-			
+				@endforeach			
 			</div>
 		</div>
 	</div><!-- end .actionBar -->

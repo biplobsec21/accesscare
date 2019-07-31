@@ -41,26 +41,38 @@
 							<div class="row" id="registration_forms">
 								<div class="col-sm mb-3">
 									<h5 class="m-0 strong">Curriculum Vitae/Resume</h5>
-									<p class="small text-muted">Please upload your CV or Resume</p>
-									<div class="input-group">
-										<input type="file" name="cv_file" value="{{ old('cv_file') }}"
-										       class="form-control{{ $errors->has('cv_file') ? ' is-invalid' : '' }}">
-										<div class="invalid-feedback">
-											{{ $errors->first('cv_file') }}
-										</div>
-									</div>
+         <label class="d-block">Please upload your CV or Resume <small>({{config('eac.storage.file.type')}})</small></label>
+         <div class="input-group">
+          <input type="file" name="cv_file" value="{{ old('cv_file') }}" class="form-control{{ $errors->has('cv_file') ? ' is-invalid' : '' }}">
+         </div>
+         <div class="d-flex justify-content-between flex-wrap">
+          <div>
+           <div class="invalid-feedback">
+            {{ $errors->first('cv_file') }}
+           </div>
+          </div>
+          <div>
+           <label class="d-block small">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
+          </div>
+         </div>
 								</div>
 								<div class="col-sm mb-3">
 									<h5 class="m-0 strong">Medical License</h5>
-									<p class="small text-muted">Please upload your active medical license</p>
-									<div class="input-group">
-										<input type="file" name="license_file" value="{{ old('license_file') }}"
-										       class="form-control{{ $errors->has('license_file') ? ' is-invalid' : '' }}">
-										<div class="invalid-feedback">
+         <label class="d-block">Please upload your active medical license <small>({{config('eac.storage.file.type')}})</small></label>
+         <div class="input-group">
+										<input type="file" name="license_file" value="{{ old('license_file') }}" class="form-control{{ $errors->has('license_file') ? ' is-invalid' : '' }}">
+         </div>
+         <div class="d-flex justify-content-between flex-wrap">
+          <div>
+           <div class="invalid-feedback">
 											{{ $errors->first('license_file') }}
-										</div>
-									</div>
-								</div>
+           </div>
+          </div>
+          <div>
+           <label class="d-block small">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
+          </div>
+         </div>
+        </div>
 							</div><!-- /.row -->
 							<h5 class="m-0 strong">Physician Declaration</h5>
 							<p class="mb-2">By acknowledging these statements, I am declaring the following:</p>
@@ -138,11 +150,7 @@
 						<div class="card-footer">
 							<div class="row">
 								<div class="col-md-8 col-lg-10">
-									<link href="https://fonts.googleapis.com/css?family=Homemade+Apple"
-									      rel="stylesheet">
-									<input type="text" name="user_signature"
-									       class="form-control {{ $errors->has('user_signature') ? ' is-invalid' : '' }}"
-									       value="{{ old('user_signature') }}" placeholder="X">
+									<input type="text" name="user_signature" class="form-control {{ $errors->has('user_signature') ? ' is-invalid' : '' }}" value="{{ old('user_signature') }}" placeholder="X">
 									<div class="invalid-feedback">
 										{{ $errors->first('user_signature') }}
 									</div>

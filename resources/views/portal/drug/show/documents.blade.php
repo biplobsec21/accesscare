@@ -24,7 +24,7 @@
 		<tr>
 			<th></th>
 			<th>Document Type</th>
-			<th>Required</th>
+   <th style="width: 90px!important">Required</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -40,7 +40,9 @@
 				<td>
 					{{$document->type->name}}
 					@if($document->file_id)
-						@include('include.portal.file-btns', ['id' => $document->file_id])
+      <div class="small">
+ 						@include('include.portal.file-btns', ['id' => $document->file_id])
+      </div>
 					@endif
 				</td>
 				<td class="text-center">

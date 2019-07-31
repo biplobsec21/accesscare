@@ -3,6 +3,7 @@
 body {
  overflow-x: hidden;
  font-family: 'Open Sans';
+ font-weight: 400;
 }
 pre, code {
  background-color: #EEEEEE;
@@ -121,10 +122,6 @@ h6, .h6 {
  .small, small {
   font-size: 90%;
  }
-}
-label small, label .small {
- font-size: 75%;
- font-weight: 600;
 }
 .dropdown-toggle::after {
  content: "\f107";

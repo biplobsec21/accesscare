@@ -12,16 +12,16 @@
       <i class="fal fa-times"></i>
      </button>
     </div>
-    <div class="alert-secondary p-2 border-bottom">
+    <div class="alert-secondary p-2 border-bottom mono">
      {{$rid->number}}
     </div>
     <div class="modal-body p-3">
      <div class="mb-3">
-      <label class="d-block">Attach Document <small>(PDF/JPG)</small></label>
+      <label class="d-block">Attach Document <small>({{config('eac.storage.file.type')}})</small></label>
       <div class="input-group">
        <input type="file" class="form-control" name="" value="filename.extension" />
       </div>
-
+      <label class="d-block"><small>Maximum filesize: {{config('eac.storage.file.maxSize')}}</small></label>
       @ if document has been uploaded
       <div class="row">
        <div class="col-sm">
