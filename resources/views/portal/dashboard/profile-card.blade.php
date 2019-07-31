@@ -28,7 +28,7 @@
   <a href="{{ route('eac.portal.user.show', \Auth::user()->id) }}" class="btn btn-dark border-0 btn-block h5 mb-0 p-0">
    <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center">
     <span>My Account</span>
-    <span class="fa-fw fas fa-user-md"></span>
+    <span class="fa-fw fas fa-lg fa-user-md"></span>
    </div>
   </a>
 	</div>

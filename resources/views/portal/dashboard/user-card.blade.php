@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-body">
 		<h5 class="text-xl-center">
-			<i class="fa-fw fas fa-users text-warning"></i>
+			<i class="fa-fw fa-lg fad fa-users text-warning"></i>
 			<a class="text-dark" href="{{route('eac.portal.user.list')}}">Platform Users</a>
 		</h5>
 		<p class="text-muted mb-0 small text-xl-center">
@@ -14,7 +14,7 @@
   </div>
   <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center flex-fill">
    <span>Platform Users</span>
-   <span class="fa-fw fas fa-user"></span>
+   <span class="fa-fw fas fa-lg fa-users"></span>
   </div>
  </a>
 </div>
