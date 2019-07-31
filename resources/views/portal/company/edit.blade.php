@@ -161,7 +161,7 @@
          @endif
          @if($company->email_main)
           <li class="nav-item">
-           <a href="mailto:{{$company->email_main}}" class="small" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
+           <a target="_blank" href="mailto:{{$company->email_main}}" class="small" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
             <i class="text-secondary fa-fw fas fa-envelope fa-sm"></i>
            </a>
           </li>

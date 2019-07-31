@@ -30,10 +30,9 @@
         }
     </style>
 @endsection
-
-@section('instructions')
+{{-- @section('instructions')
     instruction
-@endsection
+@endsection --}}
 
 @section('content')
     <div class="titleBar">

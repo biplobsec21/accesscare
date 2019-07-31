@@ -31,6 +31,9 @@
 			<a href="{{route('eac.portal.user.group.list')}}" class="dropdown-item @IndexTab('user_groups')">
 				<span>User Groups</span>
 			</a>
+   <a href="{{ route('eac.portal.settings.manage.user.role') }}" class="dropdown-item @IndexTab('user_roles')">
+    <span>Role Manager</span>
+   </a>
 		</div>
 	</li>
 	<li class="nav-item dropdown">

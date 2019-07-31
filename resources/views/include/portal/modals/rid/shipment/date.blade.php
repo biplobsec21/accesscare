@@ -2,7 +2,7 @@
 	<form method="post" action="{{ route('eac.portal.rid.shipment.dates.save') }}">
 		@csrf
 		<input type="hidden" name="id" value="{{ $shipment->id }}">
-		<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header p-2">
 					<h5 class="m-0">

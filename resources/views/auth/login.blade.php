@@ -87,7 +87,7 @@
 			</div>
 		</div>
 		<div class="card-footer text-center">
-			Need Help? <a href="mailto:{{site()->email}}">contact EAC</a>
+			Need Help? <a target="_blank" href="mailto:{{site()->email}}">contact EAC</a>
 		</div>
 	</div>
 

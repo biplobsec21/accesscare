@@ -48,10 +48,11 @@
 				@endif
 				<ul class="list-group flex-lg-row align-items-lg-stretch">
 					<li class="list-group-item flex-grow-1 mb-lg-0 border-light">
-						<label class="d-block mb-1">Upload File</label>
+						<label class="d-block mb-1">Upload File <small>({{config('eac.storage.file.type')}})</small></label>
 						<div class="input-group m-0">
 							<input class="form-control" type="file" name="upload_file"/>
 						</div>
+      <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
 						<hr class="mt-3 mb-3"/>
 						<label class="d-block">Notes</label>
 						<textarea class="form-control" rows="2" name="desc"></textarea>

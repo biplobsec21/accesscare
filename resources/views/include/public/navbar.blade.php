@@ -35,7 +35,7 @@
         </a>
        </li>
        <li class="nav-item">
-        <a href="mailto:{{site()->email}}" class="nav-link">
+        <a target="_blank" href="mailto:{{site()->email}}" class="nav-link">
          <span class="fas small fa-fw fa-envelope text-muted"></span> {{site()->email}}
         </a>
        </li>
@@ -56,7 +56,7 @@
       {{ site()->phone1 }}
      </a><br />
      <span class="fas fa-envelope text-muted"></span> 
-     <a href="mailto:{{site()->email}}" class="text-dark">
+     <a target="_blank" href="mailto:{{site()->email}}" class="text-dark">
       {{site()->email}}
      </a>
     </div>

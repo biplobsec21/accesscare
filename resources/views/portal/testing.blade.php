@@ -1,4 +1,4 @@
-@extends('layouts.portal-alt')
+@extends('layouts.portal-app')
 
 @section('title')
  QuasarEsh's Testing Page

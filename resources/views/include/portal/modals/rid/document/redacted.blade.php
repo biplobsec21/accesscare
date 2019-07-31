@@ -45,7 +45,7 @@
 				<ul class="list-group flex-lg-row align-items-lg-stretch">
 					<li class="list-group-item flex-grow-1 mb-lg-0 border-light">
 						<div class="d-sm-flex justify-content-sm-between align-items-center">
-							<label class="d-block upper mb-1">Uploaded File</label>
+							<label class="d-block upper mb-1">Uploaded File <small>({{config('eac.storage.file.type')}})</small></label>
 							@if($visitDocument->file_id)
 								<a class="btn btn-danger btn-sm" href="#" onclick="removeTemplateDocument('{{ $visitDocument->id }}', event,'upload_file')" data-toggle="tooltip" data-placement="bottom" title="Delete File">
 									<i class="far fa-trash"></i>
@@ -59,6 +59,7 @@
 							<div class="input-group m-0">
 								<input class="form-control" type="file" name="upload_file" id="upload_file_{{ $visitDocument->id }}"/>
 							</div>
+       <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
 						@endif
 						<hr class="mt-3 mb-3"/>
 						<label class="d-block">Notes</label>
@@ -70,7 +71,7 @@
 					</li>
 					<li class="list-group-item flex-grow-1 mb-lg-0 border-bottom border-light">
 						<div class="d-sm-flex justify-content-sm-between align-items-center">
-							<label class="d-block upper mb-1">Redacted File</label>
+							<label class="d-block upper mb-1">Redacted File <small>({{config('eac.storage.file.type')}})</small></label>
 							@if($visitDocument->redacted_file_id)
 								<a class="btn btn-danger btn-sm" href="#" onclick="removeRedacted('{{$visitDocument->id}}', event)" data-toggle="tooltip" data-placement="bottom" title="Delete File">
 									<i class="far fa-trash"></i>
@@ -84,6 +85,7 @@
 							<div class="input-group m-0">
 								<input class="form-control" type="file" id="new_template_{{ $visitDocument->id }}" name="redacted_file" required="required"/>
 							</div>
+       <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
 						@endif
 						<hr class="mt-3 mb-3"/>
 						<label class="d-block">Notes</label>

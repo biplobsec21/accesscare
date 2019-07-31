@@ -62,12 +62,19 @@
        </div>
        <div class="row">
         <div class="col-sm mb-3">
-         <label class="d-block">Template <small class="text-muted">(PDF or Doc)</small></label>
+         <label class="d-block">Template <small>({{config('eac.storage.file.type')}})</small></label>
          <div class="input-group">
           <input type="file" name="template_file" class="form-control{{ $errors->has('template_file') ? ' is-invalid' : '' }}" id="template_id" />
          </div>
-         <div class="invalid-feedback">
-          {{ $errors->first('template_file') }}
+         <div class="d-flex justify-content-between flex-wrap">
+          <div>
+           <div class="invalid-feedback">
+            {{ $errors->first('template_file') }}
+           </div>
+          </div>
+          <div>
+           <label class="d-block small">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
+          </div>
          </div>
         </div>
         <div class="col-sm-auto mb-3">

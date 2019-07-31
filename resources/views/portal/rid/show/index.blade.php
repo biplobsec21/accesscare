@@ -212,7 +212,14 @@
 										   href="#xdetails{{$visit->index}}"
 										   role="tab" aria-controls="xdetails{{$visit->index}}"
 										   aria-selected="false">
-											<small class="text-upper">Visit #{{$visit->index == 0 ? 1 : $visit->index}}</small>
+           <div class="d-md-flex justify-content-md-between align-items-md-center">
+ 											<small class="text-upper">
+             Visit #{{$visit->index == 0 ? 1 : $visit->index}}
+            </small>
+            @if($visit->visit_date)
+             <span class="small mono d-block d-md-inline">{{ $visit->visit_date }}</span>
+            @endif
+           </div>
 										</a>
 									@endforeach
 									@php $shipment_index ++; @endphp

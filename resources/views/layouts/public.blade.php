@@ -74,7 +74,7 @@
        </div>
        <div class="col p-0 pl-sm-2">
         <strong class="d-block">Email</strong>
-        <a href="mailto:{{site()->email}}">{{site()->email}}</a>
+        <a target="_blank" href="mailto:{{site()->email}}">{{site()->email}}</a>
        </div>
       </div>
      </div>

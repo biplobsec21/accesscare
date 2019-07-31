@@ -150,7 +150,7 @@
          @endif
          @if($company->email_main)
           <li class="nav-item">
-           <a href="mailto:{{$company->email_main}}" class="small" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
+           <a target="_blank" href="mailto:{{$company->email_main}}" class="small" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
             <i class="text-secondary fa-fw fas fa-envelope fa-sm"></i>
            </a>
           </li>
@@ -201,7 +201,7 @@
            @endif
            @if($company->email_main)
             <li class="nav-item">
-             <a href="mailto:{{$company->email_main}}" class="btn btn-link p-0" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
+             <a target="_blank" href="mailto:{{$company->email_main}}" class="btn btn-link p-0" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
               <i class="text-secondary fa-fw fas fa-envelope"></i> Email
              </a>
             </li>
@@ -278,7 +278,7 @@
              @endif
              @if($company->email_main)
               <li class="nav-item">
-               <a href="mailto:{{$company->email_main}}" class="btn btn-link p-0" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
+               <a target="_blank" href="mailto:{{$company->email_main}}" class="btn btn-link p-0" data-toggle="tooltip" data-placement="bottom" title="Email {{$company->email_main}}">
                 <i class="text-secondary fa-fw fas fa-envelope"></i> Email
                </a>
               </li>
@@ -321,7 +321,7 @@
                   <i class="text-secondary fa-fw fas fa-envelope"></i>
                  </div>
                  <div class="col pl-2 pr-0 wraphelp">
-                  <a href="mailto:{{$department->email}}" class="btn btn-link btn-sm p-0" title="{{$department->email}}">
+                  <a target="_blank" href="mailto:{{$department->email}}" class="btn btn-link btn-sm p-0" title="{{$department->email}}">
                    <span class="d-none d-lg-inline">{{$department->email}}</span> <span class="d-lg-none">Email</span>
                   </a>
                  </div>
@@ -532,7 +532,7 @@
          <div>
           <i class="fas fa-at"></i> <span class="sr-only">Main Email</span>
           @if($company->email_main)
-           <a href="mailto:{{$company->email_main}}">{{$company->email_main}}</a>
+           <a target="_blank" href="mailto:{{$company->email_main}}">{{$company->email_main}}</a>
           @else
            <small class="text-muted">N/A</small>
           @endif
@@ -552,7 +552,7 @@
           @if($department->email)
            <div>
             <i class="fas fa-phone"></i> <span class="sr-only">Email</span>
-            <a href="mailto:{{$department->email}}">{{$department->email}}</a>
+            <a target="_blank" href="mailto:{{$department->email}}">{{$department->email}}</a>
            </div>
           @endif
          </li>
