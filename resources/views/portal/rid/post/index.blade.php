@@ -82,7 +82,6 @@
 										<span class="text-danger">Upload required</span>
 									</a>
 								@endif
-							
 							</div>
 						</div>
 						<div class="modal fade" id="UploadModal{{$document->id}}" tabindex="-1" role="dialog" aria-hidden="true">
