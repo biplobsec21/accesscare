@@ -1,70 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="card">
-					<div class="card-header">{{ __('Reset Password') }}</div>
-
-					<div class="card-body">
-						<form method="POST" action="{{ route('password.update') }}">
-							@csrf
-
-							<input type="hidden" name="token" value="{{ $token }}">
-
-							<div class="form-group row">
-								<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-								<div class="col-md-6">
-									<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-												 name="email" value="{{ $email ?? old('email') }}" required autofocus>
-
-									@if ($errors->has('email'))
-										<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-									@endif
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-								<div class="col-md-6">
-									<input id="password" type="password"
-												 class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
-												 required>
-
-									@if ($errors->has('password'))
-										<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-									@endif
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="password-confirm"
-											 class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-								<div class="col-md-6">
-									<input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-												 required>
-								</div>
-							</div>
-
-							<div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
-									<button type="submit" class="btn btn-primary">
-										{{ __('Reset Password') }}
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="card mb-5">
+        <div id="header" class="text-center">
+            <img src="https://www.earlyaccesscare.com/images/eac_mini.png" class="img-fluid">
+        </div>
+        <div class="card-body">
+            @php
+                if(Session::has('alerts')) {
+                  $alert = Session::get('alerts');
+                  $alert_dismiss = view('layouts.alert-dismiss', ['type' => $alert['type'], 'message' => $alert['msg']]);
+                  echo $alert_dismiss;
+                }
+            @endphp
+            <div class="tab-content" id="LoginPContent">
+                <div class="col-md col-lg p-3 p-lg-4 p-xl-5 ml-lg-auto mr-lg-auto">
+                    <div class="tab-content" id="LoginPContent">
+                        <div class="tab-pane fade show active" id="loginGen" role="tabpanel" aria-labelledby="loginGen-tab">
+                            <form method="post" action="{{ route('eac.auth.password.reset.submit') }}">
+                                @csrf
+                                <input type="hidden" name="table" value="eac_user"/>
+                                <h4 class="text-center">Please enter your email.</h4>
+                                <div class="mb-3 mb-xl-4">
+                                    <label class="d-block">Email</label>
+                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" name="email" id="email" placeholder="Email Address" value="{{ old('email') }}">
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('email') }}
+                                        {{--Either your username or password is incorrect.--}}
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-success btn-block" type="submit" id="" value="Reset">
+                                    Reset my password
+                                </button>
+                            
+                            </form><!-- end eac form -->
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{{ route('eac.auth.getSignIn') }}">
+                Go Back to Login
+            </a>
+        </div>
+    </div>
 @endsection

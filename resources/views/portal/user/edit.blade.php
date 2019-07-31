@@ -1,35 +1,35 @@
 @extends('layouts.portal')
 
 @section('title')
-	@if(Auth::User()->id == $user->id)
-		My Profile
-	@else
-		Edit User
-	@endif
+    @if(Auth::User()->id == $user->id)
+        My Profile
+    @else
+        Edit User
+    @endif
 @endsection
 @section('styles')
-	<style>
-		@media screen and (min-width: 1200px) {
-			:root {
-				--leftCol: 230px;
-				--rightCol: 750px;
-			}
-			
-			.actionBar, .viewData {
-				max-width: calc(var(--leftCol) + var(--rightCol));
-			}
-			
-			.viewData .row.thisone > [class*=col]:first-child {
-				max-width: var(--leftCol);
-				min-width: var(--leftCol);
-			}
-			
-			.viewData .row.thisone > [class*=col]:last-child {
-				max-width: var(--rightCol);
-				min-width: var(--rightCol);
-			}
-		}
-	</style>
+    <style>
+        @media screen and (min-width: 1200px) {
+            :root {
+                --leftCol: 230px;
+                --rightCol: 750px;
+            }
+            
+            .actionBar, .viewData {
+                max-width: calc(var(--leftCol) + var(--rightCol));
+            }
+            
+            .viewData .row.thisone > [class*=col]:first-child {
+                max-width: var(--leftCol);
+                min-width: var(--leftCol);
+            }
+            
+            .viewData .row.thisone > [class*=col]:last-child {
+                max-width: var(--rightCol);
+                min-width: var(--rightCol);
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -408,35 +408,61 @@
 						</div>
 					</div>
 					<div class="tab-pane fade " id="xgroups" role="tabpanel" aria-labelledby="xgroups-tab">
-						<div class="card card-body">
-							<h5 class="">
-								User Groups
-								<span class="badge badge-dark"></span>
-							</h5>
-							@if($user->groups())
-								<ul class="list-group list-group-flush">
-									@foreach($user->groups() as $team)
-										<li class="list-group-item">
-											<div class="row">
-												<div class="col-sm mb-3">
-													{{$team->name}}
-												</div>
-												<div class="col-sm mb-3">
-													{{$team->roleInTeam($user->id)->name}}
-													@if($user->id == $team->parent_user_id)
-														<strong>(Group Lead)</strong>@endif
-												</div>
-											</div>
-										</li>
-									@endforeach
-								</ul>
-							@else
-								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No information available
-								</p>
-							@endif
-						</div>
+      <div class="card card-body">
+       <h5 class="">
+        User Groups
+        <span class="badge badge-dark"></span>
+       </h5>
+       @if($user->groups())
+        <div class="row">
+         @foreach($user->groups()->sortBy('name') as $userGroup)
+          <div class="col-sm-6 mb-3">
+           <div class="card h-100 border-light bs-no border">
+            <div class="card-body p-3">
+             <h6 class="mb-2 strong">
+              {{$userGroup->name}} ({{$userGroup->type->name}} Group) </h6>
+             
+             <ul class="list-unstyled">
+              <!-- Group leader -->
+              @if($userGroup->parent())
+               <li>
+                <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link">
+                 {{$userGroup->parent->full_name}}
+                </a>
+                <small class="d-block">
+                 (Group Lead)
+                </small>
+               </li>
+              @endif
+             <!-- member -->
+              @foreach($userGroup->users()->sortBy('first_name') as $user)
+               @if($user)
+                <li>
+                 <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link">
+                  {{$user->full_name}}
+                 </a>
+                 <small class="d-block">
+                  {{$userGroup->roleInTeam($user->id)->name}}
+                  @if($user->id == $userGroup->parent_user_id)
+                   (Group Lead)
+                  @endif
+                 </small>
+                </li>
+               @endif
+              @endforeach
+             </ul>
+            </div>
+           </div>
+          </div>
+         @endforeach
+        </div>
+       @else
+        <p class="text-muted m-0">
+         <i class="fal fa-info-circle"></i>
+         No information available
+        </p>
+       @endif
+      </div>
 						<div class="card-footer d-none">
 							<button class="btn btn-success" name="" value="">
 								Save Changes
@@ -570,7 +596,7 @@
 
 
 @section('scripts')
-	<script>
+    <script>
         var str = $("#country_id option:selected").text();
         if (str.toLowerCase().indexOf("united states") >= 0) {
 
@@ -607,5 +633,5 @@
                 $("#div2").show();
             }
         });
-	</script>
+    </script>
 @endsection

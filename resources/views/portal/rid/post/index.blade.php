@@ -1,4 +1,9 @@
 @extends('layouts.portal')
+<style type="text/css">
+	.upload-add {
+		cursor: pointer;
+	}
+</style>
 @section('title')
 	Post Approval Documents
 @endsection
@@ -125,7 +130,7 @@
    												<input type="file" class="form-control" name="upload_file" value="filename.extension" required/>
    											</div>
               <label class="d-block small text-right">Maximum filesize: {{config('eac.storage.file.maxSize')}}</label>
-   										@endif									
+   										@endif
    									</div>
    									<div class="">
    										<label class="d-block">Notes</label>
@@ -274,7 +279,7 @@
    			@endif
      </div>
     </div>
- 		@endforeach	
+ 		@endforeach
   </div>
 	</div>
 	@include('include.portal.modals.rid.post.upload')

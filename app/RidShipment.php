@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RidShipment extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -127,7 +127,7 @@ class RidShipment extends Model
 			$todo->push('Add a pharmacist');
 		if ($this->regimensNeeded()->count())
 			$todo->push('Add a regimen');
-		if (!($this->delivery_date && $this->tracking_number && $this->shipped_on_date))
+		if (!($this->ship_by_date && $this->deliver_by_date && $this->courier_id))
 			$todo->push('Add Shipping Details');
 
 		if($todo->isEmpty())

@@ -198,23 +198,31 @@ class UserController extends PermissionsController
 		return redirect()->back()->with('confirm', 'Password Has Been Changed.');
 	}
 
+    public function userWelcome($id)
+    {
+        $user = User::where('id', '=', $id)->firstOrFail();
+        $this->createNotice('user_registration_submitted', $user, $user);
+        $user->save();
+        return redirect()->back()->with('confirm', 'User welcome email sent');
+    }
+
 	public function approve($id)
 	{
 		$user = User::where('id', '=', $id)->firstOrFail();
 		if ($user->status == 'Pending') {
 			$this->createNotice('user_approved', $user, $user);
-			if ($user->type->name == 'Physican') {
-				$group = new UserGroup();
-				$group->id = $this->newID(UserGroup::class);
-				$group->type_id = $request->input('type_id');
-				$group->parent_user_id = $request->input('parent_id');
-				$group->name = $request->input('name');
-				$group->group_members = json_encode(array_values($users));
-				$group->saveOrFail();
-			}
 		}
 		$user->status = 'Approved';
 		$user->save();
+        if ($user->type->name == 'Physican' && !$user->groups_leading->count()) {
+            $group = new UserGroup();
+            $group->id = $this->newID(UserGroup::class);
+            $group->type_id = $user->type->id;
+            $group->parent_user_id = $user->id;
+            $group->name = trim($user->full_name) . '\'s Group';
+            $group->group_members = json_encode(array_values($users));
+            $group->saveOrFail();
+        }
 		return redirect()->back()->with('confirm', '<h5 class="text-primary"><i class="fas fa-check-circle"></i> Authorized</h5><p class="text-dark "><strong>' . $user->full_name . '</strong> is able to access content.</p>');
 	}
 

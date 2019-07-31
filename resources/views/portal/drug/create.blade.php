@@ -322,7 +322,7 @@
 									--}}
 									<div class="mb-3">
 										<label class="d-block label_required">Dosage Form</label>
-										<select class="form-control {{ $errors->has('form_id') ? ' is-invalid' : '' }}" name="form_id">
+										<select class="form-control {{ $errors->has('form_id') ? ' is-invalid modalOpen' : '' }}" name="form_id">
 											<option disabled="" hidden="" selected="" value="">
 												-- Select --
 											</option>
@@ -341,12 +341,12 @@
 									<div class="row m-0 mb-3">
 										<div class="col p-0">
 											<label class="d-block label_required">Dose Strength</label>
-											<input type="number" class="form-control {{ $errors->has('amount') ? ' is-invalid' : '' }}" name="amount" step="any" value="{{ old('amount')}}">
+											<input type="number" class="form-control {{ $errors->has('amount') ? ' is-invalid modalOpen' : '' }}" name="amount" step="any" value="{{ old('amount')}}">
 											<div class="invalid-feedback">{{ $errors->first('amount') }}</div>
 										</div>
 										<div class="col p-0">
 											<label class="d-block label_required">Unit</label>
-											<select class="form-control border-left-0 {{ $errors->has('unit_id') ? ' is-invalid' : '' }}" name="unit_id">
+											<select class="form-control border-left-0 {{ $errors->has('unit_id') ? ' is-invalid modalOpen' : '' }}" name="unit_id">
 												<option disabled="" hidden="" selected="" value="">-- Select --</option>
 												@if($dosageUnit->count() > 0)
 													@foreach($dosageUnit as $val)
@@ -362,7 +362,7 @@
 									<div class="row">
 										<div class="col-md mb-3">
 											<label class="d-block label_required">Relevant Age Group</label>
-											<select class="form-control {{ $errors->has('strength_id') ? ' is-invalid' : '' }}" name="strength_id">
+											<select class="form-control {{ $errors->has('strength_id') ? ' is-invalid modalOpen' : '' }}" name="strength_id">
 												<option disabled="" hidden="" selected="" value="">-- Select --</option>
 												@if($dosageStrength->count() > 0)
 													@foreach($dosageStrength as $val)
@@ -381,10 +381,10 @@
 											</label>
 											<div class="input-group">
 												{{-- <div class="d-flex justify-content-between align-items-center flex-grow-1">
-												 <input type="range" class="form-control slider{{ $errors->has('temperature') ? ' is-invalid' : '' }}" name="temperature" value="30">
+												 <input type="range" class="form-control slider{{ $errors->has('temperature') ? ' is-invalid modalOpen' : '' }}" name="temperature" value="30">
 												 <small class="slider_label ml-2 mr-2"></small>
 												</div> --}}
-												<input type="number" class="form-control {{ $errors->has('temperature') ? ' is-invalid' : '' }}" name="temperature" value="{{ old('temperature') }}">
+												<input type="number" class="form-control {{ $errors->has('temperature') ? ' is-invalid modalOpen' : '' }}" name="temperature" value="{{ old('temperature') }}">
 												<div class="input-group-append">
 													<span class="input-group-text d-flex flex-column align-items-stretch text-dark">
 														<small class="d-flex">
@@ -424,6 +424,14 @@
 @section('scripts')
 	<script type="text/javascript">
         $(function () {
+
+            let errorCount = $(".tab-pane").find('.is-invalid').length;
+            if (errorCount === 0) {
+                if ($('.modalOpen').length > 0) {
+                    $('#newDosageModal').modal('show');
+                }
+            }
+            
             $('.slider').on('input change', function () {
                 $(this).next($('.slider_label')).html(this.value);
             });
@@ -431,8 +439,7 @@
                 var value = $(this).prev().attr('value');
                 $(this).html(value);
             });
-        })
-        $(function () {
+            
             $("a.next").click(function () {
                 let currentLink = $('.nav-link.active');
                 setWizardStep(currentLink.index() + 1);
@@ -460,8 +467,7 @@
             function setWizardStep(n) {
                 $('.wizardSteps a.nav-link:nth-child(' + (n + 1) + ')').click();
             };
-        });
-        $(document).ready(function () {
+            
             var wrapper = $(".input_fields_wrap"); //Fields wrapper
             var add_button = $(".add_field_button"); //Add button ID
             var modal_wrapper = $(".dosage-modal-wrapper");

@@ -21,6 +21,15 @@ Route::group([
 		'uses' => 'RegisterController@showRegistrationForm'
 	]);
 
+    Route::get('/password/reset', [
+        'as' => 'eac.auth.password.reset',
+        'uses' => 'ForgotPasswordController@resetPasswordForm'
+    ]);
+    Route::post('/password/reset/submit', [
+        'as' => 'eac.auth.password.reset.submit',
+        'uses' => 'ForgotPasswordController@resetPassword'
+    ]);
+
 	Route::get('/pending', [
 		'as' => 'eac.portal.user.wait',
 		'uses' => 'StatusBouncer@pendingScreen'
@@ -63,7 +72,7 @@ Route::group([
 	Route::group([
 		'prefix' => '/ridtrack',
 
-		
+
 	], function () {
 	Route::post('/patient', [
 		'as' => 'eac.auth.ridtrack.patient',
