@@ -178,8 +178,8 @@ class UserController extends PermissionsController
 			$cert->user_signature = $request->input('user_signature');
 			$cert->save();
 		}
-
-		$user->status = 'Pending';
+		if($user->status->name === 'Registering')
+		    $user->status = 'Pending';
 		$user->save();
 		$this->createNotice('user_registration_submitted', $user, $user);
 		$this->createNotice('user_registration_needs_attention', $user, 'eac');

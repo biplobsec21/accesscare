@@ -43,7 +43,7 @@ class ChangePasswordController extends Controller
                     $fail('Current Password Incorrect.');
                 }
             }],
-            'new_password' => ['required'],
+            'new_password' => ['required', 'min:8'],
         ];
         $messages = [
             'current_password.required' => 'Current Password Required',

@@ -495,23 +495,12 @@ class DrugController extends Controller
 				'<span class="badge badge-' . $drug->status . '">' . $drug->status . '</span>'
 			);
 			$row->setColumn('created_at', $drug->created_at->format('Y-m-d'),
-				'<span style="display: none">' . $drug->created_at->format('Y-m-d') . '</span>' . $drug->created_at->format(config('eac.date_format')),
-				$drug->created_at->format(config('eac.date_format'))
+				'<span style="display: none">' . $drug->created_at->format('Y-m-d') . '</span>' . $drug->created_at->format(config('eac.date_format'))
 			);
 			$row->setColumn('btns', $drug->id,
-				'<div class="btn-group dropleft" role="group">' .
-				'<a class="btn btn-link" href="#" id="dropdownMenuButton' . $drug->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-				'<span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>' .
-				'</a>' .
-				'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $drug->id . '">' .
-				'<a class="dropdown-item" title="Edit Drug" href="' . route('eac.portal.drug.edit', $drug->id) . '">' .
-				'<i class="fal fa-fw fa-edit"></i> Edit Drug' .
-				'</a>' .
-				'<a class="dropdown-item" title="View Drug" href="' . route('eac.portal.drug.show', $drug->id) . '">' .
-				'<i class="fal fa-fw fa-search-plus"></i> View Drug' .
-				'</a>' .
-				'</div>' .
-				'</div>'
+                '<a class="dropdown-item" title="View Drug" href="' . route('eac.portal.drug.show', $drug->id) . '">' .
+                '<i class="fal fa-fw fa-search-plus"></i> View Drug' .
+                '</a>'
 			);
 			$response->addRow($row);
 		}
