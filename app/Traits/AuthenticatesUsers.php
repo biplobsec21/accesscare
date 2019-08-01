@@ -3,12 +3,15 @@
 namespace App\Traits;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 trait AuthenticatesUsers
 {
@@ -181,6 +184,7 @@ trait AuthenticatesUsers
 	 */
 	public function logout(Request $request)
 	{
+	    $this->setLastSeen();
 		$this->guard()->logout();
 
 		$request->session()->invalidate();
@@ -198,4 +202,11 @@ trait AuthenticatesUsers
 	{
 		//
 	}
+
+    protected function setLastSeen()
+    {
+        $user = User::where('id', '=', \Auth::user()->id)->firstOrFail();
+        $user->last_seen = Carbon::now();
+        $user->saveOrFail();
+    }
 }

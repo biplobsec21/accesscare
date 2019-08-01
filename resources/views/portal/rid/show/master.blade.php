@@ -172,32 +172,40 @@
             </div>
             <div class="bg-gradient-primary text-white p-3 d-flex justify-content-between">
                 <div>
-                    <a href="#" class="btn btn-light">
-                        <i class="fa-fw fas fa-users"></i>
-                        Assign User Group
-                    </a>
-                    @if(true)
+                    @access('rid.user.create')
+                        <a href="#" class="btn btn-light">
+                            <i class="fa-fw fas fa-users"></i>
+                            Assign User Group
+                        </a>
+                    @endif
+                    @access('rid.documents.update')
                         <a href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-light ml-2">
                             <i class="fa-fw fas fa-upload"></i>
                             Post Approval Documents
                         </a>
                     @endif
                     @access('rid.note.view')
-                    <a href="#" class="btn btn-success ml-2" data-toggle="modal" data-target="#RidNoteAdd">
-                        <i class="fa-fw fas fa-comment-alt-edit"></i>
-                        Add Note
-                    </a>
+                        <a href="#" class="btn btn-success ml-2" data-toggle="modal" data-target="#RidNoteAdd">
+                            <i class="fa-fw fas fa-comment-alt-edit"></i>
+                            Add Note
+                        </a>
                     @endif
                 </div>
                 <div>
-                    <a href="{{route('eac.portal.rid.resupply', $rid->id)}}" class="btn btn-info ml-2 @if(!$rid->visits->count()) disabled @endif">
-                        <i class="fa-fw fas fa-calendar-edit"></i>
-                        Manage Visits
-                    </a>
+                    @if(\Auth::user()->type->name == 'Early Access Care')
+                        @access('rid.document.update')
+                        <a href="{{route('eac.portal.rid.resupply', $rid->id)}}" class="btn btn-info ml-2 @if(!$rid->visits->count()) disabled @endif">
+                            <i class="fa-fw fas fa-calendar-edit"></i>
+                            Manage Visits
+                        </a>
+                        @endif
+                    @endif
+                    @access('rid.index.update')
                     <a href="{{ route("eac.portal.rid.edit", $rid->id) }}" class="btn btn-info ml-2">
                         <i class="fa-fw fas fa-edit"></i>
                         Edit RID Master
                     </a>
+                    @endif
                 </div>
             </div>
         

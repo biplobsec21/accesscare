@@ -63,10 +63,6 @@
 			{{$user->full_name}}
 		</h2>
 		<div class="small">
-			@if($user->last_seen)
-				<strong>Last Login:</strong>
-				{{$user->last_seen->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A')}}
-			@endif
 			@if($user->updated_at)
 				<strong>Last Updated:</strong>
 				{{$user->updated_at->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A')}}

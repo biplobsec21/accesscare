@@ -14,22 +14,22 @@
                             <form method="post" action="{{ route('eac.auth.password.update') }}">
                                 @csrf
                                 <div class="mb-3 mb-xl-4">
-                                    <label class="d-block">Old Password</label>
-                                    <input class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" type="password" name="old_password" placeholder="Old Password" value="{{old('old_password')}}">
+                                    <label class="d-block">Current Password</label>
+                                    <input class="form-control{{ $errors->has('current_password') ? ' is-invalid' : '' }}" type="password" name="current_password" placeholder="Current Password" value="{{ !$errors->has('current_password') ? old('current_password') : '' }}">
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('old_password') }}
+                                        {{ $errors->first('current_password') }}
                                     </div>
                                 </div>
                                 <div class="mb-3 mb-xl-4">
                                     <label class="d-block">New Password</label>
                                     <input class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" type="password" name="new_password" placeholder="New Password" value="">
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('new_password') }}
-                                    </div>
                                 </div>
                                 <div class="mb-3 mb-xl-4">
                                     <label class="d-block">Confirm New Password</label>
-                                    <input class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" type="password" name="confirm_password" placeholder="Confirm New Password" value="">
+                                    <input class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" type="password" name="confirm_new_password" placeholder="Confirm New Password" value="">
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('new_password') }}
+                                    </div>
                                 </div>
                                 <button class="btn btn-success btn-block" type="submit" id="" value="Reset">
                                     Change Password

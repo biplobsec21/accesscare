@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class ForgotPasswordController extends Controller
 {
     use Notifier;
+
     /**
      * CreateRequest a new controller instance.
      *
@@ -29,33 +30,31 @@ class ForgotPasswordController extends Controller
 
     public function recoverPassword(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(), [
-            'email' => 'required|max:40|email',
-        ], [
-                'email.required' => ' Email Field is Required',
-            ]
-        );
+        $rules = [
+            'email' => ['required', 'max:40', 'email', function ($attribute, $value, $fail) {
+                if (!User::where('email', $value)->first()) {
+                    $fail('Email address not found in our system.');
+                }
+            }],
+        ];
+        $messages = [
+            'required' => 'Entering your account\'s email is required.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return redirect()->back()
                 ->with("errors", $validator->errors())
                 ->withInput();
-        } else {
-            $user = User::where('email', $request->input('email'))->first();
-            if (!$user) {
-                $validator->getMessageBag()->add('email', 'Email address does not exist');
-                return redirect()->back()
-                    ->with("errors", $validator->errors())
-                    ->withInput();
-            }
-            $new_password = self::newID('null');
-            $user->password_temp = 1;
-            $user->password = \Hash::make($new_password);
-            $user->save();
-
-            $this->sendMail('password_reset', $new_password, $user);
-            return redirect()->back()
-                ->with("alert", ['type' => 'success', 'msg' => "A temporary password is sent to your email address"]);
         }
+
+        $user = User::where('email', $request->input('email'))->first();
+        $new_password = self::newID('null');
+        $user->password_temp = 1;
+        $user->password = \Hash::make($new_password);
+        $user->save();
+
+        //$this->sendMail('password_reset', $new_password, $user);
+        return redirect()->back()
+            ->with("alert", ['type' => 'success', 'msg' => "A temporary password is sent to your email address" . $new_password]);
     }
 }

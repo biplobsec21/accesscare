@@ -64,10 +64,6 @@
 			@endif
 		</h2>
 		<div class="small">
-			@if($user->last_seen)
-				<strong>Last Login:</strong>
-				{{$user->last_seen->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A')}}
-			@endif
 			@if($user->updated_at)
 				<strong>Last Updated:</strong>
 				{{$user->updated_at->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A')}}
@@ -131,11 +127,11 @@
 				Resend Welcome Email
 			</a>
 			<div>
-				@if(\Auth::user()->type->name == 'Early Access Care' || \Auth::user()->id === $user->id)
-					<a href="#" class="btn btn-info" data-toggle="modal" data-target="#changePassword">
-						<i class="fas fa-key"></i>
-						Change Password
-					</a>
+				@if(\Auth::user()->id === $user->id)
+                    <a href="{{route('eac.auth.password.change', \Auth::user()->id)}}" class="btn btn-dark btn-block">
+                        Modify Password
+                        <i class="fa-fw fas fa-user-md"></i>
+                    </a>
 				@endif
 			</div>
 		</div>
@@ -548,39 +544,6 @@
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="0">Cancel
 						</button>
 						<button type="submit" name="submit" class="btn btn-success" value="Add Note">
-							Save
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header p-2">
-					<h5 class="m-0">
-						Change Password </h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="fal fa-times"></i>
-					</button>
-				</div>
-				<form method="post" action="{{ route('eac.auth.password.update', $user->id) }}">
-					@csrf
-					<div class="modal-body p-3">
-						<div class="mb-3">
-							<label class="d-block">Password</label>
-							<input name="pass_1" type="password" class="form-control"/>
-						</div>
-						<div class="mb-3">
-							<label class="d-block">Confirm Password</label>
-							<input name="pass_2" type="password" class="form-control"/>
-						</div>
-					</div>
-					<div class="modal-footer p-2 d-flex justify-content-between">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="0">Cancel
-						</button>
-						<button type="submit" class="btn btn-success">
 							Save
 						</button>
 					</div>

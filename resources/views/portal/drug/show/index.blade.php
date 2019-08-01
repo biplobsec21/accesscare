@@ -162,7 +162,7 @@
 					   aria-selected="false">
 						<span>Reference Documents</span>
 					</a>
-					@access('drug.resquests.view')
+					@access('drug.requests.view')
 					<a class="nav-link @if($drug->rids->count()) complete  @else hide-tab @endif" id="xridsT"
 					   data-toggle="pill" href="#xrids" role="tab"
 					   aria-controls="xrids" aria-selected="false">
@@ -335,7 +335,7 @@
 							@endif
 						</div>
 					</div><!-- /.tab-pane -->
-					@access('drug.resquests.view')
+					@access('drug.requests.view')
 					<div class="tab-pane fade" id="xrids" role="tabpanel" aria-labelledby="xrids-tab">
 						<div class="card-body">
 							<h5 class="">
