@@ -3,7 +3,7 @@
 		Pending Shipments </h5>
 </div>
 <div class="table-responsive">
-	<table class="table table-sm table-striped table-hover" id="shipmentListTBL">
+	<table class="table table-sm table-striped table-hover w-100" id="shipmentListTBL">
 		<thead>
 		<tr>
 			<th class="no-search no-sort"></th>

@@ -1,19 +1,20 @@
 <div class="card">
 	<div class="card-body">
 		<h5 class="text-xl-center">
-			<i class="fa-fw fas fa-users text-info"></i>
-			<a class="text-dark" href="{{route('eac.portal.user.list')}}">User Groups</a>
+			<i class="fa-fw fa-lg fad fa-users text-warning"></i>
+			<a class="text-dark" href="{{route('eac.portal.user.list')}}">Platform Users</a>
 		</h5>
 		<p class="text-muted mb-0 small text-xl-center">
-			Establish your user groups within your practice/hospital </p>
+			Create and manage all user types within the Early Access Care&trade; platform.
+  </p>
 	</div>
-	<div class="d-flex">
-		<div class="p-3 h4 mb-0 alert-info">
-			<a href="{{route('eac.portal.user.list')}}" class="text-info">{{$users->count()}}</a>
-		</div>
-		<a href="{{ route('eac.portal.user.create') }}" class="btn btn-info btn-lg flex-grow-1 d-flex justify-content-between align-items-center">
-			Create User
-			<i class="fa-fw fas fa-user"></i>
-		</a>
-	</div>
+ <a href="{{route('eac.portal.user.list')}}" class="btn btn-warning border-0 btn-block h5 mb-0 p-0 d-flex justify-content-between align-items-stretch">
+  <div class="p-1 pl-2 pr-2 p-xl-3 alert-warning">
+   {{$users->count()}}
+  </div>
+  <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center flex-fill">
+   <span>Platform Users</span>
+   <span class="fa-fw fas fa-lg fa-users"></span>
+  </div>
+ </a>
 </div>
