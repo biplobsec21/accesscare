@@ -6,53 +6,62 @@ use Illuminate\Support\Collection;
 
 class AuthCollection extends Collection
 {
-	protected $all = false;
-	protected $none = false;
+    protected $all = false;
+    protected $none = false;
 
-	public function pushAccess($items)
-	{
-		return $this->items = (array_merge($this->items, $this->getArrayableItems($items)));
-	}
+    public function pushAccess($items)
+    {
+        return $this->items = (array_merge($this->items, $this->getArrayableItems($items)));
+    }
 
-	public function gate(string $gates, $id = null)
-	{
-		if($this->all)
-			return 1;
+    public function gate(string $gates, $id = null)
+    {
+        if ($this->all)
+            return 1;
 
-		if($this->none)
-			return 0;
+        if ($this->none)
+            return 0;
 
-		echo $gates . ' -> ' . $this->recursiveNeedleInHaystack($gates);
-		return $this->recursiveNeedleInHaystack($gates);
-	}
+        $str = '<span class="debug-perm badge badge-outline-dark bg-white">';
+        $str .= '<span class="debug-perm-key font-italic text-dark">' . $gates . '</span>';
+        $str .= '<span class="debug-perm-deliminator">   </span>';
+        if ($this->recursiveNeedleInHaystack($gates))
+            $str .= '<span class="debug-perm-value text-success"><i class="far fa-lock-open"></i></span>';
+        else
+            $str .= '<span class="debug-perm-value text-danger"><i class="far fa-lock"></i></span>';
+        $str .= '</span>';
+        echo $str;
 
-	public function recursiveNeedleInHaystack($needles)
-	{
-		$needles = explode('.', $needles);
-		$haystack = $this->recursiveObjectToArray($this->items);
-		foreach($needles as $needle) {
-			if(array_key_exists($needle, $haystack))
-				$haystack = $haystack[$needle];
-			else
-				return 0;
-		}
-		return $haystack;
-	}
+        return $this->recursiveNeedleInHaystack($gates);
+    }
 
-	public function recursiveObjectToArray($obj)
-	{
-		return json_decode(json_encode($obj), true);
-	}
+    public function recursiveNeedleInHaystack($needles)
+    {
+        $needles = explode('.', $needles);
+        $haystack = $this->recursiveObjectToArray($this->items);
+        foreach ($needles as $needle) {
+            if (array_key_exists($needle, $haystack))
+                $haystack = $haystack[$needle];
+            else
+                return 0;
+        }
+        return $haystack;
+    }
 
-	public function setAuthAll()
-	{
-		$this->all = true;
-		$this->none = false;
-	}
+    public function recursiveObjectToArray($obj)
+    {
+        return json_decode(json_encode($obj), true);
+    }
 
-	public function setAuthNone()
-	{
-		$this->all = false;
-		$this->none = true;
-	}
+    public function setAuthAll()
+    {
+        $this->all = true;
+        $this->none = false;
+    }
+
+    public function setAuthNone()
+    {
+        $this->all = false;
+        $this->none = true;
+    }
 }

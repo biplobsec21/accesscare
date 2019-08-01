@@ -21,13 +21,23 @@ Route::group([
 		'uses' => 'RegisterController@showRegistrationForm'
 	]);
 
-    Route::get('/password/reset', [
-        'as' => 'eac.auth.password.reset',
-        'uses' => 'ForgotPasswordController@resetPasswordForm'
+    Route::get('/password/forgot', [
+        'as' => 'eac.auth.password.forgot',
+        'uses' => 'ForgotPasswordController@forgotPassword'
     ]);
-    Route::post('/password/reset/submit', [
-        'as' => 'eac.auth.password.reset.submit',
-        'uses' => 'ForgotPasswordController@resetPassword'
+    Route::post('/password/recover', [
+        'as' => 'eac.auth.password.recover.submit',
+        'uses' => 'ForgotPasswordController@recoverPassword'
+    ]);
+
+    Route::get('/password/change', [
+        'as' => 'eac.auth.password.change',
+        'uses' => 'ChangePasswordController@changePassword',
+    ]);
+
+    Route::post('/password/update', [
+        'as' => 'eac.auth.password.update',
+        'uses' => 'ChangePasswordController@updatePassword',
     ]);
 
 	Route::get('/pending', [

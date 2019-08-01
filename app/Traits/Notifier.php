@@ -16,16 +16,16 @@ trait Notifier
 	protected function createNotice($name, $context, $user)
 	{
 		if($user === 'eac')
-			return;
+			return; // Send it to all eac users
 		$mailer = Mailer::where('name', $name)->first();
 		$notice = new Notification();
 		$notice->id = $this->newID(Notification::class);
 		$notice->user_id = $user->id;
 		$notice->subject_id = $context->id;
 		$notice->message = strip_tags($this->applyTokens($mailer->html, $context));
-		$notice->save();
+		//$notice->save();
 
-		$this->sendMail($mailer, $context, $user);
+		//$this->sendMail($mailer, $context, $user);
 	}
 
 	public function sendMail($mailer, $context, $user)

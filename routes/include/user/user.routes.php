@@ -33,11 +33,6 @@ Route::group([
 		'uses' => 'UserController@show',
 	]);
 
-	Route::post('/status/approve/{id}', [
-		'as' => 'eac.portal.user.changePassword',
-		'uses' => 'UserController@changePassword',
-	]);
-
 	Route::get('/status/approve/{id}', [
 		'as' => 'eac.portal.user.approve',
 		'uses' => 'UserController@approve',

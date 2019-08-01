@@ -12,18 +12,6 @@ use Illuminate\Support\Facades\Validator;
 class ForgotPasswordController extends Controller
 {
     use Notifier;
-
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset emails and
-    | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
-    |
-    */
-
     /**
      * CreateRequest a new controller instance.
      *
@@ -34,12 +22,12 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function resetPasswordForm()
+    public function forgotPassword()
     {
-        return view('auth.passwords.reset');
+        return view('auth.passwords.forgot');
     }
 
-    public function resetPassword(Request $request)
+    public function recoverPassword(Request $request)
     {
         $validator = Validator::make(
             $request->all(), [
@@ -65,14 +53,9 @@ class ForgotPasswordController extends Controller
             $user->password = \Hash::make($new_password);
             $user->save();
 
-            //
-            return redirect()->back()
-                ->with("alert", ['type' => 'success', 'msg' => "System Not Currently Sending Emails. New Password: {$new_password}"]);
-
             $this->sendMail('password_reset', $new_password, $user);
             return redirect()->back()
                 ->with("alert", ['type' => 'success', 'msg' => "A temporary password is sent to your email address"]);
         }
-
     }
 }

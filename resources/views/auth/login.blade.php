@@ -50,7 +50,7 @@
 										{{--Either your username or password is incorrect.--}}
 									</div>
 									<div class="text-right">
-                                        <a href="{{ route('eac.auth.password.reset') }}" id="forgotPassword" class="btn btn-sm btn-link">
+                                        <a href="{{ route('eac.auth.password.forgot') }}" id="forgotPassword" class="btn btn-sm btn-link">
 											<i class="far fa-lock"></i> Forgot Password
 										</a>
 									</div>

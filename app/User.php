@@ -86,11 +86,7 @@ class User extends Authenticatable
 
 	public function hasDefaultPassword()
 	{
-		if (\Hash::check($this->id, $this->password)) {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->password_temp;
 	}
 
 	/**

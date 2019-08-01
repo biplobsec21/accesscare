@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Company;
 use App\Address;
 use App\Company;
 use App\Country;
+use App\DataTables\DataTableResponse;
+use App\DataTables\DataTableRow;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\CreateRequest;
 use App\Http\Requests\Company\UpdateRequest;
 use App\Phone;
 use App\RidVisit;
+use App\Traits\AuthAssist;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,6 +24,8 @@ use Illuminate\Http\Request;
  */
 class CompanyController extends Controller
 {
+    use AuthAssist;
+
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -173,83 +178,48 @@ class CompanyController extends Controller
 
 	public function ajaxCompanyData()
 	{
-
-		$sql = Company::Where('status', '!=', '');
-
-		if (Request()->input('status')) {  // get status parameter
-			$RequestViewStatus = Request()->input('status');
-			$sql = Company::Where('status', '=', $RequestViewStatus);
-		}
-
-//  return \DataTables::of(Company::query())
-		return \DataTables::of($sql)
-			->addColumn('name', function ($row) {
-				return '<a href="' . route('eac.portal.company.show', $row->id) . '">' . $row->name . '</a>';
-			})
-			->addColumn('status', function ($row) {
-				return '<span class="badge badge-' . config('eac.company.status')[$row->status] . '"> ' . $row->status . ' </span>';
-			})
-			->addColumn('drug_count', function ($row) {
-				return '<a href="' . route('eac.portal.company.show', $row->id) . '#xdrugs" class="badge badge-mw badge-outline-warning"> ' . $row->drugs->count() . '</a>';
-			})
-			->addColumn('user_count', function ($row) {
-				return '<a href="' . route('eac.portal.company.show', $row->id) . '#xusers" class="badge badge-mw badge-outline-info"> ' . $row->users->count() . '</a>';
-			})
-			->addColumn('rid_count', function ($row) {
-				return '<a href="' . route('eac.portal.company.show', $row->id) . '#xrequests" class="badge badge-mw badge-outline-primary"> ' . $row->rids->count() . '</a>';
-			})
-			->addColumn('created_at', function ($row) {
-				return $row->created_at->format(config('eac.date_format'));
-			})
-			->addColumn('ops_btns', function ($row) {
-				return '<div class="btn-group dropleft" role="group">
-     <a class="btn btn-link" href="#" id="dropdownMenuButton' . $row->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>
-     </a>
-     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $row->id . '">
-      <a class="dropdown-item" title="Edit Company" href="' . route('eac.portal.company.edit', $row->id) . '">
-       <i class="fal fa-fw fa-edit"></i> Edit Company
-      </a>
-      <a class="dropdown-item" title="View Company" href="' . route('eac.portal.company.show', $row->id) . '">
-       <i class="fal fa-fw fa-search-plus"></i> View Company
-      </a>
-     </div>
-    </div>
-    ';
-			})
-			->rawColumns([
-				'name',
-				'status',
-				'drug_count',
-				'user_count',
-				'rid_count',
-				'created_at',
-				'ops_btns',
-			])
-			->filterColumn('name', function ($query, $keyword) {
-				$query->where('name', 'like', '%' . $keyword . '%');
-			})
-			->filterColumn('created_at', function ($query, $keyword) {
-				$query->where('created_at', 'like', '%' . $keyword . '%');
-			})->order(function ($query) {
-				$columns = ['name' => 0,
-				'status' => 1,
-				'drug_count' => 2,
-				'user_count' => 3,
-				'rid_count' => 4,
-				'created_at' => 5,];
-
-				$direction = request('order.0.dir');
-				if (request('order.0.column') == $columns['name']) {
-					$query->orderBy('name', $direction);
-				}
-
-				if (request('order.0.column') == $columns['created_at']) {
-					$query->orderBy('created_at', $direction);
-				}
-			})
-			->smart(1)
-			->toJson();
+	    $companies = $this->listCompanyAccess();
+        $response = new DataTableResponse(Company::class, $companies);
+        foreach ($companies as $company) {
+            $row = new DataTableRow($company->id);
+            $row->setColumn('name', $company->name,
+                '<a href="' . route('eac.portal.company.show', $company->id) . '">' .
+                $company->name .
+                '</a>'
+            );
+            $row->setColumn('status', $company->status,
+                $company->status
+            );
+            $row->setColumn('drug_count', $company->drugs->count(),
+                '<a href="' . route('eac.portal.company.show', $company->id) . '#xdrugs" class="badge badge-mw badge-outline-warning"> ' . $company->drugs->count() . '</a>'
+            );
+            $row->setColumn('user_count', $company->users->count(),
+                '<a href="' . route('eac.portal.company.show', $company->id) . '#xusers" class="badge badge-mw badge-outline-info"> ' . $company->users->count() . '</a>'
+            );
+            $row->setColumn('rid_count', $company->rids->count(),
+                '<a href="' . route('eac.portal.company.show', $company->id) . '#xrequests" class="badge badge-mw badge-outline-primary"> ' . $company->rids->count() . '</a>'
+            );
+            $row->setColumn('created_at', strtotime($company->created_at),
+                '<span style="display: none">' . $company->created_at->format('Y-m-d') . '</span>' . $company->created_at->format(config('eac.date_format'))
+            );
+            $row->setColumn('btns', $company->id,
+                '<div class="btn-group dropleft" role="group">' .
+                '<a class="btn btn-link" href="#" id="dropdownMenuButton' . $company->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
+                '<span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>' .
+                '</a>' .
+                '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $company->id . '">' .
+                '<a class="dropdown-item" title="Edit Company" href="' . route('eac.portal.company.edit', $company->id) . '">' .
+                '<i class="fal fa-fw fa-edit"></i> Edit Company' .
+                '</a>' .
+                '<a class="dropdown-item" title="View Company" href="' . route('eac.portal.company.show', $company->id) . '">' .
+                '<i class="fal fa-fw fa-search-plus"></i> View Company' .
+                '</a>' .
+                '</div>' .
+                '</div>'
+            );
+            $response->addRow($row);
+        }
+        return $response->toJSON();
 	}
 
 

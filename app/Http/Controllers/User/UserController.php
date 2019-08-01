@@ -187,17 +187,6 @@ class UserController extends PermissionsController
 		return redirect()->route('eac.portal.getDashboard');
 	}
 
-	public function changePassword($id)
-	{
-		if ($_POST['pass_1'] !== $_POST['pass_2'])
-			return redirect()->back()->with('error', 'Passwords Did Not Match.');
-		$user = User::where('id', $id)->firstOrFail();
-		$user->password = \Hash::make($_POST['pass_1']);
-		$user->save();
-		$this->createNotice('user_reset_password', $user, $user);
-		return redirect()->back()->with('confirm', 'Password Has Been Changed.');
-	}
-
     public function userWelcome($id)
     {
         $user = User::where('id', '=', $id)->firstOrFail();

@@ -565,7 +565,7 @@
 						<i class="fal fa-times"></i>
 					</button>
 				</div>
-				<form method="post" action="{{ route('eac.portal.user.changePassword', $user->id) }}">
+				<form method="post" action="{{ route('eac.auth.password.update', $user->id) }}">
 					@csrf
 					<div class="modal-body p-3">
 						<div class="mb-3">
