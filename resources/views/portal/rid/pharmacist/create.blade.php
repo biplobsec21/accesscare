@@ -33,7 +33,7 @@
         {{ csrf_field() }}
         <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
         <div class="actionBar">
-            <a href="{{ route('eac.portal.pharmacist.list') }}" class="btn btn-light">
+            <a href="{{ route('eac.portal.pharmacist.list.all') }}" class="btn btn-light">
                 Pharmacist List
             </a>
         </div><!-- end .actionBar -->
