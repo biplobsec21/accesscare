@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Drug extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -250,7 +250,7 @@ class Drug extends Model
 		$allDrugs = Drug::all();
 		$drugs = [];
 		foreach ($allDrugs as $drug)
-			if ($user->can('drug.index.view', $drug->id)) {
+			if ($user->can('drug.index.view')) {
 				array_push($drugs, $drug);
 			}
 		return collect($drugs);

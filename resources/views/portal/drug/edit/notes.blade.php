@@ -4,7 +4,7 @@
    Notes &amp; Correspondence
    <span class="badge badge-dark">{{$drug->notes->count()}}</span>
   </h5>
-		@access('drug.note.create', $drug->id)
+		@access('drug.note.create')
 			@if($drug->notes->count())
 				<ul class="list-group list-group-flush m-0">
 					@foreach($drug->notes->sortByDesc('created_at') as $note)
@@ -30,7 +30,7 @@
 			@endif
 		@endif
 	</div>
-	@access('drug.note.create', $drug->id)
+	@access('drug.note.create')
 		<div class="card-footer d-flex justify-content-start">
 			<a href="#" class="btn btn-success" data-toggle="modal" data-target="#NoteAdd">
 				Add Note

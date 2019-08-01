@@ -104,12 +104,12 @@
 {{--				</a>--}}
 {{--			@endif--}}
 			<div>
-				@access('drug.index.update', $drug->id)
+				@access('drug.index.update')
 				<a href="{{ route("eac.portal.drug.edit", $drug->id) }}" class="btn btn-info">
 					<i class="far fa-edit"></i> Edit Drug
 				</a>
 				@endif
-				{{-- <a href="{{ route('eac.portal.drug.druginfo', $drug->id) }}" class="text-white btn bg-gradient-indigo">
+				{{-- <a href="{{ route('eac.portal.drug.druginfo') }}" class="text-white btn bg-gradient-indigo">
 					<i class="fa-fw fas fa-calendar-alt"></i> Drug Supply Information
 				</a> --}}
 			</div>
@@ -178,7 +178,7 @@
 			</div>
 			<div class="col-sm-9 col-xl p-0">
 				<div class="card tab-content wizardContent" id="tabContent">
-					@access('drug.info.view', $drug->id)
+					@access('drug.info.view')
 					@include('portal.drug.show.details')
 					@endif
 					<div class="tab-pane fade show active" id="xavailability" role="tabpanel"
@@ -187,7 +187,7 @@
 							<h5 class="mb-1">
 								Drug is available in these <strong>countries</strong>:
 							</h5>
-							@access('drug.info.view', $drug->id)
+							@access('drug.info.view')
 							<div class="mb-3">
 								@if($drug->countries_available && $drug->countries_available != 'null' && $drug->countries_available != '0' )
 									@foreach(\App\Country::find(json_decode($drug->countries_available, true)) as $country)
@@ -268,7 +268,7 @@
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xdocuments" role="tabpanel" aria-labelledby="xdocuments-tab">
 						<div class="card-body">
-							@access('drug.document.view', $drug->id)
+							@access('drug.document.view')
 							@serverRender('portal.drug.show.documents')
 							@else
 								<p class="text-danger m-0">
@@ -279,7 +279,7 @@
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xresources" role="tabpanel" aria-labelledby="xresources-tab">
 						<div class="card-body">
-							@access('drug.resource.view', $drug->id)
+							@access('drug.resource.view')
 							@serverRender('portal.drug.show.resources')
 							@else
 								<p class="text-danger m-0">
@@ -290,7 +290,7 @@
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xgroups" role="tabpanel" aria-labelledby="xgroups-tab">
 						<div class="card-body">
-							@access('drug.user.view', $drug->id)
+							@access('drug.user.view')
 							@serverRender('portal.drug.show.groups')
 							@else
 								<p class="text-danger m-0">
@@ -302,7 +302,7 @@
 					<div class="tab-pane fade" id="xdepots" role="tabpanel" aria-labelledby="xdepots-tab">
 						<div class="card-body">
 							<h5 class="">Depots &amp; Lots</h5>
-							@access('drug.depot.view', $drug->id)
+							@access('drug.depot.view')
 							@serverRender('portal.drug.show.depots')
 							@else
 								<p class="text-danger m-0">
@@ -315,7 +315,7 @@
 						<div class="card-body">
 							<h5 class="">Drug Distribution Schedule <span
 									class="badge badge-dark">{{ $supply_info->count()}}</span></h5>
-							@access('drug.supply.view', $drug->id)
+							@access('drug.supply.view')
 							@include('portal.drug.show.supply_info')
 							@else
 								<p class="text-danger m-0">
@@ -326,7 +326,7 @@
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xcomponents" role="tabpanel" aria-labelledby="xcomponents-tab">
 						<div class="card-body">
-							@access('drug.component.view', $drug->id)
+							@access('drug.component.view')
 							@serverRender('portal.drug.show.dosages')
 							@else
 								<p class="text-danger m-0">
@@ -384,7 +384,7 @@
 								Notes &amp; Correspondence
 								<span class="badge badge-dark">{{$drug->notes->count()}}</span>
 							</h5>
-							@access('drug.note.view', $drug->id)
+							@access('drug.note.view')
 							@include('portal.drug.show.notes')
 							@else
 								<p class="text-danger m-0">

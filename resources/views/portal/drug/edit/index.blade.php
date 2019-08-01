@@ -152,7 +152,7 @@
 			</div>
 			<div class="col-sm-9 col-xl p-0">
 				<div class="card tab-content wizardContent" id="tabContent">
-					@access('drug.info.view', $drug->id)
+					@access('drug.info.view')
 					@include('portal.drug.show.details')
 					@endif
 					<div class="tab-pane fade show active" id="xdetails" role="tabpanel" aria-labelledby="xdetails-tab">
@@ -160,9 +160,9 @@
 							@csrf
 							<input type="hidden" name="drug_id" value="{{$drug->id}}">
 							<div class="card-body">
-								@access('drug.info.update', $drug->id)
+								@access('drug.info.update')
 								@include('portal.drug.edit.details')
-								@elseaccess('drug.info.view', $drug->id)
+								@elseaccess('drug.info.view')
 								@include('portal.drug.show.details')
 								@endif
 							</div>
@@ -183,7 +183,7 @@
 									<strong>countries</strong>
 									:
 								</h5>
-								@access('drug.info.update', $drug->id)
+								@access('drug.info.update')
 								<div class="mb-3">
 									<select multiple class="form-control select2" name="countries_available[]">
 										@foreach($countries as $country)
@@ -225,7 +225,7 @@
 										Allow Remote Visits
 									</label>
 								</div>
-								@elseaccess('drug.info.view', $drug->id)
+								@elseaccess('drug.info.view')
 								<div class="mb-3">
 									@if($drug->countries_available && $drug->countries_available != 'null' && $drug->countries_available != '0' )
 										@foreach(\App\Country::find(json_decode($drug->countries_available, true)) as $country)
@@ -318,16 +318,16 @@
 					<div class="tab-pane fade" id="xcomponents" role="tabpanel" aria-labelledby="xcomponents-tab">
 						<div class="card card-body mb-0">
 							<h5>
-								Components @access('drug.component.view', $drug->id)
+								Components @access('drug.component.view')
 								<span class="badge badge-dark">{{ $drug->components->count() }}</span>
 								@endif
-								and Dosages @access('drug.component.view', $drug->id)
+								and Dosages @access('drug.component.view')
 								<span class="badge badge-dark">{{ $dosg->count() }}</span>
 								@endif
 							</h5>
-							@access('drug.component.update', $drug->id)
+							@access('drug.component.update')
 							@include('portal.drug.edit.dosages')
-							@elseaccess('drug.component.view', $drug->id)
+							@elseaccess('drug.component.view')
 							@include('portal.drug.show.dosages')
 							@else
 								<p class="text-danger m-0">
@@ -336,7 +336,7 @@
 								</p><!-- need to hide entire block if else ^^ -->
 							@endif
 						</div>
-						@access('drug.component.create', $drug->id)
+						@access('drug.component.create')
 						<div class="card-footer d-flex justify-content-start">
 							<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newComponentModal">
 								Add Component
@@ -350,9 +350,9 @@
 							<h5 class="text-gold mb-2">
 								Depots and Lots
 							</h5>
-							@access('drug.depot.update', $drug->id)
+							@access('drug.depot.update')
 							@include('portal.drug.edit.depots')
-							@elseaccess('drug.depot.view', $drug->id)
+							@elseaccess('drug.depot.view')
 							@include('portal.drug.show.depots')
 							@else
 								<p class="text-danger m-0">
@@ -361,7 +361,7 @@
 								</p>
 							@endif
 						</div>
-						@access('drug.depot.create', $drug->id)
+						@access('drug.depot.create')
 						<div class="card-footer d-flex justify-content-start">
 							@if($dosg->count())
 								<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newLotModal">
@@ -378,9 +378,9 @@
 						@endif
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xdrugdistTa" role="tabpanel" aria-labelledby="xdrugdistTa-tab">
-						@access('drug.supply.update', $drug->id)
+						@access('drug.supply.update')
 						@include('portal.drug.edit.supply')
-						@elseaccess('drug.supply.view', $drug->id)
+						@elseaccess('drug.supply.view')
 						@include('portal.drug.show.supply_info')
 						@else
 							<p class="text-danger m-0">
@@ -391,9 +391,9 @@
 					</div><!-- /.tab-pane -->
 					<div class="tab-pane fade" id="xgroups" role="tabpanel" aria-labelledby="xgroups-tab">
 						<div class="card card-body mb-0">
-							@access('drug.user.update', $drug->id)
+							@access('drug.user.update')
 							@include('portal.drug.edit.groups')
-							@elseaccess('drug.user.view', $drug->id)
+							@elseaccess('drug.user.view')
 							@include('portal.drug.show.groups')
 							@else
 								<p class="text-danger m-0">
@@ -402,7 +402,7 @@
 								</p>
 							@endif
 						</div>
-						@access('drug.user.create', $drug->id)
+						@access('drug.user.create')
 						<div class="card-footer d-flex justify-content-start">
 							{{-- <button type="button" class="btn btn-primary window-btn" data-toggle="modal"
 							data-target="#">
@@ -434,9 +434,9 @@
 									</div>
 								</div>
 							</div>
-							@access('drug.document.update', $drug->id)
+							@access('drug.document.update')
 							@include('portal.drug.edit.documents')
-							@elseaccess('drug.document.view', $drug->id)
+							@elseaccess('drug.document.view')
 							@include('portal.drug.show.documents')
 							@else
 								<p class="text-danger m-0">
@@ -445,7 +445,7 @@
 								</p><!-- need to hide entire block if else ^^ -->
 							@endif
 						</div>
-						@access('drug.document.create', $drug->id)
+						@access('drug.document.create')
 						<div class="card-footer d-flex justify-content-start">
 							<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newDocumentModal">
 								Add Form
@@ -453,7 +453,7 @@
 						</div>
 						@include('include.portal.modals.drugs.document.new')
 						@endif
-						@access('drug.document.update', $drug->id)
+						@access('drug.document.update')
 						@foreach($drug->documents as $document)
 							@include('include.portal.modals.drugs.document.edit', $document)
 						@endforeach
@@ -463,7 +463,7 @@
 						<div class="card card-body mb-0">
 							<div class="row mb-3">
 								<div class="col">
-									<h5 class="mb-0">Reference Documents @access('drug_resource.view', $drug->id)
+									<h5 class="mb-0">Reference Documents @access('drug_resource.view')
 										<span class="badge badge-dark">{{ $drug->resources->count() }}</span>
 										@endif
 									</h5>
@@ -481,9 +481,9 @@
 									</div>
 								</div>
 							</div>
-							@access('drug.resource.update', $drug->id)
+							@access('drug.resource.update')
 							@include('portal.drug.edit.resources')
-							@elseaccess('drug.resource.view', $drug->id)
+							@elseaccess('drug.resource.view')
 							@include('portal.drug.show.resources')
 							@else
 								<p class="text-danger m-0">
@@ -492,7 +492,7 @@
 								</p>
 							@endif
 						</div>
-						@access('drug.resource.create', $drug->id)
+						@access('drug.resource.create')
 						<div class="card-footer d-flex justify-content-start">
 							<button type="button" class="btn btn-success window-btn" data-toggle="modal" data-target="#newResourceModal">
 								Add Document
@@ -500,7 +500,7 @@
 						</div>
 						@endif
 						@include('include.portal.modals.drugs.resource.new')
-						@access('drug.resource.update', $drug->id)
+						@access('drug.resource.update')
 						@foreach($drug->resources as $resource)
 							@include('include.portal.modals.drugs.resource.edit', $resource)
 						@endforeach

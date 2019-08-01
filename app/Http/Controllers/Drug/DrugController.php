@@ -244,7 +244,7 @@ class DrugController extends Controller
 		$dosage->active = $request->input('active') ? 1 : 0;
 		$dosage->save();
 
-		$component->index = DrugComponent::where('drug_id', $drug->id)->count() + 1;
+		$component->index = DrugComponent::where('drug_id')->count() + 1;
 		$component->save();
 
 		if ($request->input('component_name')) {
@@ -254,7 +254,7 @@ class DrugController extends Controller
 				$component->id = $this->newID(DrugComponent::class);
 				$component->drug_id = $drug->id;
 				$component->name = $componentArray[$i];
-				$component->index = DrugComponent::where('drug_id', $drug->id)->count() + 1;
+				$component->index = DrugComponent::where('drug_id')->count() + 1;
 				$component->save();
 
 
