@@ -46,7 +46,25 @@ class SettingsController extends Controller
         foreach ($items as $item) {
             $row = new DataTableRow($item->id);
             foreach($request->input('cols') as $col) {
-                $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item));
+                if(!array_key_exists('type', $col)) {
+                    $col['type'] = "string";
+                }
+                switch (strtolower($col['type'])) {
+                    case "string":
+                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item));
+                        break;
+                    case "btn":
+                        $value = "<a href=\"{$this->getThroughModel($col['data'], $item)}\" ";
+                        $value .= "class=\"{$col['styling']}\">";
+                        $value .= $col['icon'] . " " . $col['text'];
+                        $value .= "</a>";
+                        $row->setColumn($col['data'], $value);
+                        break;
+                    case "link":
+                        echo "i equals 2";
+                        break;
+                }
+
             }
             $response->addRow($row);
         }

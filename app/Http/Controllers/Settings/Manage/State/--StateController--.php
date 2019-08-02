@@ -277,8 +277,8 @@ class StateController extends Controller {
 
 
         // $dosage = array();
-        // $rows = State::where('id', '=', $id);
-        // $country = Country::where('id', '=', $id);
+        // $rows = State::where('id', '=', $id)->get();
+        // $country = Country::where('id', '=', $id)->get();
         // if (!count($rows)) {
         //     return redirect(route($this->_data['listAll']));
         // }

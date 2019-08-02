@@ -190,7 +190,7 @@ class DenialReasonController extends Controller {
     public function edit($id) {
 
         $dosage = array();
-        $rows = DenialReason::where('id', '=', $id);
+        $rows = DenialReason::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

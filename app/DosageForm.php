@@ -50,6 +50,12 @@ class DosageForm extends Model
 	 *
 	 * @var string
 	 */
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.drug.dosage.form.edit', $this->id);
+    }
+
 	protected $prefix = "DOSAGEFORM";
 
 	public function route()

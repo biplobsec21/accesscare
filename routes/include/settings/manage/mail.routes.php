@@ -44,7 +44,7 @@ Route::group([
 	]);
 
 	Route::post('/edit', [
-		'as' => 'eac.portal.settings.mail.edit',
+		'as' => 'eac.portal.settings.mail.update',
 		'uses' => 'NotificationMailController@postEdit',
 	]);
 	Route::match(['get','post'],'ajax/mailType/deleteDB', [

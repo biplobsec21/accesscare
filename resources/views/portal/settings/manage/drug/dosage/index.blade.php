@@ -69,7 +69,7 @@
                         <th>Unit</th>
                         <th class="no-search">Status</th>
                         <th>Last Update</th>
-                        <th class="no-search"></th>
+                        <th class="no-search no-sort"></th>
                     </tr>
                     </thead>
                     <tbody></tbody>
@@ -99,16 +99,32 @@
                 ajax: {
                     url: $url,
                     type: "post",
+                    fields: [
+                        {
+                            data: "form-name"
+                        },
+                        {
+                            data: "strength-name"
+                        },
+                        {
+                            data: "unit-name"
+                        },
+                        {
+                            data: "active"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "manage_route",
+                            type: "btn",
+                            styling: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
                 order: [[0, 'desc']],
-                columns: [
-                    "form-name",
-                    "strength-name",
-                    "unit-name",
-                    "active",
-                    "created_at",
-                    "btns",
-                ],
             });
         }); // end doc ready
     </script>

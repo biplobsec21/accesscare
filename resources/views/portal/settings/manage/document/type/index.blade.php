@@ -99,17 +99,35 @@
                 ajax: {
                     url: $url,
                     type: "post",
+                    fields: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "is_resource"
+                        },
+                        {
+                            data: "active"
+                        },
+                        {
+                            data: "template"
+                        },
+                        {
+                            data: "desc"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "manage_route",
+                            type: "btn",
+                            styling: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
                 order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "is_resource",
-                    "active",
-                    "template",
-                    "desc",
-                    "created_at",
-                    "btns",
-                ],
             });
         }); // end doc ready
     </script>

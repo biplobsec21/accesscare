@@ -100,16 +100,32 @@
                 ajax: {
                     url: $url,
                     type: "post",
+                    fields: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "abbr"
+                        },
+                        {
+                            data: "avg_days_to_deliver_drug"
+                        },
+                        {
+                            data: "active"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "manage_route",
+                            type: "btn",
+                            styling: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
                 order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "abbr",
-                    "avg_days_to_deliver_drug",
-                    "active",
-                    "created_at",
-                    "btns",
-                ],
             });
         }); // end doc ready
     </script>

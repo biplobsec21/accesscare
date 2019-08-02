@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class State extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -61,4 +61,9 @@ class State extends Model
 	{
 		return $this->belongsTo('App\\Country');
 	}
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.states.edit', $this->id);
+    }
 }

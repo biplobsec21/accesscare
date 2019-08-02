@@ -26,7 +26,7 @@
    @yield('title')
   </h2>
  </div><!-- end .titleBar -->
-	<form action="{{ route('eac.portal.settings.mail.edit') }}" method="post" id="edit_form">
+	<form action="{{ route('eac.portal.settings.mail.update') }}" method="post" id="edit_form">
 		{{ csrf_field() }}
   <input type="hidden" name="return_from" id="return_from" value="">
   <input type="hidden" name="eid" id="eid" value="{{ $mailbyId->id }}">

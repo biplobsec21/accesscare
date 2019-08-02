@@ -211,7 +211,7 @@ class DrugDosageStrengthController extends Controller {
     public function edit($id) {
 
         $dosage = array();
-        $rows = DosageStrength::where('id', '=', $id);
+        $rows = DosageStrength::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

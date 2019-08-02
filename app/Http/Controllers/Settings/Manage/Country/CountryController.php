@@ -252,7 +252,7 @@ class CountryController extends Controller {
     public function edit($id) {
 
         $dosage = array();
-        $rows = Country::where('id', '=', $id);
+        $rows = Country::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

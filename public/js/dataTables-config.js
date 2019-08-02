@@ -13,14 +13,28 @@
             orderCellsTop: true,
             fixedHeader: true,
         }, $options);
-        $settings.columns = $settings.columns.map(function (str, index) {
-            let $col = $header.find('th:eq(' + index + ')');
-            let $val = {orderable: !$col.hasClass('no-sort'), searchable: !$col.hasClass('no-search')};
-            if (str) {
-                $val.data = str;
-            }
-            return $val;
-        });
+        if ($settings.ajax.fields) {
+            $settings.columns = $settings.ajax.fields.map(function ($field, $index) {
+                let $col = $header.find('th:eq(' + $index + ')');
+                $field.orderable = !$col.hasClass('no-sort');
+                $field.searchable = !$col.hasClass('no-search');
+                if(!$field.type) {
+                    $field.type = "string";
+                }
+                return $field;
+            });
+        }
+        else if ($settings.columns) {
+            $settings.columns = $settings.columns.map(function (str, index) {
+                let $col = $header.find('th:eq(' + index + ')');
+                let $val = {orderable: !$col.hasClass('no-sort'), searchable: !$col.hasClass('no-search')};
+                if (str) {
+                    $val.data = str;
+                }
+                return $val;
+            });
+        }
+
 
         // Create inputs in the table head
         let $firstHeaderRow = $header.find('tr:eq(0)');

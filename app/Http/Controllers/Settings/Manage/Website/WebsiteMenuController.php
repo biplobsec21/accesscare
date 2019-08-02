@@ -314,7 +314,7 @@ class WebsiteMenuController extends Controller {
         $menu = new Menu();
         $menu_data = $menu->multiLabelMenu();
 
-        $rows = Menu::where('id', '=', $id);
+        $rows = Menu::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

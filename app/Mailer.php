@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Mailer extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -57,4 +57,9 @@ class Mailer extends Model
 		'drug' => [],
 		'user' => ['{user_view}', '{user_edit}', '{user_dashboard}', '{user.id}', '{user.full_name}', '{user.email}'],
 	];
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.mail.edit', $this->id);
+    }
 }

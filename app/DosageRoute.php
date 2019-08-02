@@ -51,4 +51,9 @@ class DosageRoute extends Model
 	 * @var string
 	 */
 	protected $prefix = "DOSAGEROUTE";
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.drug.dosage.route.edit', $this->id);
+    }
 }

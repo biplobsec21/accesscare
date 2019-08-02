@@ -194,7 +194,7 @@ class ShippingCourierController extends Controller {
     public function edit($id) {
 
         $dosage = array();
-        $rows = ShippingCourier::where('id', '=', $id);
+        $rows = ShippingCourier::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

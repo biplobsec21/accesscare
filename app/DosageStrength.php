@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DosageStrength extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -51,4 +51,9 @@ class DosageStrength extends Model
 	 * @var string
 	 */
 	protected $prefix = "DOSAGESTRENGTH";
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.drug.dosage.strength.edit', $this->id);
+    }
 }

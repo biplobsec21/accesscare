@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ConcentrationUnit extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -51,4 +51,9 @@ class ConcentrationUnit extends Model
 	 * @var string
 	 */
 	protected $prefix = "DOSAGEUNITS";
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.drug.dosage.concentration.edit', $this->id);
+    }
 }

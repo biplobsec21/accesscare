@@ -198,7 +198,7 @@ class DrugDosageRouteController extends Controller {
     public function edit($id) {
 
         $dosage = array();
-        $rows = DosageRoute::where('id', '=', $id);
+        $rows = DosageRoute::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

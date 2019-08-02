@@ -94,17 +94,35 @@
                 ajax: {
                     url: $url,
                     type: "post",
+                    fields: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "route-name"
+                        },
+                        {
+                            data: "active"
+                        },
+                        {
+                            data: "concentration_req"
+                        },
+                        {
+                            data: "desc"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "manage_route",
+                            type: "btn",
+                            styling: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
                 order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "route-name",
-                    "active",
-                    "concentration_req",
-                    "desc",
-                    "created_at",
-                    "btns",
-                ],
             });
         }); // end doc ready
     </script>

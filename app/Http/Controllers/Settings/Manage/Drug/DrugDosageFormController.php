@@ -135,10 +135,10 @@ class DrugDosageFormController extends Controller {
     public function create(Request $request) {
         $dosage = array();
 
-        $dosage['dosageUnite'] = DosageUnit::where('active', '1');
-        $dosage['dosageRoute'] = DosageRoute::where('active', '1');
-        $dosage['dosageStrength'] = DosageStrength::where('active', '1');
-        $dosage['dosageForm'] = DosageForm::where('active', '1');
+        $dosage['dosageUnite'] = DosageUnit::where('active', '1')->get();
+        $dosage['dosageRoute'] = DosageRoute::where('active', '1')->get();
+        $dosage['dosageStrength'] = DosageStrength::where('active', '1')->get();
+        $dosage['dosageForm'] = DosageForm::where('active', '1')->get();
 
         return view($this->_data['createView'])
                         ->with('active', 'create')
@@ -266,10 +266,10 @@ class DrugDosageFormController extends Controller {
 
     public function edit($id) {
         $dosage = array();
-        $dosage['dosageUnite'] = DosageUnit::where('active', '1');
-        $dosage['dosageRoute'] = DosageRoute::where('active', '1');
-        $dosage['dosageStrength'] = DosageStrength::where('active', '1');
-        $dosage['dosageForm'] = DosageForm::where('id', $id);
+        $dosage['dosageUnite'] = DosageUnit::where('active', '1')->get();
+        $dosage['dosageRoute'] = DosageRoute::where('active', '1')->get();
+        $dosage['dosageStrength'] = DosageStrength::where('active', '1')->get();
+        $dosage['dosageForm'] = DosageForm::where('id', $id)->get();
 
         if (!count($dosage['dosageForm'])) {
             return redirect(route($this->_data['listAll']));

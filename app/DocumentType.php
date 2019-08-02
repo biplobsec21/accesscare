@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DocumentType extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -51,6 +51,11 @@ class DocumentType extends Model
 	 * @var string
 	 */
 	protected $prefix = "DOCUMENTTYPE";
+
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.document.type.edit', $this->id);
+    }
 
 	public function file()
 	{

@@ -210,7 +210,7 @@ class DrugDosageConcentrationController extends Controller {
 
     public function edit($id) {
         $dosage = array();
-        $rows = DosageUnit::where('id', '=', $id);
+        $rows = DosageUnit::where('id', '=', $id)->get();
         if (!count($rows)) {
             return redirect(route($this->_data['listAll']));
         }

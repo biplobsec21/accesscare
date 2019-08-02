@@ -44,7 +44,12 @@ class Dosage extends Model {
 	 */
 	protected $prefix = "DOSAGE";
 
-	public function lots() {
+	public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.drug.dosage.edit', $this->id);
+    }
+
+    public function lots() {
 		return $this->HasMany('App\\DrugLot');
 	}
 

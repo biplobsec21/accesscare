@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ethnicity extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -52,5 +52,8 @@ class Ethnicity extends Model
 	 */
 	protected $prefix = "ETHNICITY";
 
-
+    public function getManageRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.ethnicity.edit', $this->id);
+    }
 }
