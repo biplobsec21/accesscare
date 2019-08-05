@@ -81,17 +81,34 @@
             $('#depotTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "lots",
+                            type: "count",
+                        },
+                        {
+                            data: "address"
+                        },
+                        {
+                            data: "address-country-name"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "edit_route",
+                            type: "btn",
+                            styling: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
                 order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "lots",
-                    "address",
-                    "address-country-name",
-                    "created_at",
-                    "btns",
-                ],
             });
         }); // end doc ready
     </script>

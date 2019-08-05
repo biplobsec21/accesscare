@@ -52,7 +52,7 @@ class DocumentType extends Model
 	 */
 	protected $prefix = "DOCUMENTTYPE";
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.document.type.edit', $this->id);
     }

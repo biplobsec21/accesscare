@@ -119,7 +119,7 @@
                             data: "created_at"
                         },
                         {
-                            data: "manage_route",
+                            data: "edit_route",
                             type: "btn",
                             styling: "btn btn-warning",
                             icon: '<i class="fal fa-fw fa-edit"></i>',

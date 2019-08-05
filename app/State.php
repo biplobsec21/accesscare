@@ -62,7 +62,7 @@ class State extends Model
 		return $this->belongsTo('App\\Country');
 	}
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.states.edit', $this->id);
     }

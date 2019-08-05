@@ -52,7 +52,7 @@ class Ethnicity extends Model
 	 */
 	protected $prefix = "ETHNICITY";
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.ethnicity.edit', $this->id);
     }

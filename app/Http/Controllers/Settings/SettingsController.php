@@ -60,6 +60,9 @@ class SettingsController extends Controller
                         $value .= "</a>";
                         $row->setColumn($col['data'], $value);
                         break;
+                    case "count":
+                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item)->count());
+                        break;
                     case "link":
                         echo "i equals 2";
                         break;

@@ -44,7 +44,7 @@ class Dosage extends Model {
 	 */
 	protected $prefix = "DOSAGE";
 
-	public function getManageRouteAttribute()
+	public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.drug.dosage.edit', $this->id);
     }
