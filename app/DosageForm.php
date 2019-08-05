@@ -51,7 +51,7 @@ class DosageForm extends Model
 	 * @var string
 	 */
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.drug.dosage.form.edit', $this->id);
     }

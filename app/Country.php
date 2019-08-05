@@ -52,7 +52,7 @@ class Country extends Model
 	 */
 	protected $prefix = "COUNTRY";
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.country.edit', $this->id);
     }

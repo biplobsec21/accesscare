@@ -58,7 +58,7 @@ class Mailer extends Model
 		'user' => ['{user_view}', '{user_edit}', '{user_dashboard}', '{user.id}', '{user.full_name}', '{user.email}'],
 	];
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.mail.edit', $this->id);
     }

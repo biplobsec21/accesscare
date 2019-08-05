@@ -52,7 +52,7 @@ class DosageStrength extends Model
 	 */
 	protected $prefix = "DOSAGESTRENGTH";
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.drug.dosage.strength.edit', $this->id);
     }

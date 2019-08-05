@@ -52,7 +52,7 @@ class DosageUnit extends Model
 	 */
 	protected $prefix = "DOSAGEUNITS";
 
-    public function getManageRouteAttribute()
+    public function getEditRouteAttribute()
     {
         return route('eac.portal.settings.manage.drug.dosage.concentration.edit', $this->id);
     }
