@@ -88,7 +88,9 @@
                             data: "status-name",
                         },
                         {
-                            data: "physician-full_name"
+                            data: "physician-full_name",
+                            type: "link",
+                            href: "physician-view_route"
                         },
                         {
                             data: "drug-name"

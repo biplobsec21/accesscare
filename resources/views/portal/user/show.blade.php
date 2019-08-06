@@ -70,53 +70,53 @@
 		</div>
 	</div><!-- end .titleBar -->
 	<div class="viewData">
-		@if(Auth::user()->type->name == 'Early Access Care')
-			@if($user->status === 'Pending')
-				<div class="alert alert-warning mb-3" role="alert">
-                
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                 </button>
-					<h5 class="text-danger">
-						<i class="fas fa-exclamation-triangle"></i>
-						User Pending
-					</h5>
-					<p class="text-dark mb-0">
-						<strong>{{ $user->first_name }} {{ $user->last_name }}</strong>
-						is unable to submit content at this time, user must be Approved in order to proceed.
-					</p>
-				</div><!-- end alert -->
-			@elseif($user->status === 'Approved')
-				<div class="alert alert-success mb-3" role="alert">
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                 </button>
-					<h5 class="text-primary">
-						<i class="fas fa-check-circle"></i>
-						Authorized
-					</h5>
-					<p class="text-dark mb-0">
-						<strong>{{ $user->full_name }}</strong>
-						is able to access content.
-					</p>
-				</div>
-			@else
-				<div class="alert alert-warning mb-3" role="alert">
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                 </button>
-                
-					<h5 class="text-danger">
-						<i class="fas fa-exclamation-triangle"></i>
-						Not Authorized
-					</h5>
-					<p class="text-dark mb-0">
-						<strong>{{ $user->full_name }}</strong>
-						is unable to access content at this time, user must be re-authorized in order to proceed.
-					</p>
-				</div><!-- end alert -->
-			@endif
-		@endif
+{{--		@if(Auth::user()->type->name == 'Early Access Care')--}}
+{{--			@if($user->status === 'Pending')--}}
+{{--				<div class="alert alert-warning mb-3" role="alert">--}}
+{{--                --}}
+{{--                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                  <span aria-hidden="true">&times;</span>--}}
+{{--                 </button>--}}
+{{--					<h5 class="text-danger">--}}
+{{--						<i class="fas fa-exclamation-triangle"></i>--}}
+{{--						User Pending--}}
+{{--					</h5>--}}
+{{--					<p class="text-dark mb-0">--}}
+{{--						<strong>{{ $user->first_name }} {{ $user->last_name }}</strong>--}}
+{{--						is unable to submit content at this time, user must be Approved in order to proceed.--}}
+{{--					</p>--}}
+{{--				</div><!-- end alert -->--}}
+{{--			@elseif($user->status === 'Approved')--}}
+{{--				<div class="alert alert-success mb-3" role="alert">--}}
+{{--                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                  <span aria-hidden="true">&times;</span>--}}
+{{--                 </button>--}}
+{{--					<h5 class="text-primary">--}}
+{{--						<i class="fas fa-check-circle"></i>--}}
+{{--						Authorized--}}
+{{--					</h5>--}}
+{{--					<p class="text-dark mb-0">--}}
+{{--						<strong>{{ $user->full_name }}</strong>--}}
+{{--						is able to access content.--}}
+{{--					</p>--}}
+{{--				</div>--}}
+{{--			@else--}}
+{{--				<div class="alert alert-warning mb-3" role="alert">--}}
+{{--                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+{{--                  <span aria-hidden="true">&times;</span>--}}
+{{--                 </button>--}}
+{{--                --}}
+{{--					<h5 class="text-danger">--}}
+{{--						<i class="fas fa-exclamation-triangle"></i>--}}
+{{--						Not Authorized--}}
+{{--					</h5>--}}
+{{--					<p class="text-dark mb-0">--}}
+{{--						<strong>{{ $user->full_name }}</strong>--}}
+{{--						is unable to access content at this time, user must be re-authorized in order to proceed.--}}
+{{--					</p>--}}
+{{--				</div><!-- end alert -->--}}
+{{--			@endif--}}
+{{--		@endif--}}
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 			<a href="{{ route("eac.portal.user.list") }}" class="btn btn-light">
 				User List

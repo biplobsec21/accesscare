@@ -52,6 +52,11 @@ class UserGroup extends Model
 	 */
 	protected $prefix = "USERGROUP";
 
+    public function getEditRouteAttribute()
+    {
+        return route('eac.portal.user.group.edit', $this->id);
+    }
+
 	public function parent()
 	{
 		return $this->belongsTo('App\User', 'parent_user_id');

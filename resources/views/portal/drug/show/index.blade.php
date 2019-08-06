@@ -250,7 +250,7 @@
 					<div class="tab-pane fade" id="xwebdesc" role="tabpanel" aria-labelledby="xwebdesc-tab">
 						<div class="card-body">
 							<h5>
-								<strong>Internal</strong> description, only viewable to EAC users
+								<strong>Internal</strong> Description (To be viewed in the EAC portal)
 							</h5>
 							<div class="pre-scrollable small">
 								{!! $drug->desc !!}
@@ -258,7 +258,7 @@
 							@if($drug->short_desc)
 								<hr/>
 								<h5 class="mb-3">
-									<strong>Description</strong> to be viewed on the EAC website
+									<strong>Public</strong> Description (To be viewed on the EAC website)
 								</h5>
 								<div class="pre-scrollable small">
 									{!! $drug->short_desc !!}

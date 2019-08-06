@@ -42,6 +42,7 @@ class UserGroupController extends Controller
 
 	public function create()
 	{
+        $this->groupInitiate();
 		$users = User::all()->sortBy('first_name');
 		return view('portal.user.group.create', [
 			'users' => $users,
@@ -76,9 +77,15 @@ class UserGroupController extends Controller
 	{
 		$group = UserGroup::where('id', $id)->first();
 		$users = User::all()->sortBy('first_name');
+
+		$access = $this->groupAuth($group);
+		if(!$access->gate('group.index.update'))
+            return $this->abortNow();
+
 		return view('portal.user.group.edit', [
 			'users' => $users,
 			'group' => $group,
+            'access' => $access
 		]);
 	}
 
@@ -150,43 +157,10 @@ class UserGroupController extends Controller
 		];
 	}
 
-	public function ajaxlist()
+	public function ajaxlist(Request $request)
 	{
 		$groups = $this->listGroupAccess();
-		$response = new DataTableResponse(User::class, null);
-
-		foreach ($groups as $group) {
-			$row = new DataTableRow($group->id);
-
-			$row->setColumn('name', $group->name,
-				'<a href="' . route('eac.portal.user.group.edit', $group->id) . '">' . $group->name . '</a>'
-			);
-			$row->setColumn('type', $group->type->name
-			);
-			$row->setColumn('parent', $group->parent->full_name,
-				'<a href="' . route("eac.portal.user.show", $group->parent->id) . '">' . $group->parent->full_name . '</a>'
-			);
-			$row->setColumn('members', $group->users()->count(),
-				'<span class="badge badge-mw badge-outline-info" title="' . str_replace('"', '', json_encode($group->users()->pluck('full_name'))) . '">' . $group->users()->count() . '</span>'
-			);
-			$row->setColumn('created_at', strtotime($group->created_at),
-				'<span style="display: none">' . $group->created_at->format('Y-m-d') . '</span>' . $group->created_at->format(config('eac.date_format')),
-				$group->created_at->format(config('eac.date_format'))
-			);
-			$row->setColumn('btns', $group->id,
-				'<div class="btn-group dropleft" role="group">
-				 <a class="btn btn-link" href="#" id="dropdownMenuButton' . $group->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  <span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>
-				 </a>
-				 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $group->id . '">
-				  <a class="dropdown-item" title="Edit User Group" href="' . route('eac.portal.user.group.edit', $group->id) . '">
-				   <i class="fal fa-fw fa-edit"></i> Edit User Group
-				  </a>
-				 </div>
-				</div>'
-			);
-			$response->addRow($row);
-		}
+		$response = new DataTableResponse($groups, $request->all());
 		return $response->toJSON();
 	}
 }

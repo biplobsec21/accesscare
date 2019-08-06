@@ -10,6 +10,7 @@
 			<th>RID Number</th>
 			<th>Drug Requested</th>
 			<th>Ship By</th>
+            <th>Physician</th>
 			<th class="no-search no-sort"></th>
 		</tr>
 		</thead>
@@ -20,6 +21,7 @@
 			<th>RID Number</th>
 			<th>Drug Requested</th>
 			<th>Ship By</th>
+            <th>Physician</th>
 			<th class="no-search no-sort"></th>
 		</tr>
 		</tfoot>
@@ -47,21 +49,37 @@
             let dataTable = $('#shipmentListTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "created_at",
+                        },
+                        {
+                            data: "rid-number",
+                            type: "link",
+                            href: "rid-view_route"
+                        },
+                        {
+                            data: "rid-drug-name"
+                        },
+                        {
+                            data: "ship_by_date",
+                        },
+                        {
+                            data: "rid-physician-full_name",
+                            type: "link",
+                            href: "rid-physician-view_route"
+                        },
+                        {
+                            data: "view_route",
+                            type: "btn",
+                            classes: "btn btn-success",
+                            icon: '<i class="fal fa-fw fa-ambulance"></i>',
+                            text: "View"
+                        },
+                    ],
                 },
                 order: [[1, 'asc']],
-                columns: [
-                    null,
-                    "number",
-                    "drug",
-                    "ship_by_date",
-                    "btns",
-                ],
-                "columnDefs": [{
-                    targets: 0,
-                    className:'details-control',
-                    defaultContent:'<i class="fas fa-plus"></i>'
-                }],
             });
             $('#shipmentListTBL').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');

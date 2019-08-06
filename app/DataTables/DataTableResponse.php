@@ -12,7 +12,8 @@ class DataTableResponse
     {
         $this->columns = collect($_settings["columns"]);
         $this->order = collect($_settings["order"]);
-        $this->settings = collect($_settings);
+        $this->page = $_settings['start'] / $_settings['length'] + 1;
+        $this->pageLength = $_settings['length'];
         $this->items = $items;
         $this->rows = collect([]);
         $this->total = $items->count();
@@ -29,7 +30,7 @@ class DataTableResponse
 
     protected function build()
     {
-        foreach ($this->items as $item) {
+        foreach ($this->items as $index => $item) {
             $row = new DataTableRow($item->id);
             foreach ($this->columns as $col) {
                 if (!array_key_exists('type', $col)) {
@@ -37,7 +38,7 @@ class DataTableResponse
                 }
                 switch (strtolower($col['type'])) {
                     case "string":
-                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item));
+                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item) . " ($index)");
                         break;
                     case "btn":
                         $value = "<a href=\"{$this->getThroughModel($col['data'], $item)}\" ";
@@ -96,7 +97,7 @@ class DataTableResponse
 
     protected function paginate()
     {
-        $this->items = $this->items->forPage($this->settings['start'], $this->settings['length']);
+        $this->items = $this->items->forPage($this->page, $this->pageLength)->values();
     }
 
     protected function sort()
@@ -119,7 +120,7 @@ class DataTableResponse
 
                 break;
         }
-        $this->items = $items;
+        $this->items = collect($items->values());
     }
 
     protected function search()

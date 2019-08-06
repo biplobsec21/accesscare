@@ -98,8 +98,8 @@ Route::group([
 		'as' => 'eac.portal.user.group.delete',
 		'uses' => 'UserGroupController@ajaxDelete',
 	]);
-	Route::match(['get', 'post'], '/group/ajaxlist', [
-		'as' => 'eac.portal.user.grouplist.ajaxlist',
+	Route::match(['get', 'post'], '/group/ajax', [
+		'as' => 'eac.portal.user.group.list.ajax',
 		'uses' => 'UserGroupController@ajaxlist',
 	]);
 

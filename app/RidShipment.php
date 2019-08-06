@@ -52,6 +52,11 @@ class RidShipment extends Model
 	 */
 	protected $prefix = "SHIPMENT";
 
+    public function getViewRouteAttribute()
+    {
+        return route('eac.portal.rid.show', $this->rid->id);
+    }
+
 	/*
 	 * Relation for rid
 	 *

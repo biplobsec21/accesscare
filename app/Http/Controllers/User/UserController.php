@@ -14,6 +14,7 @@ use App\Http\Requests\User\UserUpdateRequest;
 use App\Permission;
 use App\Phone;
 use App\Rid;
+use App\Role;
 use App\Traits\AuthAssist;
 use App\Traits\Filer;
 use App\Traits\Notifier;
@@ -84,7 +85,7 @@ class UserController extends PermissionsController
 				Session::forget('redirect_url');
 			}
 		}
-
+        $this->userInitiate();
 		$roles = \App\Role::all();
 		$userType = \App\UserType::all();
 		$countries = $this->getCountry();
@@ -178,7 +179,7 @@ class UserController extends PermissionsController
 			$cert->user_signature = $request->input('user_signature');
 			$cert->save();
 		}
-		if($user->status->name === 'Registering')
+		if($user->status === 'Registering')
 		    $user->status = 'Pending';
 		$user->save();
 		$this->createNotice('user_registration_submitted', $user, $user);
@@ -202,16 +203,17 @@ class UserController extends PermissionsController
 			$this->createNotice('user_approved', $user, $user);
 		}
 		$user->status = 'Approved';
-		$user->save();
-        if ($user->type->name == 'Physican' && !$user->groups_leading->count()) {
+        if ($user->type->name == 'Physician') {
             $group = new UserGroup();
             $group->id = $this->newID(UserGroup::class);
             $group->type_id = $user->type->id;
             $group->parent_user_id = $user->id;
-            $group->name = trim($user->full_name) . '\'s Group';
-            $group->group_members = json_encode(array_values($users));
+            $group->name = trim($user->full_name) . ' Group';
+            $role = Role::where('name', 'Physician Admin')->first();
+            $group->group_members = "[{\"id\": \"$user->id\", \"role\": \"$role->id\"}]";
             $group->saveOrFail();
         }
+        $user->save();
 		return redirect()->back()->with('confirm', '<h5 class="text-primary"><i class="fas fa-check-circle"></i> Authorized</h5><p class="text-dark "><strong>' . $user->full_name . '</strong> is able to access content.</p>');
 	}
 
@@ -236,6 +238,8 @@ class UserController extends PermissionsController
 		$countries = $this->getCountry();
 		$user = User::where('id', '=', $id)->firstOrFail();
 		$access = $this->userAuth($user);
+        if(!$access->gate('user.index.update'))
+            return $this->abortNow();
 		$userType = \App\UserType::all();
 		$rids = $this->listRidAccess($user);
 		$drugs = $this->listDrugAccess($user);
