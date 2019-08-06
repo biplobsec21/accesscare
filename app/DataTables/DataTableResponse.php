@@ -38,7 +38,7 @@ class DataTableResponse
                 }
                 switch (strtolower($col['type'])) {
                     case "string":
-                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item) . " ($index)");
+                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item));
                         break;
                     case "btn":
                         $value = "<a href=\"{$this->getThroughModel($col['data'], $item)}\" ";
