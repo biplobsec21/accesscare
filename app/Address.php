@@ -62,21 +62,20 @@ class Address extends Model
 	{
 		return $this->belongsTo('App\\Country');
 	}
-
-	public function strDisplayShort()
-	{
-		$str = $this->addr1 . '</br>';
-		if ($this->addr2)
-			$str .= $this->addr2 . '</br>';
-		$str .= $this->city . ' ';
-		if ($this->state_province)
-			$str .= ( $this->state->abbr ?? $this->state_province ) . ' ';
-		$str .= $this->zipcode;
-		return $str;
-	}
+    public function getDisplayShortAttribute()
+    {
+        $str = $this->addr1 . '</br>';
+        if ($this->addr2)
+            $str .= $this->addr2 . '</br>';
+        $str .= $this->city . ' ';
+        if ($this->state_province)
+            $str .= ( $this->state->abbr ?? $this->state_province ) . ' ';
+        $str .= $this->zipcode;
+        return $str;
+    }
 
 	public function strDisplay()
 	{
-		return $this->strDisplayShort() . ' ' . ($this->country->name ?? '');
+		return $this->display_short . ' ' . ($this->country->name ?? '');
 	}
 }

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DrugLot extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -44,6 +44,11 @@ class DrugLot extends Model
 	 * @var string
 	 */
 	protected $table = 'drug_lots';
+
+    public function getEditRouteAttribute()
+    {
+        return route('eac.portal.lot.edit', $this->id);
+    }
 
 	/**
 	 * The prefix for the id
@@ -78,7 +83,7 @@ class DrugLot extends Model
 				$lots->push($lot);
 			}
 			}
-			
+
 		}
 		return $lots;
 	}

@@ -304,53 +304,9 @@ class UserController extends PermissionsController
 
 	public function ajaxUserData(Request $request)
 	{
-		$users = $this->listUserAccess();
-		$response = new DataTableResponse(User::class, $request->all());
-
-		if (Request()->input('user_status'))
-			$users = $users->where('status', Request()->input('user_status'));
-
-		if (Request()->input('user_type'))
-			$users = $users->where('type_id', Request()->input('user_type'));
-
-		foreach ($users as $user) {
-			$row = new DataTableRow($user->id);
-
-			$row->setColumn('name', $user->number,
-				"<a href=" . route('eac.portal.user.show', $user->id) . ">" . $user->full_name . "</a>"
-			);
-			$row->setColumn('status', $user->status,
-				'<span class="badge badge-' . config('eac.user.status')[$user->status] . '">' . $user->status . '</span>'
-			);
-			$row->setColumn('email', $user->email,
-				'<a target="_blank" href="mailto:' . $user->email . '">' . $user->email . '</a>'
-			);
-			$row->setColumn('user_type', $user->type->name
-			);
-			$row->setColumn('created_at', strtotime($user->created_at),
-				'<span style="display: none">' . $user->created_at->format('Y-m-d') . '</span>' . $user->created_at->format(config('eac.date_format')),
-				$user->created_at->format(config('eac.date_format'))
-			);
-			$row->setColumn('btns', $user->id,
-				'<div class="btn-group" role="group">
-				 <div class="btn-group dropleft">
-				  <a class="btn btn-link" href="#" id="dropdownMenuButton' . $user->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				   <span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>
-				  </a>
-				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $user->id . '">
-				   <a class="dropdown-item" title="Edit User" href="' . route('eac.portal.user.edit', $user->id) . '">
-					<span class="fal fa-fw fa-edit"></span> Edit User
-				   </a>
-				   <a class="dropdown-item" title="View User" href="' . route('eac.portal.user.show', $user->id) . '">
-					<span class="fal fa-fw fa-search-plus"></span> View User
-				   </a>
-				  </div>
-				 </div>
-				</div>'
-			);
-			$response->addRow($row);
-		}
-		return $response->toJSON();
+        $users = $this->listUserAccess();
+        $response = new DataTableResponse($users, $request->all());
+        return $response->toJSON();
 	}
 
 

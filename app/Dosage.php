@@ -73,12 +73,13 @@ class Dosage extends Model {
         return $this->amount . ' ' . $this->unit->name;
     }
 
-	public function display() {
-		$str = '<div>';
-		$str .= $this->form->name . ' ';
-		$str .= $this->amount . ' ';
-		$str .= $this->unit->name . ' ';
-		$str .= '</div>';
-		return $str;
-	}
+    public function getDisplayShortAttribute()
+    {
+        $str = '<div>';
+        $str .= $this->form->name . ' ';
+        $str .= $this->amount . ' ';
+        $str .= $this->unit->name . ' ';
+        $str .= '</div>';
+        return $str;
+    }
 }

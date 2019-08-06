@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Depot extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -51,6 +51,11 @@ class Depot extends Model
 	 * @var string
 	 */
 	protected $prefix = "DEPOT";
+
+    public function getEditRouteAttribute()
+    {
+        return route('eac.portal.depot.edit', $this->id);
+    }
 
 	public function address()
 	{

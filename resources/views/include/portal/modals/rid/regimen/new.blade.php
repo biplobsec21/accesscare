@@ -23,7 +23,7 @@
 								<option value="0">Not Applicable</option>
 								@foreach(\App\DrugLot::allWithDrug($rid->drug_id) as $lot)
 									@if($lot->dosage->component->id == $component->id && $lot->depot)
-										<option value="{{ $lot->id }}">Lot: {{ $lot->number }}, {!!  $lot->dosage->display()  !!}</option>
+										<option value="{{ $lot->id }}">Lot: {{ $lot->number }}, {!!  $lot->dosage->display_short  !!}</option>
 									@endif
 								@endforeach
 							</select>

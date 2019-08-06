@@ -72,22 +72,39 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
             let $url = "{{route('eac.portal.user.ajax.list')}}";
-            $url += "?user_status=" + "{{$_GET['user_status'] ?? null}}" + "&user_type=" + "{{$_GET['user_type'] ?? null}}";
 			// Data Tables
 			$('#userListTBL').initDT({
 				ajax: {
 					url: $url,
-					type: "post"
+					type: "post",
+                    fields: [
+                        {
+                            data: "full_name",
+                            type: "link",
+                            href: "view_route"
+                        },
+                        {
+                            data: "status",
+                        },
+                        {
+                            data: "email",
+                        },
+                        {
+                            data: "type-name",
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "view_route",
+                            type: "btn",
+                            classes: "btn btn-info",
+                            icon: '<i class="fal fa-fw fa-eye"></i>',
+                            text: "View"
+                        },
+                    ],
 				},
 				order: [[0, 'asc']],
-				columns: [
-					"name",
-					"status",
-					"email",
-					"user_type",
-                    "created_at",
-					"btns",
-				],
 			});
 		}); // end doc ready
 	</script>

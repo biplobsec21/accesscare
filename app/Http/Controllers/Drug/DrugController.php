@@ -474,57 +474,9 @@ class DrugController extends Controller
 
 	public function ajaxDrugData(Request $request)
 	{
-		$drugs = $this->listDrugAccess();
-		$response = new DataTableResponse(Drug::class, $request->all());
-
-		if (Request()->input('drug_status'))
-			$drugs = $drugs->where('status', Request()->input('drug_status'));
-
-		foreach ($drugs as $drug) {
-			$row = new DataTableRow($drug->id);
-
-			$row->setColumn('drug_name', $drug->name,
-				"<a href=" . route('eac.portal.drug.show', $drug->id) . ">" . $drug->name . "</a>"
-			);
-			$row->setColumn('company_name', $drug->company->name,
-				'<a title="Physician" href="' . route('eac.portal.company.show', $drug->company->id ?? '') . '">' .
-				$drug->company->name .
-				'</a>'
-			);
-			$row->setColumn('status', $drug->status,
-				'<span class="badge badge-' . $drug->status . '">' . $drug->status . '</span>'
-			);
-			$row->setColumn('created_at', $drug->created_at->format('Y-m-d'),
-				'<span style="display: none">' . $drug->created_at->format('Y-m-d') . '</span>' . $drug->created_at->format(config('eac.date_format'))
-			);
-			$row->setColumn('btns', $drug->id,
-                '<a class="dropdown-item" title="View Drug" href="' . route('eac.portal.drug.show', $drug->id) . '">' .
-                '<i class="fal fa-fw fa-search-plus"></i> View Drug' .
-                '</a>'
-			);
-			$response->addRow($row);
-		}
-
-//		$direction = request('order.0.dir');
-//		if (request('order.0.column') == $columns['number']) {
-//			$query->orderBy('rids.number', $direction)->orderBy('rids.number', $direction);
-//		}
-//		if (request('order.0.column') == $columns['status']) {
-//			$query->orderBy('rid_master_statuses.name', $direction);
-//		}
-//		if (request('order.0.column') == $columns['physician_name']) {
-//			$query->orderBy('users.first_name', $direction);
-//		}
-//		if (request('order.0.column') == $columns['drug_name']) {
-//			$query->orderBy('drug.name', $direction);
-//		}
-//		if (request('order.0.column') == $columns['req_date']) {
-//			$query->orderBy('rids.created_at', $direction);
-//		}
-//		if (request('order.0.column') == $columns['visits']) {
-//			$query->orderBy('visits', $direction);
-//		}
-		return $response->toJSON();
+        $rids = $this->listDrugAccess();
+        $response = new DataTableResponse($rids, $request->all());
+        return $response->toJSON();
 	}
 
 	public function writeDB()

@@ -54,7 +54,7 @@ class DrugLotController extends Controller
 		$lot = DrugLot::where('id', $id)->firstOrFail();
 		$drug_all = Drug::all();
 		if ($lot && $lot->dosage) {
-			$drugs = Drug::where('id', '=', $lot->dosage->component->drug_id);
+			$drugs = Drug::where('id', '=', $lot->dosage->component->drug_id)->get();
 		}
 		$depot = null;
 		if ($request->input('depot'))

@@ -13,7 +13,7 @@
 					@foreach($component->dosages as $dosage)
 						@if($dosage->active == 1)
 							<li class="pr-0">
-								{!! $dosage->display() !!}
+								{!! $dosage->display_short !!}
 							</li>
 						@endif
 					@endforeach

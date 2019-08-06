@@ -25,7 +25,7 @@
      <ul class="list-group small border-bottom border-light">
   				@foreach($component->dosages->where('active', 1) as $dosage)
        <li class="list-group-item d-flex justify-content-between">
-  						{!! $dosage->display() !!}
+  						{!! $dosage->display_short !!}
         <div>
          <a href="#" data-toggle="modal" data-target="#DosageModal{{ $dosage->id }}">
           <span class="fal fa-fw fa-edit" data-toggle="tooltip" title="Edit Dosage"></span>

@@ -55,7 +55,7 @@
            <span class="strong">Name:</span> {{ $val->name }}
           </p>
           <p class="text-muted m-0">
-           <span class="strong">Address:</span> {!! $val->address && $val->address->strDisplayShort() ?  $val->address->strDisplayShort() : '' !!}
+           <span class="strong">Address:</span> {!! $val->address && $val->address->display_short ?  $val->address->display_short : '' !!}
           </p>
           <p class="text-muted m-0">
            <span class="strong">Physician:</span> {{ $val->physician ? $val->physician->full_name : ''}}
@@ -87,7 +87,7 @@
            <span class="strong">Name:</span> {{ $val->name }}
           </p>
           <p class="text-muted m-0">
-           <span class="strong">Address:</span> {!! $val->address->strDisplayShort() !!}
+           <span class="strong">Address:</span> {!! $val->address->display_short !!}
           </p>
           <p class="text-muted m-0">
            <span class="strong">Physician:</span> {{ $val->physician->full_name }}

@@ -64,7 +64,7 @@
          <td><input type="checkbox" name="merge[]" value="{{ $depot->id }}" /></td>
   							<td>{{ $depot->name }}</td>
   							<td>{{ $depot->lots->count() }}</td>
-  							<td>{!! $depot->address->strDisplayShort() !!}</td>
+  							<td>{!! $depot->address->display_short !!}</td>
   							<td>@php try{ echo $depot->address->country->name; } catch (\Exception $e) {} @endphp</td>
   							<td>{{ $depot->created_at }}</td>
   							{{-- <td class="text-right">

@@ -66,25 +66,43 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 		    let $url = "{{route('eac.portal.rid.ajax.list')}}";
-		    if('{{ $_GET['rid_status'] ?? '' }}') {
-		        $url += "?rid_status=" + "{{$_GET['rid_status'] ?? null}}";
-		    }
 			// Data Tables
 			$('#ridListTBL').initDT({
 				ajax: {
 					url: $url,
-					type: "post"
+					type: "post",
+                    fields: [
+                        {
+                            data: "created_at",
+                        },
+                        {
+                            data: "number",
+                            type: "link",
+                            href: "view_route"
+                        },
+                        {
+                            data: "visits",
+                            type: "count"
+                        },
+                        {
+                            data: "status-name",
+                        },
+                        {
+                            data: "physician-full_name"
+                        },
+                        {
+                            data: "drug-name"
+                        },
+                        {
+                            data: "view_route",
+                            type: "btn",
+                            classes: "btn btn-info",
+                            icon: '<i class="fal fa-fw fa-eye"></i>',
+                            text: "View"
+                        },
+                    ],
 				},
-				order: [[0, 'desc']],
-				columns: [
-					"created_at",
-					"number",
-					"visits",
-					"status",
-					"physician",
-					"drug",
-					"btns",
-				],
+				order: [[0, 'asc']],
 			});
 		}); // end doc ready
 	</script>

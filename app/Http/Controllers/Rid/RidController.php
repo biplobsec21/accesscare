@@ -246,6 +246,9 @@ class RidController extends Controller
 	public function ajaxRidData(Request $request)
 	{
 		$rids = $this->listRidAccess();
+        $response = new DataTableResponse($rids, $request->all());
+        return $response->toJSON();
+
 		$response = new DataTableResponse(Rid::class, $request->all());
 
 		if (Request()->input('rid_status'))

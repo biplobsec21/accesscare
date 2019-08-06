@@ -55,8 +55,6 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
                         <th class="no-search">Status</th>
                         <th>Pharmacy</th>
                         <th>Last Update</th>
@@ -66,8 +64,6 @@
                     <tfoot>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
                         <th class="no-search">Status</th>
                         <th>Pharmacy</th>
                         <th>Last Update</th>
@@ -92,18 +88,30 @@
             $('#pharmacistTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "active"
+                        },
+                        {
+                            data: "pharmacy-name"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "edit_route",
+                            type: "btn",
+                            classes: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
-                order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "email",
-                    "phone_num",
-                    "active",
-                    "pharmacy-name",
-                    "created_at",
-                    "btns",
-                ],
+                order: [[0, 'asc']],
             });
         }); // end doc ready
     </script>

@@ -85,18 +85,36 @@
             $('#lotTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "number"
+                        },
+                        {
+                            data: "dosage-component-drug-name"
+                        },
+                        {
+                            data: "dosage-display_short"
+                        },
+                        {
+                            data: "depot-name"
+                        },
+                        {
+                            data: "stock"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "edit_route",
+                            type: "btn",
+                            classes: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
-                order: [[0, 'desc']],
-                columns: [
-                    "number",
-                    "dosage-component-drug-name",
-                    "dosage",
-                    "depot-name",
-                    "stock",
-                    "created_at",
-                    "btns",
-                ],
+                order: [[0, 'asc']],
             });
         }); // end doc ready
     </script>

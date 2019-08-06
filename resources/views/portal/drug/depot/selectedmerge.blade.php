@@ -55,7 +55,7 @@
            <span class="strong">Depot Name:</span> {{ $val->name }}
           </p>
           <p class="text-muted m-0">
-           <span class="strong">Address:</span> {!!  $val->address && $val->address->strDisplayShort() ? $val->address->strDisplayShort() : '' !!}
+           <span class="strong">Address:</span> {!!  $val->address && $val->address->display_short ? $val->address->display_short : '' !!}
           </p>
           <input type="hidden" name="primary_id" value="{{ $val->id}}">
           </div>
@@ -81,7 +81,7 @@
            <span class="strong">Depot Name:</span> {{ $val->name }}
           </p>
           <p class="text-muted m-0">
-           <span class="strong">Address:</span> {!!  $val->address && $val->address->strDisplayShort() ? $val->address->strDisplayShort() : '' !!}
+           <span class="strong">Address:</span> {!!  $val->address && $val->address->display_short ? $val->address->display_short : '' !!}
           </p>
           <input type="hidden" name="merged_id[]" value="{{ $val->id}}">
           </div>

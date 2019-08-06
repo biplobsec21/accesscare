@@ -42,39 +42,11 @@ class SettingsController extends Controller
         }
         $methods = get_class_methods($model);
         $items = $model::all();
-        $response = new DataTableResponse(null, $request->all());
-        foreach ($items as $item) {
-            $row = new DataTableRow($item->id);
-            foreach($request->input('cols') as $col) {
-                if(!array_key_exists('type', $col)) {
-                    $col['type'] = "string";
-                }
-                switch (strtolower($col['type'])) {
-                    case "string":
-                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item));
-                        break;
-                    case "btn":
-                        $value = "<a href=\"{$this->getThroughModel($col['data'], $item)}\" ";
-                        $value .= "class=\"{$col['styling']}\">";
-                        $value .= $col['icon'] . " " . $col['text'];
-                        $value .= "</a>";
-                        $row->setColumn($col['data'], $value);
-                        break;
-                    case "count":
-                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item)->count());
-                        break;
-                    case "link":
-                        echo "i equals 2";
-                        break;
-                }
-
-            }
-            $response->addRow($row);
-        }
+        $response = new DataTableResponse($items, $request->all());
         return $response->toJSON();
     }
 
-    public function getThroughModel($accessors, $item)
+    private function getThroughModel($accessors, $item)
     {
         foreach(explode('-', $accessors) as $accessor) {
             $item = $item->{$accessor} ?? null;

@@ -57,7 +57,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th class="no-sort no-search">Pharmacists</th>
+                        <th class="no-sort">Pharmacists</th>
                         <th>Status</th>
                         <th>Created At</th>
                         <th class="no-sort no-search"></th>
@@ -66,7 +66,7 @@
                     <tfoot>
                     <tr>
                         <th>Name</th>
-                        <th class="no-sort no-search"></th>
+                        <th class="no-sort">Pharmacists</th>
                         <th>Status</th>
                         <th>Created At</th>
                         <th class="no-sort no-search"></th>
@@ -88,16 +88,31 @@
             $('#pharmacyTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "pharmacists",
+                            type: "count",
+                        },
+                        {
+                            data: "active"
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "edit_route",
+                            type: "btn",
+                            classes: "btn btn-warning",
+                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            text: "Edit"
+                        },
+                    ],
                 },
-                order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "pharmacists",
-                    "active",
-                    "created_at",
-                    "btns",
-                ],
+                order: [[0, 'asc']],
             });
         }); // end doc ready
     </script>

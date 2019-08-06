@@ -7,6 +7,7 @@ use App\Rid;
 use App\Role;
 use App\Support\AuthCollection;
 use App\User;
+use App\Company;
 use App\UserGroup;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -135,7 +136,8 @@ trait AuthAssist
         $access = new AuthCollection();
         switch($this->preGateCheck()) {
             case 1;
-                $access->setAuthAll();
+                foreach($this->user->groups() as $group)
+                    $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
                 return $access;
             case -1:
                 $access->setAuthNone();
@@ -144,7 +146,7 @@ trait AuthAssist
         if($this->user->id == $rid->physician->id)
             $access->pushAccess(json_decode(Role::where('name', 'Physician Admin')->first()->base_level));
         foreach($rid->user_groups as $group)
-            if($member = $group->members()->where('id', $this->user->id)->first())
+            if($member = $group->members->where('id', $this->user->id)->first())
                 $access->pushAccess(json_decode($member->role->base_level));
         return $access;
     }
@@ -177,14 +179,15 @@ trait AuthAssist
         $this->user = Auth::user();
         switch($this->preGateCheck()) {
             case 1;
-                $access->setAuthAll();
+                foreach($this->user->groups() as $group)
+                    $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
                 return $access;
             case -1:
                 $access->setAuthNone();
                 return $access;
         }
         foreach($drug->user_groups as $group)
-            if($member = $group->members()->where('id', $this->user->id)->first())
+            if($member = $group->members->where('id', $this->user->id)->first())
                 $access->pushAccess(json_decode($member->role->base_level));
         return $access;
     }
@@ -217,7 +220,8 @@ trait AuthAssist
         $this->user = Auth::user();
         switch($this->preGateCheck()) {
             case 1;
-                $access->setAuthAll();
+                foreach($this->user->groups() as $group)
+                    $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
                 return $access;
             case -1:
                 $access->setAuthNone();
@@ -228,10 +232,11 @@ trait AuthAssist
             return $access;
         }
         foreach($targetUser->groups() as $group)
-            if($member = $group->members()->where('id', $this->user->id)->first())
+            if($member = $group->members->where('id', $this->user->id)->first())
                 $access->pushAccess(json_decode($member->role->base_level));
         return $access;
     }
+
     protected function abortNow() {
         return abort(403, 'Unauthorized action.');
     }

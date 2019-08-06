@@ -43,9 +43,9 @@
                     <tr>
                         <th>Company Name</th>
                         <th class="no-search no-sort">Status</th>
-                        <th class="no-search no-sort">Drugs</th>
-                        <th class="no-search no-sort">Requests</th>
-                        <th class="no-search no-sort">Users</th>
+                        <th class="no-search">Drugs</th>
+                        <th class="no-search">Requests</th>
+                        <th class="no-search">Users</th>
                         <th>Added</th>
                         <th class="no-search no-sort"></th>
                     </tr>
@@ -55,9 +55,9 @@
                     <tr>
                         <th>Company Name</th>
                         <th class="no-search no-sort">Status</th>
-                        <th class="no-search no-sort">Drugs</th>
-                        <th class="no-search no-sort">Requests</th>
-                        <th class="no-search no-sort">Users</th>
+                        <th class="no-search">Requests</th>
+                        <th class="no-search">Drugs</th>
+                        <th class="no-search">Users</th>
                         <th>Added</th>
                         <th class="no-search no-sort"></th>
                     </tr>
@@ -72,23 +72,46 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
-            let $url = "{{route('eac.portal.company.ajax.list')}}";
+            let $url = "{{route('eac.portal.settings.dataTables', 'Company')}}";
             // Data Tables
             $('#companyListTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "name",
+                            type: "link",
+                            href: "view_route"
+                        },
+                        {
+                            data: "status",
+                        },
+                        {
+                            data: "rids",
+                            type: "count",
+                        },
+                        {
+                            data: "drugs",
+                            type: "count",
+                        },
+                        {
+                            data: "users",
+                            type: "count",
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "view_route",
+                            type: "btn",
+                            classes: "btn btn-info",
+                            icon: '<i class="fal fa-fw fa-eye"></i>',
+                            text: "View"
+                        },
+                    ],
                 },
-                order: [[0, 'desc']],
-                columns: [
-                    "name",
-                    "status",
-                    "drug_count",
-                    "rid_count",
-                    "user_count",
-                    "created_at",
-                    "btns",
-                ],
+                order: [[0, 'asc']],
             });
         }); // end doc ready
     </script>

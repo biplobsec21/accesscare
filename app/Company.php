@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -52,7 +52,13 @@ class Company extends Model
 	 */
 	protected $prefix = "COMPANY";
 
-	/**
+    public function getViewRouteAttribute()
+    {
+        return route('eac.portal.company.show', $this->id);
+    }
+
+
+    /**
 	 * The address relationship definition
 	 */
 	public function address()

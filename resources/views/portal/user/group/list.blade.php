@@ -68,22 +68,41 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
         $(document).ready(function () {
-            let $url = "{{route('eac.portal.user.grouplist.ajaxlist')}}";
+            let $url = "{{route('eac.portal.settings.dataTables', 'UserGroup')}}";
             // Data Tables
             $('#groupTBL').initDT({
                 ajax: {
                     url: $url,
-                    type: "post"
+                    type: "post",
+                    fields: [
+                        {
+                            data: "name",
+                            type: "link",
+                            href: "edit_route"
+                        },
+                        {
+                            data: "type-name",
+                        },
+                        {
+                            data: "parent-full_name",
+                        },
+                        {
+                            data: "members",
+                            type: "count",
+                        },
+                        {
+                            data: "created_at"
+                        },
+                        {
+                            data: "view_route",
+                            type: "btn",
+                            classes: "btn btn-info",
+                            icon: '<i class="fal fa-fw fa-eye"></i>',
+                            text: "View"
+                        },
+                    ],
                 },
                 order: [[0, 'asc']],
-                columns: [
-                    "name",
-                    "type",
-                    "parent",
-                    "members",
-                    "created_at",
-                    "btns",
-                ],
             });
         }); // end doc ready
 	</script>

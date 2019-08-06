@@ -22,7 +22,7 @@
 								@foreach(\App\DrugLot::allWithDrug($rid->drug_id) as $lot)
 									@if($lot->dosage->component->id == $component->id && $lot->depot)
 										<option value="{{ $lot->id }}" @if($lot->id == $regimen->drug_lot_id) selected @endif>
-										 Lot: {{ $lot->number }}, {!!  $lot->dosage->display()  !!}
+										 Lot: {{ $lot->number }}, {!!  $lot->dosage->display_short  !!}
 										</option>
 									@endif
 								@endforeach

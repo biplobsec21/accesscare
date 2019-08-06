@@ -176,7 +176,7 @@
                                         <tbody id="memberSection">
                                         @if($group->group_members)
                                             @php $i = 0; @endphp
-                                            @foreach($group->members() as $member)
+                                            @foreach($group->members as $member)
                                                 <tr class="group-member">
                                                     <td>
                                                         <span class="read">{{$member->user->full_name}}</span>

@@ -52,6 +52,11 @@ class Pharmacist extends Model
 	 */
 	protected $prefix = "PHARMACIST";
 
+    public function getEditRouteAttribute()
+    {
+        return route('eac.portal.pharmacist.edit', $this->id);
+    }
+
 	/**
 	 * Relation for address
 	 *

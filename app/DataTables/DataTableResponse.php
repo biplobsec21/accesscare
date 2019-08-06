@@ -4,67 +4,142 @@ namespace App\DataTables;
 
 class DataTableResponse
 {
-	protected $class;
-	protected $settings;
-	protected $rows = [];
+    protected $class;
+    protected $settings;
+    protected $rows = [];
 
-	public function __construct($_class, $_settings)
-	{
-		$this->settings = $_settings;
-		$this->class = $_class;
-		$this->rows = collect([]);
-	}
+    public function __construct($items, $_settings)
+    {
+        $this->columns = collect($_settings["columns"]);
+        $this->order = collect($_settings["order"]);
+        $this->settings = collect($_settings);
+        $this->items = $items;
+        $this->rows = collect([]);
+        $this->total = $items->count();
+        $this->run();
+    }
 
-	public function addRow(DataTableRow $row)
-	{
-		return $this->rows->push($row);
-	}
+    protected function run()
+    {
+        $this->search();
+        $this->sort();
+        $this->paginate();
+        $this->build();
+    }
 
-	public function toJSON()
-	{
-//		$this->search();
-//		$this->orderRows();
-		$response = new \stdClass();
-		$response->data = [];
-		foreach ($this->rows as $row) {
-			$json = new \stdClass();
-			foreach ($row->cells as $cell) {
-				$json->{$cell->key} = $cell->format;
-			}
-			array_push($response->data, $json);
-		}
-		return json_encode($response);
-	}
+    protected function build()
+    {
+        foreach ($this->items as $item) {
+            $row = new DataTableRow($item->id);
+            foreach ($this->columns as $col) {
+                if (!array_key_exists('type', $col)) {
+                    $col['type'] = "string";
+                }
+                switch (strtolower($col['type'])) {
+                    case "string":
+                        $row->setColumn($col['data'], $this->getThroughModel($col['data'], $item));
+                        break;
+                    case "btn":
+                        $value = "<a href=\"{$this->getThroughModel($col['data'], $item)}\" ";
+                        $value .= "class=\"{$col['classes']}\">";
+                        $value .= $col['icon'] . " " . $col['text'];
+                        $value .= "</a>";
+                        $row->setColumn($col['data'], $value);
+                        break;
+                    case "link":
+                        $value = "<a href=\"{$this->getThroughModel($col['href'], $item)}\">";
+                        $value .= $this->getThroughModel($col['data'], $item);
+                        $value .= "</a>";
+                        $row->setColumn($col['data'], $value);
+                        break;
+                    case "count":
+                        $value = '<span class="badge badge-mw badge-outline-info">';
+                        $value .= $this->getThroughModel($col['data'], $item)->count();
+                        $value .= '</span>';
+                        $row->setColumn($col['data'], $value);
+                        break;
+                }
 
-	protected function orderRows()
-	{
-		$orders = $this->settings['order'];
-		for ($i = 0; $i < count($orders); $i++) {
-			$col = $this->settings['columns'][$orders[$i]['column']]['data'];
-			if ($orders[$i]['dir'] == 'asc') {
-				$this->rows = collect($this->rows->sortBy(function ($row) use ($col) {
-					return $row->getColumn($col);
-				})->all());
-			} else {
-				$this->rows = collect($this->rows->sortByDesc(function ($row) use ($col) {
-					return $row->getColumn($col);
-				})->all());
-			}
-		}
-	}
-	protected function search()
-	{
-		$cols = $this->settings['columns'];
-		foreach ($cols as $col) {
-			if($col['search']['value']) {
-				$key = $col['data'];
-				$val = trim(strtolower($col['search']['value']));
-				$this->rows = collect($this->rows->filter(function ($row) use ($key, $val) {
-					echo similar_text($key,  trim(strtolower($row->getColumn($key, true))));
-					return 3 < similar_text($key,  trim(strtolower($row->getColumn($key, true))));
-				})->all());
-				dd($this->rows);
-			}
-		}
-	}
+            }
+            $this->addRow($row);
+        }
+    }
+
+    protected function getThroughModel($accessors, $item)
+    {
+        foreach (explode('-', $accessors) as $accessor) {
+            $item = $item->{$accessor} ?? null;
+        }
+        return $item;
+    }
+
+    public function addRow(DataTableRow $row)
+    {
+        return $this->rows->push($row);
+    }
+
+    public function toJSON()
+    {
+        $response = new \stdClass();
+        $response->data = [];
+        foreach ($this->rows as $row) {
+            $json = new \stdClass();
+            foreach ($row->cells as $cell) {
+                $json->{$cell->key} = $cell->format;
+            }
+            array_push($response->data, $json);
+        }
+        $response->recordsFiltered = $this->total;
+        $response->recordsTotal = $this->total;
+        return json_encode($response);
+    }
+
+    protected function paginate()
+    {
+        $this->items = $this->items->forPage($this->settings['start'], $this->settings['length']);
+    }
+
+    protected function sort()
+    {
+        $items = $this->items;
+        switch ($this->order->count()) {
+            case 0:
+                break;
+            case 1:
+                if($this->order[0]['dir'] == "asc")
+                    $items = $items->sortBy($this->columns[$this->order[0]['column']]['data']);
+                else
+                    $items = $items->sortByDesc($this->columns[$this->order[0]['column']]['data']);
+                break;
+            default:
+                if($this->order[0]['dir'] == "asc")
+                    $items = $items->sortBy($this->columns[$this->order[0]['column']]['data']);
+                else
+                    $items = $items->sortByDesc($this->columns[$this->order[0]['column']]['data']);
+
+                break;
+        }
+        $this->items = $items;
+    }
+
+    protected function search()
+    {
+        $filters = collect([]);
+        foreach ($this->columns as $column) {
+            if (!$column['search']['value'])
+                continue;
+            if ($column['searchable'] === "false")
+                continue;
+            $filters->push(["data" => $column['data'], "value" => $column['search']['value'], "type" => $column['type']]);
+        }
+        $this->items = $this->items->filter(function ($model) use ($filters) {
+            $passed = true;
+            foreach ($filters as $filter) {
+                $value = $this->getThroughModel($filter['data'], $model);
+                if (strpos(strtolower($value), strtolower($filter['value'])) === false)
+                    $passed = false;
+            }
+            return $passed;
+        });
+    }
 }

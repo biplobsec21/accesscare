@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserGroup extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -66,7 +66,7 @@ class UserGroup extends Model
 		return $collection;
 	}
 
-	public function members()
+	public function getMembersAttribute()
 	{
 		$collection = json_decode($this->group_members);
 		foreach ($collection as $member) {
@@ -77,7 +77,7 @@ class UserGroup extends Model
 	}
 
 	public function roleInTeam($user_id)
-	{	
+	{
 		$collection = json_decode($this->group_members);
 		foreach ($collection as $member) {
 			if($member->id == $user_id){

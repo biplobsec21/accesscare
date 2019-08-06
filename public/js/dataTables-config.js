@@ -8,8 +8,8 @@
         let $settings = Object.assign({
             paginationDefault: 10,
             paginationOptions: [10, 25, 50, 75, 100],
-            processing: false,
-            serverSide: false,
+            processing: true,
+            serverSide: true,
             orderCellsTop: true,
             fixedHeader: true,
         }, $options);
@@ -46,14 +46,14 @@
                 return;
             }
             $(this).html('<input type="text" class="form-control" placeholder="Search ' + $(this).text() + '" />');
-            $('input', this).on('keyup change', function () {
+            $('input', this).on('change', function () {
                 if ($(this).closest('table').DataTable().column(i).search() !== this.value)
                     $(this).closest('table').DataTable().column(i).search(this.value).draw();
             });
         });
 
         //Passing columns through ajax
-        $settings.ajax.data = {cols: $settings.columns};
+        $settings.ajax.data = {columns: $settings.columns};
 
         let dataTable = $(this).DataTable($settings);
 

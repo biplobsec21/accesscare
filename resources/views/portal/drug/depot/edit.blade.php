@@ -231,7 +231,7 @@
 															{{$lot->dosage->component->drug->name}}
 														</a>
 													</td>
-													<td>{!! $lot->dosage->display() !!}</td>
+													<td>{!! $lot->dosage->display_short !!}</td>
 													<td>{{$lot->stock}}</td>
 													<td>{{$lot->updated_at->format(config('eac.date_format'))}}</td>
 													<td>

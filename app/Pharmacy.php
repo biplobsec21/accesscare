@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pharmacy extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -51,6 +51,11 @@ class Pharmacy extends Model
 	 * @var string
 	 */
 	protected $prefix = "PHARMACY";
+
+    public function getEditRouteAttribute()
+    {
+        return route('eac.portal.pharmacy.edit', $this->id);
+    }
 
 	/**
 	 * Relation for address

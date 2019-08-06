@@ -115,7 +115,7 @@
                         {
                             data: "edit_route",
                             type: "btn",
-                            styling: "btn btn-warning",
+                            classes: "btn btn-warning",
                             icon: '<i class="fal fa-fw fa-edit"></i>',
                             text: "Edit"
                         },

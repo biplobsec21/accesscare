@@ -11,7 +11,7 @@
 				<li class="breadcrumb-item">
 					<a href="{{route('eac.portal.getDashboard')}}">Dashboard</a>
 				</li>
-				@if($_GET['depot'])
+				@if($_GET['depot'] ?? false)
 					<li class="breadcrumb-item">
 						<a href="{{route('eac.portal.depot.list.all')}}">All Depots</a>
 					</li>
@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="col-lg-10 col-xl-8">
 				<div class="actionBar">
-					@if($_GET['depot'])
+					@if($_GET['depot'] ?? false)
 						<a href="{{ route('eac.portal.depot.edit', $_GET['depot']) }}" class="btn btn-warning ">
 							<i class="far fa-arrow-left"></i> Edit Depot
 						</a>
@@ -69,8 +69,7 @@
 								        required="required">
 									<option disabled hidden selected value="">-- Select --</option>
 									@foreach($drug_all as $drug)
-										<option
-											value="{{ $drug->id }}" {{ ($drugs->count() > 0) && $drugs[0]->id == $drug->id ? 'selected' : ''}}>
+										<option value="{{ $drug->id }}" {{ ($drugs->count() > 0) && $drugs->first()->id == $drug->id ? 'selected' : ''}}>
 											{{ $drug->name }}
 										</option>
 									@endforeach
