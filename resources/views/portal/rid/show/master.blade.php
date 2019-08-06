@@ -178,7 +178,7 @@
                             Assign User Group
                         </a>
                     @endif
-                    @access('rid.documents.update')
+                    @access('rid.document.update')
                         <a href="{{route('eac.portal.rid.postreview', $rid->id)}}" class="btn btn-light ml-2">
                             <i class="fa-fw fas fa-upload"></i>
                             Post Approval Documents

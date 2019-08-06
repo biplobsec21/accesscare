@@ -258,7 +258,7 @@
 									</a>
 								@endif
         @elseif(!$visitDocument->redacted_file_id)
-									@access('rid.document.edit')
+									@access('rid.document.update')
 									<a href="#" data-toggle="modal" class="" title="Upload Redacted File" data-target="#AddRedactedModal{{ $visitDocument->id }}">
           <i class="fas fa-upload text-primary"></i>
 									</a>
