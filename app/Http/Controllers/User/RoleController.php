@@ -28,8 +28,13 @@ class RoleController extends PermissionsController
 
 	public function index()
 	{
+		// dd(Request()->type);
+		if(Request()->type == 'all')
+			$roles = Role::where('hidden', 0);
+		else
+			$roles = Role::where('hidden', 0)->where('type_id',Request()->type);
 		return view('portal.settings.manage.user.role.index', [
-			'roles' => Role::where('hidden', 0),
+			'roles' => $roles,
 			'baseDefault' => Role::default_level(),
 			'types' => UserType::all()->sortBy('name'),
 		]);

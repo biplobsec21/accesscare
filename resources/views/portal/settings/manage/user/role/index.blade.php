@@ -34,26 +34,23 @@
 		<div class="card mb-1 mb-md-4" style="max-width: 991px">
    <form>
     <div class="mb-2 ml-sm-2 mr-sm-2 mt-sm-2 d-flex justify-content-between btn-group-toggle novisual flex-wrap" data-toggle="buttons">
-     <label class="btn btn-outline-primary m-1 flex-fill">
-      <input type="radio" name="showThisType" value="Physician" />
-      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
-       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">Physician</span> Users
-      </span>
-     </label>
-     <label class="btn btn-outline-primary m-1 flex-fill">
-      <input type="radio" name="showThisType" value="Pharma" />
-      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
-       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">Pharma</span> Users
-      </span>
-     </label>
-     <label class="btn btn-outline-primary m-1 flex-fill">
-      <input type="radio" name="showThisType" value="EAC" />
-      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
-       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">EAC</span> Users
-      </span>
-     </label>
-     <label class="btn btn-outline-primary m-1 flex-fill active">
-      <input type="radio" name="showThisType" value="All" checked> 
+    @if($types->count())	
+     @foreach($types as $val)
+	     <label class="btn btn-outline-primary m-1 flex-fill {{ Request()->type === $val->id ? 'active' : ''}}" onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+	      <input type="radio"  name="type" value="{{ $val->id }}" />
+	      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+	       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">
+	       	{{ $val->name === 'Early Access Care' ? 'EAC' : ''  }}
+	       	{{ $val->name === 'Pharmaceutical' ? 'Pharma' : ''  }}
+	       	{{ $val->name === 'Physician' ? 'Physician' : ''  }}
+	       </span> Users
+	      </span>
+	     </label>
+     @endforeach
+    @endif
+   	
+     <label class="btn btn-outline-primary m-1 flex-fill {{ Request()->type === 'all' ? 'active' : ''}}"  onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+      <input type="radio" name="type" value="all" > 
       <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
        <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">All</span> Users
       </span>
@@ -107,5 +104,8 @@
 		$(document).ready(function(){
 			$('.table').DataTable();
 		});
+		function formSubmit(input){
+			$(this).find(':radio').prop('checked', true);
+		}
 	</script>
 @endsection
