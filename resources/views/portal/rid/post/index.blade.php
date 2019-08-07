@@ -114,7 +114,7 @@
    										@if($doc->uploaded_file_id ?? null)
    											<div class="row">
    												<div class="col-sm">
-   													{{$doc->file->name}}
+                             @include('include.portal.file-btns', ['id' => $doc->file->id])
    												</div>
    												<div class="col-sm-auto">
    													<a class="btn btn-danger btn-sm" href="#" onclick="removeDocument('{{$doc->id}}',event)">
