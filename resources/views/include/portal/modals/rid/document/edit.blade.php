@@ -80,7 +80,7 @@
 							<div class="d-sm-flex justify-content-sm-between align-items-center">
 								<label class="d-block">Redacted File <small>({{config('eac.storage.file.type')}})</small></label>
 								@if($visitDocument->redacted_file_id)
-									<a class="badge badge-danger" href="#" onclick="removeTemplateDocument('{{$visitDocument->redacted_file_id}}', event,'redacted_file')">
+									<a class="badge badge-danger" href="#" onclick="removeTemplateDocument('{{$visitDocument->id}}', event,'redacted_file')">
 										<i class="fas fa-times"></i>
 										Delete
 									</a>

@@ -289,6 +289,7 @@ class DocumentController extends Controller
         $document = RidDocument::where('id', "=", $_POST['id'])->firstOrFail();
         $document[$file_name] = 0;
         $document->saveOrFail();
+        \Session::flash('confirm', 'File deleted successfully'); 
         return;
     }
 
@@ -314,6 +315,7 @@ class DocumentController extends Controller
         $document = RidDocument::where('id', "=", $_POST['id'])->firstOrFail();
         $document[$file_name] = 0;
         $document->saveOrFail();
+        \Session::flash('confirm', 'File deleted successfully'); 
         return;
     }
 

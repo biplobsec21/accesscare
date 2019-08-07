@@ -300,5 +300,22 @@
                 "dom": 't<"d-flex justify-content-between flex-wrap small p-2"lp>'
             });
         });
+        function removeTemplateDocument($id, $e, $field_name) {
+        console.log($field_name);
+        $.ajax({
+          url: "{{route('eac.portal.rid.modal.document.remove')}}",
+          type: 'POST',
+          data: {
+              id: $id,
+              field: $field_name,
+          },
+          success: function () {
+            location.reload();
+            // var labelUploaded_ = $field_name === 'upload_file' ? 'UPLOAD FILE' : ' Redacted file';
+           // var labelUploaded = '<label class="d-block">Redacted File <small>({{config('eac.storage.file.type')}})</small></label>';
+           //  $e.target.parentNode.parentNode.innerHTML = labelUploaded+' <input class="form-control" type="file" name="' + $field_name + '"/>'
+          }
+      });
+  }
     </script>
 @endsection
