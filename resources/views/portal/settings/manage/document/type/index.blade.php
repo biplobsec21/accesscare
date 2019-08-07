@@ -60,10 +60,10 @@
                 <table class="table table-sm table-striped" id="doctypeTBL">
                     <thead>
                     <tr>
-                        <th width="12%">Name</th>
-                        <th width="8%">Resource</th>
+                        <th >Name</th>
+                        <!-- <th width="8%">Resource</th> -->
                         <th class="no-sort no-search">Active</th>
-                        <th width="35%" class="no-sort no-search">Template (PDF or Doc)</th>
+                        <th  class="no-sort no-search">Template (PDF or Doc)</th>
                         <th>Description</th>
                         <th>Last Update</th>
                         <th class="no-sort">Actions</th>
@@ -73,10 +73,10 @@
                     <tbody></tbody>
                     <tfoot>
                     <tr>
-                        <th width="12%">Name</th>
-                        <th width="8%">Resource</th>
+                        <th >Name</th>
+                        <!-- <th width="8%">Resource</th> -->
                         <th class="no-sort no-search">Active</th>
-                        <th width="35%" class="no-sort no-search">Template (PDF or Doc)</th>
+                        <th class="no-sort no-search">Template (PDF or Doc)</th>
                         <th>Description</th>
                         <th>Last Update</th>
                         <th class="no-sort">Actions</th>
@@ -103,9 +103,9 @@
                         {
                             data: "name"
                         },
-                        {
-                            data: "is_resource"
-                        },
+                        // {
+                        //     data: "is_resource"
+                        // },
                         {
                             data: "active"
                         },

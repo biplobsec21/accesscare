@@ -60,7 +60,21 @@ class DataTableResponse
                         $row->setColumn($col['data'], $value);
                         break;
                 }
-
+                // add active or inactive badges
+                if($col['data'] === 'active'){
+                    $value = $this->getThroughModel($col['data'], $item) == '1'
+                        ? '<span class="badge badge-success">Active' 
+                        : '<span class="badge badge-danger">Inactive';
+                    $value .= '</span>';
+                    $row->setColumn($col['data'], $value);
+                }
+                // template view download
+                if($col['data'] === 'template'){
+                    if($item->file){ // check file exist 
+                        $value =  view('include.portal.file-btns', ['id' => $item->file->id]);
+                        $row->setColumn($col['data'], $value->render());
+                    }
+                }
             }
             $this->addRow($row);
         }
