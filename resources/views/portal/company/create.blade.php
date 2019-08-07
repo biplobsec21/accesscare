@@ -279,6 +279,7 @@
           $("#city_input").attr('placeholder','City');
           $("#zip_lbl").text('Zip');
           $("#zip_input").attr('placeholder','Zip Code');
+          $("#state_lbl").text('State');
         }
    }
  </script>

@@ -6,7 +6,7 @@
 }
 </style>
 @section('title')
-	Create Depot
+  Create Depot
 @endsection
 
 @section('content')
@@ -29,9 +29,9 @@
   </h2>
  </div><!-- end .titleBar -->
 
-	<form method="post" action="{{ route('eac.portal.depot.store') }}">
-		{{ csrf_field() }}
-		<input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
+  <form method="post" action="{{ route('eac.portal.depot.store') }}">
+    {{ csrf_field() }}
+    <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
   <div class="actionBar">
    <a href="{{ url()->previous() }}" class="btn btn-light">
     <i class="far fa-angle-double-left"></i> Go back
@@ -59,7 +59,7 @@
        <input type="text" name="depot_addr1" placeholder="Address Line 1" class="form-control mb-1" required="required">
        <input type="text" name="depot_addr2" placeholder="Address Line 2" class="form-control">
       </div>
-      <div class="row">
+      <!-- <div class="row">
        <div class="col-sm col-md-8 col-lg-12 col-xl-7 mb-3">
         <label class="d-block label_required">Country</label>
         <select name="depot_country_id" class="form-control" required="required" id="country_id">
@@ -73,8 +73,30 @@
         <label class="d-block label_required">City</label>
        <input type="text" name="depot_city" placeholder="City" class="form-control" required="required">
        </div>
+      </div> -->
+
+      <div class="row">
+       <div class="col-sm col-md-8 col-lg-12 col-xl-7 mb-3">
+        <label class="d-block label_required">Country</label>
+        <select class="form-control select2 {{ $errors->has('depot_country_id') ? ' is-invalid' : '' }}" id="country_id" name="depot_country_id">
+         @foreach($countries as $country)
+          <option value="{{$country->id}}" {{old('depot_country_id') == $country->id ? 'selected' : '' }}>{{$country->name}}</option>
+         @endforeach
+        </select>
+        <div class="invalid-feedback">
+         {{ $errors->first('depot_country_id') }}
+        </div>
+       </div>
+       <div class="col-sm col-md-4 col-lg-12 col-xl mb-3">
+        <label class="d-block label_required"  id="city_lbl">City</label>
+        <input type="text"  id="city_input"  class="form-control{{ $errors->has('depot_city') ? ' is-invalid' : '' }}" name="depot_city" value="{{ old('depot_city') }}" placeholder="City">
+        <div class="invalid-feedback">
+         {{ $errors->first('depot_city') }}
+        </div>
+       </div>
       </div>
-      <div class="row mb-3">
+
+      <!-- <div class="row mb-3">
        <div class="col-sm col-lg-7 mb-3" >
         <label class="d-block label_required" id="lbl">State</label>
         <select name="depot_state_province" class="form-control" required="required" id="state">
@@ -88,7 +110,32 @@
         <label class="d-block label_required">Zip</label>
         <input type="text" name="depot_zip" placeholder="ZIP Code" class="form-control " required="required">
        </div>
-      </div><!-- /.row -->
+      </div> --><!-- /.row -->
+
+      <div class="row">
+       <div class="col-sm col-lg-7 mb-3">
+        <label class="d-block"  id="state_lbl">State</label>
+        
+        <select class=" form-control{{ $errors->has('depot_state_province') ? ' is-invalid' : '' }}" name="depot_state_province" id="state_option">
+        <option disabled hidden selected value="">-- Select --</option>
+        @foreach($states as $state)
+         <option value="{{$state->id}}" {{ old('depot_state_province') == $state->id ? 'selected' : ''}}>{{$state->name}}</option>
+        @endforeach
+       </select>
+       <input type="text" placeholder="Province" name="depot_state_province" id="state_text" class="form-control" value="{{ old('depot_state_province')}}">
+        <div class="invalid-feedback">
+         {{ $errors->first('depot_state_province') }}
+        </div>
+       </div>
+       <div class="col-sm col-lg-5 mb-3">
+        <label class="d-block label_required" id="zip_lbl">Zip</label>
+        <input type="text" id="zip_input" class="form-control{{ $errors->has('depot_zip') ? ' is-invalid' : '' }}" name="depot_zip" value="{{ old('depot_zip') }}" placeholder="Zipcode">
+        <div class="invalid-feedback">
+         {{ $errors->first('depot_zip') }}
+        </div>
+       </div>
+      </div>
+
       <div class="row">
        <div class="ml-auto mr-auto col-sm-10 col-md-8 col-lg-6">
         <button class="btn btn-success btn-block" type="submit">
@@ -100,25 +147,48 @@
     </div>
    </div>
   </div><!-- /.viewData -->
-	</form>
+  </form>
 @endsection
 
 @section('scripts')
 <script>
-  $("#state").prop('required',false);
-  $("#lbl").removeClass('label_required');
-  $("#country_id").on('change',function(){
-    if($("#country_id option:selected").text() == 'United States'){
-      $("#state").prop('required',true);
-      $("#lbl").addClass('label_required');
-    }else{
+  $(document).ready(function () {
+     $('.select2').select2();
+      $( "#state_text" ).hide();
+      $('#state_text').attr("disabled", true);
       $("#state").prop('required',false);
-      $("#lbl").removeClass('label_required');
-    }
+      $("#country_id").on('change',function(){
+        countrySelected();
 
+      });
+      countrySelected();
   });
+ function countrySelected(){
+    if($("#country_id option:selected").text() != 'United States'){
+          $("#zip_lbl").text('Postal Code');
+          $("#zip_input").attr('placeholder','Postal Code');
+          $("#city_lbl").text('Town/City');
+          $("#city_input").attr('placeholder','Town/City');
+          $("#state_lbl").text('Province');
+          $( "#state_option" ).hide();
+          $('#state_option').attr("disabled", true);
+          $( "#state_text" ).show();
+          $('#state_text').attr("disabled", false);
+
+        }else{
+          $( "#state_text" ).hide();
+          $('#state_text').attr("disabled", true);
+          $( "#state_option" ).show();
+          $('#state_option').attr("disabled", false);
+          $("#city_lbl").text('City');
+          $("#city_input").attr('placeholder','City');
+          $("#zip_lbl").text('Zip');
+          $("#zip_input").attr('placeholder','Zip Code');
+          $("#state_lbl").text('State');
+        }
+   }
+
 </script>
 @endsection
-
 
 
