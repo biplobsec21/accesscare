@@ -49,7 +49,7 @@
      @endforeach
     @endif
    	
-     <label class="btn btn-outline-primary m-1 flex-fill {{ Request()->type === 'all' ? 'active' : ''}}"  onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+     <label class="btn btn-outline-primary m-1 flex-fill {{ Request()->type === 'all' || !Request()->type ? 'active' : ''}}"  onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
       <input type="radio" name="type" value="all" > 
       <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
        <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">All</span> Users

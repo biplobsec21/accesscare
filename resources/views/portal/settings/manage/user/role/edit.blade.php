@@ -95,6 +95,8 @@
 				</a>
 				<div>
 					<button class="btn btn-success" type="submit">Save All Permissions</button>
+					<input type="submit" name="save" class="btn btn-info" value="Save" />
+					<input type="submit" name="close" class="btn btn-secondary" value="Close" />
 				</div>
 			</div>
 			<div class="row thisone m-0 mb-xl-5">

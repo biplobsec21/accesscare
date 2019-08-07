@@ -29,7 +29,7 @@ class RoleController extends PermissionsController
 	public function index()
 	{
 		// dd(Request()->type);
-		if(Request()->type == 'all')
+		if(Request()->type == 'all' || !Request()->type)
 			$roles = Role::where('hidden', 0);
 		else
 			$roles = Role::where('hidden', 0)->where('type_id',Request()->type);
@@ -78,7 +78,11 @@ class RoleController extends PermissionsController
 		else
 			$role->base_level = null;
 		$role->save();
+		if($request->save || $request->close)
 		return redirect()->route('eac.portal.settings.manage.user.role')->with('confirm', ucwords($role->type->name) . ': ' . ucwords($role->name) . ' has been updated.');
+		
+		// the save all will redirect back to the page
+		return redirect()->back()->with('confirm', ucwords($role->type->name) . ': ' . ucwords($role->name) . ' has been updated.');
 	}
 
 	public function delete($id)
