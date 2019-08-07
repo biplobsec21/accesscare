@@ -4,8 +4,13 @@ namespace App\DataTables;
 
 class DataTableResponse
 {
-    protected $class;
-    protected $settings;
+    protected $columns;
+    protected $order;
+    protected $page;
+    protected $pageLength;
+    protected $items;
+    protected $total;
+    protected $filtered;
     protected $rows = [];
 
     public function __construct($items, $_settings)
@@ -63,14 +68,14 @@ class DataTableResponse
                 // add active or inactive badges
                 if($col['data'] === 'active'){
                     $value = $this->getThroughModel($col['data'], $item) == '1'
-                        ? '<span class="badge badge-success">Active' 
+                        ? '<span class="badge badge-success">Active'
                         : '<span class="badge badge-danger">Inactive';
                     $value .= '</span>';
                     $row->setColumn($col['data'], $value);
                 }
                 // template view download
                 if($col['data'] === 'template'){
-                    if($item->file){ // check file exist 
+                    if($item->file){ // check file exist
                         $value =  view('include.portal.file-btns', ['id' => $item->file->id]);
                         $row->setColumn($col['data'], $value->render());
                     }
@@ -104,37 +109,36 @@ class DataTableResponse
             }
             array_push($response->data, $json);
         }
-        $response->recordsFiltered = $this->total;
+        $response->recordsFiltered = $this->filtered;
         $response->recordsTotal = $this->total;
         return json_encode($response);
     }
 
     protected function paginate()
     {
+        $this->filtered = $this->items->count();
         $this->items = $this->items->forPage($this->page, $this->pageLength)->values();
     }
 
     protected function sort()
     {
-        $items = $this->items;
+        $sorted = $this->items;
         switch ($this->order->count()) {
             case 0:
                 break;
-            case 1:
-                if($this->order[0]['dir'] == "asc")
-                    $items = $items->sortBy($this->columns[$this->order[0]['column']]['data']);
-                else
-                    $items = $items->sortByDesc($this->columns[$this->order[0]['column']]['data']);
-                break;
             default:
-                if($this->order[0]['dir'] == "asc")
-                    $items = $items->sortBy($this->columns[$this->order[0]['column']]['data']);
-                else
-                    $items = $items->sortByDesc($this->columns[$this->order[0]['column']]['data']);
-
+//                if($this->order[0]['dir'] == "asc")
+//                    $sorted = $sorted->sortBy($this->columns[$this->order[0]['column']]['data']);
+//                else
+//                    $sorted = $sorted->sortByDesc($this->columns[$this->order[0]['column']]['data']);
+                $sorted = collect($sorted->sortBy(function ($item) {
+                    return $this->getThroughModel($this->columns[$this->order[0]['column']]['data'], $item);
+                })->values());
+                if($this->order[0]['dir'] == "desc")
+                    $sorted = collect($sorted->reverse()->values());
                 break;
         }
-        $this->items = collect($items->values());
+        $this->items = $sorted;
     }
 
     protected function search()
