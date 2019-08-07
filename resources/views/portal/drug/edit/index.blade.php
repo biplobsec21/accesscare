@@ -466,7 +466,7 @@
                         <div class="card card-body mb-0">
                             <div class="row mb-3">
                                 <div class="col">
-                                    <h5 class="mb-0">Reference Documents @access('drug_resource.view')
+                                    <h5 class="mb-0">Reference Documents @access('drug.resource.view')
                                         <span class="badge badge-dark">{{ $drug->resources->count() }}</span>
                                         @endif
                                     </h5>

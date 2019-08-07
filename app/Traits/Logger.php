@@ -30,6 +30,18 @@ trait Logger
 		return redirect()->back();
 	}
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  string $id ID of Changed Row
+     * @param  array $data New Data [field => value[
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogs($id)
+    {
+        return Log::where('subject_id', $id)->get();
+    }
+
 	public static function newID(string $model)
 	{
 		return GenerateID::generateWithPrefixUnique($model);

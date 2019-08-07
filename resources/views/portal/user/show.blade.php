@@ -122,7 +122,7 @@
 				User List
 			</a>
 			<div>
-				@if(\Auth::user()->type->name == 'Early Access Care')
+                @access('user.emulate.view')
 					<a href="{{ route('eac.auth.emu.init', $user->id) }}" class="btn btn-primary">
 						<i class="fas fa-sign-in-alt" aria-hidden="true"></i>
 						Sign In As User

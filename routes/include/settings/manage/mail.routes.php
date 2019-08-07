@@ -8,60 +8,43 @@ Route::group([
 	'namespace' => 'Mail',
 	'prefix' => '/mail'
 ], function () {
-	Route::get('/notification-mail', [
+	Route::get('/list', [
 		'as' => 'eac.portal.settings.mail.notification-mail',
-		'uses' => 'NotificationMailController@index',
+		'uses' => 'MailerController@index',
 	]);
 	Route::match(['post', 'get'], '/ajax/list', [
 		'as' => 'eac.portal.settings.mail.ajax.list',
-		'uses' => 'NotificationMailController@ajaxMailData'
+		'uses' => 'MailerController@ajaxMailData'
 	]);
-	Route::post('/ajax/updateDB/notification-mail', [
+	Route::post('/ajax/update', [
 		'as' => 'eac.portal.settings.mail.notification-mail.ajax',
-		'uses' => 'NotificationMailController@ajaxUpdate',
+		'uses' => 'MailerController@ajaxUpdate',
 	]);
 
-	Route::get('/registration-mail', [
-		'as' => 'eac.portal.settings.mail.registration-mail',
-		'uses' => 'RegistrationMailController@index',
-	]);
-	Route::get('/shipping-mail', [
-		'as' => 'eac.portal.settings.mail.shipping-mail',
-		'uses' => 'ShippingMailController@index',
-	]);
 	Route::get('/create', [
 		'as' => 'eac.portal.settings.mail.create',
-		'uses' => 'NotificationMailController@create',
+		'uses' => 'MailerController@create',
 	]);
 
 	Route::post('/create', [
 		'as' => 'eac.portal.settings.mail.create',
-		'uses' => 'NotificationMailController@postCreate'
+		'uses' => 'MailerController@postCreate'
 	]);
 	Route::get('/edit/{id}', [
 		'as' => 'eac.portal.settings.mail.edit',
-		'uses' => 'NotificationMailController@edit',
+		'uses' => 'MailerController@edit',
 	]);
 
 	Route::post('/edit', [
 		'as' => 'eac.portal.settings.mail.update',
-		'uses' => 'NotificationMailController@postEdit',
+		'uses' => 'MailerController@postEdit',
 	]);
-	Route::match(['get','post'],'ajax/mailType/deleteDB', [
+	Route::match(['get','post'],'ajax/delete', [
 		'as' => 'mailType.ajaxDelete',
-		'uses' => 'NotificationMailController@ajaxMailDelete',
+		'uses' => 'MailerController@ajaxMailDelete',
 	]);
-	Route::get('/logMail', [
-		'as' => 'eac.portal.settings.mail.logMail',
-		'uses' => 'NotificationMailController@logMail',
+	Route::get('/log', [
+		'as' => 'eac.portal.settings.mail.log',
+		'uses' => 'MailerController@logMail',
 	]);
-	// Route::post('/mailLogview', [
-	// 	'as' => 'eac.portal.settings.mail.mailLogview',
-	// 	'uses' => 'NotificationMailController@mailLogview',
-	// ]);
-	Route::get('/mailLogview/{id}', [
-		'as' => 'eac.portal.settings.mail.mailLogview',
-		'uses' => 'NotificationMailController@mailLogview',
-	]);
-
 });

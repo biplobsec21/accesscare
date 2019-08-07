@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Rid;
 
+use App\Mailer;
 use Carbon\Carbon;
 use DB;
 use App\Company;
@@ -380,35 +381,66 @@ class RidController extends Controller
 	}
 
 	public function approve($id)
-	{
-		$completedId = RidMasterStatus::where('name', 'Approved')->firstOrFail();
-		$status_id = $completedId->id;
-		$rid = Rid::where('id', $id)->firstOrFail();
-		$rid->status_id = $status_id;
-		$rid->save();
-		$this->createNotice('rid_approved', $rid, $rid->physician);
-		return redirect()->back();
-	}
+    {
+        return view('portal.rid.letter.edit', [
+            'rid' => Rid::where('id', $id)->firstOrFail(),
+            'status' => RidMasterStatus::where('name', 'Approved')->firstOrFail(),
+            'title' => 'Approved Letter',
+            'template' => Mailer::where('name', 'rid_approved')->first(),
+        ]);
+    }
 
 	public function deny($id)
 	{
-		$completedId = RidMasterStatus::where('name', 'Completed')->firstOrFail();
-		$status_id = $completedId->id;
-
-		$rid = Rid::where('id', $id)->firstOrFail();
-		$rid->status_id = $status_id;
-		$rid->save();
-		$this->createNotice('rid_not_approved', $rid, $rid->physician);
-		return redirect()->back();
+        return view('portal.rid.letter.edit', [
+            'rid' => Rid::where('id', $id)->firstOrFail(),
+            'status' => RidMasterStatus::where('name', 'Completed')->firstOrFail(),
+            'title' => 'Denied Letter',
+            'template' => Mailer::where('name', 'rid_not_approved')->first(),
+        ]);
 	}
 
 	public function moreinfo($id)
 	{
-		$rid = Rid::where('id', $id)->firstOrFail();
-		return view('portal.rid.letter.moreinfo', [
-			'rid' => $rid,
+		return view('portal.rid.letter.edit', [
+			'rid' => Rid::where('id', $id)->firstOrFail(),
+            'status' => RidMasterStatus::where('name', 'Pending')->firstOrFail(),
+            'title' => 'More Info Letter',
+            'template' => Mailer::where('name', 'rid_more_info')->first(),
 		]);
 	}
+
+	public function letterSend (Request $request) {
+        $this->validate($request, [
+            'subject' => 'required',
+            'from_email' => 'required|email',
+            'from_name' => 'required',
+            'html' => 'required'
+        ], [
+            'subject.required' => ' The subject field is required.',
+            'from_email.required' => ' The from address field is required.',
+            'from_name.required' => ' The from name field is required.',
+            'html.required' => 'The html body field is required.',
+        ]);
+
+        $rid = Rid::where('id', $request->input('rid'))->firstOrFail();
+        $rid->status_id = $request->input('status');
+        $rid->save();
+
+        $mail = new \stdClass();
+        $mail->name = $request->input('name');
+        $mail->subject = $request->input('subject');
+        $mail->from_email = $request->input('from_email');
+        $mail->from_name = $request->input('from_name');
+        $mail->reply_to = $request->input('reply_to');
+        $mail->cc = $request->input('cc');
+        $mail->bcc = $request->input('bcc');
+        $mail->html = $request->input('html');
+
+        $this->customNotice($mail, $rid, $rid->physician);
+
+        return redirect()->route('eac.portal.rid.show', $rid->id)->with("alert", ['type' => 'success', 'msg' => 'Letter send to physician!']);
+    }
 
 	public function autoUpdate()
 	{

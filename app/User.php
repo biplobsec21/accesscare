@@ -117,7 +117,7 @@ class User extends Authenticatable
 		$allGroups = UserGroup::all();
 		$groups = collect([]);
 		foreach ($allGroups as $group)
-            if ($group->users()->contains('id', $this->id)  || $group->parent_user_id == $this->id )
+            if ($group->users()->contains('id', $this->id))
 				$groups->push($group);
 		return $groups;
 	}

@@ -23,10 +23,24 @@ trait Notifier
 		$notice->user_id = $user->id;
 		$notice->subject_id = $context->id;
 		$notice->message = strip_tags($this->applyTokens($mailer->html, $context));
-		//$notice->save();
+		$notice->save();
 
-		//$this->sendMail($mailer, $context, $user);
+		$this->sendMail($mailer, $context, $user);
 	}
+
+    protected function customNotice($mailer, $context, $user)
+    {
+        if($user === 'eac')
+            return; // Send it to all eac users
+        $notice = new Notification();
+        $notice->id = $this->newID(Notification::class);
+        $notice->user_id = $user->id;
+        $notice->subject_id = $context->id;
+        $notice->message = strip_tags($this->applyTokens($mailer->html, $context));
+        $notice->save();
+
+        $this->sendMail($mailer, $context, $user);
+    }
 
 	public function sendMail($mailer, $context, $user)
 	{
@@ -36,7 +50,7 @@ trait Notifier
 		$content->receiver = $user->full_name;
 		$content->context = $context;
 
-		//return Mail::to('office@quasars.com')->send(new GenericEmail($content));
+		//return Mail::to('andrew@quasars.com')->send(new GenericEmail($content));
 	}
 
 	private function applyTokens($str, $context)

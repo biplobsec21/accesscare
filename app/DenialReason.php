@@ -49,4 +49,9 @@ class DenialReason extends Model
 	 * @var string
 	 */
 	protected $prefix = "DENIALREASON";
+
+    public function getEditRouteAttribute()
+    {
+        return route('portal.settings.manage.rid.denial.reason.edit', $this->id);
+    }
 }

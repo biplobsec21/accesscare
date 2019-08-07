@@ -131,6 +131,10 @@ Route::group([
 		'as' => 'eac.portal.rid.moreinfo',
 		'uses' => 'RidController@moreinfo',
 	]);
+    Route::post('/letter/send', [
+        'as' => 'eac.portal.rid.letter.send',
+        'uses' => 'RidController@letterSend',
+    ]);
 
 	/**
 	 * Rid Treatment Routes
@@ -290,7 +294,7 @@ Route::group([
 		'as' => 'eac.portal.rid.visit.edit.reassign.save',
 		'uses' => 'RidController@reassign',
 	]);
-	
+
 });
 
 Route::group([

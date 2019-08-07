@@ -173,7 +173,7 @@
             <div class="bg-gradient-primary text-white p-3 d-flex justify-content-between">
                 <div>
                     @access('rid.user.create')
-                        <a href="#" class="btn btn-light">
+                        <a href="{{route('eac.portal.rid.edit', $rid->id)}}#xusergrpT" class="btn btn-light">
                             <i class="fa-fw fas fa-users"></i>
                             Assign User Group
                         </a>

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ShippingCourier extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -49,4 +49,9 @@ class ShippingCourier extends Model
 	 * @var string
 	 */
 	protected $prefix = "SHIPPINGCOURIER";
+
+    public function getEditRouteAttribute()
+    {
+        return route('eac.portal.settings.manage.rid.shipment.courier.edit', $this->id);
+    }
 }

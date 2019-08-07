@@ -27,7 +27,7 @@
   </h2>
  </div><!-- end .titleBar -->
  <div class="actionBar">
-  <a href="{{ route('eac.portal.settings.mail.logMail') }}" class="btn btn-secondary">
+  <a href="{{ route('eac.portal.settings.mail.log') }}" class="btn btn-secondary">
    <i class="fal fa-key"></i> Return to Change Log
   </a>
  </div><!-- end .actionBar -->
@@ -85,14 +85,14 @@
  $(document).ready(function () {
 
   $("#-datatble-").on("click", function () {
-   
+  
   });
 
  });
 
-  
+ 
  function ConfirmDelete(param){
-    
+ 
  }
 </script>
 @endsection
