@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Rid;
 
 use App\Mailer;
+use App\Traits\Filer;
 use Carbon\Carbon;
 use DB;
 use App\Company;
@@ -35,7 +36,7 @@ use Illuminate\Http\Request;
  */
 class RidController extends Controller
 {
-	use WorksWithRIDs, Notifier, AuthAssist;
+	use WorksWithRIDs, Notifier, AuthAssist, Filer;
 
 	public function __construct()
 	{
@@ -539,78 +540,59 @@ class RidController extends Controller
 	public function postreview($id)
 	{
 		$rid = Rid::where('id', $id)->firstOrFail();
-		$ridPADocs = RidPostApprovalActions::where('is_active', 1)->orderBy('serial', 'asc')->get();
+        $postApprovalActions = RidPostApprovalActions::where('is_active', 1)->orderBy('serial', 'asc')->get();
 
-		return view('portal.rid.post.index', ['rid' => $rid, 'ridPADocs' => $ridPADocs]);
-
-	}
-
-	public function reviewdocstore(Request $request)
-	{
-		if ($request->action == 'upload') {
-			$rid_id = $request->rid_id;
-			$doc_id = $request->document_id;
-			$data = RidPostApprovalDocs::where('rid_id', $rid_id)->where('doc_id', $doc_id)->first();
-			if ($data) {
-				$docStore = $data;
-			} else {
-				$docStore = new RidPostApprovalDocs();
-				$docStore->id = $this->newID(RidPostApprovalDocs::class);
-				$docStore->rid_id = $request->rid_id;
-				$docStore->doc_id = $request->document_id;
-			}
-
-			$docStore->upload_notes = $request->up_notes;
-
-			if ($request->file('upload_file')) {
-				$requestFile = $request->file('upload_file');
-				$dir = '/rid/post/documents';
-				$filename = 'doc_' . rand(10000000, 99999999) . '.' . $requestFile->getClientOriginalExtension();
-				$path = $requestFile->storeAs($dir, $filename);
-				$file = new File();
-				$file->id = $this->newID(File::class);
-				$file->path = $dir;
-				$file->name = $filename;
-				$file->save();
-				$file_id = $file->id;
-
-				$docStore->uploaded_file_id = $file_id;
-			}
-
-			$docStore->save();
-
-		} else if ($request->action == 'review') {
-
-			$rid_id = $request->rid_id;
-			$doc_id = $request->document_id;
-
-			$revStore = RidPostApprovalDocs::where('rid_id', $rid_id)->where('doc_id', $doc_id)->first();
-			$revStore->is_matched = $request->is_match == 'yes' ? 'yes' : 'no';
-			$revStore->record_no = $request->record_no;
-			$revStore->expiration_date = $request->exp_date;
-			$revStore->review_notes = $request->review_notes;
-			$revStore->save();
-
-		} else {
-			$rid_id = $request->rid_id;
-			$doc_id = $request->document_id;
-			$data = RidPostApprovalDocs::where('rid_id', $rid_id)->where('doc_id', $doc_id)->first();
-			if ($data) {
-				$ackStore = $data;
-			} else {
-				$ackStore = new RidPostApprovalDocs();
-				$ackStore->id = $this->newID(RidPostApprovalDocs::class);
-				$ackStore->rid_id = $request->rid_id;
-				$ackStore->doc_id = $request->document_id;
-			}
-
-			$ackStore->is_acknowledged = 1;
-			$ackStore->save();
-		}
-
-		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Data updated successfully']);
+		return view('portal.rid.post.index', ['rid' => $rid, 'postApprovalActions' => $postApprovalActions]);
 
 	}
+
+    public function postApprovalAction(Request $request)
+    {
+        if ($request->action == 'upload') {
+            $rid_id = $request->rid_id;
+            $doc_id = $request->document_id;
+            $postApprovalDoc = RidPostApprovalDocs::where('rid_id', $rid_id)->where('doc_id', $doc_id)->first();
+            if(!$postApprovalDoc) {
+                $postApprovalDoc = new RidPostApprovalDocs();
+                $postApprovalDoc->id = $this->newID(RidPostApprovalDocs::class);
+                $postApprovalDoc->rid_id = $request->rid_id;
+                $postApprovalDoc->doc_id = $request->document_id;
+            }
+            $postApprovalDoc->upload_notes = $request->up_notes;
+            $file = $this->createFile($request->file('upload_file'), 'rid.doc');
+            $postApprovalDoc->uploaded_file_id = $file->id;
+            $postApprovalDoc->save();
+        } else if ($request->action == 'review') {
+
+            $rid_id = $request->rid_id;
+            $doc_id = $request->document_id;
+
+            $postApprovalReview = RidPostApprovalDocs::where('rid_id', $rid_id)->where('doc_id', $doc_id)->first();
+            $postApprovalReview->is_matched = $request->is_match == 'yes' ? 'yes' : 'no';
+            $postApprovalReview->record_no = $request->record_no;
+            $postApprovalReview->expiration_date = $request->exp_date;
+            $postApprovalReview->review_notes = $request->review_notes;
+            $postApprovalReview->save();
+
+        } else {
+            $rid_id = $request->rid_id;
+            $doc_id = $request->document_id;
+            $data = RidPostApprovalDocs::where('rid_id', $rid_id)->where('doc_id', $doc_id)->first();
+            if ($data) {
+                $postApprovalAction = $data;
+            } else {
+                $postApprovalAction = new RidPostApprovalDocs();
+                $postApprovalAction->id = $this->newID(RidPostApprovalDocs::class);
+                $postApprovalAction->rid_id = $request->rid_id;
+                $postApprovalAction->doc_id = $request->document_id;
+            }
+
+            $postApprovalAction->is_acknowledged = 1;
+            $postApprovalAction->save();
+        }
+
+        return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Data updated successfully']);
+    }
 
 	public function reviewdocdelete(Request $request)
 	{

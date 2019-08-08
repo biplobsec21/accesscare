@@ -9,6 +9,7 @@ use App\File;
 use App\Http\Requests\Document\CreateRequest;
 use App\Resource;
 use App\RidDocument;
+use App\RidPostApprovalDocs;
 use App\RidVisit;
 use App\Traits\Filer;
 use App\Traits\Notifier;
@@ -289,7 +290,7 @@ class DocumentController extends Controller
         $document = RidDocument::where('id', "=", $_POST['id'])->firstOrFail();
         $document[$file_name] = 0;
         $document->saveOrFail();
-        \Session::flash('confirm', 'File deleted successfully'); 
+        \Session::flash('confirm', 'File deleted successfully');
         return;
     }
 
@@ -315,7 +316,7 @@ class DocumentController extends Controller
         $document = RidDocument::where('id', "=", $_POST['id'])->firstOrFail();
         $document[$file_name] = 0;
         $document->saveOrFail();
-        \Session::flash('confirm', 'File deleted successfully'); 
+        \Session::flash('confirm', 'File deleted successfully');
         return;
     }
 

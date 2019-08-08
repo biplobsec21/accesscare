@@ -279,9 +279,9 @@ Route::group([
 		'uses' => 'RidController@postreview',
 	]);
 
-	Route::post('/modal/review/doc/save', [
-		'as' => 'eac.portal.rid.modal.review.doc.save',
-		'uses' => 'RidController@reviewdocstore',
+	Route::post('/post/approval/action/save', [
+		'as' => 'eac.portal.rid.post.approval.action.save',
+		'uses' => 'RidController@postApprovalAction',
 	]);
 
 	Route::post('/modal/review/doc/delete', [
