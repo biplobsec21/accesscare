@@ -527,10 +527,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($drug->rids as $rid)
+                                    @foreach($drug->rids->sortByDesc('created_at') as $rid)
                                         <tr>
                                             <td>
-                                                {{-- {{$rid->req_date->format(config('eac.date_format'))}} --}}
+                                                {{\Carbon\Carbon::parse($rid->created_at)->format(config('eac.date_format')) }}
                                             </td>
                                             <td>
                                                 <a href="{{route('eac.portal.rid.show',$rid->id)}}">
@@ -544,6 +544,7 @@
                                                 <a href="{{route('eac.portal.user.show', $rid->physician->id)}}">{{$rid->physician->full_name}}</a>
                                             </td>
                                             <td></td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

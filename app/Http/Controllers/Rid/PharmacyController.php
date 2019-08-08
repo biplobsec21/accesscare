@@ -703,20 +703,17 @@ class PharmacyController extends Controller
 			->toJson();
 	}
 
-	public function assignePharmacist(Request $request)
+	public function assignPharmacist(Request $request)
 	{
 
-		if (empty($request->select)) {
+		if (empty($request->pharmacists)) {
 			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Please select a pharmacist then submit!']);
 		}
 
-		$pharmacy_id = $request->pharmacy_id;
-		$pharmacistInfo = $request->select;
-
-		$Pharmacist = Pharmacist::whereIn('id', $pharmacistInfo)->update(['pharmacy_id' => $pharmacy_id]);
+		$Pharmacist = Pharmacist::whereIn('id', $request->pharmacists)->update(['pharmacy_id' => $request->pharmacy_id]);
 
 		return redirect()->back()
-			->with("alert", ['type' => 'success', 'msg' => 'Pharmacist added successfully']);
+			->with("alert", ['type' => 'success', 'msg' => 'Pharmacist(s) added successfully']);
 	}
 
 

@@ -84,8 +84,7 @@ class Pharmacist extends Model
      */
     public function getPhoneNumAttribute()
     {
-        $phoneid = $this->phone;
-        return \App\Phone::where('id', $phoneid)->first()->number;
+        return \App\Phone::where('id', $this->phone)->first()->number;
     }
 
 	/**
@@ -95,12 +94,10 @@ class Pharmacist extends Model
 	 */
 	public function getPhone()
 	{
-		$phoneid = $this->phone;
-		return \App\Phone::where('id', $phoneid)->first()->number;
+		return \App\Phone::where('id', $this->phone)->first()->number;
 	}
 	public function getCountry()
 	{
-		$phoneid = $this->phone;
-		return \App\Phone::where('id', $phoneid)->first()->country_id;
+		return \App\Phone::where('id', $this->phone)->first()->country_id;
 	}
 }

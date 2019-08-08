@@ -73,17 +73,17 @@ Route::group([
 		'uses' => 'PharmacyController@getpharmacistajaxlist',
 	]);
 	Route::post('/assignePharmacist', [
-		'as' => 'eac.portal.pharmacy.assignepharmacist',
-		'uses' => 'PharmacyController@assignePharmacist',
+		'as' => 'eac.portal.pharmacy.assign.pharmacist',
+		'uses' => 'PharmacyController@assignPharmacist',
 	]);
 	Route::post('/newpharmacist', [
 		'as' => 'eac.portal.pharmacy.newpharmacist',
 		'uses' => 'PharmacyController@newpharmacist',
 	]);
-	
+
 	Route::get('/pharmacistremove', [
 		'as' => 'eac.portal.pharmacy.pharmacistremove',
 		'uses' => 'PharmacyController@pharmacistremove',
-	]);	
+	]);
 
 });

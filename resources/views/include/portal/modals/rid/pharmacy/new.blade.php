@@ -174,7 +174,7 @@
 		</form>
 	</div>
 	<div class="modal fade" id="pharmacistaddmodal" tabindex="-1" role="dialog" aria-hidden="true">
-		<form method="post" action="{{ route('eac.portal.pharmacy.assignepharmacist') }}" enctype="multipart/form-data">
+		<form method="post" action="{{ route('eac.portal.pharmacy.assign.pharmacist') }}" enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<input type="hidden" name="pharmacy_id" value="{{$pharmacy->id}}"/>
 			<div class="modal-dialog modal-dialog-centered modal-xl" role="document">

@@ -340,10 +340,10 @@
 						<div class="card-body">
 							<h5 class="">
 								Requests for {{$drug->name}}
-								<span class="badge badge-dark">{{$rids->count()}}</span>
+								<span class="badge badge-dark">{{$drug->rids->count()}}</span>
 							</h5>
 							<div class="table-responsive">
-								<table class="table table-sm SObasic table-striped table-hover">
+								<table class="table table-sm SOBasic table-striped table-hover">
 									<thead>
 									<tr>
 										<th>Request Date</th>
@@ -354,10 +354,10 @@
 									</tr>
 									</thead>
 									<tbody>
-									@foreach($rids as $rid)
+									@foreach($drug->rids->sortByDesc('created_at') as $rid)
 										<tr>
 											<td>
-												{{\Carbon\Carbon::parse($rid->req_date)->format(config('eac.date_format')) }}
+												{{\Carbon\Carbon::parse($rid->created_at)->format(config('eac.date_format')) }}
 											</td>
 											<td>
 												<a href="{{route('eac.portal.rid.show',$rid->id)}}">
@@ -371,6 +371,7 @@
 												<a href="{{route('eac.portal.user.show', $rid->physician->id)}}">{{$rid->physician->full_name}}</a>
 											</td>
 											<td></td>
+                                        </tr>
 									@endforeach
 									</tbody>
 								</table>
