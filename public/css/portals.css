@@ -1304,7 +1304,9 @@ table.dataTable.table-sm .sorting:before, table.dataTable.table-sm .sorting_asc:
 .viewData .card[class*=bg-] .detail a:hover {
  background-color: rgba(0,0,0,.5);
 }
-
+.viewData .card .table {
+ min-width: unset;
+}
 .drag_item {
  cursor: move;
 }
@@ -2194,3 +2196,4 @@ table.dataTable>tfoot .form-control:focus, table.dataTable>tfoot .form-control.f
   }
  }
 /* = = = //END custom checkbox = = = */
+

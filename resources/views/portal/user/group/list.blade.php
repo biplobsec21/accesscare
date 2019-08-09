@@ -67,43 +67,43 @@
 @section('scripts')
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-        $(document).ready(function () {
-            let $url = "{{route('eac.portal.user.group.list.ajax')}}";
-            // Data Tables
-            $('#groupTBL').initDT({
-                ajax: {
-                    url: $url,
-                    type: "post",
-                    fields: [
-                        {
-                            data: "name",
-                            type: "link",
-                            href: "edit_route"
-                        },
-                        {
-                            data: "type-name",
-                        },
-                        {
-                            data: "parent-full_name",
-                        },
-                        {
-                            data: "members",
-                            type: "count",
-                        },
-                        {
-                            data: "created_at"
-                        },
-                        {
-                            data: "edit_route",
-                            type: "btn",
-                            classes: "btn btn-warning",
-                            icon: '<i class="fal fa-fw fa-edit"></i>',
-                            text: "Edit"
-                        },
-                    ],
-                },
-                order: [[0, 'asc']],
-            });
-        }); // end doc ready
+  $(document).ready(function () {
+   let $url = "{{route('eac.portal.user.group.list.ajax')}}";
+   // Data Tables
+   $('#groupTBL').initDT({
+    ajax: {
+     url: $url,
+     type: "post",
+     fields: [
+      {
+       data: "name",
+       type: "link",
+       href: "edit_route"
+      },
+      {
+       data: "type-name",
+      },
+      {
+       data: "parent-full_name",
+      },
+      {
+       data: "members",
+       type: "count",
+      },
+      {
+       data: "created_at"
+      },
+      {
+       data: "edit_route",
+       type: "btn",
+       classes: "btn btn-warning",
+       icon: '<i class="fal fa-fw fa-edit"></i>',
+       text: "Edit"
+      },
+     ],
+    },
+    order: [[0, 'asc']]
+   });
+  }); // end doc ready
 	</script>
 @endsection

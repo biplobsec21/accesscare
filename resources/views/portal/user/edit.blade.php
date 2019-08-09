@@ -11,7 +11,7 @@
     <style>
         @media screen and (min-width: 1200px) {
             :root {
-                --leftCol: 230px;
+                --leftCol: 180px;
                 --rightCol: 750px;
             }
             
@@ -128,10 +128,10 @@
 			</a>
 			<div>
 				@if(\Auth::user()->id === $user->id)
-                    <a href="{{route('eac.auth.password.change', \Auth::user()->id)}}" class="btn btn-dark btn-block">
-                        Modify Password
-                        <i class="fa-fw fas fa-user-md"></i>
-                    </a>
+     <a href="{{route('eac.auth.password.change', \Auth::user()->id)}}" class="btn btn-dark btn-block">
+      Modify Password
+      <i class="fa-fw fas fa-user-md"></i>
+     </a>
 				@endif
 			</div>
 		</div>
@@ -141,18 +141,27 @@
 					<a class="nav-link complete active" id="xdetails-tab" data-toggle="pill" href="#xdetails" role="tab" aria-controls="xdetails" aria-selected="true">
 						<span>Details</span>
 					</a>
-					<a class="nav-link @if($user->assignedTo()->count() > 0) complete @endif" id="xassigned-tab" data-toggle="pill" href="#xassigned" role="tab" aria-controls="xassigned" aria-selected="false">
-						<span>Assigned Items</span>
-					</a>
+     @access('rid.info.view')
+      <a class="nav-link @if($user->rids->count()) complete @endif" id="xassignedRIDs-tab" data-toggle="pill" href="#xassignedRIDs" role="tab" aria-controls="xassignedRIDs" aria-selected="false">
+       <span>Assigned RIDs</span>
+      </a>
+     @endif
+     @access('drug.info.view')
+      <a class="nav-link @if($drugs->count()) complete @endif" id="xassignedDrugs-tab" data-toggle="pill" href="#xassignedDrugs" role="tab" aria-controls="xassignedDrugs" aria-selected="false">
+       <span>Assigned Drugs</span>
+      </a>
+     @endif
 					<a class="nav-link @if($user->groups()) complete @endif" id="xgroups-tab" data-toggle="pill" href="#xgroups" role="tab" aria-controls="xgroups" aria-selected="false">
 						<span>User Groups</span>
 					</a>
-					<a class="nav-link @if($user->notes->count() > 0) complete @endif" id="xnotes-tab" data-toggle="pill" href="#xnotes" role="tab" aria-controls="xnotes" aria-selected="false">
-						<span>User Notes</span>
-					</a>
+     @access('user.note.view')
+ 					<a class="nav-link @if($user->notes->count() > 0) complete @endif" id="xnotes-tab" data-toggle="pill" href="#xnotes" role="tab" aria-controls="xnotes" aria-selected="false">
+ 						<span>User Notes</span>
+ 					</a>
+     @endif
 				</div>
 			</div>
-			<div class="col-sm-9 col-lg-7 col-xl p-0">
+			<div class="col-sm-9 col-xl p-0">
 				<div class="tab-content wizardContent" id="tabContent">
 					<div class="alert-light text-dark pt-3 pl-3 pr-3">
 						<div class="row">
@@ -360,88 +369,128 @@
 							</div>
 						</form>
 					</div>
-					<div class="tab-pane fade " id="xassigned" role="tabpanel" aria-labelledby="xassigned-tab">
-						<div class="card card-body">
-							<h5 class="">
-								Assigned Itemsx
-       </h5>
-							Rids
-							@if($rids)
-								<span class="badge badge-success">{{$rids->count()}}</span>
-								<ul>
-									@foreach($rids as $rid)
-										<li>
-											<a href="{{$rid->view_route}}">{{$rid->number}}</a>
-										</li>
-									@endforeach
-								</ul>
-							@else
-								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No Accessible Rids
-								</p>
-							@endif
-							<hr>
-							Drugs
-							@if($drugs)
-								<ul>
-									@foreach($drugs as $drug)
-										<li>
-											<a href="{{$drug->view_route}}">{{$drug->name}}</a>
-										</li>
-									@endforeach
-								</ul>
-							@else
-								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No Accessible Drugs
-								</p>
-							@endif
-						</div>
-						<div class="card-footer d-none">
-							<button class="btn btn-success" name="" value="">
-								Save Changes
-							</button>
-						</div>
-					</div>
+     @access('rid.info.view')
+ 					<div class="tab-pane fade " id="xassignedRIDs" role="tabpanel" aria-labelledby="xassignedRIDs-tab">
+ 						<div class="card card-body">
+        <h4 class="mb-3">
+         <strong>Assigned RIDs</strong>
+         @if($rids)
+          <span class="badge badge-success">{{$user->rids->count()}}</span>
+         @endif
+        </h4>
+ 							@if($user->rids->count())
+         <div class="table-responsive">
+          <table class="table table-sm SObasic w-100" id="ridsAssigned">
+           <thead>
+            <tr>
+             <th>RID Number</th>
+             <th>Date</th>
+            </tr>
+           </thead>
+           <tbody>
+   									@foreach($user->rids as $rid)
+             <tr>
+              <td>
+    											<a href="{{$rid->view_route}}">{{$rid->number}}</a>
+    										</td>
+              <td class="text-right">
+               {{date('Y-m-d', strtotime($rid->created_at))}}
+              </td>
+             </tr>
+   									@endforeach
+           </tbody>
+          </table>
+         </div>
+  						@else
+  							<p class="text-muted m-0">
+  								<i class="fal fa-info-circle"></i>
+  								No Accessible Rids
+  							</p>
+  						@endif
+       </div>
+ 					</div>
+     @endif
+     @access('drug.info.view')
+      <div class="tab-pane fade " id="xassignedDrugs" role="tabpanel" aria-labelledby="xassignedDrugs-tab">
+       <div class="card card-body">
+        <h4 class="mb-3">
+         <strong>Assigned Drugs</strong>
+         @if($drugs)
+          <span class="badge badge-success">{{$drugs->count()}}</span>
+         @endif
+        </h4>
+        @if($drugs->count())
+         <div class="table-responsive">
+          <table class="table table-sm SObasic w-100" id="drugsAssigned">
+           <thead>
+            <tr>
+             <th>Drug</th>
+             <th>Date</th>
+            </tr>
+           </thead>
+           <tbody>
+            @foreach($drugs as $drug)
+             <tr>
+              <td>
+               <a href="{{$drug->view_route}}">{{$drug->name}}</a>
+              </td>
+              <td class="text-right">
+               {{date('Y-m-d', strtotime($drug->created_at))}}
+              </td>
+             </tr>
+            @endforeach
+           </tbody>
+          </table>
+         </div>
+        @else
+         <p class="text-muted m-0">
+          <i class="fal fa-info-circle"></i>
+          No Accessible Drugs
+         </p>
+        @endif
+       </div>
+      </div>
+     @endif
 					<div class="tab-pane fade " id="xgroups" role="tabpanel" aria-labelledby="xgroups-tab">
       <div class="card card-body">
-       <h5 class="">
-        User Groups
-        <span class="badge badge-dark"></span>
-       </h5>
+       <h4 class="mb-3">
+        <strong>User Groups</strong>
+        @if($user->groups())
+         <span class="badge badge-dark">{{$user->groups()->count()}}</span>
+        @endif
+       </h4>
        @if($user->groups())
         <div class="row">
          @foreach($user->groups()->sortBy('name') as $userGroup)
           <div class="col-sm-6 mb-3">
-           <div class="card h-100 border-light bs-no border">
-            <div class="card-body p-3">
-             <h6 class="mb-2 strong">
-              {{$userGroup->name}} ({{$userGroup->type->name}} Group) </h6>
-             
-             <ul class="list-unstyled">
+           <div class="card border-light bs-no border">
+            <div class="card-header p-2">
+             <div>
+              <strong>{{$userGroup->name}}</strong> <small>({{$userGroup->type->name}} Group)</small>
+             </div>
+             @if($userGroup->parent())
+              <div class="small ml-3">
+               <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link btn-sm">
+                {{$userGroup->parent->full_name}}
+               </a>
+               <small class="badge badge-success">Group Lead</small>
+              </div>
+             @endif
+            </div>
+            <div class="card-body p-2">             
+             <ul class="list-group list-group-flush mb-0">
               <!-- Group leader -->
-              @if($userGroup->parent())
-               <li>
-                <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link">
-                 {{$userGroup->parent->full_name}}
-                </a>
-                <small class="d-block">
-                 (Group Lead)
-                </small>
-               </li>
-              @endif
              <!-- member -->
               @foreach($userGroup->users()->sortBy('first_name') as $user)
                @if($user)
-                <li>
-                 <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link">
+                <li class="list-group-item">
+                 <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link btn-sm">
                   {{$user->full_name}}
                  </a>
                  <small class="d-block">
                   {{$userGroup->roleInTeam($user->id)->name}}
                   @if($user->id == $userGroup->parent_user_id)
-                   (Group Lead)
+                   <span class="badge badge-success">Group Lead</span>
                   @endif
                  </small>
                 </li>
@@ -466,51 +515,43 @@
 							</button>
 						</div>
 					</div>
-					<div class="tab-pane fade " id="xpermissions" role="tabpanel" aria-labelledby="xpermissions-tab">
-						<div class="card card-body mb-0">
-							xpermissions
-						</div>
-						<div class="card-footer">
-							<button class="btn btn-success" name="" value="">
-								Save Changes
-							</button>
-						</div>
-					</div>
-					<div class="tab-pane fade " id="xnotes" role="tabpanel" aria-labelledby="xnotes-tab">
-						<div class="card card-body mb-0">
-							<h5 class="">
-								User Notes
-								<span class="badge badge-dark"></span>
-							</h5>
-							@if($user->notes->count() > 0)
-								<ul class="list-group list-group-flush m-0">
-									@foreach($user->notes->sortByDesc('created_at') as $note)
-										<li class="list-group-item">
-											<a href="{{ route('eac.portal.note.delete', $note->id) }}" class="btn text-danger float-right" title="Delete Note">
-												<i class="far fa-times"></i>
-												<span class="sr-only">Delete</span>
-											</a>
-											<label class="d-block">
-												{{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
-												<small>{{ $note->created_at->format('Y-m-d  h:m A') }}</small>
-											</label>
-											<p class="m-0 small">{{ $note->text }}</p>
-										</li>
-									@endforeach
-								</ul>
-							@else
-								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No information available
-								</p>
-							@endif
-						</div>
-						<div class="card-footer">
-							<a href="#" class="btn btn-success" data-toggle="modal" data-target="#NoteAdd">
-								Add Note
-							</a>
-						</div>
-					</div>
+     @access('user.note.view')
+ 					<div class="tab-pane fade " id="xnotes" role="tabpanel" aria-labelledby="xnotes-tab">
+ 						<div class="card card-body mb-0">
+ 							<h5 class="">
+ 								User Notes
+ 								<span class="badge badge-dark"></span>
+ 							</h5>
+ 							@if($user->notes->count() > 0)
+ 								<ul class="list-group list-group-flush m-0">
+ 									@foreach($user->notes->sortByDesc('created_at') as $note)
+ 										<li class="list-group-item">
+ 											<a href="{{ route('eac.portal.note.delete', $note->id) }}" class="btn text-danger float-right" title="Delete Note">
+ 												<i class="far fa-times"></i>
+ 												<span class="sr-only">Delete</span>
+ 											</a>
+ 											<label class="d-block">
+ 												{{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
+ 												<small>{{ $note->created_at->format('Y-m-d  h:m A') }}</small>
+ 											</label>
+ 											<p class="m-0 small">{{ $note->text }}</p>
+ 										</li>
+ 									@endforeach
+ 								</ul>
+ 							@else
+ 								<p class="text-muted m-0">
+ 									<i class="fal fa-info-circle"></i>
+ 									No information available
+ 								</p>
+ 							@endif
+ 						</div>
+ 						<div class="card-footer">
+ 							<a href="#" class="btn btn-success" data-toggle="modal" data-target="#NoteAdd">
+ 								Add Note
+ 							</a>
+ 						</div>
+ 					</div>
+     @endif
 				</div>
 			</div>
 		</div>

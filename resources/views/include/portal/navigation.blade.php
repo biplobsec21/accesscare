@@ -1,27 +1,27 @@
 <ul class="nav navbar-nav">
 	<li class="nav-item">
 		<a href="{{route('eac.portal.getDashboard')}}" class="nav-link">
-			<i class="fa-fw text-primary fas fa-chart-bar"></i>
+			<i class="fa-fw text-primary fad fa-chart-bar"></i>
 			<span>Dashboard</span>
 		</a>
 	</li>
  @if(\Auth::user()->type->name == 'Early Access Care')
 	<li class="nav-item dropdown">
 		<a href="{{route('eac.portal.rid.list')}}" class="nav-link">
-			<i class="fa-fw text-primary fas fa-medkit"></i>
+			<i class="fa-fw text-primary fad fa-medkit"></i>
 			<span>RIDs</span>
 		</a>
 	</li>
 	<li class="nav-item dropdown">
 		<a href="{{route('eac.portal.drug.list')}}" class="nav-link">
-			<i class="fa-fw text-primary fas fa-prescription-bottle-alt"></i>
+			<i class="fa-fw text-primary fad fa-prescription-bottle-alt"></i>
 			<span>Drugs</span>
 		</a>
 	</li>
 	<li class="nav-item dropdown">
 		<a href="#" id="DD3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 		   class="nav-link dropdown-toggle">
-			<i class="fa-fw text-primary fas fa-user-md"></i>
+			<i class="fa-fw text-primary fad fa-user-md"></i>
 			<span>Users</span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="DD3">
@@ -38,14 +38,14 @@
 	</li>
 	<li class="nav-item dropdown">
 		<a href="{{route('eac.portal.company.list')}}" class="nav-link">
-			<i class="fa-fw text-primary fas fa-hospitals"></i>
+			<i class="fa-fw text-primary fad fa-hospitals"></i>
 			<span>Companies</span>
 		</a>
 	</li>
 	<li class="nav-item dropdown">
 		<a href="#" id="DD4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 		   class="nav-link dropdown-toggle">
-			<i class="fa-fw text-primary fas fa-warehouse-alt"></i>
+			<i class="fa-fw text-primary fad fa-warehouse-alt"></i>
 			<span>Shipping</span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="DD4">
@@ -65,13 +65,13 @@
 	</li>
 	<li class="nav-item">
 		<a href="#" class="nav-link">
-			<i class="fa-fw text-primary fas fa-files-medical"></i>
+			<i class="fa-fw text-primary fad fa-files-medical"></i>
 			<span>Reports</span>
 		</a>
 	</li>
 	<li class="nav-item">
 		<a href="{{route('eac.portal.settings')}}" class="nav-link @IndexTab('supporting')">
-			<i class="fa-fw text-primary fas fa-tools"></i>
+			<i class="fa-fw text-primary fad fa-tools"></i>
 			<span>Supporting Content</span>
 		</a>
 	</li>
@@ -81,19 +81,19 @@
 <ul class="nav navbar-nav">
  <li class="nav-item">
   <a href="#" class="nav-link">
-   <i class="fa-fw fal fa-flag text-danger"></i>
+   <i class="fa-fw fad fa-flag text-danger"></i>
    <span>Safety Reporting</span>
   </a>
  </li>
  <li class="nav-item">
   <a href="#" class="nav-link">
-   <i class="fa-fw fal fa-info-circle text-primary"></i>
+   <i class="fa-fw fad fa-info-circle text-primary"></i>
    <span>About Us</span>
   </a>
  </li>
  <li class="nav-item">
   <a href="#" class="nav-link">
-   <i class="fa-fw fal fa-phone fa-rotate-180 text-primary"></i>
+   <i class="fa-fw fad fa-phone fa-rotate-180 text-primary"></i>
    <span>Contact EAC</span>
   </a>
  </li>
