@@ -124,6 +124,7 @@ class PharmacyController extends Controller
 	public function setPharmacy(Request $request)
 	{
 		$shipment = RidShipment::where('id', $request->input('ship_id'))->firstOrFail();
+
 		if ($request->input('pharmacy_id') === 'new') {
 			$pharmacy = new Pharmacy();
 			$address = new Address();
@@ -137,74 +138,35 @@ class PharmacyController extends Controller
 			$address->state_province = $request->input('state_province');
 			$address->country_id = $request->input('country_id');
 			$address->zipcode = $request->input('zipcode');
-			$address->save();
-			$pharmacy->save();
+			$address->saveOrFail();
+			$pharmacy->saveOrFail();
 		} else {
 			$shipment->pharmacy_id = $request->input('pharmacy_id');
-			if ($request->input('name') && $request->input('name')[0] != null) {
-				$name = array_values($request->input('name'));
-				$email = array_values($request->input('email'));
-				$phone_number = array_values($request->input('phone'));
-				for ($i = 0; $i < count($name); $i++) {
-					$pharmacist = new Pharmacist();
-					$pharmacist->id = $this->newID(Pharmacist::class);
-					$pharmacist->pharmacy_id = $request->input('pharmacy_id');
-					$pharmacist->name = $name[$i];
-					$pharmacist->email = $email[$i];
-					$phone = new Phone();
-					$phone->id = $pharmacist->phone = $this->newID(Phone::class);
-					$phone->number = $phone_number[$i];
-					$phone->country_id = $request->country_name;
-					$phone->is_primary = 1;
-					$phone->save();
-					$pharmacist->save();
-				}
-				$shipment->pharmacist_id = $pharmacist->id;
-			}
 		}
 
 		if ($request->input('pharmacist_id')) {
-			if ($request->input('pharmacy_id') === 'new') {
-				$pharmacist = new Pharmacist();
-				$pharmacist->id = $shipment->pharmacist_id = $this->newID(Pharmacist::class);
-				$pharmacist->pharmacy_id = $shipment->pharmacy->id;
-				$pharmacist->name = $request->input('pharmacist_name');
-				$pharmacist->email = $request->input('pharmacist_email');
-				$phone = new Phone();
-				$phone->id = $pharmacist->phone = $this->newID(Phone::class);
-				$phone->country_id = $shipment->pharmacy->address->country_id;
-				$phone->number = $request->input('pharmacist_phone');
-				$phone->is_primary = true;
-				$phone->save();
-				$pharmacist->save();
+			if ($request->input('pharmacist_id') === 'new') {
+                $pharmacist = new Pharmacist();
+                $pharmacist->id = $this->newID(Pharmacist::class);
+                $pharmacist->pharmacy_id = $request->input('pharmacy_id');
+                $pharmacist->name = $request->input('pharmacist_name');
+                $pharmacist->email = $request->input('pharmacist_email');
+                $phone = new Phone();
+                $phone->id = $pharmacist->phone = $this->newID(Phone::class);
+                $phone->number = $request->input('pharmacist_phone');
+                $phone->country_id = $request->country_name;
+                $phone->is_primary = 1;
+                $phone->saveOrFail();
+                $pharmacist->saveOrFail();
+                $shipment->pharmacist_id = $pharmacist->id;
 			} else {
 				$shipment->pharmacist_id = $request->input('pharmacist_id');
 			}
 		}
 
-		$shipment->save();
+		$shipment->saveOrFail();
 		return redirect()->back()->with('confirm', 'Pharmacy Has Been Set.');
 	}
-
-//	/**
-//	 * Store a newly created resource in storage.
-//	 *
-//	 * @param  \Illuminate\Http\Request $request
-//	 * @return \Illuminate\Http\Response
-//	 */
-//	public function updatePharma(){
-//		$shipment = new RidShipment();
-//		$shipment = RidShipment::where('id', $request->input('id'))->first();
-//		$pharmacist = new Pharmacist();
-//		$pharmacist->id = $this->newID(Pharmacist::class);
-//		$pharmacist->pharmacy_id = $ridShipment->pharmacy_id;
-//		$pharmacist->name = $data['pharmacist_name'];
-//		$pharmacist->email = $data['pharmacist_email'] ? $data['pharmacist_email'] : null;
-//		$pharmacist->phone = preg_replace('/[^0-9]/', '', $data['pharmacist_phone']);
-//		$pharmacist->created_at = $currentDate;
-//		$pharmacist->save();
-//		return redirect()->back();
-//	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -245,70 +207,6 @@ class PharmacyController extends Controller
 		$str = '<strong>' . $pharmacy->name . '</strong></br>';
 		$str .= $pharmacy->address->strDisplay();
 		$str .= '<hr/>';
-		if ($pharmacy->pharmacists->count() == 0) {
-			// get all pharmacist
-			$pharmacy = '<select  name="pharmacist_id" class="form-control select2">';
-			$pharmacy .= '<option disabled hidden selected value="">-- Select --</option>';
-			foreach (Pharmacist::all() as $user)
-				$pharmacy .= '<option value="' . $user->id . '">' . $user->name . '</option>';
-			$pharmacy .= '</select>';
-			// add more layout
-			$str .= '<div class="table-responsive">
-				<table class="table table-sm table-responsive table-striped table-hover group-member-templatetable">
-						<thead>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th></th>
-						</tr>
-						</thead>
-						<tbody id="memberSection">
-						<tr class="">
-							<td>
-								<input type="text" name="name[]" placeholder="Pharmacist Name"
-								       class="form-control">
-							</td>
-							<td>
-								<input type="email" name="email[]" placeholder="Email"
-								       class="form-control">
-							</td>
-							<td>
-								<input type="text" name="phone[]" placeholder="Phone"
-								       class="form-control">
-							</td>
-							<td>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-					</div>
-					<!-- <div class="d-flex justify-content-between mt-3">
-						<a href="#" class="btn btn-link" id="addMemberBtn" onclick="addMember()">
-							<i class="fal fa-plus"></i> Add Another
-						</a>
-					</div> -->
-					<div class="d-flex justify-content-between mt-3 ">
-						<a href="#" class="btn btn-link" onclick="templateShow()">
-							<i class="fal fa-plus"></i>  Add New Pharmacist
-						</a>
-					</div>
-					<br>
-						OR
-					<br><br>
-					<label class="d-block">Assign Pharmacist</label>	
-					<div class="row m-sm-0">
-						<div class="col-sm mb-3 mb-sm-0 p-sm-0">' . $pharmacy . '
-						</div>
-						</div>
-						';
-		} else {
-			$str .= "<label class='d-block label_required'>Pharmacist </label>";
-			$str .= '<select id="pharmacistSelect" name="pharmacist_id" class="form-control">';
-			foreach ($pharmacy->pharmacists as $contact)
-				$str .= '<option value="' . $contact->id . '">' . $contact->name . '</option>';
-			$str .= '</select>';
-		}
 		return $str;
 	}
 
@@ -323,49 +221,10 @@ class PharmacyController extends Controller
 		//
 	}
 
-	public function ajaxlist()
+	public function ajaxlist(Request $request)
 	{
 	    $pharmacies = Pharmacy::all();
-        $response = new DataTableResponse(Company::class, $pharmacies);
-        foreach ($pharmacies as $pharmacy) {
-            $row = new DataTableRow($pharmacy->id);
-            $row->setColumn('name', $pharmacy->name
-            );
-            $row->setColumn('status', $pharmacy->status,
-                $pharmacy->status
-            );
-            $str = '';
-            for ($i = 0; $i < $pharmacy->pharmacists->count(); $i++) {
-                $str .= ucwords($pharmacy->pharmacists[$i]->name);
-                if ($i < $pharmacy->pharmacists->count() - 1)
-                    $str .= ' + ';
-            }
-            $row->setColumn('pharmacists', $pharmacy->pharmacists->count(),
-                '<span class="badge badge-mw badge-outline-warning" title="' . $str . '"> ' . $pharmacy->pharmacists->count() . '</span>'
-            );
-            $row->setColumn('active', $pharmacy->users->count(),
-                '<a href="' . route('eac.portal.company.show', $pharmacy->id) . '#xusers" class="badge badge-mw badge-outline-info"> ' . $pharmacy->users->count() . '</a>'
-            );
-            $row->setColumn('created_at', strtotime($pharmacy->created_at),
-                '<span style="display: none">' . $pharmacy->created_at->format('Y-m-d') . '</span>' . $pharmacy->created_at->format(config('eac.date_format'))
-            );
-            $row->setColumn('btns', $pharmacy->id,
-                '<div class="btn-group dropleft" role="group">' .
-                '<a class="btn btn-link" href="#" id="dropdownMenuButton' . $pharmacy->id . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-                '<span class="far fa-fw fa-ellipsis-v"></span> <span class="sr-only">Actions</span>' .
-                '</a>' .
-                '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $pharmacy->id . '">' .
-                '<a title="View Pharmacy" href="' . route('eac.portal.pharmacy.show', $row->id) . '">' .
-                '<i class="far fa-search-plus" aria-hidden="true"></i> <span class="sr-only">View Pharmacy</span>' .
-                '</a>' .
-                '<a title="Edit Pharmacy" href="' . route('eac.portal.pharmacy.edit', $row->id) . '">' .
-                '<i class="far fa-edit" aria-hidden="true"></i> <span class="sr-only">Edit Pharmacy</span>' .
-                '</a>' .
-                '</div>' .
-                '</div>'
-            );
-            $response->addRow($row);
-        }
+        $response = new DataTableResponse($pharmacies, $request->all());
         return $response->toJSON();
 	}
 
@@ -599,108 +458,6 @@ class PharmacyController extends Controller
 			'countries' => $countries,
 			'pharmacy' => $pharmacy,
 		]);
-	}
-
-	public function getpharmacistajaxlist()
-	{
-		$sql = Pharmacist::Leftjoin('pharmacies', 'pharmacies.id', '=', 'pharmacists.pharmacy_id')
-			->Leftjoin('phones', 'phones.id', '=', 'pharmacists.phone')
-			->Where('pharmacists.pharmacy_id', '=', null)
-			->select([
-				'pharmacies.id as pharmacy_id',
-				'pharmacies.name as pharmacy_name',
-
-				'pharmacists.name as name',
-				'pharmacists.id as id',
-
-				'phones.number as phone',
-				'pharmacists.email as email',
-				'pharmacists.created_at as created_at']);
-
-		return \DataTables::of($sql)
-			->addColumn('select', function ($row) {
-				return '<input type="checkbox" name="select[]" value="' . $row->id . '" />';
-			})
-			->addColumn('name', function ($row) {
-				return $row->name;
-			})
-			->addColumn('email', function ($row) {
-				return $row->email ? $row->email : 'N/A';
-			})
-			->addColumn('phone', function ($row) {
-
-				return $row->phone ? $row->phone : 'N/A';
-			})
-			->addColumn('pharmacy', function ($row) {
-
-				return $row->pharmacy_name ? $row->pharmacy_name : 'Not Assigned';
-			})
-			->addColumn('created_at', function ($row) {
-				return $row->created_at->toDateString();
-			})
-			->addColumn('ops_btns', function ($row) {
-				return '
-                <a title="Edit Pharmacy" href="' . route('eac.portal.pharmacist.edit', $row->id) . '">
-                 <i class="far fa-edit" aria-hidden="true"></i> <span class="sr-only">Edit Pharmacist</span>
-                </a>
-               
-                ';
-			})
-			->rawColumns([
-				'select',
-				'name',
-				'email',
-				'phone',
-				'pharmacy',
-				'created_at',
-				'ops_btns'
-			])
-			->filterColumn('name', function ($query, $keyword) {
-				$query->where('pharmacists.name', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('email', function ($query, $keyword) {
-				$query->where('pharmacists.email', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('phone', function ($query, $keyword) {
-				$query->where('phones.number', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('pharmacy', function ($query, $keyword) {
-				$query->where('pharmacies.name', 'like', "%" . $keyword . "%");
-			})
-			->filterColumn('created_at', function ($query, $keyword) {
-				$query->where('pharmacist.created_at', 'like', "%" . $keyword . "%");
-			})
-			->order(function ($query) {
-				$columns = [
-					'select' => 0,
-					'name' => 1,
-					'email' => 2,
-					'phone' => 3,
-					'pharmacy' => 4,
-					'created_at' => 5,
-
-				];
-
-				$direction = request('order.0.dir');
-
-				if (request('order.0.column') == $columns['name']) {
-					$query->orderBy('pharmacists.name', $direction);
-				}
-				if (request('order.0.column') == $columns['email']) {
-					$query->orderBy('pharmacists.email', $direction);
-				}
-				if (request('order.0.column') == $columns['phone']) {
-					$query->orderBy('phones.number', $direction);
-				}
-				if (request('order.0.column') == $columns['pharmacy']) {
-					$query->orderBy('pharmacies.name', $direction);
-				}
-				if (request('order.0.column') == $columns['created_at']) {
-					$query->orderBy('pharmacists.created_at', $direction);
-				}
-			})
-			->smart(0)
-			->toJson();
 	}
 
 	public function assignPharmacist(Request $request)

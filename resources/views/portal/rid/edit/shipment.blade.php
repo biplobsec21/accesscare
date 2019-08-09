@@ -314,88 +314,27 @@
                         },
                     });
                 }
+                filterPharmacists($(this).val());
             });
-        });
-
-        $(document).ready(function () {
-            $('#pharmacistTBL tfoot th').each(function () {
-                if ($(this).hasClass("no-search"))
-                    return;
-                var title = $(this).text();
-                $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+            
+            $('#pharmacistSelect').change(function () {
+                if ($(this).val() == 'new') {
+                    $('#newPharmacist').addClass('show');
+                } else {
+                    $('#newPharmacist').removeClass('show');
+                }
             });
-            var dataTable = $('#pharmacistTBL').DataTable({
-                "paginationDefault": 10,
-                "paginationOptions": [10, 25, 50, 75, 100],
-                // "responsive": true,
-                'order': [[5, 'desc']],
-                "ajax": {
-                    url: "{{route('eac.portal.pharmacy.getpharmacistajaxlist')}}",
-                    type: "get"
-                },
-                "processing": true,
-                "serverSide": true,
-                columnDefs: [{
-                    targets: 'no-sort',
-                    orderable: false,
-                }],
-                "columns": [
-                    {"data": "select", 'name': 'select'},
-                    {"data": "name", 'name': 'name'},
-                    {"data": "email", 'name': 'email'},
-                    {"data": "phone", 'name': 'phone'},
-                    {"data": "pharmacy", 'name': 'pharmacy'},
-                    {"data": "created_at", 'name': 'created_at'},
-                ]
-            });
-            dataTable.columns().every(function () {
-                var that = this;
-                $('input', this.footer()).on('keyup change', function () {
-                    if (that.search() !== this.value) {
-                        that
-                            .search(this.value)
-                            .draw();
-                    }
+            
+            function filterPharmacists ($pharmacy) {
+                let element = $('#choose-pharmacist');
+                element.addClass('show');
+                element.find('option').each(function () {
+                    if ($(this).data('pharmacy') === $pharmacy || $(this).data('pharmacy') === "*")
+                        $(this).show();
+                    else
+                        $(this).hide();
                 });
-            });
-            $.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-                swal({
-                    title: "Oh Snap!",
-                    text: "Something went wrong on our side. Please try again later.",
-                    icon: "warning",
-                });
-            };
-        }); // end doc ready
-
-
-        $(document).on('click', 'a.remove', function (e) {
-            e.preventDefault();
-            $(this).closest('.group-member').remove();
-            // let $count = 0;
-            $('#memberSection').find('.group-member').each(function () {
-                $(this).find('text[name^="name"]').attr('name', 'name[]');
-                $(this).find('email[name^="email"]').attr('name', 'email[]');
-                $(this).find('text[name^="phone"]').attr('name', 'phone[]');
-                // $count++;
-            });
+            }
         });
-        function templateShow(){
-            $("#memberSection").show();
-            $(".group-member-templatetable ").show();
-            $("#addMemberBtn").show();
-        }
-        function addMember() {
-            let $template = $('.group-member-template');
-            let $memberSection = $("#memberSection");
-            console.log($template);
-            $memberSection.append($template.prop('outerHTML'));
-            let $newMember = $memberSection.find(".group-member:last");
-            console.log($newMember);
-            $newMember.removeClass('group-member-template');
-            const $count = $memberSection.find(".group-member").length - 1;
-            $newMember.find('text[name^="name"]').attr('name', 'name[]');
-            $newMember.find('email[name^="email"]').attr('name', 'email[]');
-            $newMember.find('text[name^="phone"]').attr('name', 'phone[]');
-        }
 	</script>
 @endsection

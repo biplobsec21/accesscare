@@ -462,7 +462,7 @@
                 // let $count = 0;
                 $('#memberSection').find('.group-member').each(function () {
                     $(this).find('text[name^="name"]').attr('name', 'name[]');
-                    $(this).find('email[name^="email"]').attr('name', 'email[]');
+                    $(this).find('text[name^="email"]').attr('name', 'email[]');
                     $(this).find('text[name^="phone"]').attr('name', 'phone[]');
                     // $count++;
                 });

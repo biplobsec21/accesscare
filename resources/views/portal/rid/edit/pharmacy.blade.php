@@ -17,7 +17,7 @@
 			<h5 class="mb-3">
 				Pharmacist
 			</h5>
-			@if($shipment->pharmacist_id)
+			@if($shipment->pharmacist)
 				{{ $shipment->pharmacist->name }}<br/>
 				<i class="far fa-at"></i>
 				<a target="_blank" href="mailto:{{ $shipment->pharmacist->email }}">
