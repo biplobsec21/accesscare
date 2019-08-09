@@ -14,7 +14,7 @@ use Carbon\Carbon;
  */
 class Rid extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -198,4 +198,8 @@ class Rid extends Model
 	{
 		return $this->belongsTo('App\\Ethnicity', 'patient_ethnicity');
 	}
+    public function getRaceAttribute()
+    {
+        return Race::whereIn('id', json_decode($this->patient_race) ?? [])->get();
+    }
 }

@@ -293,59 +293,44 @@
     <script>
         $(document).ready(function () {
             $('.auto-update select').change(function () {
-                let e = $(this);
+                let element = $(this);
+                let val = $(this).val();
+                if(val == '' && $(this).prop('multiple'))
+                    val = "[]";
                 $.ajax({
                     method: "POST",
                     url: "{{ route('eac.portal.rid.store.auto') }}",
-                    data: {name: $(this).attr('name'), value: $(this).val(), key: $('#key').val()},
+                    data: {name: $(this).attr('name'), value: val, key: $('#key').val()},
                     success: function (response) {
-                        e.animate({backgroundColor: '#88c442'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
+                        element.animate({backgroundColor: '#88c442'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
                     },
                     error: function (response) {
-                        alert('error ' + response);
-                    }
-                });
-            });
-            $('.auto-update .select2').change(function () {
-// console.log($(this).next().find('.select2-selection__rendered' ) );
-                let e = $(this).next().find('.select2-selection__rendered');
-                $.ajax({
-                    method: "POST",
-                    url: "{{ route('eac.portal.rid.store.auto') }}",
-                    data: {name: $(this).attr('name'), value: $(this).val(), key: $('#key').val()},
-                    success: function (response) {
-                        e.animate({backgroundColor: '#88c442 !important'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
-                    },
-                    error: function (response) {
-                        alert('error ' + response);
                     }
                 });
             });
             $('.auto-update input').blur(function () {
-                let e = $(this);
+                let element = $(this);
                 $.ajax({
                     method: "POST",
                     url: "{{ route('eac.portal.rid.store.auto') }}",
                     data: {name: $(this).attr('name'), value: $(this).val(), key: $('#key').val()},
                     success: function (response) {
-                        e.animate({backgroundColor: '#88c442'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
+                        element.animate({backgroundColor: '#88c442'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
                     },
                     error: function (response) {
-                        alert('error ' + response);
                     }
                 });
             });
             $('.auto-update textarea').change(function () {
-                let e = $(this);
+                let element = $(this);
                 $.ajax({
                     method: "POST",
                     url: "{{ route('eac.portal.rid.store.auto') }}",
                     data: {name: $(this).attr('name'), value: $(this).val(), key: $('#key').val()},
                     success: function (response) {
-                        e.animate({backgroundColor: '#88c442'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
+                        element.animate({backgroundColor: '#88c442'}, 'slow').delay(2500).animate({backgroundColor: 'white'});
                     },
                     error: function (response) {
-                        alert('error ' + response);
                     }
                 });
             });
