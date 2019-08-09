@@ -361,9 +361,10 @@
 						</form>
 					</div>
 					<div class="tab-pane fade " id="xassigned" role="tabpanel" aria-labelledby="xassigned-tab">
-						<div class="card-body">
+						<div class="card card-body">
 							<h5 class="">
-								Assigned Items </h5>
+								Assigned Itemsx
+       </h5>
 							Rids
 							@if($rids)
 								<span class="badge badge-success">{{$rids->count()}}</span>

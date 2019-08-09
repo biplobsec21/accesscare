@@ -51,7 +51,7 @@
                             Pharmacist Details </h5>
                         <div class="mb-3">
                             <label class="d-block label_required">Pharmacist Name</label>
-                            <input type="text" name="name" placeholder="Pharmacy Name" value="{{ old('name') }}" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required="required">
+                            <input type="text" name="name" placeholder="Pharmacist Name" value="{{ old('name') }}" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required="required">
                             <div class="invalid-feedback">
                                 {{ $errors->first('name') }}
                             </div>
