@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @author Andrew Mellor <andrew@quasars.com>
  */
 class DrugGroup extends Pivot {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

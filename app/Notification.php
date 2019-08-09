@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notification extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

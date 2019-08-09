@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RidPostDocument extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

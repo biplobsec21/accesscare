@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class DrugSupply extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

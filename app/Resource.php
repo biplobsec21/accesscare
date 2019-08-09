@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Resource extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

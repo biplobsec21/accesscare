@@ -14,7 +14,7 @@ use App\Support\GenerateID;
  */
 class RidVisit extends Model
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

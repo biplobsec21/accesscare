@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class UserRole extends Pivot
 {
-	
+
 
 	/**
 	 * Indicates if the model should automatically increment the id

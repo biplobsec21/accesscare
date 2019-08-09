@@ -13,7 +13,7 @@ use DB;
  */
 class Menu extends Model
 {
-    
+
 
     /**
      * Indicates if the model should automatically increment the id

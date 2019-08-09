@@ -15,6 +15,7 @@ trait Logger
 	 *
 	 * @param  string $id ID of Changed Row
 	 * @param  array $data New Data [field => value[
+     * @param  string $type type of change
 	 * @return \Illuminate\Http\Response
 	 */
 	public function storeLog($id, $data, $type)
@@ -23,9 +24,9 @@ trait Logger
 		$log = new Log();
 		$log->id = $this->newID(Log::class);
 		$log->user_id = \Auth::user()->id ?? 'System';
-		$log->subject_id = $id ?? 'NO_ID_FOUND';
+		$log->subject_id = $id;
 		$log->desc = json_encode($data);
-		$log->type = $type ?? 'NOT_FOUND';
+		$log->type = $type;
 		$log->save();
 		return redirect()->back();
 	}
@@ -44,6 +45,6 @@ trait Logger
 
 	public static function newID(string $model)
 	{
-		return GenerateID::generateWithPrefixUnique($model);
+		return GenerateID::run(10);
 	}
 }
