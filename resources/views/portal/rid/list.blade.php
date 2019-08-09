@@ -79,6 +79,7 @@
        data: "number",
        type: "link",
        href: "view_route"
+      },
       {
        data: "visits",
        type: "count"
