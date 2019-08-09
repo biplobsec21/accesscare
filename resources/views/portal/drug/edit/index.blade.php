@@ -107,7 +107,7 @@
                             <a class="dropdown-item" href="{{ route('eac.portal.drug.status.change', ['status'=>1,'id'=>$drug->id]) }}">Approved</a>
                         </div>
                     </div>
-                    @endif
+                @endif
                 @endif
             </div>
         </div>
@@ -798,9 +798,9 @@
             });
 
         });
-        $(".alert").delay(7000).slideUp(200, function () {
-            $(this).alert('close');
-        });
+        // $(".alert").delay(7000).slideUp(200, function () {
+        //     $(this).alert('close');
+        // });
     </script>
     @if(isset($sweet_alert))
         <script>
