@@ -71,40 +71,39 @@
 				ajax: {
 					url: $url,
 					type: "post",
-                    fields: [
-                        {
-                            data: "created_at",
-                        },
-                        {
-                            data: "number",
-                            type: "link",
-                            href: "view_route"
-                        },
-                        {
-                            data: "visits",
-                            type: "count"
-                        },
-                        {
-                            data: "status-name",
-                        },
-                        {
-                            data: "physician-full_name",
-                            type: "link",
-                            href: "physician-view_route"
-                        },
-                        {
-                            data: "drug-name"
-                        },
-                        {
-                            data: "view_route",
-                            type: "btn",
-                            classes: "btn btn-info",
-                            icon: '<i class="fal fa-fw fa-eye"></i>',
-                            text: "View"
-                        },
-                    ],
+     fields: [
+      {
+       data: "created_at",
+      },
+      {
+       data: "number",
+       type: "link",
+       href: "view_route"
+      {
+       data: "visits",
+       type: "count"
+      },
+      {
+       data: "status-name",
+      },
+      {
+       data: "physician-full_name",
+       type: "link",
+       href: "physician-view_route"
+      },
+      {
+       data: "drug-name"
+      },
+      {
+       data: "view_route",
+       type: "btn",
+       classes: "btn btn-info",
+       icon: '<i class="fal fa-fw fa-eye"></i>',
+       text: "View"
+      },
+     ],
 				},
-				order: [[0, 'asc']],
+				order: [[0, 'asc']]
 			});
 		}); // end doc ready
 	</script>

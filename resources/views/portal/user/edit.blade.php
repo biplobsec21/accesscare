@@ -1,35 +1,32 @@
 @extends('layouts.portal')
 
 @section('title')
-    @if(Auth::User()->id == $user->id)
-        My Profile
-    @else
-        Edit User
-    @endif
+ @if(Auth::User()->id == $user->id)
+  My Profile
+ @else
+  Edit User
+ @endif
 @endsection
 @section('styles')
-    <style>
-        @media screen and (min-width: 1200px) {
-            :root {
-                --leftCol: 180px;
-                --rightCol: 750px;
-            }
-            
-            .actionBar, .viewData {
-                max-width: calc(var(--leftCol) + var(--rightCol));
-            }
-            
-            .viewData .row.thisone > [class*=col]:first-child {
-                max-width: var(--leftCol);
-                min-width: var(--leftCol);
-            }
-            
-            .viewData .row.thisone > [class*=col]:last-child {
-                max-width: var(--rightCol);
-                min-width: var(--rightCol);
-            }
-        }
-    </style>
+ <style>
+  @media screen and (min-width: 1200px) {
+   :root {
+    --leftCol: 180px;
+    --rightCol: 740px;
+   }   
+   .actionBar, .viewData {
+    max-width: calc(var(--leftCol) + var(--rightCol));
+   }   
+   .viewData .row.thisone > [class*=col]:first-child {
+    max-width: var(--leftCol);
+    min-width: var(--leftCol);
+   }   
+   .viewData .row.thisone > [class*=col]:last-child {
+    max-width: var(--rightCol);
+    min-width: var(--rightCol);
+   }
+  }
+ </style>
 @endsection
 
 @section('content')
@@ -464,12 +461,12 @@
          @foreach($user->groups()->sortBy('name') as $userGroup)
           <div class="col-sm-6 mb-3">
            <div class="card border-light bs-no border">
-            <div class="card-header p-2">
+            <div class="card-header p-2 text-sm-center">
              <div>
               <strong>{{$userGroup->name}}</strong> <small>({{$userGroup->type->name}} Group)</small>
              </div>
              @if($userGroup->parent())
-              <div class="small ml-3">
+              <div class="small ml-3 ml-sm-0">
                <a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-link btn-sm">
                 {{$userGroup->parent->full_name}}
                </a>
@@ -509,11 +506,6 @@
         </p>
        @endif
       </div>
-						<div class="card-footer d-none">
-							<button class="btn btn-success" name="" value="">
-								Save Changes
-							</button>
-						</div>
 					</div>
      @access('user.note.view')
  					<div class="tab-pane fade " id="xnotes" role="tabpanel" aria-labelledby="xnotes-tab">
