@@ -3,6 +3,11 @@
 return [
 	'date_format' => 'j M, Y',
 
+    'modes' => [
+        'production',
+        'debug'
+    ],
+
 	'user' => [
 		'availableTitle' => [
 			'mr' => 'Mr.',

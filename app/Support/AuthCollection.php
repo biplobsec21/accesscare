@@ -30,7 +30,9 @@ class AuthCollection extends Collection
         else
             $str .= '<span class="debug-perm-value text-danger"><i class="far fa-lock"></i></span>';
         $str .= '</span>';
-        echo $str;
+
+        if($_GET['mode'] ?? false === 'debug')
+            echo $str;
 
         return $this->recursiveNeedleInHaystack($gates);
     }
