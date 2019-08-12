@@ -42,63 +42,52 @@
  </div><!-- end .actionBar -->
 
  <div class="viewData">
-  <div class="card mb-1 mb-md-4">
-    <div class="row mb-3">
-                <div class="col">
-                </div>
-
-  <div class="col-auto">
-    <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
-      <label class="btn btn-secondary  btn-sm active" onclick="showactiveOrAll(1)">
-        <input type="radio" name="show_active" value="1"
-             autocomplete="off" > View Active
-      </label>
-      <label class="btn btn-secondary  btn-sm" onclick="showactiveOrAll(0)">
-        <input type="radio" name="show_active"  value="0"
-             autocomplete="off" checked>  View All
-      </label>
+  <div class="row"> 
+   <div class="order-lg-2 col-lg-2 col-xl-3">
+   </div>
+   <div class="order-lg-1 col-lg-10 col-xl-9">
+    <div class="card mb-1 mb-md-4">
+     <div class="d-flex justify-content-end p-3">
+      <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
+       <label class="btn btn-secondary  btn-sm active" onclick="showactiveOrAll(1)">
+        <input type="radio" name="show_active" value="1" autocomplete="off" > View Active
+       </label>
+       <label class="btn btn-secondary  btn-sm" onclick="showactiveOrAll(0)">
+        <input type="radio" name="show_active" value="0"autocomplete="off" checked>  View All
+       </label>
+      </div>
+     </div>
+     <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover" id="pageTbl">
+       <thead>
+        <tr>
+         <th>Content Identifier</th>
+         <th>Title</th>
+         <th class="no-search no-sort">Menu Name</th>
+         <th class="no-search">Active</th>
+         <th class="no-search">Last Update</th>
+         <th class="no-search"></th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </div>
     </div>
-  </div>
-</div>
-   <div class="table-responsive">
-    <table class="table table-sm table-striped table-hover" id="pageTbl">
-     <thead>
+    <script id="details-template" type="text/x-handlebars-template">
+     <table class="table">
       <tr>
-       <th>Content Identifier</th>
-       <th>Title</th>
-       <th class="no-search no-sort">Menu Name</th>
-       <th class="no-search">Active</th>
-       <th class="no-search">Last Update</th>
-       <th class="no-search"></th>
+       <td>Content :@{{content}}</td>
       </tr>
-     </thead>
-     <tbody></tbody>
-     <tfoot>
-      <tr>
-       <th>Content Identifier</th>
-       <th>Title</th>
-       <th class="no-search no-sort">Menu Name</th>
-       <th class="no-search">Active</th>
-       <th class="no-search">Last Update</th>
-       <th class="no-search"></th>
+      <tr style="font-size:12px;background: #fddcb8;">
+       <td>Meta Description :[ @{{{meta_kewords}}} ] </td>
       </tr>
-     </tfoot>
-    </table>
-     <script id="details-template" type="text/x-handlebars-template">
-          <table class="table">
-              <tr>
-                  <td>Content :@{{content}}</td>
-              </tr>
-              <tr style="font-size:12px;background: #fddcb8;">
-                  <td>Meta Description :[ @{{{meta_kewords}}} ] </td>
-              </tr>
-              <tr style="font-size:12px;background: #fddcb8;">
-                  <td>Meta Keyword :[ @{{{meta_description}}} ] </td>
-              </tr>
+      <tr style="font-size:12px;background: #fddcb8;">
+       <td>Meta Keyword :[ @{{{meta_description}}} ] </td>
+      </tr>
 
 
-          </table>
-      </script>
+     </table>
+    </script>
    </div>
   </div>
  </div><!-- end .viewData -->

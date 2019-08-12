@@ -55,16 +55,6 @@
           </tr>
           </thead>
           <tbody></tbody>
-          <tfoot>
-          <tr>
-            <th class="no-search no-sort">Primary</th>
-            <th class="no-search no-sort">Merge</th>
-            <th>Full Name</th>
-            <th>Status</th>
-            <th>Email</th>
-            <th>User Type</th>
-          </tr>
-          </tfoot>
         </table>
       </div>
     </div>

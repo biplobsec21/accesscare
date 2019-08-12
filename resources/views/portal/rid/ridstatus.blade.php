@@ -43,17 +43,6 @@
   				</tr>
  				</thead>
  				<tbody></tbody>
- 				<tfoot>
-  				<tr>
-  					<th>RID Number</th>
-  					<th class="no-search">Master Status</th>
-  					<th>Assigned To</th>
-  					<th>Drug Requested</th>
-  					<th>Request Date</th>
-  					<th>Created At</th>
-  					<th class="no-search"></th>
-  				</tr>
- 				</tfoot>
  			</table>
    </div>
   </div>

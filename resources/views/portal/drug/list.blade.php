@@ -28,31 +28,30 @@
 	</div><!-- end .actionBar -->
 
 	<div class="viewData">
-		<div class="card mb-1 mb-md-4">
-			<div class="table-responsive">
-				<table class="table table-sm table-striped table-hover drugtable" id="drugListTBL">
-					<thead>
-					<tr>
-						<th>Drug Name</th>
-						<th>Company</th>
-						<th class="no-search">Status</th>
-						<th>Submitted Date</th>
-						<th class="no-search no-sort"></th>
-					</tr>
-					</thead>
-					<tbody></tbody>
-					<tfoot>
-					<tr>
-						<th>Drug Name</th>
-						<th>Company</th>
-						<th class="no-search">Status</th>
-						<th>Submitted Date</th>
-						<th class="no-search"></th>
-					</tr>
-					</tfoot>
-				</table>
-			</div>
-		</div>
+  <div class="row"> 
+   <div class="order-lg-2 col-lg-2 col-xl-3">
+    <!-- show pie chart displaying companies and # of drugs -->
+    <!-- display fulfillment stats -->
+   </div>
+   <div class="order-lg-1 col-lg-10 col-xl-9">
+  		<div class="card mb-1 mb-md-4">
+  			<div class="table-responsive">
+  				<table class="table table-sm table-striped table-hover drugtable" id="drugListTBL">
+  					<thead>
+  					<tr>
+  						<th>Drug Name</th>
+  						<th>Company</th>
+  						<th class="no-search">Status</th>
+  						<th>Submitted Date</th>
+  						<th class="no-search no-sort"></th>
+  					</tr>
+  					</thead>
+  					<tbody></tbody>
+  				</table>
+  			</div>
+  		</div>
+   </div>
+  </div>
 	</div><!-- end .viewData -->
 @endsection
 
@@ -61,35 +60,35 @@
 
 	<script type="text/javascript">
 		$(document).ready(function () {
-            let $url = "{{route('eac.portal.drug.ajax.list')}}";
+   let $url = "{{route('eac.portal.drug.ajax.list')}}";
 			// Data Tables
 			$('#drugListTBL').initDT({
 				ajax: {
 					url: $url,
 					type: "post",
-                    fields: [
-                        {
-                            data: "name",
-                            type: "link",
-                            href: "view_route"
-                        },
-                        {
-                            data: "company-name",
-                        },
-                        {
-                            data: "status",
-                        },
-                        {
-                            data: "created_at"
-                        },
-                        {
-                            data: "view_route",
-                            type: "btn",
-                            classes: "btn btn-info",
-                            icon: '<i class="fal fa-fw fa-eye"></i>',
-                            text: "View"
-                        },
-                    ],
+     fields: [
+      {
+       data: "name",
+       type: "link",
+       href: "view_route"
+      },
+      {
+       data: "company-name",
+      },
+      {
+       data: "status",
+      },
+      {
+       data: "created_at"
+      },
+      {
+       data: "view_route",
+       type: "btn",
+       classes: "btn btn-primary btn-sm",
+       icon: '<i class="far fa-sm fa-search"></i>',
+       text: "View"
+      },
+     ],
 				},
 				order: [[0, 'asc']],
 			});

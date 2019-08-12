@@ -36,8 +36,42 @@
 	</div><!-- end .actionBar -->
 
 	<div class="viewData">
-		<div class="card mb-1 mb-md-4">
-			<div class="table-responsive">
+  <div class="card mb-1 mb-md-4">
+   <form>
+    <div class="mb-2 ml-sm-2 mr-sm-2 mt-sm-2 d-flex justify-content-between btn-group-toggle novisual flex-wrap" data-toggle="buttons">
+     <label class="btn btn-outline-primary m-1 flex-fill " onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+      <input type="radio" name="type" value="aFu1f1fYhq">
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">
+        EAC
+       </span> Users
+      </span>
+     </label>
+     <label class="btn btn-outline-primary m-1 flex-fill " onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+      <input type="radio" name="type" value="XdP0OKYrui">
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">         
+        Pharma
+       </span> Users
+      </span>
+     </label>
+     <label class="btn btn-outline-primary m-1 flex-fill " onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+      <input type="radio" name="type" value="bTHfo6PeGj">
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">
+        Physician
+       </span> Users
+      </span>
+     </label>             
+     <label class="btn btn-outline-primary m-1 flex-fill active" onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
+      <input type="radio" name="type" value="all"> 
+      <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
+       <span class="d-none d-md-inline">Show</span> <span class="h4 m-0 ml-1 mr-1 poppins">All</span> Users
+      </span>
+     </label>
+    </div>
+   </form>
+   <div class="table-responsive">
 				<table class="table table-sm table-striped table-hover usertable" id="userListTBL">
 					<thead>
 					<tr>
@@ -50,16 +84,6 @@
 					</tr>
 					</thead>
 					<tbody></tbody>
-					<tfoot>
-					<tr>
-						<th>Name</th>
-						<th>Status</th>
-						<th>Email</th>
-						<th>Type</th>
-						<th>Created At</th>
-						<th></th>
-					</tr>
-					</tfoot>
 				</table>
 			</div>
 		</div>
@@ -71,38 +95,38 @@
 
 	<script type="text/javascript">
 		$(document).ready(function () {
-            let $url = "{{route('eac.portal.user.ajax.list')}}";
+   let $url = "{{route('eac.portal.user.ajax.list')}}";
 			// Data Tables
 			$('#userListTBL').initDT({
 				ajax: {
 					url: $url,
 					type: "post",
-                    fields: [
-                        {
-                            data: "full_name",
-                            type: "link",
-                            href: "view_route"
-                        },
-                        {
-                            data: "status",
-                        },
-                        {
-                            data: "email",
-                        },
-                        {
-                            data: "type-name",
-                        },
-                        {
-                            data: "created_at"
-                        },
-                        {
-                            data: "view_route",
-                            type: "btn",
-                            classes: "btn btn-info",
-                            icon: '<i class="fal fa-fw fa-eye"></i>',
-                            text: "View"
-                        },
-                    ],
+     fields: [
+      {
+       data: "full_name",
+       type: "link",
+       href: "view_route"
+      },
+      {
+       data: "status",
+      },
+      {
+       data: "email",
+      },
+      {
+       data: "type-name",
+      },
+      {
+       data: "created_at"
+      },
+      {
+       data: "view_route",
+       type: "btn",
+       classes: "btn btn-primary btn-sm",
+       icon: '<i class="far fa-sm fa-search"></i>',
+       text: "View"
+      },
+     ],
 				},
 				order: [[0, 'asc']],
 			});

@@ -47,8 +47,7 @@
 	      </span>
 	     </label>
      @endforeach
-    @endif
-   	
+    @endif   	
      <label class="btn btn-outline-primary m-1 flex-fill {{ Request()->type === 'all' || !Request()->type ? 'active' : ''}}"  onclick="$(this).find(':radio').prop('checked', true);this.form.submit()">
       <input type="radio" name="type" value="all" > 
       <span class="small upper h6 m-0 d-flex align-items-center justify-content-center flex-wrap">
@@ -61,12 +60,8 @@
 				<table class="table table-sm table-striped">
 					<thead>
 					<tr>
-						<th>
-							Name
-						</th>
-						<th>
-							Type
-						</th>
+						<th>Name</th>
+						<th>Type</th>
 						<th></th>
 						<th class="no-sort"></th>
 					</tr>
@@ -86,9 +81,9 @@
 									{{$role->areas()->count()}}
 								</span>
 							</td>
-							<td class="text-center">
+							<td class="text-right">
 								<a class="btn btn-dark btn-sm" href="{{route('eac.portal.settings.manage.user.role.edit', $role->id)}}">
-									<i class="fas fa-key"></i> Manage Permissions
+									<i class="fad fa-edit"></i> Edit
 								</a>
 							</td>
 						</tr>
@@ -102,7 +97,12 @@
 @section('scripts')
 	<script>
 		$(document).ready(function(){
-			$('.table').DataTable();
+			$('.table').DataTable({
+    columnDefs: [{
+     targets: 'no-sort',
+     orderable: false,
+    }]
+   });
 		});
 		function formSubmit(input){
 			$(this).find(':radio').prop('checked', true);

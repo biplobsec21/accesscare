@@ -35,33 +35,28 @@
  </div><!-- end .actionBar -->
 
  <div class="viewData">
-  <div class="card mb-1 mb-md-4">
-   <div class="table-responsive">
-    <table class="table table-sm table-striped table-hover" id="dosageTBL">
-     <thead>
-      <tr>
-       <th>Menu Name</th>
-       {{-- <th>Route</th> --}}
-       <th class="no-search">Sub Menu</th>
-       <th class="no-search">Sequence</th>
-       <th class="no-search">Active</th>
-       <th>Last Update</th>
-       <th class="no-search"></th>
-      </tr>
-     </thead>
-     <tbody></tbody>
-     <tfoot>
-      <tr>
-       <th>Menu Name</th>
-       {{-- <th>Route</th> --}}
-       <th class="no-search">Sub Menu</th>
-       <th class="no-search">Sequence</th>
-       <th class="no-search">Active</th>
-       <th>Last Update</th>
-       <th class="no-search"></th>
-      </tr>
-     </tfoot>
-    </table>
+  <div class="row"> 
+   <div class="order-lg-2 col-lg-2 col-xl-3">
+   </div>
+   <div class="order-lg-1 col-lg-10 col-xl-9">
+    <div class="card mb-1 mb-md-4">
+     <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover" id="dosageTBL">
+       <thead>
+        <tr>
+         <th>Menu Name</th>
+         {{-- <th>Route</th> --}}
+         <th class="no-search">Sub Menu</th>
+         <th class="no-search">Sequence</th>
+         <th class="no-search">Active</th>
+         <th>Last Update</th>
+         <th class="no-search no-sort"></th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </div>
+    </div>
    </div>
   </div>
  </div><!-- end .viewData -->

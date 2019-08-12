@@ -37,22 +37,27 @@
  </div><!-- end .actionBar -->
 
  <div class="viewData">
-  <div class="card mb-1 mb-md-4">
-   <div class="table-responsive">
-    <table class="table table-sm table-striped table-hover" id="pageTbl">
-     <thead>
-      <tr>
-       <th>Name</th>
-       <th>City</th>
-       <th>Phone</th>
-       <th class="no-search">Email</th>
-       <th class="no-search">Last Update</th>
-       <th class="no-search"></th>
-      </tr>
-     </thead>
-     <tbody></tbody>
-    </table>
-   
+  <div class="row"> 
+   <div class="order-lg-2 col-lg-2 col-xl-3">
+   </div>
+   <div class="order-lg-1 col-lg-10 col-xl-9">
+    <div class="card mb-1 mb-md-4">
+     <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover" id="pageTbl">
+       <thead>
+        <tr>
+         <th>Name</th>
+         <th>City</th>
+         <th>Phone</th>
+         <th class="no-search">Email</th>
+         <th class="no-search">Last Update</th>
+         <th class="no-search"></th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </div>
+    </div>   
    </div>
   </div>
  </div><!-- end .viewData -->

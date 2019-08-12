@@ -921,7 +921,7 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
  /* - - - /end .rightSide - - - */
 /* = = = = structure elements = = = = */
  #pcont {
-  padding: 1rem;
+  padding: 2.5rem 2rem;
   min-height: 81.5vh;
  }
  @media screen and (min-width: 1200px) {
@@ -1092,7 +1092,7 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
 .table a:not(.badge):not(.btn) > [class*=fa]:not(.fa-stack) {
  font-size: 120%;
 }
-.table td, .table th {
+.table:not(.align-top) td, .table:not(.align-top) th {
  vertical-align: middle;
  padding: .5rem;
 }
@@ -1100,16 +1100,17 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
  padding: .3rem;
 }
 .table thead tr:not(.filter-cols) th, .table tbody th {
- background-color: rgba(1,66,111,.05);
+ background-color: rgba(38,140,213,.05);
 }
 .table thead .filter-cols th {
- background-color: rgba(1,66,111,.5);
+ background-color: rgba(38,140,213,.35);
 }
 .table thead .filter-cols [class*=form-control] {
  font-size: 1rem;
  font-family: 'Roboto';
  font-weight: 700;
  height: auto;
+ line-height:1;
 }
 .table thead .filter-cols [class*=form-control]::placeholder {
  padding: .15rem .05rem;
@@ -1121,7 +1122,7 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
 .table thead .filter-cols [class*=form-control].focus, .table thead .filter-cols [class*=custom-select].focus {
   box-shadow: none;
   border-color: rgba(255,255,255,1);
-  background-color: rgba(255,255,255,.5);
+  background-color: rgba(255,255,255,.25);
 }
 .table thead th, .table tbody th, .table tfoot th {
  letter-spacing: 1px;
@@ -1136,9 +1137,6 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
 }
 .table tfoot th.no-search {
  color: #ccc;
- font-size: .7rem;
- font-weight: 600;
- text-transform: uppercase;
 }
 .table tfoot tr {
  background-color: #fff;
@@ -1309,7 +1307,7 @@ table.dataTable.table-sm .sorting:before, table.dataTable.table-sm .sorting_asc:
  background-color: rgba(0,0,0,.5);
 }
 .viewData .card .table {
- min-width: unset;
+ /*min-width: unset;*/
 }
 .drag_item {
  cursor: move;
