@@ -215,11 +215,11 @@
 
   //   });
    $.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-     swal({
+    swal({
      title: "Oh Snap!",
-     text: "Something went wrong on our side. Please try again later.",
+     text: "There was an error understanding this request. If this issue persists, <a href="mailto:{{site()->email}}">click her</a> to contact us.",
      icon: "warning",
-     });
+    });
    };
 
   }); // end doc ready
