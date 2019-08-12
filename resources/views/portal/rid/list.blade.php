@@ -98,8 +98,8 @@
       {
        data: "view_route",
        type: "btn",
-       classes: "btn btn-info",
-       icon: '<i class="fal fa-fw fa-eye"></i>',
+       classes: "btn btn-info btn-sm",
+       icon: '<i class="fad fa-folder-open"></i>',
        text: "View"
       },
      ],

@@ -1,51 +1,18 @@
-</div><!-- /#pcont --><!-- DO NOT REMOVE -->
-</div><!-- /.container-fluid --><!-- DO NOT REMOVE -->
-</div><!-- /#content-wrapper --><!-- DO NOT REMOVE -->
-<div class="rightSide">
- <button class="toggleRight btn floater" type="button">
-  <i class="far fa-times"></i>
- </button>
- <div class="row align-items-center mt-3 ml-0 mr-0">
-  <div class="col">
-   <h5 class="m-0">
-    <i class="far fa-bell text-primary"></i>
-    Notifications
-   </h5>
-  </div>
-  <div class="col-auto ml-auto">
-   <a href="{{ route('eac.portal.notifications.read.all',Auth::user()->id) }}" class="btn btn-sm btn-light" tabindex="-1">
-    <i class="fa-fw far fa-check text-success"></i>
-    Mark All Read
-   </a>
-  </div>
- </div>
- <div class="tasklist">
-  <div class="notificationlist">
-   @if(Auth::user()->notifications()->count() > 0)
-    <ul class="list-unstyled">
-     @foreach(Auth::user()->notifications() as $notification)
-      <li class="{{ ($notification->read_at) ? 'read': 'unread'}}">
-       <a onclick="notificationSingleRead('{{$notification->id}}')" href="{{$notification->subject->view_route}}" class="strong">
-        {{ $notification->message }}
-        <small class="d-block date">
-         {{date('Y-m-d', strtotime($notification->created_at))}}
-        </small>
-       </a>
-      </li>
-     @endforeach
-    </ul>
-   @else
-    <p class="text-muted m-0 small">
-     <i class="fal fa-info-circle"></i>
-     No information available
-    </p>
-   @endif
-  </div>
- </div>
-</div></div><!--- /#wrapper -->
-<a class="scroll-to-top rounded" href="#page-top">
- <i class="fas fa-angle-up"></i>
-</a></div><!-- /#DONOTREMOVE"> --><!-- DO NOT REMOVE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.1/tinymce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.js"></script>
+
 <script>
  $(document).on("click", ".table tr td:last-child .btn", function () {
   $("tr.selected").removeClass("selected");
@@ -55,7 +22,6 @@
   $("body").tooltip({selector: '[data-toggle=tooltip]'});
   $("body").popover({selector: '[data-toggle=popover]'});
  });
-
  function readnotification(nid) {
   $url = 'eac.portal.rid.readnotification';
   $.ajax({
@@ -69,19 +35,15 @@
    }
   });
  }
-
  $.ajaxSetup({
   headers: {
    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
  });
-
  $(document).ready(function () {
-
   $('.select2').select2({
    placeholder: "-- Select --"
   });
-
   $('.datepicker').datepicker({
    dateFormat: 'yy-mm-dd',
    changeMonth: true,
@@ -135,29 +97,18 @@
   });
 
 
-  // Toggle the side navigation
-  $(".sidebarToggle").on('click', function (e) {
+  $(".toggleLeft").on('click', function (e) {
    e.preventDefault();
-   $(".sidebar").toggleClass("toggled");
-   $(".sidebar").toggleClass("slideout");
-   $("body").toggleClass("hack");
-   document.cookie = "sidebar_class=" + ($(".sidebar").hasClass("toggled") ? "toggled" : "");
+   $("body").toggleClass("ShowASide");
+   $("#leftSide").toggleClass("show");
   });
 
   $(".toggleRight").on('click', function (e) {
    e.preventDefault();
    $("body").toggleClass("ShowASide");
-   $(".rightSide").toggleClass("show");
+   $("#rightSide").toggleClass("show");
   });
-
-  $(".overlay, .sidebarToggle").on('click', function (e) {
-   e.preventDefault();
-   $("body").removeClass("ShowASide");
-   $("body").removeClass("hack");
-   $("body").removeClass("ShowNotifications");
-   $(".rightSide").removeClass("show");
-   $(".slideDown").removeClass("show");
-  });
+   
 
   $('.SObasic').DataTable({
    responsive: false,
@@ -220,7 +171,6 @@
  });
 
  function notificationSingleRead($id) {
-
   var notificationid = $id;
   console.log(notificationid);
   $.ajax({
@@ -234,8 +184,6 @@
     console.log(errMsg);
    }
   });
-
-
  }
 
  $(document).ready(function () {

@@ -1,58 +1,103 @@
 body {
  overflow-anchor: none;
 }
+
+#outSide {
+ display: flex;
+ flex-wrap: nowrap;
+ flex-direction: column;
+ align-items: stretch;
+ @include media-breakpoint-up(lg) {  
+  overflow: hidden;
+  max-height: 100vh;
+  border: 2px solid blue;
+ }
+}
+
 header {
  padding: 1rem 0;
 }
 #wrapper {
- .aside {
-  flex: 0;
-  overflow: hidden;
-  &.show {
+ max-width: 100%;
+ display: flex;
+ flex-wrap: nowrap;
+ @include media-breakpoint-up(lg) {
+  .aside {
+   flex: 0 0 225px;
    overflow: visible;
-   flex: 0 0 100px;   
   }
-  &:not(#rightSide) {
-   @include media-breakpoint-up(md) {
-    overflow: visible;
-    flex: 0 0 230px;
-    &.show {
-     overflow: visible;
-     flex: 0 0 150px;  
-    } // minimize sidebar on .show
+  #rightSide {
+   &:not(.show) {
+    overflow: hidden;
+    flex: 0;
    }
   }
- }
- #content {}
-
- #rightSide {
-  &.show {
-   flex: 0 0 300px;
-  }
-  .bottom {
-   position: absolute;
-   bottom: 0;
-   display: block;
-   border: 1px #f00 solid;
+  #content {
+   flex: 1;
+   flex-shrink: 1; // do i even need this!?
+   max-height: 90vh;
+   overflow-y: auto;
   }
  }
 }
 
-.aside, #content {
- position: relative;
- @include transition(all .4s ease-in-out);
-}
-.aside {
- .bottom {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: block;
-  border: 1px #f00 solid;
- }
-}
-#content {
- border-width: 2px 1px;
- border-style: solid;
- border-color: transparent;
-}
+
+
+
+
+// #wrapper {
+//  .aside {
+//   flex: 0;
+//   overflow: hidden;
+//   &.show {
+//    overflow: visible;
+//    flex: 0 0 100px;   
+//   }
+//   &:not(#rightSide) {
+//    @include media-breakpoint-up(md) {
+//     overflow: visible;
+//     flex: 0 0 230px;
+//     &.show {
+//      overflow: visible;
+//      flex: 0 0 150px;  
+//     } // minimize sidebar on .show
+//    }
+//   }
+//  }
+//  #content {}
+
+//  #rightSide {
+//   &.show {
+//    flex: 0 0 300px;
+//   }
+//   .bottom {
+//    position: absolute;
+//    bottom: 0;
+//    display: block;
+//    border: 1px #f00 solid;
+//   }
+//  }
+// }
+
+// .aside, #content {
+//  position: relative;
+//  @include transition(all .4s ease-in-out);
+// }
+// .aside {
+//  .bottom {
+//   position: absolute;
+//   bottom: 0;
+//   width: 100%;
+//   display: block;
+//   border: 1px #f00 solid;
+//  }
+// }
+// #content {
+//  @include media-breakpoint-down(lg) {
+//   max-width: 100%;
+//   background-color: red!important;
+//  }
+//  border-width: 2px 1px;
+//  border-style: solid;
+//  border-color: transparent;
+// }

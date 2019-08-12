@@ -50,15 +50,15 @@
 @yield('content')
 @include('include.portal.foot')
 @yield('scripts')
-<script>
-    $(function () {
-        let activeTab = $('a.dropdown-item.active');
-        if (activeTab) {
-            let navItem = $('a.dropdown-item.active').parent().parent();
-            navItem.children('a').trigger('click');
-        }
-    })
-</script>
+ <script>
+  $(function () {
+   let activeTab = $('a.dropdown-item.active');
+   if (activeTab) {
+    let navItem = $('a.dropdown-item.active').parent().parent();
+    navItem.children('a').trigger('click');
+   }
+  })
+ </script>
 </body>
 @SetTab('')
 </html>
