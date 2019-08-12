@@ -58,6 +58,7 @@
                     <tr>
                         <th>Name</th>
                         <th class="no-sort">Pharmacists</th>
+                        <th class="">Physician</th>
                         <th>Status</th>
                         <th>Created At</th>
                         <th class="no-sort no-search"></th>
@@ -67,6 +68,7 @@
                     <tr>
                         <th>Name</th>
                         <th class="no-sort">Pharmacists</th>
+                        <th class="">Physician</th>
                         <th>Status</th>
                         <th>Created At</th>
                         <th class="no-sort no-search"></th>
@@ -96,6 +98,9 @@
                         {
                             data: "pharmacists",
                             type: "count",
+                        },
+                        {
+                            data: "physician-full_name"
                         },
                         {
                             data: "active"
