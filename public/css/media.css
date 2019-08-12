@@ -70,8 +70,8 @@
   margin-bottom: .75rem;
  }
  .rightSide {
-  max-height: calc(100vh - var(--TNheight) + var(--LIAheight));
-  min-height: calc(100vh - var(--TNheight) + var(--LIAheight));
+  max-height: 100vh;
+  min-height: 100vh;
  }
  .rightSide.show {
   width: 60vw;
@@ -90,6 +90,11 @@
 @media (min-width:768px) {
  .rightSide.show {
   width: 320px;
+ }
+ .rightSide {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: column;
  }
 }
 
