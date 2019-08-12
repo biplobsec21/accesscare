@@ -8,19 +8,19 @@
 	@endif
 @endsection
 @section('styles')
-	<style>		
+	<style>
 		@media screen and (min-width: 1200px) {
    :root {
     --leftCol: 180px;
     --rightCol: 740px;
-   }   
+   }
    .actionBar, .viewData {
     max-width: calc(var(--leftCol) + var(--rightCol));
-   }   
+   }
    .viewData .row.thisone > [class*=col]:first-child {
     max-width: var(--leftCol);
     min-width: var(--leftCol);
-   }   
+   }
    .viewData .row.thisone > [class*=col]:last-child {
     max-width: var(--rightCol);
     min-width: var(--rightCol);
@@ -353,7 +353,7 @@
               </div>
              @endif
             </div>
-            <div class="card-body p-2">             
+            <div class="card-body p-2">
              <ul class="list-group list-group-flush mb-0">
               <!-- Group leader -->
              <!-- member -->
@@ -477,12 +477,12 @@
             });
 
             $.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-                swal({
-                    title: "Oh Snap!",
-                    text: "Something went wrong on our side. Please try again later.",
-                    icon: "warning",
-                });
-            };
+    swal({
+     title: "Oh Snap!",
+     text: "There was an error understanding this request. If this issue persists, <a href="mailto:{{site()->email}}">click her</a> to contact us.",
+     icon: "warning",
+    });
+   };
 
         }); // end doc ready
 	</script>

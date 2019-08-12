@@ -9,6 +9,7 @@ use App\DrugLot;
 use App\Http\Controllers\Controller;
 use App\MergeData;
 use App\RidRegimen;
+use App\Traits\AuthAssist;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -19,6 +20,7 @@ use Validator;
  */
 class DrugLotController extends Controller
 {
+    use AuthAssist;
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -61,7 +63,8 @@ class DrugLotController extends Controller
 			$depot = Depot::where('id', $request->input('depot'))->first();
 
 		$depots = Depot::all()->sortBy('name');
-		return view('portal.drug.lot.edit', ['drugs' => $drugs, 'depots' => $depots, 'lot' => $lot, 'drug_all' => $drug_all, 'depot' => $depot]);
+        $access = $this->lotAuth($depot);
+		return view('portal.drug.lot.edit', ['drugs' => $drugs, 'depots' => $depots, 'lot' => $lot, 'drug_all' => $drug_all, 'depot' => $depot, 'access' => $access]);
 	}
 
 	/**
