@@ -31,6 +31,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->type->name !== 'Early Access Care')
+            return abort(403, 'Unauthorized action.');
         return view('portal.settings.settings');
     }
 

@@ -14,6 +14,7 @@ use App\Pharmacy;
 use App\Phone;
 use App\Rid;
 use App\RidShipment;
+use App\Traits\AuthAssist;
 use App\Traits\WorksWithRIDs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\DB;
  */
 class PharmacyController extends Controller
 {
-	use WorksWithRIDs;
+	use WorksWithRIDs, AuthAssist;
 
 	public function __construct()
 	{
@@ -64,10 +65,12 @@ class PharmacyController extends Controller
 		$pharmacy = Pharmacy::where('id', $id)->firstOrFail();
 		$countries = \App\Country::all()->sortBy('name');
 		$states = \App\State::all()->sortBy('name');
+        $access = $this->pharmacyAuth($pharmacy);
 		return view('portal.rid.pharmacy.edit', [
 			'states' => $states,
 			'countries' => $countries,
 			'pharmacy' => $pharmacy,
+            'access' => $access
 		]);
 	}
 

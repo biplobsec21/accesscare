@@ -13,6 +13,7 @@ use App\RidShipment;
 use App\MergeData;
 use App\DEVUPDATESCRIPTTABLE;
 
+use App\Traits\AuthAssist;
 use App\User;
 use App\Phone;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ use Validator;
  */
 class PharmacistController extends Controller
 {
-	use WorksWithRIDs;
+	use WorksWithRIDs, AuthAssist;
 
 	public function __construct()
 	{
@@ -61,10 +62,12 @@ class PharmacistController extends Controller
 		$pharmacist = Pharmacist::where('id', $id)->firstOrFail();
 		$pharmacy = Pharmacy::all();
 		$countries = $this->getCountry();
+        $access = $this->pharmacistAuth($pharmacist);
 		return view('portal.rid.pharmacist.edit', [
 			'pharmacist' => $pharmacist,
 			'countries' => $countries,
 			'pharmacy' => $pharmacy,
+            'access' => $access,
 		]);
 	}
 

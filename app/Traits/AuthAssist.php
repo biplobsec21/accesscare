@@ -2,7 +2,11 @@
 
 namespace App\Traits;
 
+use App\Depot;
 use App\Drug;
+use App\DrugLot;
+use App\Pharmacist;
+use App\Pharmacy;
 use App\Rid;
 use App\Role;
 use App\Support\AuthCollection;
@@ -324,6 +328,97 @@ trait AuthAssist
                 return null;
         }
         return $this->user->company;
+    }
+
+    protected function companyAuth(Company $company)
+    {
+        $this->user = Auth::user();
+        switch ($this->preGateCheck()) {
+            case 2;
+                return true;
+            case -1:
+                return $this->abortNow();
+        }
+        $access = new AuthCollection();
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate('company.index.view'))
+            return true;
+        else
+            return $this->abortNow();
+    }
+
+    protected function pharmacyAuth(Pharmacy $pharmacy) {
+        $this->user = Auth::user();
+        switch ($this->preGateCheck()) {
+            case 2;
+                return true;
+            case -1:
+                return $this->abortNow();
+        }
+        $access = new AuthCollection();
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate('pharmacy.index.view'))
+            return true;
+        else
+            return $this->abortNow();
+    }
+
+    protected function pharmacistAuth(Pharmacist $pharmacist) {
+        $this->user = Auth::user();
+        switch ($this->preGateCheck()) {
+            case 2;
+                return true;
+            case -1:
+                return $this->abortNow();
+        }
+        $access = new AuthCollection();
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate('pharmacist.index.edit'))
+            return true;
+        else
+            return $this->abortNow();
+    }
+
+    protected function depotAuth(Depot $depot) {
+        $this->user = Auth::user();
+        switch ($this->preGateCheck()) {
+            case 2;
+                return true;
+            case -1:
+                return $this->abortNow();
+        }
+        $access = new AuthCollection();
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate('depot.index.edit'))
+            return true;
+        else
+            return $this->abortNow();
+    }
+
+    protected function lotAuth(DrugLot $lot) {
+        $this->user = Auth::user();
+        switch ($this->preGateCheck()) {
+            case 2;
+                return true;
+            case -1:
+                return $this->abortNow();
+        }
+        $access = new AuthCollection();
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate('lot.index.edit'))
+            return true;
+        else
+            return $this->abortNow();
     }
 
     protected function abortNow()

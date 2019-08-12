@@ -57,8 +57,10 @@ class CompanyController extends Controller
 	public function show($id)
 	{
 		$company = Company::where('id', $id)->first();
+        $access = $this->companyAuth($company);
 		return view('portal.company.show', [
 			'company' => $company,
+            'access' => $access,
 		]);
 	}
 
@@ -73,11 +75,12 @@ class CompanyController extends Controller
 		$company = Company::where('id', $id)->first();
 		$countries = $this->getCountry();
 		$state = \App\State::all()->sortBy('name');
-		// dd($countries);
+        $access = $this->companyAuth($company);
 		return view('portal.company.edit', [
 			'company' => $company,
 			'countries' => $countries,
 			'state' => $state,
+            'access' => $access,
 		]);
 	}
 

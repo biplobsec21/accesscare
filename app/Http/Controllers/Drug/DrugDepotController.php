@@ -9,6 +9,7 @@ use App\Drug;
 use App\RidShipment;
 use App\DrugLot;
 use App\Http\Controllers\Controller;
+use App\Traits\AuthAssist;
 use Illuminate\Http\Request;
 use App\DEVUPDATESCRIPTTABLE;
 use DB;
@@ -20,6 +21,7 @@ use DB;
  */
 class DrugDepotController extends Controller
 {
+    use AuthAssist;
 
 	public function __construct()
 	{
@@ -56,10 +58,12 @@ class DrugDepotController extends Controller
 		$depot = Depot::where('id', $id)->firstOrFail();
 		$countries = $this->getCountry();
 		$states = \App\State::all()->sortBy('name');
+        $access = $this->depotAuth($depot);
 		return view('portal.drug.depot.edit', [
 			'states' => $states,
 			'countries' => $countries,
 			'depot' => $depot,
+            'access' => $access,
 		]);
 	}
 	public function ajaxlist(){
