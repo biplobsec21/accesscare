@@ -19,7 +19,7 @@
 			<strong>Dashboard,</strong>
 			<span class="text-info">{{\Auth::user()->first_name}}</span>
 		</h3>
-		<span class="badge badge-primary">{{\Auth::user()->type->name}}</span>
+		<span class="badge badge-primary d-none d-md-inline">{{\Auth::user()->type->name}}</span>
 	</div>
 	@if(\Auth::user()->type->name == 'Physician')
   <div class="dashCards">
