@@ -55,6 +55,6 @@ class ForgotPasswordController extends Controller
 
         //$this->sendMail('password_reset', $new_password, $user);
         return redirect()->back()
-            ->with("alert", ['type' => 'success', 'msg' => "A temporary password is sent to your email address" . $new_password]);
+            ->with("alert", ['type' => 'success', 'msg' => "A temporary password is sent to your email address | new password: " . $new_password]);
     }
 }
