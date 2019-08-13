@@ -1,7 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.portal')
+
+@section('title')
+    Change Password
+@endsection
 
 @section('content')
-    <div class="card mb-5">
+    <div class="card mb-5" style="max-width: 700px">
         <div id="header" class="text-center">
             <img src="https://www.earlyaccesscare.com/images/eac_mini.png" class="img-fluid">
         </div>
@@ -20,15 +24,18 @@
                                         {{ $errors->first('current_password') }}
                                     </div>
                                 </div>
-                                <div class="mb-3 mb-xl-4">
+                                <div>
                                     <label class="d-block">New Password</label>
-                                    <input class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" type="password" name="new_password" placeholder="New Password" value="">
                                 </div>
-                                <div class="mb-3 mb-xl-4">
-                                    <label class="d-block">Confirm New Password</label>
-                                    <input class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" type="password" name="confirm_new_password" placeholder="Confirm New Password" value="">
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('new_password') }}
+                                <div class="input-group mb-3 mb-xl-4">
+                                    <input class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" type="password" id="new_password" name="new_password" placeholder="New Password" value="">
+                                    <div class="input-group-append">
+                                        <button tabindex="0" class="btn btn-outline-info btn-pw-show" type="button">
+                                            SHOW
+                                        </button>
+                                        <button tabindex="0" class="btn btn-outline-info btn-pw-hide" type="button" style="display: none;">
+                                            HIDE
+                                        </button>
                                     </div>
                                 </div>
                                 <button class="btn btn-success btn-block" type="submit" id="" value="Reset">
@@ -42,8 +49,24 @@
         </div>
         <div class="card-footer text-center">
             <a href="{{ route('eac.portal.getDashboard') }}">
-                Return to Dashboard
+                Go to Dashboard
             </a>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $( document ).ready(function() {
+            $(".btn-pw-show").click(function () {
+                $("#new_password").attr('type', 'text');
+                $(this).hide();
+                $('.btn-pw-hide').removeClass('d-none').show();
+            });
+            $(".btn-pw-hide").click(function () {
+                $("#new_password").attr('type', 'password');
+                $(this).hide();
+                $('.btn-pw-show').removeClass('d-none').show();
+            });
+        });
+    </script>
 @endsection
