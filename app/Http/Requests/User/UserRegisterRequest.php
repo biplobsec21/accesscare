@@ -60,19 +60,22 @@ class UserRegisterRequest extends FormRequest
 			'phone' => [
 				'required',
 			],
+            'certified' => [
+                'required',
+            ],
 		];
 	}
 
 	public function messages()
 	{
 		return [
-			'first_name.required' => 'The User\'s first name is required.',
+			'first_name.required' => 'First name is required.',
 
-			'last_name.required' => 'The User\'s last name is required.',
+			'last_name.required' => 'Last name is required.',
 
-			'addr1.required' => 'The address line 1 field is required.',
+			'addr1.required' => 'Address line 1 is required.',
 
-			'hospital.required' => 'The hospital field is required.',
+			'hospital.required' => 'The institution field is required.',
 
 			'city.required' => 'The city field is required.',
 
@@ -86,6 +89,7 @@ class UserRegisterRequest extends FormRequest
 			'phone.required' => 'The phone number field is required.',
 
 			'country.required' => 'Please select a country.',
+            'certified.required' => 'To register you must be a licensed Physician.',
 		];
 	}
 }
