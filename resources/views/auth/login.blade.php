@@ -10,8 +10,8 @@
 		</div>
 		<div class="card-body p-0">
 			<div class="row m-0">
-				<div class="text-center col-md col-lg-auto bg-dark text-white p-3 p-lg-4 p-xl-5">
-					<img src="{{ asset('/images/logo-w-bg.png') }}" alt="Early Access Care" class="img-fluid mb-3" />
+    <div class="text-center col-lg-auto bg-dark text-white p-3 p-lg-4 p-xl-5 d-sm-flex d-lg-block justify-content-sm-between flex-sm-wrap align-items-sm-center">
+     <img src="{{ asset('/images/logo-w-bg.png') }}" alt="Early Access Care" class="img-fluid mb-3 mb-sm-0 mb-lg-3" style="max-height: 100px" />
 					<ul class="nav nav-pills justify-content-center" id="LoginP" role="tablist">
 						<li class="nav-item">
 							<a class="nav-link active" id="loginGen-tab" data-toggle="tab" href="#loginGen" role="tab"
@@ -27,7 +27,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md col-lg p-3 p-lg-4 p-xl-5 ml-lg-auto mr-lg-auto">
+    <div class="col-lg p-3 p-lg-4 p-xl-5 ml-lg-auto mr-lg-auto">
 					<div class="tab-content" id="LoginPContent">
 						<div class="tab-pane fade show active" id="loginGen" role="tabpanel" aria-labelledby="loginGen-tab">
 							<form method="post" action="{{ route('eac.auth.postSignIn') }}">

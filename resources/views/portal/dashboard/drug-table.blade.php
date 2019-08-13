@@ -1,22 +1,52 @@
-<div class="card-body pt-3 pl-3 pr-3 pb-0">
-	<h5 class="text-primary strong text-upper mb-3">
-		Drugs </h5>
+<h3 class="mb-3">Investigative Drugs</h3>
+<div class="card mb-1 mb-md-4">
+ <div class="card-header">
+  {{--
+   * * * PLEASE UTILIZE THIS PLUGIN * * * https://datatables.net/plug-ins/filtering/row-based/range_dates * * * 
+  --}}
+  <div class="row align-items-end">
+   <div class="col-sm col-xl-auto mb-2">
+    <label class="d-block">Company</label>
+    <select class="form-control" name="">
+     <option>-- Select --</option>
+     <option value="">Test 1</option>
+     <option value="">Test 2</option>
+     <option value="">Test 3</option>
+     <option value="">Test 4</option>
+    </select>
+   </div>
+   <div class="col-sm col-xl-auto mb-2">
+    <label class="d-block">Status</label>
+    <select class="form-control" name="">
+     <option>-- Select --</option>
+     <option value="">Test 1</option>
+     <option value="">Test 2</option>
+     <option value="">Test 3</option>
+     <option value="">Test 4</option>
+    </select>
+   </div>
+   <div class="col-sm-auto mb-2">
+    <button type="submit" name="" value="" class="btn btn-dark">
+     Apply Filter(s)
+    </button>
+   </div>
+  </div>
+ </div>
+ <div class="table-responsive">
+ 	<table class="table table-sm table-striped table-hover drugtable" id="drugListTBL">
+ 		<thead>
+ 		<tr>
+ 			<th>Drug Name</th>
+ 			<th>Company</th>
+ 			<th class="no-search">Status</th>
+ 			<th>Submitted Date</th>
+ 			<th class="no-search no-sort"></th>
+ 		</tr>
+ 		</thead>
+ 		<tbody></tbody>
+ 	</table>
+ </div>
 </div>
-<div class="table-responsive">
-	<table class="table table-sm table-striped table-hover drugtable" id="drugListTBL">
-		<thead>
-		<tr>
-			<th>Drug Name</th>
-			<th>Company</th>
-			<th class="no-search">Status</th>
-			<th>Submitted Date</th>
-			<th class="no-search no-sort"></th>
-		</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
-</div>
-
 @section('scripts')
  <script type="text/javascript">
   $(document).ready(function () {

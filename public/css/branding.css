@@ -341,9 +341,10 @@
  .custom-control-input:focus~.custom-control-label::before {
   box-shadow: 0 0 0 0.2rem rgba(9, 137, 126,.25);
  }
+
  .page-item.active .page-link, .custom-control-input:checked~.custom-control-label::before {
-  background: linear-gradient(160deg, #0ed1c0 0, #09897e 100%);
-  border-color: #0ed1c0 #0ed1c0 #09897e #0ed1c0;
+  background: rgba(38,140,213,1);
+  border-color: rgba(38,140,213,.85);
  }
  .page-item.disabled .page-link, .custom-control-input:disabled~.custom-control-label::before {
   color: #666E73;

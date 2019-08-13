@@ -10,7 +10,7 @@
 @else
  <div class="card">
   <div class="bg-danger text-white p-2 small">
-   <span class="fas fa-exclamation-triangle text-warning"></span> 8 New Requests
+   <a href="{{route('eac.portal.rid.list')}}" class="text-white"><span class="fas fa-exclamation-triangle text-warning"></span> 8 New Requests</a>
   </div>
   <div class="card-body">
    <div class="d-flex justify-content-between">

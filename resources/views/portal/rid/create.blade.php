@@ -401,7 +401,7 @@
                 var month = $(".p_date").val().length;
                 if (month != 2) {
 
-                    $("#dob_year_invalid").text("Date must have 2 digit!");
+                    $("#dob_year_invalid").text("Date must have 2 digits");
 
                 } else {
 

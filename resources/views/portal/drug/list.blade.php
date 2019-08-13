@@ -41,7 +41,7 @@
   					<tr>
   						<th>Drug Name</th>
   						<th>Company</th>
-  						<th class="no-search">Status</th>
+  						<th class="">Status</th>
   						<th>Submitted Date</th>
   						<th class="no-search no-sort"></th>
   					</tr>

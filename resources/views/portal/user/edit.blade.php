@@ -2,7 +2,7 @@
 
 @section('title')
  @if(Auth::User()->id == $user->id)
-  My Profile
+  Edit Profile Settings
  @else
   Edit User
  @endif
@@ -117,7 +117,11 @@
 		@endif
 		<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 			<a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-secondary">
-				View User
+    @if(Auth::User()->id == $user->id)
+     View My Profile
+    @else
+ 				View User
+    @endif
 			</a>
 			<a href="{{ route('eac.portal.user.show', $user->id) }}" class="btn btn-info">
 				<i class="fal fa-redo"></i>
