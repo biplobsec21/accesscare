@@ -1,0 +1,232 @@
+  <div class="gradients">
+   <div class="row">
+    <div class="col-sm mr-xl-4 mb-5">
+     <div class="card m-0 h-100 dcounter">
+      <div class="card-body p-2">
+       <div class="row align-items-center">
+        <div class="col">
+         <h5 class="text-primary strong text-upper m-0">
+          Requests
+         </h5>
+        </div>
+        <div class="pl-0 col-auto">
+         <a href="{{route('eac.portal.rid.list')}}" class="btn p-0">
+          <div class="gradient circle d-flex align-items-center justify-content-center">
+           <h3 class="m-0">{{ \EAC\Rid::all()->count()}}</h3>
+          </div>
+         </a>
+        </div>
+       </div>
+       <ul class="list-group list-group-flush mb-0 mt-1">
+        @if($status_count->count() > 0)
+         @foreach($status_count as $val)
+          <li class="list-group-item small pl-2 pb-0 pr-2 pt-0 @if($val->name == 'New')text-danger @endif">
+           <a href="{{route('eac.portal.rid.list','rid_status='.$val->status_id)}}">
+            <div class="row m-0">
+             <div class="col p-0">
+              {{ $val->name }}
+              @if($val->name == 'New')
+               <i class="fas fa-exclamation-triangle text-danger"></i>
+              @endif
+             </div>
+             <div class="col-auto p-0">
+
+              @if($val->name == 'New')
+               <span class="badge badge-danger">
+                {{ $val->total }}
+               </span>
+              @else
+               <span class="badge badge-light">
+                {{ $val->total }}
+               </span>
+              @endif
+
+             </div>
+            </div><!-- /.row -->
+           </a>
+          </li>
+         @endforeach
+        @endif
+       </ul>
+      </div>
+      <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-primary btn-block">
+       <i class="fa-fw fas fa-medkit"></i> Submit Request
+      </a>
+     </div><!-- /.card -->
+    </div>
+    <div class="col-sm ml-xl-4 mr-xl-4 mb-5">
+     <div class="card m-0 h-100 dcounter">
+      <div class="card-body p-2">
+       <div class="row align-items-center">
+        <div class="col">
+         <h5 class="text-primary strong text-upper m-0">
+          Drugs
+         </h5>
+        </div>
+        <div class="pl-0 col-auto">
+         <a href="{{route('eac.portal.drug.list')}}" class="btn p-0">
+          <div class="gradient circle d-flex align-items-center justify-content-center">
+           <h3 class="m-0">{{ $alldrug = \EAC\Drug::all()->count() }}</h3>
+           @php $aproved = \EAC\Drug::where('status','Approved')->count(); @endphp
+           @php $notAproved = \EAC\Drug::where('status','Not Approved')->count(); @endphp
+           @php $pending = \EAC\Drug::where('status','Pending')->count(); @endphp
+          </div>
+         </a>
+        </div>
+       </div>
+       <ul class="list-group list-group-flush mb-0 mt-1">
+        <li class="list-group-item small pl-2 pb-0 pr-2 pt-0 @if($pending > 0) text-danger @endif">
+         <a href="{{route('eac.portal.drug.list','drug_status='.'Pending')}}"
+            class="text-danger">
+          <div class="row m-0">
+           <div class="col p-0">
+            Pending
+            @if($pending > 0) <i
+             class="fas fa-exclamation-triangle text-danger"></i> @endif
+           </div>
+           <div class="col-auto p-0">
+            <span
+             class="badge @if($pending > 0) badge-danger @else badge-light @endif">@if($pending > 0) {{$pending}} @else
+              0 @endif</span>
+           </div>
+          </div><!-- /.row -->
+         </a>
+        </li>
+        <li class="list-group-item small pl-2 pb-0 pr-2 pt-0">
+         <a href="{{route('eac.portal.drug.list','drug_status='.'Approved')}}">
+          <div class="row m-0">
+           <div class="col p-0">
+            Approved
+           </div>
+           <div class="col-auto p-0">
+            <span class="badge badge-light">@if($aproved > 0) {{$aproved}} @else
+              0 @endif</span>
+           </div>
+          </div><!-- /.row -->
+         </a>
+        </li>
+        <li class="list-group-item small pl-2 pb-0 pr-2 pt-0">
+         <a href="{{route('eac.portal.drug.list','drug_status='.'Not Approved')}}">
+          <div class="row m-0">
+           <div class="col p-0">
+            Not Approved
+           </div>
+           <div class="col-auto p-0">
+            <span
+             class="badge badge-light">@if($notAproved > 0) {{$notAproved}} @else
+              0 @endif</span>
+           </div>
+          </div><!-- /.row -->
+         </a>
+        </li>
+       </ul>
+      </div>
+      <a href="{{ route('eac.portal.drug.create') }}" class="btn btn-primary btn-block">
+       <i class="fa-fw fas fa-prescription-bottle-alt"></i> Add Drug
+      </a>
+     </div><!-- /.card -->
+    </div>
+    <div class="col-sm ml-xl-4 mb-5">
+     <div class="card m-0 h-100 dcounter">
+      <div class="card-body p-2">
+       <div class="row align-items-center">
+        <div class="col">
+         <h5 class="text-primary strong text-upper m-0">
+          Users
+         </h5>
+        </div>
+        <div class="pl-0 col-auto">
+         <a href="{{route('eac.portal.user.list')}}" class="btn p-0">
+          <div class="gradient circle d-flex align-items-center justify-content-center">
+           <h3 class="m-0">{{ \EAC\User::all()->count() }}</h3>
+          </div>
+         </a>
+        </div>
+       </div>
+       <ul class="list-group list-group-flush mb-0 mt-1">
+        <li class="list-group-item small pl-2 pb-0 pr-2 pt-0 text-danger">
+         <a href="{{route('eac.portal.user.list','user_status='.'Pending')}}"
+            class="text-danger">
+          <div class="row m-0">
+           <div class="col p-0">
+            Pending
+            <i class="fas fa-exclamation-triangle text-danger"></i>
+           </div>
+           <div class="col-auto p-0">
+            @php $pending_user = \EAC\User::where('status','Pending')->count(); @endphp
+            <span
+             class="badge badge-danger">@if($pending_user > 0) {{$pending_user}} @else
+              0 @endif</span>
+           </div>
+          </div><!-- /.row -->
+         </a>
+        </li>
+        <li class="list-group-item small pl-2 pb-0 pr-2 pt-0">
+         <a data-toggle="collapse" href="#showUsers" role="button" aria-expanded="true"
+            aria-controls="showUsers">
+          <div class="row m-0">
+           <div class="col p-0">
+            Approved
+           </div>
+           <div class="col-auto p-0">
+            <i class="far fa-chevron-down"></i>
+           </div>
+          </div><!-- /.row -->
+         </a>
+         <div class="collapse show" id="showUsers">
+          <ul class="list-unstyled m-0">
+           @php
+            $users = \EAC\UserType::where('user_types.id','!=','')
+              ->LeftJoin('users','users.type_id','=','user_types.id')
+              ->groupBy('user_types.id')
+              ->where('users.status','Approved')
+              ->select(DB::raw("count(users.id) as total"),'user_types.name as type_name','user_types.id as type_id')
+              ->get();
+
+           @endphp
+           {{-- @dd($users) --}}
+           @if($users->count() > 0)
+            @foreach($users as $val)
+             <li class="pt-0 pr-0 pl-3 pl-xl-4 pb-1">
+              <a href="{{route('eac.portal.user.list','user_status='.'Approved&user_type='.$val->type_id)}}">
+               <div class="row m-0">
+                <div class="col p-0">
+                 {{ $val->type_name }} Users
+                </div>
+                <div class="col-auto p-0">
+                 <span class="badge badge-light">
+                  {{ $val->total }}
+                 </span>
+                </div>
+               </div><!-- /.row -->
+              </a>
+             </li>
+            @endforeach
+           @endif
+          </ul>
+         </div>
+        </li>
+        <li class="list-group-item small pl-2 pb-0 pr-2 pt-0">
+         <a href="{{route('eac.portal.user.list','user_status='.'Suspended')}}">
+          <div class="row m-0">
+           <div class="col p-0">
+            Suspended
+           </div>
+           <div class="col-auto p-0">
+            @php $suspended_user = \EAC\User::where('status','Suspended')->count(); @endphp
+            <span
+             class="badge badge-light">@if($suspended_user > 0) {{$suspended_user}} @else
+              # @endif</span>
+           </div>
+          </div><!-- /.row -->
+         </a>
+        </li>
+       </ul>
+      </div>
+      <a href="{{ route('eac.portal.user.create') }}" class="btn btn-primary btn-block">
+       <i class="fa-fw fas fa-user-md"></i> Add User
+      </a>
+     </div><!-- /.card -->
+    </div>
+   </div>
+  </div>

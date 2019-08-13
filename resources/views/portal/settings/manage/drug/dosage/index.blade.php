@@ -47,33 +47,39 @@
  </div><!-- end .actionBar -->
  
  <div class="viewData">
-  <div class="card mb-1 mb-md-4">
-   <div class="d-flex justify-content-end p-3">
-    <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
-     <label class="btn btn-secondary active btn-sm " onclick="showactiveOrAll(1)">
-      <input type="radio" autocomplete="off">
-      View Active
-     </label>
-     <label class="btn btn-secondary   btn-sm" onclick="showactiveOrAll(0)">
-      <input type="radio" autocomplete="off" checked>
-      View All
-     </label>
-    </div>
+  <div class="row"> 
+   <div class="order-lg-2 col-lg-2 col-xl-3">
    </div>
-   <div class="table-responsive">
-    <table class="table table-sm table-striped table-hover" id="dosageTBL">
-     <thead>
-     <tr>
-      <th>Form</th>
-      <th>Strength</th>
-      <th>Unit</th>
-      <th class="no-search">Status</th>
-      <th>Last Update</th>
-      <th class="no-search no-sort"></th>
-     </tr>
-     </thead>
-     <tbody></tbody>
-    </table>
+   <div class="order-lg-1 col-lg-10 col-xl-9">
+    <div class="card mb-1 mb-md-4">
+     <div class="d-flex justify-content-end p-3">
+      <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
+       <label class="btn btn-secondary active btn-sm " onclick="showactiveOrAll(1)">
+        <input type="radio" autocomplete="off">
+        View Active
+       </label>
+       <label class="btn btn-secondary   btn-sm" onclick="showactiveOrAll(0)">
+        <input type="radio" autocomplete="off" checked>
+        View All
+       </label>
+      </div>
+     </div>
+     <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover" id="dosageTBL">
+       <thead>
+       <tr>
+        <th>Form</th>
+        <th>Strength</th>
+        <th>Unit</th>
+        <th class="no-search">Status</th>
+        <th>Last Update</th>
+        <th class="no-search no-sort"></th>
+       </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </div>
+    </div>
    </div>
   </div>
  </div><!-- end .viewData -->
@@ -108,8 +114,8 @@
       {
        data: "edit_route",
        type: "btn",
-       classes: "btn btn-warning",
-       icon: '<i class="fal fa-fw fa-edit"></i>',
+       classes: "btn btn-dark btn-sm",
+       icon: '<i class="fad fa-edit"></i>',
        text: "Edit"
       },
      ],

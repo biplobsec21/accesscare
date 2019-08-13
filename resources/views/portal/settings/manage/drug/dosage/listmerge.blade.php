@@ -64,17 +64,6 @@
        </tr>
       </thead>
       <tbody></tbody>
-      <tfoot>
-       <tr>
-       <th class="no-search no-sort">Primary</th>
-        <th class="no-search no-sort">Merge</th>
-        <th>Form</th>
-        <th>Strength</th>
-        <th>Unit</th>
-        <th class="no-search">Status</th>
-        <th>Last Update</th>
-       </tr>
-      </tfoot>
      </table>
     </div>
    </div>

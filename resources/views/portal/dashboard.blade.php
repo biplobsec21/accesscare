@@ -68,13 +68,13 @@
   <div class="dashCards">
  		<div class="row">
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.rid-card')
+ 				@include('portal.dashboard.eac-rid-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.drug-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.user-card')
+ 				@include('portal.dashboard.eac-user-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.notification-card')

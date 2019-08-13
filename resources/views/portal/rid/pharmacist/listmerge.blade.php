@@ -58,17 +58,6 @@
         <th>Created At</th>
       </tr>
       </thead>
-      <tfoot>
-      <tr>
-        <th class="no-sort no-search">Primary</th>
-        <th class="no-sort no-search">Merge</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Pharmacy</th>
-        <th>Created At</th>
-      </tr>
-      </tfoot>
       <tbody>
       </tbody>
      </table>

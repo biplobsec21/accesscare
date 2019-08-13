@@ -60,18 +60,6 @@
        <th>Created At</th>
       </tr>
       </thead>
-      <tfoot>
-      <tr>
-       <th class="no-sort no-search">Primary</th>
-       <th class="no-sort no-search">Merge</th>
-       <th>Lot Number</th>
-       <th>Drug</th>
-       <th>Dosage</th>
-       <th>Depot</th>
-       <th class="no-sort no-search">Stock</th>
-       <th class="">Created At</th>
-      </tr>
-      </tfoot>
       <tbody>
       </tbody>
      </table>

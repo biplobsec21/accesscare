@@ -3,14 +3,14 @@
 @SetTab('pharmacies')
 
 @section('title')
-    All Pharmacies
+ All Pharmacies
 @endsection
 @section('styles')
-    <style>
-        .v-inactive{
-            display:none ;
-        }
-    </style>
+ <style>
+  .v-inactive{
+   display:none ;
+  }
+ </style>
 @endsection
 @section('content')
     <div class="titleBar">
@@ -64,16 +64,6 @@
                         <th class="no-sort no-search"></th>
                     </tr>
                     </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th class="no-sort">Pharmacists</th>
-                        <th class="">Physician</th>
-                        <th>Status</th>
-                        <th>Created At</th>
-                        <th class="no-sort no-search"></th>
-                    </tr>
-                    </tfoot>
                     <tbody>
                     </tbody>
                 </table>
@@ -111,8 +101,8 @@
                         {
                             data: "edit_route",
                             type: "btn",
-                            classes: "btn btn-warning",
-                            icon: '<i class="fal fa-fw fa-edit"></i>',
+                            classes: "btn btn-dark btn-sm",
+                            icon: '<i class="fad fa-edit"></i>',
                             text: "Edit"
                         },
                     ],

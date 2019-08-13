@@ -366,15 +366,6 @@
 						</tr>
 						</thead>
 						<tbody></tbody>
-						<tfoot>
-						<tr>
-							<th class="no-search no-sort"></th>
-							<th>RID Number</th>
-							<th>Drug Requested</th>
-							<th>Ship By</th>
-							<th class="no-search no-sort"></th>
-						</tr>
-						</tfoot>
 					</table>
 				</div>
 			</div>

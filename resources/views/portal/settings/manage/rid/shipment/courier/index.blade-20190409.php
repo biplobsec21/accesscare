@@ -78,14 +78,6 @@ Rid Shipping Courier Manager
                     </tr>
                 </thead>
                 <tbody></tbody>
-                <tfoot>
-                    <tr>
-                        <th>name</th>
-                        <th class="no-search">active</th>
-                        <th>created_at</th>
-                        <th class="no-search"></th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>

@@ -213,15 +213,6 @@
        </tr>
        </thead>
        <tbody></tbody>
-       <tfoot>
-       <tr>
-        <th>Drug Name</th>
-        <th>Company</th>
-        <th class="no-search">Status</th>
-        <th>Submitted Date</th>
-        <th class="no-search"></th>
-       </tr>
-       </tfoot>
       </table>
      </div>
     </div>
@@ -241,17 +232,6 @@
       </tr>
       </thead>
       <tbody></tbody>
-      <tfoot>
-      <tr>
-       <th>RID Number</th>
-       <th class="no-search">RID Status</th>
-       <th>Assigned To</th>
-       <th>Drug Requested</th>
-       <th class="no-search">Shipment Status</th>
-       <th>Request Date</th>
-       <th class="no-search"></th>
-      </tr>
-      </tfoot>
      </table>
     </div>
    </div>
@@ -270,15 +250,6 @@
        </tr>
        </thead>
        <tbody></tbody>
-       <tfoot>
-       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th class="no-search">Status</th>
-        <th>Submitted Date</th>
-        <th class="no-search"></th>
-       </tr>
-       </tfoot>
       </table>
      </div>
     </div>

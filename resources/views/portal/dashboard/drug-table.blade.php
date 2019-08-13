@@ -18,40 +18,40 @@
 </div>
 
 @section('scripts')
-    <script type="text/javascript">
-        $(document).ready(function () {
-            let $url = "{{route('eac.portal.drug.ajax.list')}}";
-            // Data Tables
-            $('#drugListTBL').initDT({
-                ajax: {
-                    url: $url,
-                    type: "post",
-                    fields: [
-                        {
-                            data: "name",
-                            type: "link",
-                            href: "view_route"
-                        },
-                        {
-                            data: "company-name",
-                        },
-                        {
-                            data: "status",
-                        },
-                        {
-                            data: "created_at"
-                        },
-                        {
-                            data: "view_route",
-                            type: "btn",
-                            classes: "btn btn-info",
-                            icon: '<i class="fal fa-fw fa-eye"></i>',
-                            text: "View"
-                        },
-                    ],
-                },
-                order: [[0, 'asc']],
-            });
-        }); // end doc ready
-    </script>
+ <script type="text/javascript">
+  $(document).ready(function () {
+   let $url = "{{route('eac.portal.drug.ajax.list')}}";
+   // Data Tables
+   $('#drugListTBL').initDT({
+    ajax: {
+     url: $url,
+     type: "post",
+     fields: [
+      {
+       data: "name",
+       type: "link",
+       href: "view_route"
+      },
+      {
+       data: "company-name",
+      },
+      {
+       data: "status",
+      },
+      {
+       data: "created_at"
+      },
+      {
+       data: "view_route",
+       type: "btn",
+       classes: "btn btn-primary btn-sm",
+       icon: '<i class="far fa-sm fa-search"></i>',
+       text: "View"
+      },
+     ],
+    },
+    order: [[0, 'asc']],
+   });
+  }); // end doc ready
+ </script>
 @append
