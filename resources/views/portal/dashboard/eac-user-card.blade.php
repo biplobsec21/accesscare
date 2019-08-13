@@ -1,12 +1,12 @@
 <div class="card">
  <div class="bg-danger text-white p-2 small">
-  <a href="{{route('eac.portal.user.list')}}" class="text-white"><span class="fas fa-exclamation-triangle text-warning"></span> 2 Pending Physicians</a>
+  <a href="{{route('eac.portal.user.list')}}" class="text-white"><span class="fas fa-exclamation-triangle text-secondary"></span> 2 Pending Physicians</a>
  </div>
 	<div class="card-body">
   <div class="d-flex justify-content-between">
    <div class="mb-3">
     <span class="h5 mb-0 d-block">
-     <i class="fa-fw fa-lg fad fa-users text-warning"></i>
+     <i class="fa-fw fa-lg fad fa-users text-secondary"></i>
      <a class="text-dark" href="{{route('eac.portal.user.list')}}">Platform Users</a>
     </span>
    </div>
@@ -15,7 +15,7 @@
    </a>
   </div>
   <p class="text-muted mb-0 small text-xl-center">
-   Create and manage all user types within the Early Access Care&trade; platform.
+   Create and manage all user types within<br />the Early Access Care&trade; platform.
   </p>
   <div class="collapse ml-n3 mb-n3 mr-n3 mt-1 mark" id="showUSERstats">
    <ul class="list-group list-group-flush mb-0 small">
@@ -115,8 +115,8 @@
    </ul>
   </div>
 	</div>
- <a href="{{route('eac.portal.user.list')}}" class="btn btn-warning border-0 btn-block h5 mb-0 p-0 d-flex justify-content-between align-items-stretch">
-  <div class="p-1 pl-2 pr-2 p-xl-3 alert-warning">
+ <a href="{{route('eac.portal.user.list')}}" class="btn btn-light border-0 btn-block h5 mb-0 p-0 d-flex justify-content-between align-items-stretch">
+  <div class="p-1 pl-2 pr-2 p-xl-3 alert-light">
    {{$users->count()}}
   </div>
   <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center flex-fill">

@@ -73,10 +73,10 @@
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.eac-user-card')
- 			</div>
+ 			</div>{{-- 
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.notification-card')
- 			</div>
+ 			</div> --}}
  		</div>
   </div>
 		<div class="viewData">

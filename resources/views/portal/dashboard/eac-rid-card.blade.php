@@ -5,7 +5,7 @@
   </h4>
   <p class="flex-grow-1 mb-3">
    You do not have any requests, initiate one now </p>
-  <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-sm btn-primary">Initiate Request</a>
+  <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-sm btn-secondary">Initiate Request</a>
  </div>
 @else
  <div class="card">
@@ -16,7 +16,7 @@
    <div class="d-flex justify-content-between">
     <div class="mb-3">
      <span class="h5 mb-0 d-block">
-      <i class="fa-fw fa-lg fad fa-medkit text-primary"></i>
+      <i class="fa-fw fa-lg fad fa-medkit text-secondary"></i>
       <a class="text-dark" href="{{route('eac.portal.rid.list')}}">Requests</a>
      </span>
     </div>
@@ -25,7 +25,7 @@
     </a>
    </div>
    <p class="text-muted mb-0 small text-xl-center">
-    "Initiate New Request" initiates a drug order for investigational drug.
+    "Initiate New Request" initiates a drug order<br /> for investigational drug.
    </p>
    <div class="collapse ml-n3 mb-n3 mr-n3 mt-1 mark" id="showRIDstats">
     <ul class="list-group list-group-flush mb-0 small">
@@ -105,7 +105,7 @@
     </ul>
    </div>
   </div>
-  <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-primary border-0 btn-block h5 mb-0 p-0">
+  <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-light border-0 btn-block h5 mb-0 p-0">
    <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center">
     <span>Initiate New Request</span>
     <span class="fa-fw fas fa-lg fa-medkit"></span>
