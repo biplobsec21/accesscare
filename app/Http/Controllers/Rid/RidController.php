@@ -439,7 +439,7 @@ class RidController extends Controller
         $mail->bcc = $request->input('bcc');
         $mail->html = $request->input('html');
 
-        $this->customNotice($mail, $rid, $rid->physician);
+        $this->buildNotice($mail, $rid, collect([$rid->physician]));
 
         return redirect()->route('eac.portal.rid.show', $rid->id)->with("alert", ['type' => 'success', 'msg' => 'Letter send to physician!']);
     }
