@@ -64,8 +64,8 @@ class UserController extends PermissionsController
 	{
 		$user = User::where('id', '=', $id)->firstOrFail();
 		$access = $this->userAuth($user);
-		$rids = $this->listRidAccess($user);
-		$drugs = $this->listDrugAccess($user);
+		$rids = $this->listRidAccess($user) ?? collect([]);
+		$drugs = $this->listDrugAccess($user) ?? collect([]);
 		return view('portal.user.show', [
 			'user' => $user,
 			'access' => $access,
@@ -241,8 +241,8 @@ class UserController extends PermissionsController
         if(!$access->gate('user.index.update'))
             return $this->abortNow();
 		$userType = \App\UserType::all();
-		$rids = $this->listRidAccess($user);
-		$drugs = $this->listDrugAccess($user);
+        $rids = $this->listRidAccess($user) ?? collect([]);
+        $drugs = $this->listDrugAccess($user) ?? collect([]);
 		return view('portal.user.edit', [
 			'user' => $user,
 			'countries' => $countries,

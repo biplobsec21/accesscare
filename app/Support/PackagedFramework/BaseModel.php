@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -37,23 +36,4 @@ class BaseModel extends Model
 	 * @var bool
 	 */
 	public $timestamps = true;
-
-	/**
-	 * The table associated with the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'abilities';
-
-	/**
-	 * The prefix for the id
-	 *
-	 * @var string
-	 */
-	protected $prefix = "ABILITY";
-
-	public function gates()
-	{
-		return $this->hasMany('App\\AbilityGate');
-	}
 }
