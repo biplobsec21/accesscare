@@ -68,15 +68,21 @@
 			</a>
 			<div>
     @access('user.emulate.view')
-					<a href="{{ route('eac.auth.emu.init', $user->id) }}" class="btn btn-primary">
-						<i class="fas fa-sign-in-alt" aria-hidden="true"></i>
-						Sign In As User
-					</a>
+     @if(Auth::User()->id != $user->id)
+ 					<a href="{{ route('eac.auth.emu.init', $user->id) }}" class="btn btn-primary">
+ 						<i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+ 						Sign In As User
+ 					</a>
+     @endif
 				@endif
 				@access('user.index.update')
  				<a href="{{ route('eac.portal.user.edit', $user->id) }}" class="btn btn-info">
  					<i class="far fa-edit"></i>
- 					Edit User
+      @if(Auth::User()->id == $user->id)
+       Edit Profile Settings
+       @else
+  					Edit User
+      @endif
  				</a>
 				@endif
 			</div>

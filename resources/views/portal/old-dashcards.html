@@ -20,6 +20,7 @@
        <ul class="list-group list-group-flush mb-0 mt-1">
         @if($status_count->count() > 0)
          @foreach($status_count as $val)
+
           <li class="list-group-item small pl-2 pb-0 pr-2 pt-0 @if($val->name == 'New')text-danger @endif">
            <a href="{{route('eac.portal.rid.list','rid_status='.$val->status_id)}}">
             <div class="row m-0">

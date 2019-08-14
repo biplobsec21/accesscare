@@ -2474,8 +2474,8 @@ textarea.form-control.is-valid {
     background-color: rgba(246, 45, 81, 0.9);
 }
 
-.was-validated .form-control:invalid,
-.form-control.is-invalid {
+.was-validated .form-control:not(.border-0):invalid,
+.form-control:not(.border-0).is-invalid {
     border-color: #f62d51;
     padding-right: calc(1.5em + 0.5rem);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23f62d51' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23f62d51' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
@@ -11355,7 +11355,7 @@ body#login .card .card-footer {
 
 body#login label {
     margin: 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: 600;
 }
 
@@ -11363,7 +11363,7 @@ body#login .form-control {
     border-radius: 0;
     font-size: 0.95rem;
     font-weight: 400;
-    font-family: "Libre Baskerville";
+    /*font-family: "Libre Baskerville";*/
     padding: 0.25rem 0.5rem;
     line-height: inherit;
     height: inherit;

@@ -5,6 +5,7 @@
 @endsection
 
 @section('styles')
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
  <style>
   [class*=justify-content] > [class*=alert] {
    min-width: 70px;
@@ -21,6 +22,7 @@
 		</h3>
 		<span class="badge badge-primary d-none d-md-inline">{{\Auth::user()->type->name}}</span>
 	</div>
+
 	@if(\Auth::user()->type->name == 'Physician')
   <div class="dashCards">
  		<div class="row">
@@ -39,9 +41,7 @@
  		</div>
   </div>
 		<div class="viewData">
-			<div class="card mb-1 mb-md-4">
-				@include('portal.dashboard.rid-table')
-			</div>
+			@include('portal.dashboard.rid-table')
 		</div>
 	@endif
 	@if(\Auth::user()->type->name == 'Pharmaceutical')
@@ -59,9 +59,7 @@
  		</div>
   </div>
 		<div class="viewData">
-			<div class="card mb-1 mb-md-4">
-				@include('portal.dashboard.drug-table')
-			</div>
+			@include('portal.dashboard.drug-table')
 		</div>
 	@endif
 	@if(\Auth::user()->type->name == 'Early Access Care')
@@ -71,20 +69,18 @@
  				@include('portal.dashboard.eac-rid-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.drug-card')
+ 				@include('portal.dashboard.eac-drug-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.eac-user-card')
- 			</div>
+ 			</div>{{-- 
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.notification-card')
- 			</div>
+ 			</div> --}}
  		</div>
   </div>
 		<div class="viewData">
-			<div class="card mb-1 mb-md-4">
-				@include('portal.dashboard.shipment-table')
-			</div>
+			@include('portal.dashboard.shipment-table')
 		</div>
 	@endif
 @endsection

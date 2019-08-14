@@ -15,6 +15,32 @@
     </div>
    </div>
    <div class="flex-grow-1">
+    <div class="d-none {{-- d-xl-block --}}">
+     <ul class="nav navbar-nav mt-0 mb-0">
+      <li class="nav-item">
+       <a class="nav-link" href="{{route('eac.portal.user.show', Auth::user()->id)}}">
+        <i class="fad fa-fw fa-user-cog"></i>
+        <span>Account Settings</span>
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link toggleRight" href="#">
+        <i class="fad fa-fw fa-bell"></i>
+        <span>Notifications</span>
+        @if(Auth::user()->notifications()->count() > 0 )
+         <strong class="badge badge-primary">{{Auth::user()->notifications()->count()}}</strong>
+        @endif
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link text-white btn btn-warning" href="{{route('eac.auth.logout')}}">
+        <i class="fad fa-fw fa-sign-out-alt"></i>
+        <span>Logout</span>
+       </a>
+      </li>
+     </ul>
+    </div>
+    <hr class="m-3 d-none">
     @include('include/portal/navigation')
    </div>
    <div class="d-flex align-items-end">
@@ -38,7 +64,7 @@
     <hr/>
    </div>
    <div class="overlay"></div>
-   <nav id="TopNav" class="navbar navbar-expand navbar-light row align-items-center">
+   <nav id="TopNav" class="navbar navbar-expand navbar-light row align-items-center flex-wrap">
     <div class="col-auto d-xl-none">
      <img src="{{asset('/images/logo-enhanced.png')}}" class="img-fluid" style="height: 53px"/>
     </div>
@@ -47,50 +73,22 @@
       <i class="fas fa-bars"></i>
      </a>
     </div>
-    <div class="col-auto ml-auto">
-     <div class="d-flex justify-content-between">
-      <a class="text-dark mr-3 mr-md-4" data-toggle="collapse" href="#dispVP" role="button" aria-expanded="false" aria-controls="dispVP">
-       <i class="fal fa-crop-alt"></i>
-       Viewport
-       <span class="badge badge-danger">temp</span>
+    <div class="col-auto ml-auto {{-- d-xl-none --}} p-0">
+     <div class="d-flex flex-row flex-wrap align-items-center justify-content-between">
+      <a class="ml-3 mr-3 d-flex align-items-center btn-link btn-sm " href="{{route('eac.portal.user.show', Auth::user()->id)}}">
+       <i class="fad d-none d-md-inline fa-user-cog mr-1"></i>
+       Account Settings
       </a>
-      <div class="dropdown">
-       <a class="text-info " href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-user text-primary"></i>
-        {{--@if(session('is_emulating'))--}}
-        {{--<span>--}}
-        {{--{{session()->get('emu_data.origin.full_name')}}--}}
-        {{--</span>--}}
-        {{--@else--}}
-        {{--<span>--}}
-        {{--{{(isset(Auth::user()->title))? config('eac.user.availableTitle')[Auth::user()->title] : ''}} {{Auth::user()->full_name}}--}}
-        {{--</span>--}}
-        {{--@endif--}}
-        <span>Profile</span>
-       </a>
-       <div class="dropdown-menu" aria-labelledby="userMenu">
-        <a class="dropdown-item" href="{{route('eac.portal.user.show', Auth::user()->id)}}">
-         <i class="far fa-cog fa-fw"></i>
-         Settings
-        </a>
-        <a class="dropdown-item" href="#">
-         <i class="far fa-clipboard-list fa-fw"></i>
-         Activity Log
-        </a>
-        <a class="dropdown-item" href="{{route('eac.auth.logout')}}">
-         <i class="far fa-sign-out-alt fa-fw"></i>
-         Logout
-        </a>
-       </div>
-      </div>
-      <a class="text-info toggleRight ml-3 ml-md-4" href="#">
-       
-       @php $allnotification = \App\Notification::where('user_id','=',(Auth::user()->id))->where('read_at', null)->count(); @endphp
-       <i class="fas fa-bell text-primary"></i>
+      <a class="ml-3 mr-3 d-flex align-items-center btn-link btn-sm toggleRight" href="#">
+       <i class="fad d-none d-md-inline fa-bell mr-1"></i>
        Notifications
-       @if($allnotification > 0 )
-        <strong class="badge badge-success">{!! $allnotification !!}</strong>
+       @if(Auth::user()->notifications()->count() > 0 )
+        <strong class="badge badge-primary">{{Auth::user()->notifications()->count()}}</strong>
        @endif
+      </a>
+      <a class="ml-3 mr-3 btn btn-sm btn-warning" href="{{route('eac.auth.logout')}}">
+       <i class="fad fa-sign-out-alt"></i>
+       Logout
       </a>
      </div>
     </div>
@@ -129,26 +127,6 @@
     </div>
    @endif
    <div class="container-fluid flex-grow-1" id="cc_main">
-    <div class="collapse" id="dispVP">
-     <div class="bg-light p-2 text-center">
-      Current viewport size:
-      <small class="text-danger d-none d-xl-inline-block">
-       XL ( &gt;1200px )
-      </small>
-      <small class="text-danger d-none d-lg-inline-block d-xl-none">
-       LARGE ( 992px - 1199px )
-      </small>
-      <small class="text-danger d-none d-md-inline-block d-lg-none">
-       MEDIUM ( 768px - 991px )
-      </small>
-      <small class="text-danger d-none d-sm-inline-block d-md-none">
-       SMALL ( 576px - 767px )
-      </small>
-      <small class="text-danger d-sm-none">
-       base/xsmall ( &lt;575px )
-      </small>
-     </div>
-    </div>
     <div id="pcont">
      @if (session('confirm'))
       <div class="alert alert-success">

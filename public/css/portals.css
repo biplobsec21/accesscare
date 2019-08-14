@@ -259,7 +259,7 @@ button[class*=text-] {
   color: #96d3ff;
  }
  #TopNav, .sidebar #brand {
-  height: var(--TNheight);
+  min-height: var(--TNheight);
  }
  .sidebar #brand {
   padding: 0 .75rem .5rem;
@@ -494,126 +494,6 @@ h4 .badge, .h4.badge {
 .custom-select {
  min-height: calc(2.25rem + 2px);
 }
-
-.notifications .date span {
- display: block;
- min-width: 5vw;
-}
-.notifications .table tbody td,
-.notifications .table tbody th {
- padding: .25rem .5rem;
- border-bottom: 1px solid #ccc;
-}
-
-.notifications .table tbody td a:not(.btn),
-.notifications .table tbody th a:not(.btn) {
- font-weight: 600;
- color: #034F83;
-}
-.notifications .table tbody tr td:first-child {
- padding-left: 1.25rem;
-}
-.notifications .table tbody tr td:first-child:before {
- content: '';
- position: absolute;
- width: 20px;
- height: 20px;
- line-height: 20px;
- font-size: 20px;
- text-align: center;
- color: #F79223;
- font-weight: 900;
- font-family: 'Font Awesome 5 Pro';
- content: '\f321';
- border-radius: 50%;
- left: -8px;
- margin: .15rem 0 0;
-}
-.notifications .table tbody tr.read td:first-child:before {
- content: '\f00c';
- color: green;
- font-weight: 500;
- left: -7px;
-}
-.notifications .table tbody tr:nth-child(5n) td,
-.notifications .table tbody tr:nth-child(5n) th,
-.notifications .table tbody tr:last-child td,
-.notifications .table tbody tr:last-child th{
- border-bottom: 0;
-}
-.notifications .table tbody tr.read {
- opacity: .5;
-}
-.notifications .table tbody tr.read td a:not(.btn),
-.notifications .table tbody tr.read th a:not(.btn) {
- font-weight: 400;
-}
-
-.notifications .table tbody tr.read:hover {
- opacity: 1;
-}
-.notifications .dataTables_wrapper {
- position: relative;
- margin-left: -.5rem;
- margin-right: -.5rem;
-}
-.card.notifications {
- margin-bottom:2rem;
-}
-.card.notifications .dataTables_wrapper .row:first-of-type {
- margin: -35px 0 0!important;
- border-bottom: 0!important;
- background-color: transparent;
-}
-.card.notifications .dataTables_wrapper .row:last-of-type {
- margin: 0 0 -.5rem!important;
- background-color:rgba(137,196,67,.15);
- border-top: 1px solid rgba(137,196,67,.5);
- padding-top: .5rem;
- padding-bottom: .5rem;
-}
-.card.notifications .dataTables_wrapper .row:last-of-type [class*=col],
-.card.notifications .dataTables_wrapper .row:last-of-type [class*=col]:first-of-type:not(:empty) {
- flex-basis: unset;
-}
-.card.notifications .dataTables_wrapper .row:last-of-type [class*=col]:first-of-type {
- display: none
-}
-.card.notifications .dataTables_wrapper .row:last-of-type [class*=col]:last-of-type {
- position: relative;
-}
-.card.notifications .dataTables_wrapper .row:first-of-type [class*=col],
-.card.notifications .dataTables_wrapper .row:first-of-type [class*=col]:nth-of-type(2):not(:empty) {
- padding: 0!important;
- flex-basis: unset;
- -ms-flex: 0 0 100%;
- flex: 0 0 100%;
- max-width: 100%;
-}
-.notifications .dataTables_wrapper .dataTables_length {
- text-align: right;
- padding: .25rem .5rem;
-}
-.notifications .dataTables_wrapper .dataTables_filter {
- padding: .25rem .5rem;
- margin: 0;
- border-bottom: 1px solid rgba(137,196,67,.5);
- background-color:rgba(137,196,67,.15);
- text-align: left;
-}
-
-.notifications .dataTables_wrapper .dataTables_info {
- margin-bottom: 0;
- padding: 0;
-}
-.notifications .dataTables_wrapper .dataTables_paginate {
- margin-bottom: 0!important;
-}
-.notifications div.dataTables_wrapper div.dataTables_paginate ul.pagination {
- margin: 0;
- justify-content: flex-start;
-}
-
 .fixt-height ::-webkit-scrollbar {
  width: 4px;
 }
@@ -707,7 +587,7 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
 
 #TopNav.navbar {
  position: relative;
- z-index: 5;
+ z-index: 0;
  margin-left: 0;
  margin-right: 0;
  background: transparent;
@@ -848,7 +728,7 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
  /* - - - /end .sidebar - - - */
  /* - - - .rightSide - - - */
    .rightSide {
-    z-index: 5;
+    z-index: 25;
     position: absolute;
     top: 70px;
     right: 0;
@@ -913,10 +793,13 @@ tr[class*=bg-]:not(.bg-light) a:not(.btn) {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 5; /* Specify a stack order in case you're using a different order for other elements */
+    z-index: 10; /* Specify a stack order in case you're using a different order for other elements */
     }
    body.ShowASide #wrapper #content-wrapper {
     overflow: hidden;
+   }
+   body.ShowASide #TopNav, body.ShowASide #cc_main {
+    pointer-events: none;
    }
  /* - - - /end .rightSide - - - */
 /* = = = = structure elements = = = = */
