@@ -9,14 +9,18 @@
 	</div>
 @else
 	<div class="card">
-  <div class="bg-danger text-white p-2 small">
-   <a href="{{route('eac.portal.drug.list')}}" class="text-white"><span class="fas fa-exclamation-triangle text-warning"></span> 5 Pending Drugs</a>
+  <div class="poppins bg-gradient-primary text-white p-2 small">
+   <span class="fa-check-circle fad fa-fw fa-lg"></span> No Pending Drugs
   </div>
+  {{-- <div class="poppins bg-gradient-warning text-dark p-2 small">
+   <span class="fa-exclamation-triangle fad fa-fw fa-lg"></span> <a href="{{route('eac.portal.drug.list')}}" class="text-dark">5 Pending Drugs</a>
+  </div> --}}
 		<div class="card-body">
    <div class="d-flex justify-content-between">
     <div class="mb-3">
      <span class="h5 mb-0 d-block">
       <i class="fa-fw fa-lg fad fa-prescription-bottle-alt text-secondary"></i>
+      <strong>{{$drugs->count()}}</strong>
       <a class="text-dark" href="{{route('eac.portal.drug.list')}}">Investigative Drugs</a>
      </span>
     </div>
@@ -25,9 +29,9 @@
     </a>
    </div>
 			<p class="text-muted mb-0 small text-xl-center">
-				Manage the investigative drugs available within<br />the Early Access Care&trade; platform
+				Manage the investigative drugs available within the platform
    </p>
-   <div class="collapse ml-n3 mb-n3 mr-n3 mt-1 mark" id="showDRUGstats">
+   <div class="collapse ml-n3 mr-n3 mt-1 mark" id="showDRUGstats">
     <ul class="list-group list-group-flush mb-0 small">
      <li class="list-group-item pt-1 pb-1">
       <a href="{{route('eac.portal.drug.list')}}">
@@ -73,14 +77,17 @@
      </li>
     </ul>
    </div>
-		</div>
-  <a href="{{route('eac.portal.drug.list')}}" class="btn btn-light border-0 btn-block h5 mb-0 p-0 d-flex justify-content-between align-items-stretch">
-   <div class="p-1 pl-2 pr-2 p-xl-3 alert-light">
-    {{$drugs->count()}}
+   <div class="mt-3 d-flex justify-content-between flex-wrap">
+    <div><!-- empty --></div>
+    <a class="btn btn-link btn-sm" href="{{route('eac.portal.drug.list')}}">
+     View All Drugs <span class="fal fa-long-arrow-right"></span>
+    </a>
    </div>
-   <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center flex-fill">
-    <span>Investigative Drugs</span>
-    <span class="fa-fw fas fa-lg fa-prescription-bottle-alt"></span>
+		</div>
+  <a href="{{ route('eac.portal.drug.create') }}" class="btn btn-light border-0 btn-block h5 mb-0 p-0">
+   <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center">
+    <span>Add New Drug</span>
+    <span class="fa-fw fad fa-lg fa-prescription-bottle-alt"></span>
    </div>
   </a>
 	</div>

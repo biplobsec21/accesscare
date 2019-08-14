@@ -9,14 +9,20 @@
  </div>
 @else
  <div class="card">
-  <div class="bg-danger text-white p-2 small">
-   <a href="{{route('eac.portal.rid.list')}}" class="text-white"><span class="fas fa-exclamation-triangle text-warning"></span> 8 New Requests</a>
-  </div>
+  {{-- <div class="poppins bg-gradient-primary text-white p-2 small">
+   <span class="fa-check-circle fad fa-fw fa-lg"></span> <a href="{{route('eac.portal.rid.list')}}" class="text-white">No New Requests</a>
+  </div> --}}
+  <a href="{{route('eac.portal.user.list')}}" class="text-dark">
+   <div class="poppins bg-gradient-warning p-2 small">
+    <span class="fa-exclamation-triangle fad fa-fw fa-lg"></span> 8 New Requests
+   </div>
+  </a>
   <div class="card-body">
    <div class="d-flex justify-content-between">
     <div class="mb-3">
      <span class="h5 mb-0 d-block">
       <i class="fa-fw fa-lg fad fa-medkit text-secondary"></i>
+      <strong>{{$rids->count()}}</strong>
       <a class="text-dark" href="{{route('eac.portal.rid.list')}}">Requests</a>
      </span>
     </div>
@@ -25,9 +31,9 @@
     </a>
    </div>
    <p class="text-muted mb-0 small text-xl-center">
-    "Initiate New Request" initiates a drug order<br /> for investigational drug.
+    "Initiate New Request" initiates a drug order for investigational drug.
    </p>
-   <div class="collapse ml-n3 mb-n3 mr-n3 mt-1 mark" id="showRIDstats">
+   <div class="collapse ml-n3 mr-n3 mt-1 mark" id="showRIDstats">
     <ul class="list-group list-group-flush mb-0 small">
      @if($rids->count() > 0)
       <li class="list-group-item pt-1 pb-1 text-danger">
@@ -104,11 +110,17 @@
      @endif
     </ul>
    </div>
+   <div class="mt-3 d-flex justify-content-between flex-wrap">
+    <div><!-- empty --></div>
+    <a class="btn btn-link btn-sm" href="{{route('eac.portal.rid.list')}}">
+     View All Requests <span class="fal fa-long-arrow-right"></span>
+    </a>
+   </div>
   </div>
   <a href="{{ route('eac.portal.rid.create') }}" class="btn btn-light border-0 btn-block h5 mb-0 p-0">
    <div class="p-1 pl-2 pr-2 p-xl-3 d-flex justify-content-between align-items-center">
     <span>Initiate New Request</span>
-    <span class="fa-fw fas fa-lg fa-medkit"></span>
+    <span class="fa-fw fad fa-lg fa-medkit"></span>
    </div>
   </a>
  </div>
