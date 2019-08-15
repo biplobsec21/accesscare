@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\RidGroup;
 use App\Support\GenerateID;
 use App\UserGroup;
 use Config;
@@ -65,6 +66,7 @@ use libphonenumber\PhoneNumberUtil;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Rinvex\Country\CountryLoaderException;
 use Storage;
+use Illuminate\Http\File as HttpFile;
 
 /**
  * Class DBMigrate
@@ -131,7 +133,7 @@ class DBMigrate extends Command
 
         $this->assignArguments();
         $this->clearLocalDB();
-        //$this->resetStorage();
+        $this->resetStorage();
 
         $this->info('Database reseting...');
         $this->db_reset();
@@ -193,17 +195,13 @@ class DBMigrate extends Command
         $this->handleNotes();
         $this->info('RID Notes Migrated!');
 
-        $this->info('Retrieving Notifications...');
-        $this->handleNotifications();
-        $this->info('Notifications Migrated!');
+        //$this->info('Retrieving Notifications...');
+        //$this->handleNotifications();
+        //$this->info('Notifications Migrated!');
 
-        $this->info('Retrieving User Certificate...');
-        $this->handleUserCertificates();
-        $this->info('User Certificate Migrated!');
-
-        $this->info('Retrieving Drug Resources...');
-        $this->handleResource();
-        $this->info('Drug Resources Migrated!');
+//        $this->info('Retrieving User Certificate...');
+//        $this->handleUserCertificates();
+//        $this->info('User Certificate Migrated!');
 
 //        $this->info('Sync depot merge data');
 //        $this->handleDepotMerge();
@@ -245,7 +243,7 @@ class DBMigrate extends Command
         if ($devscript)
             return $devscript->new_id;
 
-        if ($old == null && $new == null)
+        if ($old == null || $new == null)
             return null;
 
         $old_value = DB::connection($this->from['name'])->table($old[0])->where($old[0] . '_id', $old_id)->first();
@@ -299,9 +297,24 @@ class DBMigrate extends Command
         $this->to['tables'] = $this->describeDatabase($this->to['name']);
     }
 
-    public function getFile(){
+    public function getFile($file_name, $old_folder, $type)
+    {
+        $file = new FileModel();
+        $file->id = $this::newID(FileModel::class);
 
+        $url = "https://www.earlyaccesscare.com/uploads/" . $old_folder . "/" . $file_name;
+        $url = str_replace(' ', '%20', $url);
+        $filename = config('eac.storage.name.' . $type) . $file->id . '.pdf';
+        $dir = config('eac.storage.file.' . $type);
+        $contents = file_get_contents($url);
+        Storage::put('public' . $dir . '/' . $filename, $contents);
+
+        $file->name = $filename;
+        $file->path = $dir;
+        $file->saveOrFail();
+        return $file;
     }
+
     public function db_reset()
     {
         //$tables = DB::connection('mysql')->select('SHOW TABLES');
@@ -459,9 +472,9 @@ class DBMigrate extends Command
 
     protected function resetStorage()
     {
-        Storage::deleteDirectory('drug');
-        Storage::deleteDirectory('user');
-        Storage::deleteDirectory('rid');
+        Storage::deleteDirectory('public/drug');
+        Storage::deleteDirectory('public/user');
+        Storage::deleteDirectory('public/rid');
     }
 
     public function handleCountries()
@@ -1018,13 +1031,7 @@ class DBMigrate extends Command
             $drugDocumentTypeModel->is_document = true;
             $drugDocumentTypeModel->active = true;
             $drugDocumentTypeModel->name = trim($drugDocumentType->drug_doc_type_name);
-
-            $foundNotFound = DocumentType::where('name', '=', $drugDocumentTypeModel->name)->first();
-            if (empty($foundNotFound) && !isset($foundNotFound->name)) {
-                $drugDocumentTypeModel->saveOrFail();
-            } else {
-                $__IDLOGGER->id_new = $foundNotFound->id;
-            }
+            $drugDocumentTypeModel->saveOrFail();
 
             $__IDLOGGER->saveOrFail();
 
@@ -1144,7 +1151,6 @@ class DBMigrate extends Command
         foreach ($drugResources as $drugResource) {
             $__IDLOGGER = new DEVUPDATESCRIPTTABLE();
             $resourceModel = new Resource();
-            $fileModel = new FileModel();
 
             $__IDLOGGER->table_name = $oldTable;
             $__IDLOGGER->id_old = $drugResource->drug_res_id;
@@ -1152,23 +1158,14 @@ class DBMigrate extends Command
             if (!$drugResource->drug_res_file)
                 continue;
 
+            $file = $this->getFile($drugResource->drug_res_file, 'drug_res', 'drug.resource');
+
             $resourceModel->id = $__IDLOGGER->id_new = $this::newID(Resource::class);
-            $fileModel->id = $resourceModel->file_id = $this::newID(FileModel::class);
+            $resourceModel->file_id = $file->id;
 
             $resourceModel->drug_id = $this->getNewID($drugResource->drug_id);
             $resourceModel->type_id = $this->getNewID($drugResource->drug_res_type_id);
             $resourceModel->name = $drugResource->drug_res_file_title;
-
-            $fileModel->path = config('eac.storage.file.drug.resource');
-            $first_character = mb_substr($drugResource->drug_res_file, 0, 1);
-            $str = $drugResource->drug_res_file;
-            if ($first_character == '_') {
-                $str = ltrim($drugResource->drug_res_file, '_');
-            }
-
-            $fileModel->name = $str;
-            // dd($fileModel->path);
-            // Storage::disk('local')->put($fileModel->path . '/' . $drugResource->drug_res_file, Storage::disk('eac_old_fs')->get(config('eac.old_storage.file.drug.resource') . '/' . $drugResource->drug_res_file));
 
             $resourceModel->public = $drugResource->drug_res_public;
             $resourceModel->active = $drugResource->drug_res_active;
@@ -1177,7 +1174,6 @@ class DBMigrate extends Command
 
             $__IDLOGGER->saveOrFail();
             $resourceModel->saveOrFail();
-            $fileModel->saveOrFail();
             $bar->advance();
         }
         $bar->finish();
@@ -1292,13 +1288,14 @@ class DBMigrate extends Command
 
             $drugDocumentModel->id = $__IDLOGGER->id_new = $this::newID(DrugDocument::class);
             try {
-                $drugDocumentModel->drug_id = $this->getNewID($drugDocument->drug_id);
+                $drugDocumentModel->drug_id = DEVUPDATESCRIPTTABLE::where(['table_name' => 'drug', 'id_old' => $drugDocument->drug_id])->firstOrFail()->id_new;
             } catch (ModelNotFoundException $modelNotFoundException) {
                 $this->info($drugDocument->drug_id);
-                continue 1;
+                continue;
             }
+
             try {
-                $drugDocumentModel->type_id = $this->getNewID($drugDocument->drug_doc_type_id);
+                $drugDocumentModel->type_id = DEVUPDATESCRIPTTABLE::where(['table_name' => 'drug_doc_type', 'id_old' => $drugDocument->drug_doc_type_id])->firstOrFail()->id_new;
             } catch (\Exception $e) {
                 $drugDocumentModel->type_id = null;
             }
@@ -1311,11 +1308,8 @@ class DBMigrate extends Command
             $drugDocumentModel->is_required_resupply = $drugDocument->drug_doc_req_rs;
 
             if (!is_null($drugDocument->drug_doc_file)) {
-                $fileModel = new FileModel();
-                $drugDocumentModel->file_id = $fileModel->id = $this::newID(FileModel::class);
-                $fileModel->path = config('eac.storage.file.drug.doc');
-                $fileModel->name = config('eac.storage.name.drug.doc') . $fileModel->id . '_' . date('Ymd') . '.pdf';
-                $fileModel->saveOrFail();
+                $file = $this->getFile($drugDocument->drug_doc_file, 'drug_doc', 'drug.doc');
+                $drugDocumentModel->file_id = $file->id;
             }
 
             $drugDocumentModel->created_at = $drugDocument->drug_doc_added;
@@ -1853,13 +1847,15 @@ class DBMigrate extends Command
 
             // file
             if (!is_null($ridDocument->drug_doc_upload_file)) {
-                $file = $this->getFile($ridDocument->drug_doc_upload_file);
+                $file = $this->getFile($ridDocument->drug_doc_upload_file, 'drug_doc_upload', 'rid.doc');
+                $ridDocumentModel->file_id = $file->id;
             } else {
                 $ridDocumentModel->file_id = null;
             }
             // redacted
             if (!is_null($ridDocument->drug_doc_upload_file_redacted)) {
-                $file = $this->getFile($ridDocument->redacted_file_id);
+                $file = $this->getFile($ridDocument->drug_doc_upload_file_redacted, 'drug_doc_upload', 'rid.redacted');
+                $ridDocumentModel->redacted_file_id = $file->id;
             } else {
                 $ridDocumentModel->redacted_file_id = null;
             }
@@ -1882,7 +1878,6 @@ class DBMigrate extends Command
 
         $oldTable = 'resupply_drug_doc';
         $resupplyDocuments = DB::connection($this->from['name'])->table($oldTable)->get();
-        // dd($resupplyDocuments);
         $bar = $this->output->createProgressBar(count($resupplyDocuments));
         $bar->setBarWidth(2000);
         $bar->start();
@@ -1905,20 +1900,14 @@ class DBMigrate extends Command
             $drugDoc = DrugDocument::where('id', $drugDocID)->first();
 
             if (!is_null($ridDocument->resupply_drug_doc_file)) {
-                $fileModel = new FileModel();
-                $ridDocumentModel->file_id = $fileModel->id = $this::newID(FileModel::class);
-                $fileModel->path = config('eac.storage.file.rid.doc');
-                $fileModel->name = config('eac.storage.name.rid.doc') . $fileModel->id . '_' . date('Ymd') . '.pdf';
-                $fileModel->saveOrFail();
+                $file = $this->getFile($ridDocument->resupply_drug_doc_file, 'resupply_drug_doc', 'rid.doc');
+                $ridDocumentModel->file_id = $file->id;
             } else {
                 $ridDocumentModel->file_id = null;
             }
             if (!is_null($ridDocument->resupply_drug_doc_file_redacted)) {
-                $fileModel = new FileModel();
-                $ridDocumentModel->redacted_file_id = $fileModel->id = $this::newID(FileModel::class);
-                $fileModel->path = config('eac.storage.file.rid.redacted');
-                $fileModel->name = config('eac.storage.name.rid.redacted') . $fileModel->id . '_' . date('Ymd') . '.pdf';
-                $fileModel->saveOrFail();
+                $file = $this->getFile($ridDocument->resupply_drug_doc_file, 'resupply_drug_doc', 'rid.redacted');
+                $ridDocumentModel->redacted_file_id = $file->id;
             } else {
                 $ridDocumentModel->redacted_file_id = null;
             }
@@ -1972,33 +1961,42 @@ class DBMigrate extends Command
 
     protected function handleRIDUsers()
     {
-        return;
         $oldTable = 'physician_user_rid';
-        $ridUsers = DB::connection($this->from['name'])->table($oldTable)->get()->group_by('rid_id');
-        $bar = $this->output->createProgressBar(count($ridUsers));
+        $ridUserGroups = DB::connection($this->from['name'])->table($oldTable)->get()->groupBy('rid_id');
+        $bar = $this->output->createProgressBar(count($ridUserGroups));
         $bar->setBarWidth(2000);
         $bar->start();
-        foreach ($ridUsers as $ridUser) {
+        foreach ($ridUserGroups as $rid_id => $ridUserGroup) {
+            $rid = Rid::where('id', '=', DEVUPDATESCRIPTTABLE::where(['table_name' => 'rid', 'id_old' => $rid_id])->first()->id_new ?? null )->first() ?? null;
 
-            $user = User::where('id', '=', DEVUPDATESCRIPTTABLE::where(['table_name' => 'physician_user', 'id_old' => $ridUser->physician_user_rid_assigned_to])->first()->id_new)->first() ?? null;
-            $rid = Rid::where('id', '=', DEVUPDATESCRIPTTABLE::where(['table_name' => 'rid', 'id_old' => $ridUser->rid_id])->first()->id_new)->first() ?? null;
+            if ($rid) {
+                $group = new UserGroup();
+                $group->id = $this::newID(UserGroup::class);
+                $group->type_id = UserType::where('name', 'Physician')->first()->id;
+                $group->parent_user_id = $rid->physician->id ?? false;
+                $group->name = 'Rid Group: ' . $rid->number;
+                $users = collect([]);
+                foreach ($ridUserGroup as $ridUser) {
+                    $usr = DEVUPDATESCRIPTTABLE::where('id_old', $ridUser->physician_user_rid_assigned_to)->first()->id_new ?? false;
+                    $role = Role::where('id_old', $ridUser->physician_user_type_id)->first()->id ?? false;
 
-            if ($user && $rid) {
-                $__IDLOGGER = new DEVUPDATESCRIPTTABLE();
-                $userGroup = new UserGroup();
-
-                $userGroup->id = $this::newID();
-                $userGroup->parent_user_id = $rid->physician->id;
-                $userGroup->name = $rid->number;
-
-                $__IDLOGGER->table_name = $oldTable;
-                $__IDLOGGER->id_old = $ridUser->physician_user_rid_id;
-
-
-                $__IDLOGGER->saveOrFail();
-                $ridUserModel->saveOrFail();
+                    if($usr && $role) {
+                        $member = new \stdClass();
+                        $member->id = $usr;
+                        $member->role = $role;
+                        $users->push($member);
+                    }
+                }
+                $group->group_members = $users->toJson();
+                $group->saveOrFail();
+                $ridGroup = new RidGroup();
+                $ridGroup->id = $this->newID(RidGroup::class);
+                $ridGroup->rid_id = $rid->id;
+                $ridGroup->user_group_id = $group->id;
+                $ridGroup->saveOrFail();
             }
-            $userGroup->advance();
+
+            $bar->advance();
         }
         $bar->finish();
     }
@@ -2283,42 +2281,14 @@ class DBMigrate extends Command
                 $crt->user_id = null;
             }
             // store cv_file file and give reference
-            if (!is_null($phy->physician_user_cv)) {
-                $fileModel = new FileModel();
-                $crt->cv_file = $fileModel->id = $this::newID(FileModel::class);
-
-                $fileModel->path = config('eac.storage.file.user');
-                $fileModel->name = config('eac.storage.name.user') . $fileModel->id . '_' . date('Ymd') . '.pdf';
-
-                $first_character = mb_substr($phy->physician_user_cv, 0, 1);
-                $str = $phy->physician_user_cv;
-                if ($first_character == '_') {
-                    $str = ltrim($phy->physician_user_cv, '_');
-                }
-
-                $fileModel->name = $str;
-                $fileModel->saveOrFail();
+            if ($phy->physician_user_cv) {
+                $file = $this->getFile($phy->physician_user_cv, 'physician', 'user.cv');
+                $crt->cv_file = $file->id;
             }
-
-            if (!is_null($phy->physician_user_medical_license)) {
-                $fileModel2 = new FileModel();
-                $crt->license_file = $fileModel2->id = $this::newID(FileModel::class);
-
-                $fileModel2->path = config('eac.storage.file.user');
-                $fileModel2->name = config('eac.storage.name.user') . $fileModel2->id . '_' . date('Ymd') . '.pdf';
-
-                $first_character = mb_substr($phy->physician_user_medical_license, 0, 1);
-                $str2 = $phy->physician_user_medical_license;
-                if ($first_character == '_') {
-                    $str2 = ltrim($phy->physician_user_medical_license, '_');
-                }
-
-                $fileModel2->name = $str2;
-                $fileModel2->saveOrFail();
+            if ($phy->physician_user_medical_license) {
+                $file = $this->getFile($phy->physician_user_medical_license, 'physician', 'user.cv');
+                $crt->license_file = $file->id;
             }
-            // store license_file file and give reference
-            // $crt->cv_file = $phy->physician_user_cv;
-            // $crt->license_file = $phy->physician_user_medical_license;
 
             $crt->user_signature = $phy->physician_user_signatures;
             $crt->created_at = $phy->physician_user_added;
@@ -2399,9 +2369,6 @@ class DBMigrate extends Command
     // 	}
     // 	$bar->finish();
     // }
-    public function handleDrugDocumentUpload()
-    {
-    }
 
     public function handleRidNotApprovedReason()
     {
