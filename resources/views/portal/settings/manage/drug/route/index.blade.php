@@ -30,13 +30,13 @@
  @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fas fa-prescription-bottle"></i>
+   <i class="fad fa-fw fa-plus-square"></i>
    Add New
-  </a>
+  </a>{{-- 
   <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
    <i class="fal fa-key"></i>
    Change Log
-  </a>
+  </a> --}}
  </div><!-- end .actionBar -->
  
  <div class="viewData">

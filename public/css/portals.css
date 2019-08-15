@@ -15,6 +15,9 @@ body {
  font-weight: 400;
  font-family: 'Roboto';
 }
+.poppins.small, .poppins small, small .poppins {
+ font-weight: 500;
+}
 
 .infinite {
  animation-iteration-count: infinite;
@@ -1576,6 +1579,14 @@ div.dataTables_wrapper div.dataTables_info {
 #pcont > .titleBar {
  padding: .5rem 0;
 }
+.titleBar h1, .titleBar .h1,
+.titleBar h2, .titleBar .h2,
+.titleBar h3, .titleBar .h3,
+.titleBar h4, .titleBar .h4,
+.titleBar h5, .titleBar .h5,
+.titleBar h6, .titleBar .h6 {
+ font-family: 'Poppins';
+}
 
 .instructions {
  border: 1px solid #e2b98c;
@@ -2081,4 +2092,15 @@ table.dataTable>tfoot .form-control:focus, table.dataTable>tfoot .form-control.f
   }
  }
 /* = = = //END custom checkbox = = = */
-
+[class*=alert] > .boxcon, [class*=card] > .boxcon {
+ position: absolute;
+ display: block;
+ left: 5%;
+ z-index: 0;
+ font-size: 800%;
+ opacity: .15;
+}
+[class*=alert] + [class*=btn], [class*=card] + [class*=btn], .boxcon ~ * {
+ z-index: 1;
+ position: relative;
+}

@@ -30,7 +30,7 @@ Shipping Courier Manager
  @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fal fa-shipping-fast"></i> Add New
+   <i class="fad fa-fw fa-plus-square"></i> Add New
   </a>
   <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
    <i class="fal fa-key"></i> Change Log

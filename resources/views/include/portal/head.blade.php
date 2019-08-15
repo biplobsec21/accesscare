@@ -83,7 +83,7 @@
        <i class="fad d-none d-md-inline fa-bell mr-1"></i>
        Notifications
        @if(Auth::user()->notifications()->count() > 0 )
-        <strong class="badge badge-primary">{{Auth::user()->notifications()->count()}}</strong>
+        <strong class="ml-1 badge-pill badge badge-primary">{{Auth::user()->notifications()->count()}}</strong>
        @endif
       </a>
       <a class="ml-3 mr-3 btn btn-sm btn-warning" href="{{route('eac.auth.logout')}}">

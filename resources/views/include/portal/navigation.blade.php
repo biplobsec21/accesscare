@@ -14,7 +14,7 @@
 	</li>
 	<li class="nav-item dropdown">
 		<a href="{{route('eac.portal.drug.list')}}" class="nav-link">
-			<i class="fa-fw text-primary fad fa-prescription-bottle-alt"></i>
+			<i class="fa-fw text-primary fad fa-capsules"></i>
 			<span>Drugs</span>
 		</a>
 	</li>
@@ -64,10 +64,10 @@
 		</div>
 	</li>
 	<li class="nav-item">
-		<a href="#" class="nav-link">
-			<i class="fa-fw text-primary fad fa-files-medical"></i>
-			<span>Reports</span>
-		</a>
+  <a href="{{route('reports')}}" class="nav-link">
+   <i class="fa-fw text-primary fad fa-files-medical"></i>
+   <span>Reports</span>
+  </a>
 	</li>
 	<li class="nav-item">
 		<a href="{{route('eac.portal.settings')}}" class="nav-link @IndexTab('supporting')">

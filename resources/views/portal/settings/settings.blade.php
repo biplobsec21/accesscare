@@ -67,7 +67,7 @@
 					<div class="col-sm-6 col-md-12">
 						<div class="card card-body mb-3 mb-xl-5">
 							<h5 class="mb-2">
-								<i class="text-secondary fas fa-prescription-bottle-alt"></i>
+								<i class="text-secondary fas fa-capsules"></i>
 								Drugs
 							</h5>
 							<ul class="list-unstyled ml-4 mb-0">
