@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings\Manage\Website;
 
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use App\Menu;
 use App\Page;
@@ -12,7 +13,7 @@ use File;
 
 
 class WebsiteMenuController extends Controller {
-
+    use Logger;
     public $_data = [
         // route load
         'editButton' => 'eac.portal.settings.manage.website.menu.edit',

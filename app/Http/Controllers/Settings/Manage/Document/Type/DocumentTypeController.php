@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings\Manage\Document\Type;
 
 use App\Http\Requests\Document\CreateRequest;
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\DocumentType;
@@ -19,6 +20,7 @@ use Validator;
  */
 class DocumentTypeController extends Controller
 {
+    use Logger;
 	public $_data = [
 		// route load
 		'editButton' => 'eac.portal.settings.document.type.edit',

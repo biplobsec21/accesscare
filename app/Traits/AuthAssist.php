@@ -379,7 +379,7 @@ trait AuthAssist
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
-        if ($access->gate('pharmacist.index.edit'))
+        if ($access->gate('pharmacist.index.update'))
             return true;
         else
             return $this->abortNow();
@@ -397,7 +397,7 @@ trait AuthAssist
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
-        if ($access->gate('depot.index.edit'))
+        if ($access->gate('depot.index.update'))
             return true;
         else
             return $this->abortNow();
@@ -415,7 +415,7 @@ trait AuthAssist
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
-        if ($access->gate('lot.index.edit'))
+        if ($access->gate('lot.index.update'))
             return true;
         else
             return $this->abortNow();

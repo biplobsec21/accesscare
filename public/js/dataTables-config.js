@@ -45,6 +45,10 @@
                 $(this).html('');
                 return;
             }
+            if ($(this).hasClass("no-search")) {
+                $(this).html('');
+                return;
+            }
             $(this).html('<input type="text" class="form-control" placeholder="Search ' + $(this).text() + '" />');
             $('input', this).on('change', function () {
                 if ($(this).closest('table').DataTable().column(i).search() !== this.value)
@@ -69,7 +73,7 @@
             // console.log(helpPage);
             // console.log(message);
         };
-
+        $('.dataTables_filter').hide();
         return dataTable;
     };
 }(jQuery));
