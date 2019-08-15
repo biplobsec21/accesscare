@@ -33,13 +33,13 @@
  @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fal fa-prescription"></i>
+   <i class="fad fa-vial"></i>
    Add New
   </a>
-  <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
+  {{-- <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
    <i class="fal fa-key"></i>
    Change Log
-  </a>
+  </a> --}}
   <a href="{{ route('eac.portal.settings.manage.drug.dosage.list.merge') }}" class="btn btn-primary">
    <i class="fal fa-code-merge"></i>
    Merge Dosages

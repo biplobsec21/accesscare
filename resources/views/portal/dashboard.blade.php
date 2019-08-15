@@ -33,9 +33,11 @@
  				@include('portal.dashboard.group-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     <pre>in progress</pre>
  				@include('portal.dashboard.notification-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     <pre>in progress</pre>
  				@include('portal.dashboard.profile-card')
  			</div>
  		</div>
@@ -47,13 +49,18 @@
 	@if(\Auth::user()->type->name == 'Pharmaceutical')
   <div class="dashCards">
  		<div class="row">
- 			<div class="col-sm-4 mb-3 mb-xl-5">
+ 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
  				@include('portal.dashboard.drug-card')
  			</div>
- 			<div class="col-sm-4 mb-3 mb-xl-5">
+    <div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     @include('portal.dashboard.group-card')
+    </div>
+ 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     <pre>in progress</pre>
  				@include('portal.dashboard.notification-card')
  			</div>
- 			<div class="col-sm-4 mb-3 mb-xl-5">
+ 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     <pre>in progress</pre>
  				@include('portal.dashboard.profile-card')
  			</div>
  		</div>
@@ -66,17 +73,17 @@
   <div class="dashCards">
  		<div class="row">
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.eac-rid-card')
+ 				@include('portal.dashboard.rid-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.eac-drug-card')
+ 				@include('portal.dashboard.drug-card')
  			</div>
  			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.eac-user-card')
- 			</div>{{-- 
- 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
- 				@include('portal.dashboard.notification-card')
- 			</div> --}}
+ 				@include('portal.dashboard.user-card')
+ 			</div>
+    <div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     @include('portal.dashboard.group-card')
+    </div>
  		</div>
   </div>
 		<div class="viewData">

@@ -31,10 +31,25 @@ Route::group([
 	]);
 	Route::get('/elements', function () {
 		return view('portal.elements');
-	});
-	Route::get('/testing', function () {
-		return view('portal.testing');
-	});
+	})->name('elements');
+
+ Route::get('/testing', function () {
+  return view('portal.testing');
+ })->name('testing');
+
+ Route::get('/test-1', function () {
+  return view('portal.test-1');
+ });
+ Route::get('/test-2', function () {
+  return view('portal.test-2');
+ });
+ Route::get('/test-3', function () {
+  return view('portal.test-3');
+ });
+
+ Route::get('/reports', function () {
+  return view('portal.reports');
+ })->name('reports');
 
 	/**
 	 * Note Routes

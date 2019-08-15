@@ -35,7 +35,7 @@
 					<div class="card mb-3 mb-xl-5">
 						<div class="card-header">
 							<input class="" name="emergency_register" id="emergency_register" type="checkbox" value="1"/>
-							<label>Emergency Registration</label>
+							<label>Not Available</label>
 						</div>
 						<div class="card-body">
 							<div class="row" id="registration_forms">
@@ -58,14 +58,14 @@
 								</div>
 								<div class="col-sm mb-3">
 									<h5 class="m-0 strong">Medical License</h5>
-         <label class="d-block">Please upload your active medical license <small>({{config('eac.storage.file.type')}})</small></label>
-         <div class="input-group">
-										<input type="file" name="license_file" value="{{ old('license_file') }}" class="form-control{{ $errors->has('license_file') ? ' is-invalid' : '' }}">
+          <label class="d-block">Please upload your active medical license <small>({{config('eac.storage.file.type')}})</small></label>
+          <div class="input-group">
+ 										<input type="file" name="license_file" value="{{ old('license_file') }}" class="form-control{{ $errors->has('license_file') ? ' is-invalid' : '' }}">
          </div>
          <div class="d-flex justify-content-between flex-wrap">
           <div>
            <div class="invalid-feedback">
-											{{ $errors->first('license_file') }}
+      						{{ $errors->first('license_file') }}
            </div>
           </div>
           <div>
@@ -136,16 +136,11 @@
 									</li>
 								</ul>
 							</div>
-
 						</div>
 						<div class="card-footer alert-warning text-dark strong">
 							By typing my name into the below box, I certify that I have read all items on the physician
-							declaration
-							and
-							agree to its terms.
-							</br>
-							I understand that by typing my name this constitutes an electronic signature for the
-							physician declaration.
+							declaration and agree to its terms.</br>
+       I understand that by typing my name this constitutes an electronic signature for the physician declaration.
 						</div>
 						<div class="card-footer">
 							<div class="row">
@@ -172,30 +167,30 @@
 @section('scripts')
 	<script>
 		$(document).ready(function(){
-		    $('#emergency_register').click(function(){
-                if($("#emergency_register").is(':checked')){
+		 $('#emergency_register').click(function(){
+    if($("#emergency_register").is(':checked')){
 
-                swal({
-                    title: "Are you sure?",
-                    text: "Are you sure you want to send an emergency registration?",
-                    icon: "warning",
-                    buttons: [
-                        'No, cancel it!',
-                        'Yes, I am sure!'
-                    ],
-                    dangerMode: true,
-                }).then(function(isConfirm) {
-                    if (isConfirm) {
-                        $("#registration_forms").hide();
-                    } else {
-                        $("#emergency_register").prop( "checked", false );
-                        swal("Cancelled", "Operation cancelled", "error");
-                    }
-                })
-                } else {
-                    $("#registration_forms").show();
-                }
-		    });
+    swal({
+     title: "Emergency Registration Not Available",
+     text: "Expanded Access / Compassionate Use requests cannot be processed or approved without confirmation of CV/Medical License as required by local laws and regulations.",
+     icon: "warning",
+     buttons: [
+      'Cancel',
+      'Proceed with Request'
+     ],
+     dangerMode: true,
+    }).then(function(isConfirm) {
+     if (isConfirm) {
+      $("#registration_forms").hide();
+     } else {
+      $("#emergency_register").prop( "checked", false );
+      swal("Cancelled", "Request cancelled", "error");
+     }
+    })
+    } else {
+     $("#registration_forms").show();
+    }
+		 });
 		});
 	</script>
 @endsection

@@ -30,7 +30,7 @@
  @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fal fa-shipping-fast"></i>
+   <i class="fad fa-envelope-open-text"></i>
    Add New
   </a>
   <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">

@@ -29,7 +29,7 @@
  @include('include.alerts')
  <div class="actionBar">
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fal fa-prescription"></i> Add New
+   <i class="fad fa-fw fa-plus-square"></i> Add New
   </a>
   <a href="{{ route($page['listAll']) }}" class="btn btn-primary">
    <i class="fal fa-list"></i> Return to List
