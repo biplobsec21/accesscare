@@ -28,9 +28,6 @@
  </div><!-- end .titleBar -->
  @include('include.alerts')
  <div class="actionBar">
-  <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fad fa-vial"></i> Add New
-  </a>
   <a href="{{ route($page['listAll']) }}" class="btn btn-primary">
    <i class="fal fa-list"></i> Return to List
   </a>

@@ -32,14 +32,10 @@
  </div><!-- end .titleBar -->
  @include('include.alerts')
  <div class="actionBar">
-  <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-   <i class="fad fa-vial"></i>
-   Add New
-  </a>
-  {{-- <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
+  <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
    <i class="fal fa-key"></i>
    Change Log
-  </a> --}}
+  </a>
   <a href="{{ route('eac.portal.settings.manage.drug.dosage.list.merge') }}" class="btn btn-primary">
    <i class="fal fa-code-merge"></i>
    Merge Dosages
@@ -47,7 +43,7 @@
  </div><!-- end .actionBar -->
  
  <div class="viewData">
-  <div class="row"> 
+  <div class="row">
    <div class="order-lg-2 col-lg-2 col-xl-3">
    </div>
    <div class="order-lg-1 col-lg-10 col-xl-9">
