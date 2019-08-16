@@ -17,7 +17,9 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css"/>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"/>
  @yield('styles')
- @include('include.stylesheets')
+ <link rel="stylesheet" href="{{ asset('/css/eac-app.css') }}">
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css" integrity="sha384-y++enYq9sdV7msNmXr08kJdkX4zEI1gMjjkw0l9ttOepH7fMdhb7CePwuRQCfwCr" crossorigin="anonymous">
+ <link rel="stylesheet" href="{{ asset('css/core.css') }}"/>
  <link rel="stylesheet" href="{{ asset('/css/select2-custom.css') }}">
  <link rel="stylesheet" href="{{ asset('/css/forms.css') }}">
  <link rel="stylesheet" href="{{ asset('/css/portals.css') }}">
@@ -90,6 +92,7 @@
     </div>
    @endif
    @yield('content')
+   {{-- @include('include/elements') --}}
   </div><!-- /#pcont --><!-- DO NOT REMOVE -->
  </div><!-- /.container-fluid --><!-- DO NOT REMOVE -->
  @include('include.portal.foot') 

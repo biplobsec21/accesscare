@@ -1,0 +1,34 @@
+
+@each $color, $value in $colors {
+ @include bg-variant(".bg-#{$color}", $value);
+ .badge-#{$color} {
+  @include badge-variant($value);
+  color: color-yiq($value);
+ }
+}
+
+@if $enable-gradients {
+ @each $color, $value in $colors {
+  @include bg-gradient-variant(".bg-gradient-#{$color}", $value);
+ }
+}
+
+@each $color, $value in $colors {
+ .alert-#{$color} {
+  @include shadow-glow($value);
+  @include alert-variant($value, $value, color-yiq($value));
+ }
+}
+
+@each $color, $value in $theme-colors {
+ .alert-#{$color} {
+  border-color: scale-color($value, $lightness: 85%);
+  // @include gradient-y(scale-color($value, $lightness: 90%), scale-color($value, $lightness: 80%));
+  @include gradient-directional(scale-color($value, $lightness: 80%), scale-color($value, $lightness: 90%), 200deg);
+ }
+ .btn-#{$color} {
+  $newColor: lighten($value, 18%);
+  border-color: $newColor;
+  @include gradient-directional($newColor, $value, 160deg);
+ }
+}

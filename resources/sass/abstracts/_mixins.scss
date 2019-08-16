@@ -1,0 +1,22 @@
+@mixin poppins {
+ font-family: 'Poppins';
+ font-weight: 400;
+}
+
+// Box Shadows
+@mixin shadow-glow($value: $dark, $border: false) {
+ box-shadow: 0px 10px 15px 0px rgba($value, .5);
+ @if shadow-glow($border) == true {
+  border: 1px solid rgba($value, 0.25);
+ }
+}
+
+@mixin shadow-minimal($value: $gray-800) {
+ box-shadow: 0px 5px 10px -5px rgba($value, 0.5);
+ border: 0;
+}
+
+@mixin shadow-material($value: $cyan) {
+ border: 0;
+ box-shadow: 0 5px 10px rgba($value, .035), 0 7px 18px rgba($value, .05);
+}

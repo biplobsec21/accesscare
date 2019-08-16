@@ -46,6 +46,21 @@
     <div class="p-2 m-1 flex-fill text-center bg-light">light</div>
    </div>
    <hr />
+
+   <div class="d-flex justify-content-around flex-wrap small">
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-blue">Blue</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-indigo">Indigo</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-purple">Purple</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-pink">Pink</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-red">Red</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-orange">Orange</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-yellow">Yellow</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-green">Green</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-teal">Teal</div>
+    <div class="p-2 m-1 flex-fill text-white text-center swatch-cyan">Cyan</div>
+   </div>
+   <hr />
+
    <div class="d-flex justify-content-around flex-wrap small">
     <div class="p-2 m-1 flex-fill text-white text-center bg-red">red</div>
     <div class="p-2 m-1 flex-fill text-white text-center bg-orange">orange</div>
@@ -115,7 +130,17 @@
    <span class="badge badge-warning">Warning</span>
    <span class="badge badge-danger">Danger</span>
    <span class="badge badge-dark">Dark</span>
-   <span class="badge badge-light">Light</span>
+   <span class="badge badge-light">Light</span><hr />
+   <span class="badge badge-red">red</span>
+   <span class="badge badge-orange">orange</span>
+   <span class="badge badge-yellow">yellow</span>
+   <span class="badge badge-green">green</span>
+   <span class="badge badge-cyan">cyan</span>
+   <span class="badge badge-blue">blue</span>
+   <span class="badge badge-teal">teal</span>
+   <span class="badge badge-purple">purple</span>
+   <span class="badge badge-indigo">indigo</span>
+   <span class="badge badge-pink">pink</span>
    <div class="row mt-3">
     <div class="col">
      <hr />
@@ -805,7 +830,7 @@
   <a name="alerts">Alerts</a>
  </h4>
  <div class="d-flex flex-wrap justify-content-between">
-  <div class="alert flex-fill m-2 alert-warning" role="alert">
+  <div class="alert alert-warning m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Warning</h1>
    <h6>Heading Six</h6>
@@ -817,7 +842,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-secondary" role="alert">
+  <div class="alert alert-secondary m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Secondary</h1>
    <h6>Heading Six</h6>
@@ -829,7 +854,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-danger" role="alert">
+  <div class="alert alert-danger m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Danger</h1>
    <h6>Heading Six</h6>
@@ -841,7 +866,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-success" role="alert">
+  <div class="alert alert-success m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Success</h1>
    <h6>Heading Six</h6>
@@ -853,7 +878,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-info" role="alert">
+  <div class="alert alert-info m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Info</h1>
    <h6>Heading Six</h6>
@@ -865,7 +890,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-primary" role="alert">
+  <div class="alert alert-primary m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Primary</h1>
    <h6>Heading Six</h6>
@@ -877,7 +902,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-dark" role="alert">
+  <div class="alert alert-dark m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Dark</h1>
    <h6>Heading Six</h6>
@@ -889,7 +914,7 @@
     Integer maximus tellus eu ullamcorper dictum.
    </p>
   </div>
-  <div class="alert flex-fill m-2 alert-light" role="alert">
+  <div class="alert alert-light m-3 flex-fill" role="alert">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
    <h1>Light</h1>
    <h6>Heading Six</h6>
@@ -900,6 +925,88 @@
    <p>
     Integer maximus tellus eu ullamcorper dictum.
    </p>
+  </div>
+ </div>
+ <div class="d-flex flex-wrap justify-content-between">
+  <div class="alert alert-red m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>red</h1>
+   <h6>heading red</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-red</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-orange m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>orange</h1>
+   <h6>heading orange</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-orange</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-yellow m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>yellow</h1>
+   <h6>heading yellow</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-yellow</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-green m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>green</h1>
+   <h6>heading green</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-green</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-cyan m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>cyan</h1>
+   <h6>heading cyan</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-cyan</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-blue m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>blue</h1>
+   <h6>heading blue</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-blue</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-teal m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>teal</h1>
+   <h6>heading teal</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-teal</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-purple m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>purple</h1>
+   <h6>heading purple</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-purple</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-indigo m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>indigo</h1>
+   <h6>heading indigo</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-indigo</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
+  </div>
+  <div class="alert alert-pink m-3 flex-fill">
+   <button type="button" class="close" data-dismissable="alert">&times;</button>
+   <h1>pink</h1>
+   <h6>heading pink</h6>
+   <p><a href="#" class="alert-link">This is an 'alert-link' for .alert-pink</a></p>
+   <hr>
+   <p>Lorem ipsum dolor sit amet, consectetur.</p>
   </div>
  </div>
  <hr />

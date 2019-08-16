@@ -107,7 +107,7 @@
      navItem.children('a').trigger('click');
     }
    })
-  </script> 
+  </script>
  </body>
  @SetTab('')
 </html>

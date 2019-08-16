@@ -1,3 +1,17 @@
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+
+.poppins, .badge {
+ @include poppins;
+}
+.btn-link {
+ border: 0;
+ padding: 0;
+ font-weight: $font-weight-bold;
+}
+.btn:hover {
+ transform: scale(1.05);
+}
 body {
  overflow-anchor: none;
 }
@@ -26,6 +40,9 @@ header {
    flex: 0 0 225px;
    overflow: visible;
   }
+  #leftSide {
+   @include poppins;
+  }
   #rightSide {
    &:not(.show) {
     overflow: hidden;
@@ -38,6 +55,11 @@ header {
    max-height: 90vh;
    overflow-y: auto;
   }
+ }
+}
+.dashCards {
+ .card {
+  @include shadow-minimal;
  }
 }
 
