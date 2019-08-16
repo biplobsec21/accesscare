@@ -44,6 +44,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.js"></script>
 	<script src="{{ asset('/js/ui/jquery-ui.js') }}"></script>
 	<script src="{{ asset('/js/dataTables-config.js') }}"></script>
+    <script> const $siteEmail = '{{site()->email}}';</script>
 </head>
 <body id="page-top">
 @include('include.portal.head')
