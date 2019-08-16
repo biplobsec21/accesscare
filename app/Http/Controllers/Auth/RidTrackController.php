@@ -24,8 +24,8 @@ class RidTrackController extends Controller
 {
 	public function show(Request $request)
 	{
-		$rid_id = $_POST['rid_id'];
-		$password = $_POST['password'];
+		$rid_id = $request->input('rid_id');
+		$password = $request->input('password');
 		$rid = Rid::where('username', $rid_id)
 			->where('password', $password)
 			->firstOrFail();

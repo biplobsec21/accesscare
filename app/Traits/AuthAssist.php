@@ -333,63 +333,68 @@ trait AuthAssist
     protected function companyAuth(Company $company)
     {
         $this->user = Auth::user();
+        $access = new AuthCollection();
         switch ($this->preGateCheck()) {
             case 2;
-                return true;
+                $access->setAuthAll();
+                return $access;
             case -1:
                 return $this->abortNow();
         }
-        $access = new AuthCollection();
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
         if ($access->gate('company.index.view'))
-            return true;
+            return $access;
         else
             return $this->abortNow();
     }
 
     protected function pharmacyAuth(Pharmacy $pharmacy) {
         $this->user = Auth::user();
+        $access = new AuthCollection();
         switch ($this->preGateCheck()) {
             case 2;
-                return true;
+                $access->setAuthAll();
+                return $access;
             case -1:
                 return $this->abortNow();
         }
-        $access = new AuthCollection();
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
-        if ($access->gate('pharmacy.index.view'))
-            return true;
+        if ($access->gate('pharmacy.index.update'))
+            return $access;
         else
             return $this->abortNow();
     }
 
     protected function pharmacistAuth(Pharmacist $pharmacist) {
         $this->user = Auth::user();
+        $access = new AuthCollection();
         switch ($this->preGateCheck()) {
             case 2;
-                return true;
+                $access->setAuthAll();
+                return $access;
             case -1:
                 return $this->abortNow();
         }
-        $access = new AuthCollection();
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
         if ($access->gate('pharmacist.index.update'))
-            return true;
+            return $access;
         else
             return $this->abortNow();
     }
 
     protected function depotAuth(Depot $depot) {
         $this->user = Auth::user();
+        $access = new AuthCollection();
         switch ($this->preGateCheck()) {
             case 2;
-                return true;
+                $access->setAuthAll();
+                return $access;
             case -1:
                 return $this->abortNow();
         }
@@ -398,25 +403,26 @@ trait AuthAssist
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
         if ($access->gate('depot.index.update'))
-            return true;
+            return $access;
         else
             return $this->abortNow();
     }
 
     protected function lotAuth(DrugLot $lot) {
         $this->user = Auth::user();
+        $access = new AuthCollection();
         switch ($this->preGateCheck()) {
             case 2;
-                return true;
+                $access->setAuthAll();
+                return $access;
             case -1:
                 return $this->abortNow();
         }
-        $access = new AuthCollection();
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
         if ($access->gate('lot.index.update'))
-            return true;
+            return $access;
         else
             return $this->abortNow();
     }

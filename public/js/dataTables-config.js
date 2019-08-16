@@ -18,13 +18,12 @@
                 let $col = $header.find('th:eq(' + $index + ')');
                 $field.orderable = !$col.hasClass('no-sort');
                 $field.searchable = !$col.hasClass('no-search');
-                if(!$field.type) {
+                if (!$field.type) {
                     $field.type = "string";
                 }
                 return $field;
             });
-        }
-        else if ($settings.columns) {
+        } else if ($settings.columns) {
             $settings.columns = $settings.columns.map(function (str, index) {
                 let $col = $header.find('th:eq(' + index + ')');
                 let $val = {orderable: !$col.hasClass('no-sort'), searchable: !$col.hasClass('no-search')};
@@ -67,11 +66,19 @@
         //     $(this).closest('table').DataTable().page.len($(this).val()).draw();
         // }).attr('style', 'width: 100%!important;').removeClass('custom-select').removeClass('custom-select-sm');
 
-
         $.fn.dataTable.ext.errMode = function (settings, helpPage, message) {
-            // console.log(settings);
-            // console.log(helpPage);
-            // console.log(message);
+            swal({
+                text: "There was an error understanding this request.",
+                content: {
+                    element: "a",
+                    attributes: {
+                        href: "mailto:" + $siteEmail + "",
+                        text: "If this issue persists, click here to contact us.",
+                        class: "",
+                    },
+                },
+                icon: "warning",
+            });
         };
         $('.dataTables_filter').hide();
         return dataTable;
