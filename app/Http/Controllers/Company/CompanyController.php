@@ -76,7 +76,7 @@ class CompanyController extends Controller
 		$countries = $this->getCountry();
 		$state = \App\State::all()->sortBy('name');
         $access = $this->companyAuth($company);
-        if(!$access->gate('company.index.edit'))
+        if(!$access->gate('company.index.update'))
             return $this->abortNow();
 		return view('portal.company.edit', [
 			'company' => $company,
