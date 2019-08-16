@@ -1,51 +1,51 @@
-</div><!-- /#pcont --><!-- DO NOT REMOVE -->
-</div><!-- /.container-fluid --><!-- DO NOT REMOVE -->
-</div><!-- /#content-wrapper --><!-- DO NOT REMOVE -->
-<div class="rightSide">
- <button class="toggleRight btn floater" type="button">
-  <i class="far fa-times"></i>
- </button>
- <div class="row align-items-center mt-3 ml-0 mr-0">
-  <div class="col">
-   <h5 class="m-0">
-    <i class="far fa-bell text-primary"></i>
-    Notifications
-   </h5>
+ </div><!-- /#content-wrapper --><!-- DO NOT REMOVE -->
+ <div class="rightSide">
+  <button class="toggleRight btn floater" type="button">
+   <i class="far fa-times"></i>
+  </button>
+  <div class="row align-items-center mt-3 ml-0 mr-0">
+   <div class="col">
+    <h5 class="m-0">
+     <i class="far fa-bell text-primary"></i>
+     Notifications
+    </h5>
+   </div>
+   <div class="col-auto ml-auto">
+    <a href="{{ route('eac.portal.notifications.read.all',Auth::user()->id) }}" class="btn btn-sm btn-light" tabindex="-1">
+     <i class="fa-fw far fa-check text-success"></i>
+     Mark All Read
+    </a>
+   </div>
   </div>
-  <div class="col-auto ml-auto">
-   <a href="{{ route('eac.portal.notifications.read.all',Auth::user()->id) }}" class="btn btn-sm btn-light" tabindex="-1">
-    <i class="fa-fw far fa-check text-success"></i>
-    Mark All Read
-   </a>
+  <div class="tasklist">
+   <div class="notificationlist">
+    @if(Auth::user()->notifications()->count() > 0)
+     <ul class="list-unstyled">
+      @foreach(Auth::user()->notifications() as $notification)
+       <li class="{{ ($notification->read_at) ? 'read': 'unread'}}">
+        <a onclick="notificationSingleRead('{{$notification->id}}')" href="{{$notification->subject->view_route}}" class="strong">
+         {{ $notification->message }}
+         <small class="d-block date">
+          {{date('Y-m-d', strtotime($notification->created_at))}}
+         </small>
+        </a>
+       </li>
+      @endforeach
+     </ul>
+    @else
+     <p class="text-muted m-0 small">
+      <i class="fal fa-info-circle"></i>
+      No information available
+     </p>
+    @endif
+   </div>
   </div>
  </div>
- <div class="tasklist">
-  <div class="notificationlist">
-   @if(Auth::user()->notifications()->count() > 0)
-    <ul class="list-unstyled">
-     @foreach(Auth::user()->notifications() as $notification)
-      <li class="{{ ($notification->read_at) ? 'read': 'unread'}}">
-       <a onclick="notificationSingleRead('{{$notification->id}}')" href="{{$notification->subject->view_route}}" class="strong">
-        {{ $notification->message }}
-        <small class="d-block date">
-         {{date('Y-m-d', strtotime($notification->created_at))}}
-        </small>
-       </a>
-      </li>
-     @endforeach
-    </ul>
-   @else
-    <p class="text-muted m-0 small">
-     <i class="fal fa-info-circle"></i>
-     No information available
-    </p>
-   @endif
-  </div>
- </div>
-</div></div><!--- /#wrapper -->
+</div><!--- /#wrapper -->
 <a class="scroll-to-top rounded" href="#page-top">
  <i class="fas fa-angle-up"></i>
-</a></div><!-- /#DONOTREMOVE"> --><!-- DO NOT REMOVE -->
+</a>
+</div><!-- /#DONOTREMOVE"> --><!-- DO NOT REMOVE -->
 <script>
  $(document).on("click", ".table tr td:last-child .btn", function () {
   $("tr.selected").removeClass("selected");
