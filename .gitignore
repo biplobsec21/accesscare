@@ -5,6 +5,7 @@
 /storage/debugbar
 /vendor
 /.idea
+sftp-config.json
 composer.lock
 .env
 .phpunit.result.cache

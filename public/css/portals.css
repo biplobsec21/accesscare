@@ -128,11 +128,11 @@ a.label [class*=fa]{
 }
 b, strong, .b, .strong {
  font-weight: 700;
-}
+}/*
 .bg-primary, .bg-secondary, .bg-info, 
 .bg-success, .bg-danger, .bg-warning, .bg-dark {
  color: #fff;
-}
+}*/
 *[onclick]:hover {
  cursor: pointer;
 }
@@ -1295,7 +1295,7 @@ div.dataTables_wrapper label {
  font-size: .9em;
  font-weight: 400;
 }
-.table tr td:last-child a:not(.btn):not(.dropdown-item) {
+.table tr td:last-child a:not(.btn):not(.dropdown-item):not(.badge) {
  text-decoration: none!important;
  text-align: center;
  min-width: 1.5em;
@@ -1349,10 +1349,10 @@ div.dataTables_wrapper label {
  font-size: 90%;
 }
 
-.table tr td:last-child a:not(.btn):not(.dropdown-item):hover {
+.table tr td:last-child a:not(.btn):not(.dropdown-item):not(.badge):hover {
  color: red;
 }
-.table tr td:last-child a:not(.btn):not(.dropdown-item):last-child {
+.table tr td:last-child a:not(.btn):not(.dropdown-item):not(.badge):last-child {
  margin-right: 0
 }
 div.table-responsive>div.dataTables_wrapper>div.row:last-of-type>div[class^="col-"]:first-child {

@@ -71,7 +71,7 @@
 		</li>
 		<li class="nav-item dropdown">
 			<a href="{{route('eac.portal.drug.list')}}" class="nav-link">
-				<i class="fa-fw text-primary fas fa-prescription-bottle-alt"></i>
+				<i class="fa-fw text-primary fas fa-capsules"></i>
 				<span>Drugs</span>
 			</a>
 		</li>
