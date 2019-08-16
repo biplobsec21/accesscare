@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Settings\Manage\Ethnicity;
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Ethnicity;
@@ -8,6 +9,7 @@ use App\Log;
 use Validator;
 
 class EthnicityController extends Controller {
+    use Logger;
     public $_data = [
         // route load
         'editButton' => 'eac.portal.settings.manage.ethnicity.edit',

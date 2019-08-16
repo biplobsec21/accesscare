@@ -27,9 +27,6 @@
  <form method="post" action="{{ route('eac.portal.settings.manage.drug.dosage.mergeselect') }}">
   {{ csrf_field() }}
   <div class="actionBar">
-   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
-    <i class="fad fa-vial"></i> Add New
-   </a>
    <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
     <i class="fal fa-key"></i> Change Log
    </a>

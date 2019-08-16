@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Settings\Manage\State;
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\State;
@@ -17,6 +18,7 @@ use Validator;
  */
 
 class StateController extends Controller {
+    use Logger;
     public $_data = [
         // route load
         'editButton' => 'eac.portal.settings.manage.states.edit',

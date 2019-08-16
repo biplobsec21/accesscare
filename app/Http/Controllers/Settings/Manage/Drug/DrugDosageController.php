@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Drug\Dosage\CreateRequest;
 use App\Http\Requests\Drug\Dosage\UpdateRequest;
 use App\MergeData;
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -24,6 +25,7 @@ use Validator;
  */
 class DrugDosageController extends Controller
 {
+    use Logger;
 
 	public $_data = [
 		// route load

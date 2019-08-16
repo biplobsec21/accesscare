@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings\Manage\Rid;
 
 use App\ShippingCourier;
 use App\Http\Controllers\Controller;
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -14,8 +15,7 @@ use Validator;
  * @author Biplob Hossain <biplob@quasars.com>
  */
 class ShippingCourierController extends Controller {
-
-
+    use Logger;
     public $_data = [
         // route load
         'editButton' => 'eac.portal.settings.manage.drug.dosage.strength.edit',

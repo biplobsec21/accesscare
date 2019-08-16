@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings\Manage\Country;
 use App\Http\Controllers\Controller;
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use App\Country;
 use Validator;
@@ -15,6 +16,7 @@ use App\Log;
  */
 
 class CountryController extends Controller {
+    use Logger;
     public $_data = [
         // route load
         'editButton' => 'eac.portal.settings.manage.country.edit',

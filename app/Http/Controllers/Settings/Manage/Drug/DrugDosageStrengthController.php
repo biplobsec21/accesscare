@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings\Manage\Drug;
 
+use App\Traits\Logger;
 use Illuminate\Http\Request;
 use App\Dosage;
 use App\DosageUnit;
@@ -21,7 +22,7 @@ use Validator;
  * @author Biplob Hossain <biplob@quasars.com>
  */
 class DrugDosageStrengthController extends Controller {
-
+    use Logger;
 
     public $_data = [
         // route load

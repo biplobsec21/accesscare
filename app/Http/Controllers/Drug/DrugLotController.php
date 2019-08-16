@@ -63,7 +63,7 @@ class DrugLotController extends Controller
 			$depot = Depot::where('id', $request->input('depot'))->first();
 
 		$depots = Depot::all()->sortBy('name');
-        $access = $this->lotAuth($depot);
+        $access = $this->lotAuth($lot);
 		return view('portal.drug.lot.edit', ['drugs' => $drugs, 'depots' => $depots, 'lot' => $lot, 'drug_all' => $drug_all, 'depot' => $depot, 'access' => $access]);
 	}
 
