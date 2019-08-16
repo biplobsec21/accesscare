@@ -361,7 +361,7 @@ trait AuthAssist
         foreach ($this->user->groups() as $group)
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
-        if ($access->gate('pharmacy.index.view'))
+        if ($access->gate('pharmacy.index.update'))
             return true;
         else
             return $this->abortNow();
