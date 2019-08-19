@@ -117,7 +117,7 @@
         </div>
        </div>
        <div class="col-sm mb-3">
-        <label class="d-block">Zipcode</label>
+        <label class="d-block">Postal Code</label>
         <input type="text" class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode" value="{{ old('zipcode') }}"/>
         <div class="invalid-feedback">
          {{ $errors->first('zipcode') }}
