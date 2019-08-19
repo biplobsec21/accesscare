@@ -1,8 +1,3 @@
-@if((\Auth::user()->type->name == 'Physician') && ($rid->user_groups->count() > 0))
-    <div class="alert alert-danger mb-3">
-        Please assign a user group to this request
-    </div>
-@endif
 <div class="masterBox mb-3 mb-xl-5">
     <ul class="nav nav-tabs" id="RequestTabs" role="tablist">
         @access('rid.info.view')

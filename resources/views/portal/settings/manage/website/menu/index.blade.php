@@ -96,7 +96,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>Text:</label>
-                                <input name="text" type="text" class="form-control"/>
+                                <input name="text" type="text" value="Title" class="form-control"/>
                                 <label>Text Color:</label>
                                 <select name="color" class="form-control">
                                     <option selected>Dark</option>
@@ -135,7 +135,7 @@
                 case 'card-title':
                     let container = $('#preview-body');
                     container.show();
-                    container.append( "<p>new paragraph</p>" );
+                    container.append( "<h6 class=\"card-title\">Title</h6>" );
                     break;
                 case 'card-subtitle':
                     break;
