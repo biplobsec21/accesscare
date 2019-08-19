@@ -1,12 +1,40 @@
-$primary: #005588;
-$blue: change-color($primary, $blue: 255);
-$pink: #cc4488;
-$red: #ff2b22;
-$orange: #ff9922;
+$primary: #024e82;
+$orange: #f79223;
 $yellow: #cccc44;
 $green: #88cc44;
+$pink: #cc4488;
+$blue: change-color($primary, $blue: 255);
+$red: change-color($orange, $green: 50);
 $purple: mix($red, $blue);
 $indigo: mix($primary, $blue);
-$dark: darken($primary, 15%);
+$dark: darken($primary, 35%);
 $warning: $orange;
+$black: #000;
+$white: #fff;
+$light: #E0E0E0;
+$close-color: rgba($black, .5);
+$close-text-shadow: 0 1px 0 rgba($white, .5);
+
+// $box-shadow-sm: ;
+// $box-shadow: ;
+// $box-shadow-lg: ;
+
+$btn-box-shadow: none;
+$btn-active-box-shadow: none;
 $enable-gradients: true;
+$enable-shadows: true;
+$enable-responsive-font-sizes: true;
+$enable-deprecation-messages: false;
+$line-height-base: 1.3;
+$theme-color-interval: 9%;
+$alert-bg-level: -8;
+$alert-border-level: -7;
+$small-font-size: 85%;
+$font-family-sans-serif: 'Open Sans', 'Poppins', 'Roboto', 'Nunito Sans';
+$font-family-monospace: 'Roboto Mono';
+$border-radius: .25rem;
+$btn-border-radius: 0;
+$btn-border-radius-sm: $btn-border-radius;
+$btn-border-radius-lg: $btn-border-radius;
+$btn-transition: all .25s ease-in-out;
+

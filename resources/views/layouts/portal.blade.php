@@ -18,15 +18,18 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"/>
  @yield('styles')
  @include('include.stylesheets')
+ {{-- <link rel="stylesheet" href="{{ asset('/css/eac-app.css') }}">
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css" integrity="sha384-y++enYq9sdV7msNmXr08kJdkX4zEI1gMjjkw0l9ttOepH7fMdhb7CePwuRQCfwCr" crossorigin="anonymous">
+ <link rel="stylesheet" href="{{ asset('css/core.css') }}"/> --}}
  <link rel="stylesheet" href="{{ asset('/css/select2-custom.css') }}">
  <link rel="stylesheet" href="{{ asset('/css/forms.css') }}">
  <link rel="stylesheet" href="{{ asset('/css/portals.css') }}">
+ <link rel="stylesheet" href="{{ asset('/css/branding.css') }}">
  <link rel="stylesheet" href="{{ asset('/css/media.css') }}">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.js"></script>
-    <script> const $siteEmail = '{{site()->email}}';</script>
 </head>
 <body id="page-top">
  @include('include.portal.head')
@@ -91,9 +94,10 @@
     </div>
    @endif
    @yield('content')
+   {{-- @include('include.elements') --}}
   </div><!-- /#pcont --><!-- DO NOT REMOVE -->
  </div><!-- /.container-fluid --><!-- DO NOT REMOVE -->
- @include('include.portal.foot')
+ @include('include.portal.foot') 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.1/tinymce.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
