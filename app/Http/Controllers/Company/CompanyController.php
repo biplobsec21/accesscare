@@ -42,6 +42,7 @@ class CompanyController extends Controller
 	{
 		$countries = $this->getCountry(); //\App\Country::all()->sortBy('name');
 		$state = \App\State::all()->sortBy('name');
+        $access = $this->companyInitiate();
 		return view('portal.company.create', [
 			'countries' => $countries,
 			'state' => $state,

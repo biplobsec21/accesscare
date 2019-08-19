@@ -350,6 +350,25 @@ trait AuthAssist
             return $this->abortNow();
     }
 
+    protected function companyInitiate()
+    {
+        $this->user = Auth::user();
+        switch ($this->preGateCheck()) {
+            case 2;
+                return true;
+            case -1:
+                return $this->abortNow();
+        }
+        $access = new AuthCollection();
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate('company.index.create'))
+            return true;
+        else
+            return $this->abortNow();
+    }
+
     protected function pharmacyAuth(Pharmacy $pharmacy) {
         $this->user = Auth::user();
         $access = new AuthCollection();
