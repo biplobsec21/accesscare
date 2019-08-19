@@ -17,7 +17,7 @@ class ExampleController extends BaseController
         $this->middleware('auth');
     }
 
-	public function list(string $model)
+	public function list()
 	{
         return view('portal.drug.depot.list', [
             'examples' => Example::all(),
@@ -26,11 +26,25 @@ class ExampleController extends BaseController
 
     public function create()
     {
-        $countries = $this->getCountry();
-        $states = \App\State::all()->sortBy('name');
+        $users = User::all();
         return view('portal.drug.depot.create', [
-            'states' => $states,
-            'countries' => $countries,
+            'users' => $users,
+        ]);
+    }
+
+    public function show()
+    {
+        $users = User::all();
+        return view('portal.drug.depot.create', [
+            'users' => $users,
+        ]);
+    }
+
+    public function edit()
+    {
+        $users = User::all();
+        return view('portal.drug.depot.create', [
+            'users' => $users,
         ]);
     }
 }

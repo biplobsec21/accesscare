@@ -23,5 +23,8 @@ class Example extends BaseModel
 
 	protected $attributes = [
 	    'id',
+        'user_id',
+        'created_at',
+        'updated_at',
     ];
 }
