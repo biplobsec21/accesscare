@@ -87,10 +87,10 @@
 					Depots List
 				</a>
 				<div>
-					<button type="button" onclick="Confirm_Delete('{{ $depot->id }}')" class="btn btn-danger"
-							title="Delete Depot">
-						<i class="fas fa-times"></i> Delete
-					</button>
+{{--					<button type="button" onclick="Confirm_Delete('{{ $depot->id }}')" class="btn btn-danger"--}}
+{{--							title="Delete Depot">--}}
+{{--						<i class="fas fa-times"></i> Delete--}}
+{{--					</button>--}}
 				</div>
 			</div>
 			<div class="row thisone m-0 mb-xl-5">

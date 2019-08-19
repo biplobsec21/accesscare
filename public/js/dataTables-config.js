@@ -21,6 +21,7 @@
                 if (!$field.type) {
                     $field.type = "string";
                 }
+                $field.selectable = !$col.hasClass('select');
                 return $field;
             });
         } else if ($settings.columns) {
@@ -38,14 +39,19 @@
         // Create inputs in the table head
         let $firstHeaderRow = $header.find('tr:eq(0)');
         let $secondHeaderRow = $firstHeaderRow.clone(true).appendTo($header).addClass("filter-cols");
+        let $selects = [];
         $firstHeaderRow.addClass("sort-cols");
         $secondHeaderRow.find('th').each(function (i) {
             if ($(this).hasClass("no-search")) {
                 $(this).html('');
                 return;
             }
-            if ($(this).hasClass("no-search")) {
-                $(this).html('');
+            if ($(this).hasClass("select")) {
+                $(this).html('<select class="form-control"><option value="">All</option></select>');
+                $('select', this).on('change', function () {
+                    if ($(this).closest('table').DataTable().column(i).search() !== this.value)
+                        $(this).closest('table').DataTable().column(i).search(this.value).draw();
+                });
                 return;
             }
             $(this).html('<input type="text" class="form-control" placeholder="Search ' + $(this).text() + '" />');
@@ -56,9 +62,17 @@
         });
 
         //Passing columns through ajax
-        $settings.ajax.data = {columns: $settings.columns};
+        $settings.ajax.data = {columns: $settings.columns, selects: {}};
 
         let dataTable = $(this).DataTable($settings);
+
+        dataTable.on('xhr', function () {
+            console.log(dataTable.ajax.json());
+            // $secondHeaderRow.find().each(function () {
+            //     if ($(this).closest('table').DataTable().column(i).search() !== this.value)
+            //         $(this).closest('table').DataTable().column(i).search(this.value).draw();
+            // });
+        });
 
         // $('.dataTables_wrapper').children('.row:first').hide();
         // $('.dataTables_length select').clone(true).appendTo($secondHeaderRow.find('th:last'));

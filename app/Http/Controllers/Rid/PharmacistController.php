@@ -51,7 +51,9 @@ class PharmacistController extends Controller
 	{
 		$pharmacy = Pharmacy::all();
 		$countries = $this->getCountry();
+        $access = $this->generalAuth('pharmacist.index.create');
 		return view('portal.rid.pharmacist.create', [
+		    'access' => $access,
 			'pharmacy' => $pharmacy,
 			'countries' => $countries
 		]);

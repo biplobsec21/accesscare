@@ -155,7 +155,7 @@ class DataTableResponse
             $passed = true;
             foreach ($filters as $filter) {
                 $value = $this->getThroughModel($filter['data'], $model);
-                if (strpos(strtolower($value), strtolower($filter['value'])) === false)
+                if (strpos(strtolower($value), strtolower($filter['value'])) === false && strtolower(trim($value)) != strtolower(trim($filter['value'])))
                     $passed = false;
             }
             return $passed;
