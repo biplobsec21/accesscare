@@ -357,7 +357,7 @@
                                     
                                     </div>
                                     <div class="col-sm-5 col-lg-6 mb-3">
-                                        <label class="d-block">Zip</label>
+                                        <label class="d-block">Postal Code</label>
                                         <input type="text" class="form-control @if($errors->has('zipcode')) 'is-invalid' @endif" name="zipcode" value="@if(isset($user->address->zipcode)) {{ $user->address->zipcode }} @endif"/>
                                         <div class="invalid-feedback">
                                             {{ $errors->first('zipcode') }}

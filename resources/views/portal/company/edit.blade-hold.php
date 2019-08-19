@@ -143,7 +143,7 @@
       @endif
    
       <div class="col-sm col-lg-12 col-xl mb-2">
-       <label class="d-block">Zip</label>
+       <label class="d-block">Postal Code</label>
        <input type="text" class="form-control" name="zipcode" value="{{ $company->address->zipcode }}">
       </div>
      </div>

@@ -97,7 +97,7 @@
         </div>
         <div class="col-sm">
          <div class="mb-3">
-          <label for="" class="d-block">Zip</label>
+          <label for="" class="d-block">Postal Code</label>
           <input type="number"  class="form-control{{ $errors->has('company_zip') ? ' is-invalid' : '' }}"  name="company_zip"  />
           <div class="invalid-feedback">
           {{ $errors->first('company_zip') }}

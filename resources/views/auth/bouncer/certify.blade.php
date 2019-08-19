@@ -171,7 +171,7 @@
     if($("#emergency_register").is(':checked')){
 
     swal({
-     title: "Emergency Registration Not Available",
+     title: "Registration Not Available",
      text: "Expanded Access / Compassionate Use requests cannot be processed or approved without confirmation of CV/Medical License as required by local laws and regulations.",
      icon: "warning",
      buttons: [

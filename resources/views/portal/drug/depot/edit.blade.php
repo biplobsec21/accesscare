@@ -191,7 +191,7 @@
 										</select>
 									</div>
 									<div class="col-sm-5 col-lg-3 mb-3">
-										<label class="d-block label_required">Zip</label>
+										<label class="d-block label_required">Postal Code</label>
 										<input type="text" name="depot_zip"
 											   value="{{ $depot->address && $depot->address->zipcode ? $depot->address->zipcode : '' }}"
 											   class="form-control" required="required">

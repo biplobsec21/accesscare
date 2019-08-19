@@ -194,8 +194,8 @@
 										</div>
 									</div>
 									<div class="col-sm col-lg-5 mb-3">
-										<label class="d-block" id="zip_lbl">Zip</label>
-										<input type="text" id="zip_input" class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode" value="{{ old('zipcode') }}" placeholder="Zipcode">
+										<label class="d-block" id="zip_lbl">Postal Code</label>
+										<input type="text" id="zip_input" class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode" value="{{ old('zipcode') }}" placeholder="Postal Code">
 										<div class="invalid-feedback">
 											{{ $errors->first('zipcode') }}
 										</div>
@@ -282,8 +282,8 @@
                     $("#state_lbl").text('State');
                     $("#city_lbl").text('City');
                     $("#city_input").attr('placeholder', 'City');
-                    $("#zip_lbl").text('Zip');
-                    $("#zip_input").attr('placeholder', 'Zip Code');
+                    $("#zip_lbl").text('Postal Code');
+                    $("#zip_input").attr('placeholder', 'Postal Code');
                 }
 
             });
@@ -306,8 +306,8 @@
                 $("#state_lbl").text('State');
                 $("#city_lbl").text('City');
                 $("#city_input").attr('placeholder', 'City');
-                $("#zip_lbl").text('Zip');
-                $("#zip_input").attr('placeholder', 'Zip Code');
+                $("#zip_lbl").text('Postal Code');
+                $("#zip_input").attr('placeholder', 'Postal Code');
             }
             if ($('#country_id').val() == '') {
                 $("#state_lbl").text('State');

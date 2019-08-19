@@ -61,7 +61,7 @@
        </select>
       </div>
       <div class="col-md mb-3">
-       <label class="d-block">Optimal Temperature</label>
+       <label class="d-block">Storage</label>
        <div class="input-group">
         <input type="text" class="form-control" name="temperature" value="{{ $dosage->temperature }}">
         <div class="input-group-append">

@@ -140,7 +140,7 @@
 									</div>
 									<div class="col-sm">
 										<div class="mb-3">
-											<label for="" class="d-block">Zip</label>
+											<label for="" class="d-block">Postal Code</label>
 											<input type="number" name="company_zip"
 												   class="form-control{{ $errors->has('company_zip') ? ' is-invalid' : '' }}"
 												   value="{{$rows->zip}}"/>

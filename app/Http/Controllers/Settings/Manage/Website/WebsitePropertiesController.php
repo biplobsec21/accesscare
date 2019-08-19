@@ -169,15 +169,15 @@ class WebsitePropertiesController extends Controller {
 
             ],
             [
-        'company_name.required' => 'Name field is Required!',
-        'company_est.required' => 'Establishedment field is Required!',
-        'company_addr_1.required' => 'Address field is Required!',
-        'company_city.required' => 'City field is Required!',
-        'company_state.required' => 'State field is Required!',
-        'company_zip.required' => 'Zip Code field is Required!',
-        'company_phone_1.required' => 'Phone field is Required!',
-        'company_email.required' => 'Email field is Required!',
-        'company_url.required' => 'Company URL field is Required!',
+        'company_name.required' => 'Name is required',
+        'company_est.required' => 'Establishedment is required',
+        'company_addr_1.required' => 'Address is required',
+        'company_city.required' => 'City is required',
+        'company_state.required' => 'State is required',
+        'company_zip.required' => 'Postal Code is required',
+        'company_phone_1.required' => 'Phone is required',
+        'company_email.required' => 'Email is required',
+        'company_url.required' => 'Company URL is required',
     ]);
 
         // dd($request);
@@ -260,17 +260,17 @@ class WebsitePropertiesController extends Controller {
 
             ],
             [
-        'company_name.required' => 'Name field is Required!',
-        'company_est.required' => 'Establishedment field is Required!',
-        'company_addr_1.required' => 'Address field is Required!',
+        'company_name.required' => 'Name is required',
+        'company_est.required' => 'Establishedment is required',
+        'company_addr_1.required' => 'Address is required',
 
-        'company_city.required' => 'City field is Required!',
-        'company_state.required' => 'State field is Required!',
-        'company_zip.required' => 'Zip Code field is Required!',
-        'company_phone_1.required' => 'Phone field is Required!',
+        'company_city.required' => 'City is required',
+        'company_state.required' => 'State is required',
+        'company_zip.required' => 'Postal Code is required',
+        'company_phone_1.required' => 'Phone is required',
 
-        'company_email.required' => 'Email field is Required!',
-        'company_url.required' => 'Company URL field is Required!',
+        'company_email.required' => 'Email is required',
+        'company_url.required' => 'Company URL is required',
     ]);
 
         // dd($request);

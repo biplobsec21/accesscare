@@ -91,7 +91,7 @@
 								</button>
 							</div>
 						@else
-							<span>Drug distrobution schedule has not been set</span>
+							<span>Drug distribution schedule has not been set</span>
 						@endif
 					</div>
 				</form>

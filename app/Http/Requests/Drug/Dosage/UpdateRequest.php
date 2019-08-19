@@ -51,11 +51,11 @@ class UpdateRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'form_id.required' => 'Dosage Form field is required',
-			'temperature.required' => 'Optimal Temperature field is required',
-			'amount.required' => 'Amount field is required',
-			'unit_id.required' => 'Unit field is required',
-			'strength_id.required' => 'Strength field is required',
+			'form_id.required' => 'Dosage Form is required',
+			'temperature.required' => 'Storage is required',
+			'amount.required' => 'Amount is required',
+			'unit_id.required' => 'Unit is required',
+			'strength_id.required' => 'Strength is required',
 		];
 	}
 }
