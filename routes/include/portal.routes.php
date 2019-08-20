@@ -25,6 +25,12 @@ Route::group([
 		'uses' => 'DashboardController@notificationAllRead',
 	]);
 
+
+ Route::get('/edit-visit-mockup', [
+  'as' => 'eac.portal.rid.visit.edit.mockup',
+  'uses' => 'MockupController@edit',
+ ]);
+
 	Route::match(['post', 'get'], '/notification/single', [
 		'as' => 'eac.portal.notifications.read.single',
 		'uses' => 'DashboardController@singleNotification'
