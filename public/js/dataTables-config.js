@@ -4,7 +4,9 @@
         let $header = this.find('thead');
         let $body = this.find('tbody');
         let $footer = this.find('tfoot');
+        let $id = this.attr('id');
 
+        //Set our custom default settings and then apply th  provided settings
         let $settings = Object.assign({
             paginationDefault: 10,
             paginationOptions: [10, 25, 50, 75, 100],
@@ -12,60 +14,83 @@
             serverSide: true,
             orderCellsTop: true,
             fixedHeader: true,
+            deferLoading: true,
         }, $options);
+
+        // Get filters based on $_GET parameters
+        let $params = $('#getParams');
+        if (!$params.length)
+            return false;
+        $params = JSON.parse($params.val());
+
+        // Set the 'columns' DataTable setting with custom setup
         if ($settings.ajax.fields) {
             $settings.columns = $settings.ajax.fields.map(function ($field, $index) {
-                let $col = $header.find('th:eq(' + $index + ')');
-                $field.orderable = !$col.hasClass('no-sort');
-                $field.searchable = !$col.hasClass('no-search');
-                if (!$field.type) {
+                let $colHeader = $header.find('th:eq(' + $index + ')');
+                $field.name = $field.data;
+                $field.orderable = !$colHeader.hasClass('no-sort');
+                $field.searchable = !$colHeader.hasClass('no-search');
+                $field.selectable = $colHeader.hasClass('select');
+
+                // If no type given, assume string
+                if (!$field.type)
                     $field.type = "string";
-                }
-                $field.selectable = $col.hasClass('select');
+
                 return $field;
-            });
-        } else if ($settings.columns) {
-            $settings.columns = $settings.columns.map(function (str, index) {
-                let $col = $header.find('th:eq(' + index + ')');
-                let $val = {orderable: !$col.hasClass('no-sort'), searchable: !$col.hasClass('no-search')};
-                if (str) {
-                    $val.data = str;
-                }
-                return $val;
             });
         }
 
-
-        // Create inputs in the table head
+        // Get the first header row
         let $firstHeaderRow = $header.find('tr:eq(0)');
+        // Create second table header row for filtering columns
         let $secondHeaderRow = $firstHeaderRow.clone(true).appendTo($header).addClass("filter-cols");
-        let $selects = [];
+        // Set first table header row to sort by that column
         $firstHeaderRow.addClass("sort-cols");
+
+
+        // Populate second table header row with inputs
         $secondHeaderRow.find('th').each(function (i) {
+            let $col = $settings.columns[i];
+            let $val = $params[$col.data];
             if ($(this).hasClass("no-search")) {
                 $(this).html('');
                 return;
             }
             if ($(this).hasClass("select")) {
-                $(this).html('<select class="form-control" data-col="' + i + '"></select>');
+                if ($val)
+                    $(this).html('<select class="form-control" data-col="' + i + '"><option selected value="' + $val + '">' + $val + '</option></select>');
+                else
+                    $(this).html('<select class="form-control" data-col="' + i + '"><option selected value="">All</option></select>');
                 $('select', this).on('change', function () {
                     if ($(this).closest('table').DataTable().column(i).search() !== this.value)
                         $(this).closest('table').DataTable().column(i).search(this.value).draw();
                 });
                 return;
             }
-            $(this).html('<input type="text" class="form-control" placeholder="Search ' + $(this).text() + '" />');
+            if ($val)
+                $(this).html('<input type="text" class="form-control" placeholder="Search ' + $(this).text() + '" value="' + $val + '" />');
+            else
+                $(this).html('<input type="text" class="form-control" placeholder="Search ' + $(this).text() + '" />');
             $('input', this).on('change', function () {
                 if ($(this).closest('table').DataTable().column(i).search() !== this.value)
                     $(this).closest('table').DataTable().column(i).search(this.value).draw();
             });
         });
 
-        //Passing columns through ajax
+        // Add columns to data sent through ajax
         $settings.ajax.data = {columns: $settings.columns};
 
+        // Initiate DataTable
         let dataTable = $(this).DataTable($settings);
 
+        // Add $_GET filters
+        for (var key in $params)
+            dataTable.column(key + ':name').search($params[key]);
+
+        // Draw table
+        dataTable.draw();
+
+        // Populate select filters with options
         dataTable.on('xhr', function () {
             let $response = dataTable.ajax.json();
             $secondHeaderRow.find('select').each(function () {
@@ -73,19 +98,21 @@
                 let $arr = $select['options'];
                 let $val = $select['value'];
                 $(this).empty();
-
-                if($val === null)
+                if ($val === null)
                     $(this).append('<option selected value="">All</option>');
                 else
                     $(this).append('<option value="">All</option>');
                 for (let i = 0; i < $arr.length; i++) {
-                    if($val === $arr[i])
+                    if ($val === $arr[i])
                         $(this).append('<option selected value="' + $arr[i] + '">' + $arr[i] + '</option>');
                     else
                         $(this).append('<option value="' + $arr[i] + '">' + $arr[i] + '</option>');
                 }
             });
         });
+
+        // Hide the global search (since we have column filtering)
+        $('.dataTables_filter').hide();
 
         // $('.dataTables_wrapper').children('.row:first').hide();
         // $('.dataTables_length select').clone(true).appendTo($secondHeaderRow.find('th:last'));
@@ -107,7 +134,8 @@
                 icon: "warning",
             });
         };
-        $('.dataTables_filter').hide();
+
+        // Return DataTable
         return dataTable;
     };
 }(jQuery));
