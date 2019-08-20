@@ -122,8 +122,8 @@
                         <th>RID Number</th>
                         <th class="no-search">Visits</th>
                         <th class="select">Request Status</th>
-                        <th>Physician</th>
-                        <th>Drug Requested</th>
+                        <th class="select">Physician</th>
+                        <th class="select">Drug Requested</th>
                         <th class="no-search no-sort"></th>
                     </tr>
                     </thead>

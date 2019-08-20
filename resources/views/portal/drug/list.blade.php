@@ -28,7 +28,7 @@
 	</div><!-- end .actionBar -->
 
 	<div class="viewData">
-  <div class="row"> 
+  <div class="row">
    <div class="order-lg-2 col-lg-2 col-xl-3">
     <!-- show pie chart displaying companies and # of drugs -->
     <!-- display fulfillment stats -->
@@ -40,8 +40,8 @@
   					<thead>
   					<tr>
   						<th>Drug Name</th>
-  						<th>Company</th>
-  						<th class="">Status</th>
+  						<th class="select">Company</th>
+  						<th class="select">Status</th>
   						<th>Submitted Date</th>
   						<th class="no-search no-sort"></th>
   					</tr>

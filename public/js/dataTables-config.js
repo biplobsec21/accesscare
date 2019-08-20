@@ -21,7 +21,7 @@
                 if (!$field.type) {
                     $field.type = "string";
                 }
-                $field.selectable = !$col.hasClass('select');
+                $field.selectable = $col.hasClass('select');
                 return $field;
             });
         } else if ($settings.columns) {
@@ -47,7 +47,7 @@
                 return;
             }
             if ($(this).hasClass("select")) {
-                $(this).html('<select class="form-control"><option value="">All</option></select>');
+                $(this).html('<select class="form-control" data-col="' + i + '"></select>');
                 $('select', this).on('change', function () {
                     if ($(this).closest('table').DataTable().column(i).search() !== this.value)
                         $(this).closest('table').DataTable().column(i).search(this.value).draw();
@@ -62,16 +62,29 @@
         });
 
         //Passing columns through ajax
-        $settings.ajax.data = {columns: $settings.columns, selects: {}};
+        $settings.ajax.data = {columns: $settings.columns};
 
         let dataTable = $(this).DataTable($settings);
 
         dataTable.on('xhr', function () {
-            console.log(dataTable.ajax.json());
-            // $secondHeaderRow.find().each(function () {
-            //     if ($(this).closest('table').DataTable().column(i).search() !== this.value)
-            //         $(this).closest('table').DataTable().column(i).search(this.value).draw();
-            // });
+            let $response = dataTable.ajax.json();
+            $secondHeaderRow.find('select').each(function () {
+                let $select = $response.options[$(this).data('col')];
+                let $arr = $select['options'];
+                let $val = $select['value'];
+                $(this).empty();
+
+                if($val === null)
+                    $(this).append('<option selected value="">All</option>');
+                else
+                    $(this).append('<option value="">All</option>');
+                for (let i = 0; i < $arr.length; i++) {
+                    if($val === $arr[i])
+                        $(this).append('<option selected value="' + $arr[i] + '">' + $arr[i] + '</option>');
+                    else
+                        $(this).append('<option value="' + $arr[i] + '">' + $arr[i] + '</option>');
+                }
+            });
         });
 
         // $('.dataTables_wrapper').children('.row:first').hide();
