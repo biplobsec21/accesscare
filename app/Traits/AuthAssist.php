@@ -90,6 +90,9 @@ trait AuthAssist
         foreach ($rid->user_groups as $group)
             if ($member = $group->members->where('id', $this->user->id)->first())
                 $access->pushAccess(json_decode($member->role->base_level));
+        if($rid->status->name == 'Completed')
+        	$access->setViewOnly();
+
         return $access;
     }
 
