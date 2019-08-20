@@ -50,7 +50,7 @@
     <div class="collapse" id="showDRUGstats">
      <ul class="list-group list-group-flush mb-0 small">
       <li class="list-group-item pt-1 pb-1">
-       <a href="{{route('eac.portal.drug.list')}}">
+       <a href="{{route('eac.portal.drug.list') . "?status=Not%20Approved"}}">
         <div class="row m-0">
          <div class="col p-0">
           Not Approved
@@ -64,7 +64,7 @@
        </a>
       </li>
       <li class="list-group-item pt-1 pb-1">
-       <a href="{{route('eac.portal.drug.list')}}">
+       <a href="{{route('eac.portal.drug.list') . "?status=Pending"}}">
         <div class="row m-0">
          <div class="col p-0">
           Pending
@@ -78,7 +78,7 @@
        </a>
       </li>
       <li class="list-group-item pt-1 pb-1">
-       <a href="{{route('eac.portal.drug.list')}}">
+       <a href="{{route('eac.portal.drug.list') . "?status=Approved"}}">
         <div class="row m-0">
          <div class="col p-0">
           Approved

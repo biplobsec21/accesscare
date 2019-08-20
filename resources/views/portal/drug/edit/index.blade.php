@@ -408,18 +408,6 @@
                                 </p>
                             @endif
                         </div>
-                        @access('drug.user.create')
-                        <div class="card-footer d-flex justify-content-start">
-                            {{-- <button type="button" class="btn btn-primary window-btn" data-toggle="modal"
-                            data-target="#">
-                            Add Existing Group
-                            </button> --}}
-                            <button type="button" class="ml-3 btn btn-success window-btn" data-toggle="modal" data-target="#AddModal">
-                                Add New Group
-                            </button>
-                        </div>
-                        @include('include.portal.modals.usergroup.AddModal')
-                        @endif
                     </div><!-- /.tab-pane -->
                     <div class="tab-pane fade" id="xdocuments" role="tabpanel" aria-labelledby="xdocuments-tab">
                         <div class="card card-body mb-0">

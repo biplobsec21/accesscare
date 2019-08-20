@@ -50,7 +50,7 @@
     <div class="collapse" id="showUSERstats">
      <ul class="list-group list-group-flush mb-0 small">
       <li class="list-group-item pt-1 pb-1 text-danger">
-       <a href="{{route('eac.portal.user.list')}}">
+       <a href="{{route('eac.portal.user.list') . "?status=Pending"}}">
         <div class="row m-0">
          <div class="col p-0">
           Pending
@@ -63,7 +63,7 @@
        </a>
       </li>
       <li class="list-group-item pt-1 pb-1">
-       <a href="{{route('eac.portal.user.list')}}">
+       <a href="{{route('eac.portal.user.list') . "?status=Registering"}}">
         <div class="row m-0">
          <div class="col p-0">
           Registering
@@ -75,7 +75,7 @@
        </a>
       </li>
       <li class="list-group-item pt-1 pb-1">
-       <a href="{{route('eac.portal.user.list')}}">
+       <a href="{{route('eac.portal.user.list') . "?status=Approved"}}">
         <div class="row m-0">
          <div class="col p-0">
           Approved
@@ -87,7 +87,7 @@
        </a>
        <ul class="list-unstyled small ml-3 mb-0">
         <li class="pt-1 pb-1">
-         <a href="{{route('eac.portal.user.list')}}">
+         <a href="{{route('eac.portal.user.list') . "?type-name=Physician&status=Approved"}}">
           <div class="row m-0">
            <div class="col p-0">
             Physician Users
@@ -101,7 +101,7 @@
          </a>
         </li>
         <li class="pt-1 pb-1">
-         <a href="{{route('eac.portal.user.list')}}">
+         <a href="{{route('eac.portal.user.list') . "?type-name=Pharmaceutical&status=Approved"}}">
           <div class="row m-0">
            <div class="col p-0">
             Pharmaceutical Users
@@ -115,7 +115,7 @@
          </a>
         </li>
         <li class="pt-1 pb-1">
-         <a href="{{route('eac.portal.user.list')}}">
+         <a href="{{route('eac.portal.user.list') . "?type-name=Early%20Access%20Care&status=Approved"}}">
           <div class="row m-0">
            <div class="col p-0">
             Early Access Care Users
@@ -131,7 +131,7 @@
        </ul>
       </li>
       <li class="list-group-item pt-1 pb-1">
-       <a href="{{route('eac.portal.user.list')}}">
+       <a href="{{route('eac.portal.user.list') . "?status=Suspended"}}">
         <div class="row m-0">
          <div class="col p-0">
           Suspended

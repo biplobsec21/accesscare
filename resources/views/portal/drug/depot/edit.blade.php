@@ -217,7 +217,7 @@
 											<th>Drug</th>
 											<th>Dosage</th>
 											<th>Stock</th>
-											<th>Last Update</th>
+											<th>Created At</th>
 											<th></th>
 										</tr>
 										</thead>

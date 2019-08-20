@@ -13,7 +13,7 @@
    <span>Initiate New Request</span>
    <span class="fa-fw fad fa-lg fa-medkit"></span>
   </div>
- </a> 
+ </a>
 @else
  <div class="card">
   @if(\Auth::user()->type->name == 'Early Access Care')
@@ -51,7 +51,7 @@
      <ul class="list-group list-group-flush mb-0 small">
       @if($rids->count() > 0)
        <li class="list-group-item pt-1 pb-1 text-danger">
-        <a href="{{route('eac.portal.rid.list')}}">
+        <a href="{{route('eac.portal.rid.list') . "?status-name=New"}}">
          <div class="row m-0">
           <div class="col p-0">
            New
@@ -66,7 +66,7 @@
         </a>
        </li>
        <li class="list-group-item pt-1 pb-1">
-        <a href="{{route('eac.portal.rid.list')}}">
+        <a href="{{route('eac.portal.rid.list') . "?status-name=Pending"}}">
          <div class="row m-0">
           <div class="col p-0">
            Pending
@@ -80,7 +80,7 @@
         </a>
        </li>
        <li class="list-group-item pt-1 pb-1">
-        <a href="{{route('eac.portal.rid.list')}}">
+        <a href="{{route('eac.portal.rid.list') . "?status-name=Fulfillment"}}">
          <div class="row m-0">
           <div class="col p-0">
            Fulfillment
@@ -94,7 +94,7 @@
         </a>
        </li>
        <li class="list-group-item pt-1 pb-1">
-        <a href="{{route('eac.portal.rid.list')}}">
+        <a href="{{route('eac.portal.rid.list') . "?status-name=Completed"}}">
          <div class="row m-0">
           <div class="col p-0">
            Completed
@@ -108,7 +108,7 @@
         </a>
        </li>
        <li class="list-group-item pt-1 pb-1">
-        <a href="{{route('eac.portal.rid.list')}}">
+        <a href="{{route('eac.portal.rid.list') . "?status-name=Approved"}}">
          <div class="row m-0">
           <div class="col p-0">
            Approved

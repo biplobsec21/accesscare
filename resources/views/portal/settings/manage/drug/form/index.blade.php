@@ -40,7 +40,7 @@
  </div><!-- end .actionBar -->
  
  <div class="viewData">
-  <div class="row"> 
+  <div class="row">
    <div class="order-lg-2 col-lg-2 col-xl-3">
    </div>
    <div class="order-lg-1 col-lg-10 col-xl-9">
@@ -66,7 +66,7 @@
         <th class="no-search">Active</th>
         <th class="no-search">Concentration</th>
         {{-- <th>Desc</th> --}}
-        <th>Last Update</th>
+        <th>Created At</th>
         <th class="no-search no-sort"></th>
        </tr>
        </thead>
