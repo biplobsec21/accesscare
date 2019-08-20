@@ -90,7 +90,7 @@
 					   </div>
 						</div>
 						<div class="col-md mb-3">
-							<label class="d-block label_required">Optimal Temperature</label>
+							<label class="d-block label_required">Storage</label>
        <div class="input-group">
  							<input type="text" class="form-control {{ $errors->has('temperature') ? ' is-invalid' : '' }}" name="temperature" value="{{ $dosage->temperature }}" required="required">
         <div class="input-group-append">

@@ -266,8 +266,8 @@
           </div>
          </div>
          <div class="col-sm-5 col-lg-6 mb-3">
-          <label class="d-block" id="zip_lbl">Zip</label>
-          <input type="text" id="zip_input" class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode"  value="{{ $company->address->zipcode }}" placeholder="Zipcode">
+          <label class="d-block" id="zip_lbl">Postal Code</label>
+          <input type="text" id="zip_input" class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode"  value="{{ $company->address->zipcode }}" placeholder="Postal Code">
           <div class="invalid-feedback">
            {{ $errors->first('zipcode') }}
           </div>
@@ -496,7 +496,7 @@
           @endif
        
           <div class="col-sm col-lg-12 col-xl mb-2">
-           <label class="d-block">Zip</label>
+           <label class="d-block">Postal Code</label>
            <input type="text" class="form-control" name="zipcode" value="{{ $company->address->zipcode }}">
           </div>
          </div>
@@ -763,8 +763,8 @@ $(document).ready(function () {
         $('#state_option').attr("disabled", false);
         $("#city_lbl").text('City');
         $("#city_input").attr('placeholder','City');
-        $("#zip_lbl").text('Zip');
-        $("#zip_input").attr('placeholder','Zip Code');
+        $("#zip_lbl").text('Postal Code');
+        $("#zip_input").attr('placeholder','Postal Code');
       }
 
     });
