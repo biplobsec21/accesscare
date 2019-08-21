@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Example;
+use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 use App\Support\GenerateID;
 use App\DataTables\DataTableResponse;
 
@@ -32,19 +33,36 @@ class ExampleController extends BaseController
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
-        $users = User::all();
+	    $example = Example::where('id',$id)->first();
         return view('portal.drug.depot.create', [
-            'users' => $users,
+	        'example' => $example,
         ]);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $users = User::all();
+	    $example = Example::where('id',$id)->first();
         return view('portal.drug.depot.create', [
-            'users' => $users,
+            'example' => $example,
         ]);
     }
+
+	public function store(Request $request)
+	{
+		$example = new Example();
+		$example->id = Example::newID();
+		$example->fill($request->all());
+		$example->save();
+		return $this->clientRedirect($request, ['success', 'Successful Creation!']);
+	}
+
+	public function update(Request $request)
+	{
+		$example = Example::where('id', $request->input('id'))->first();
+		$example->fill($request->all());
+		$example->save();
+		return $this->clientRedirect($request, ['success', 'Successful Update!']);
+	}
 }

@@ -137,52 +137,51 @@
 @endsection
 
 @section('scripts')
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
-	<script type="text/javascript">
-		$(document).ready(function () {
-			let $url = "{{route('eac.portal.rid.ajax.list')}}";
-			// Data Tables
-			$('#ridListTBL').initDT({
-				ajax: {
-					url: $url,
-					type: "post",
-					fields: [
-						{
-							data: "created_at",
-						},
-						{
-							data: "number",
-							type: "link",
-							href: "view_route"
-						},
-						{
-							data: "visits",
-							type: "count"
-						},
-						{
-							data: "status-name",
-						},
-						{
-							data: "physician-full_name",
-							type: "link",
-							href: "physician-view_route"
-						},
-						{
-							data: "drug-name"
-						},
-						{
-							data: "view_route",
-							type: "btn",
-							classes: "btn btn-primary btn-sm",
-							icon: '<i class="far fa-sm fa-search"></i>',
-							text: "View"
-						},
-					],
-				},
-				order: [[0, 'asc']],
-				responsive: true
-			});
-		}); // end doc ready
-	</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let $url = "{{route('eac.portal.rid.ajax.list')}}";
+            // Data Tables
+            $('#ridListTBL').initDT({
+                ajax: {
+                    url: $url,
+                    type: "post",
+                    fields: [
+                        {
+                            data: "created_at",
+                        },
+                        {
+                            data: "number",
+                            type: "link",
+                            href: "view_route"
+                        },
+                        {
+                            data: "visits",
+                            type: "count"
+                        },
+                        {
+                            data: "status-name",
+                        },
+                        {
+                            data: "physician-full_name",
+                            type: "link",
+                            href: "physician-view_route"
+                        },
+                        {
+                            data: "drug-name"
+                        },
+                        {
+                            data: "view_route",
+                            type: "btn",
+                            classes: "btn btn-primary btn-sm",
+                            icon: '<i class="far fa-sm fa-search"></i>',
+                            text: "View"
+                        },
+                    ],
+                },
+                order: [[0, 'asc']]
+            });
+        }); // end doc ready
+    </script>
 @endsection

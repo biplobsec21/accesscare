@@ -19,8 +19,6 @@ trait Notifier
         $users = collect([$user]);
         if ($user === 'eac')
             $users = User::where('type_id', UserType::where('name', 'Early Access Care')->first()->id)->get();
-        else
-            $users = $user;
         $mailer = Mailer::where('name', $name)->first();
 
         $this->buildNotice($mailer, $context, $users);
