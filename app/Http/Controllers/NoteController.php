@@ -32,10 +32,10 @@ class NoteController extends Controller
 		$note->save();
 
 		if($note->PhysicianMember()->count() > 0){
-			// rid_notes is the mailer template 
+			// rid_notes is the mailer template
 			//$this->createNotice('rid_notes', $note, $note->PhysicianMember());
 		}
-		
+
 		return redirect()->back();
 	}
 

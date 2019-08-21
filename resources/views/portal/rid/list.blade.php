@@ -179,8 +179,7 @@
                         },
                     ],
                 },
-                order: [[0, 'asc']],
-                responsive: true
+                order: [[0, 'asc']]
             });
         }); // end doc ready
     </script>

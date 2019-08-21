@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Support\GenerateID;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -12,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BaseModel extends Model
 {
-
 
 	/**
 	 * Indicates if the model should automatically increment the id
@@ -36,4 +36,9 @@ class BaseModel extends Model
 	 * @var bool
 	 */
 	public $timestamps = true;
+
+	public static function newID()
+	{
+		return GenerateID::run(10);
+	}
 }
