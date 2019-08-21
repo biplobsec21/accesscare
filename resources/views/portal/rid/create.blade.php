@@ -6,26 +6,28 @@
 
 @section('styles')
 	<style>
-  @media screen and (min-width: 1200px) {
-   :root {
-    --leftCol: 220px;
-    --rightCol: 700px;
-   }   
-   .actionBar, .viewData {
-    max-width: calc(var(--leftCol) + var(--rightCol));
-   }   
-   .viewData .row.thisone > [class*=col]:first-child {
-    width: var(--leftCol);
-   }   
-   .viewData .row.thisone > [class*=col]:last-child {
-    width: var(--rightCol);
-   }
-  }
+		@media screen and (min-width: 1200px) {
+			:root {
+				--leftCol: 220px;
+				--rightCol: 700px;
+			}   
+			.actionBar, .viewData {
+				max-width: calc(var(--leftCol) + var(--rightCol));
+			}   
+			.viewData .row.thisone > [class*=col]:first-child {
+				width: var(--leftCol);
+			}   
+			.viewData .row.thisone > [class*=col]:last-child {
+				width: var(--rightCol);
+			}
+		}
 	</style>
 @endsection
 
 @section('instructions')
-	To make a request for investigational drug, complete required information. Provide the diagnosis and further relevant information, such as failure of all available treatments. Provide brief description of proposed treatment regimen, if available.
+	<div class="instructions mb-3">
+		To make a request for investigational drug, complete required information. Provide the diagnosis and further relevant information, such as failure of all available treatments. Provide brief description of proposed treatment regimen, if available.
+	</div>
 @endsection
 
 @section('content')
@@ -54,35 +56,33 @@
 			<a href="{{ route('eac.portal.rid.list') }}" class="btn btn-light">
 				Rid List
 			</a>
-   <a href="{{ route('eac.portal.rid.list') }}" class="ml-xl-auto btn btn-warning">
-    <i class="fal fa-times"></i>
-    Cancel
-   </a>{{-- added per request RP --}}
+			<a href="{{ route('eac.portal.rid.list') }}" class="ml-xl-auto btn btn-warning">
+				<i class="fal fa-times"></i>
+				Cancel
+			</a>{{-- added per request RP --}}
 		</div><!-- end .actionBar -->
 
-  <div class="viewData">
-   <div class="instructions mb-3">
-    @yield('instructions')
-   </div>
-   <div class="row thisone m-0 mb-xl-5">
-    <div class="col-sm-3 col-xl-auto mb-2 mb-sm-0 p-0">
-     <div class="wizardSteps nav flex-row flex-sm-column" id="tab" role="tablist" aria-orientation="vertical">
- 					<a class="nav-link active" id="one-tab" data-toggle="pill" href="#one" role="tab" aria-controls="one" aria-selected="false">
- 						<span>Assign Request</span>
- 					</a>
- 					<a class="nav-link" id="two-tab" data-toggle="pill" href="#two" role="tab" aria-controls="two" aria-selected="false">
- 						<span>Patient Information</span>
- 					</a>
- 					<a class="nav-link" id="three-tab" data-toggle="pill" href="#three" role="tab" aria-controls="three" aria-selected="true">
- 						<span>Drug Selection</span>
- 					</a>
- 					<a class="nav-link" id="four-tab" data-toggle="pill" href="#four" role="tab" aria-controls="four" aria-selected="false">
- 						<span>Delivery Date</span>
- 					</a>
+		<div class="viewData">
+			@yield('instructions')
+			<div class="row thisone m-0 mb-xl-5">
+				<div class="col-sm-3 col-xl-auto mb-2 mb-sm-0 p-0">
+					<div class="wizardSteps nav flex-row flex-sm-column" id="tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="one-tab" data-toggle="pill" href="#one" role="tab" aria-controls="one" aria-selected="false">
+							<span>Assign Request</span>
+						</a>
+						<a class="nav-link" id="two-tab" data-toggle="pill" href="#two" role="tab" aria-controls="two" aria-selected="false">
+							<span>Patient Information</span>
+						</a>
+						<a class="nav-link" id="three-tab" data-toggle="pill" href="#three" role="tab" aria-controls="three" aria-selected="true">
+							<span>Drug Selection</span>
+						</a>
+						<a class="nav-link" id="four-tab" data-toggle="pill" href="#four" role="tab" aria-controls="four" aria-selected="false">
+							<span>Delivery Date</span>
+						</a>
 					</div>
 				</div>
-    <div class="col-sm-9 col-xl p-0">
-     <div class="card tab-content wizardContent" id="tabContent">
+				<div class="col-sm-9 col-xl p-0">
+					<div class="card tab-content wizardContent" id="tabContent">
 						<!-- first tab should only be available (and active) if user is able to select other users, ie: only for EAC -->
 						<div class="tab-pane fade show active" id="one" role="tabpanel" aria-labelledby="one-tab">
 							<div class="card-body">
@@ -131,66 +131,66 @@
 													name="patient_dob[month]">
 													<option hidden selected value="">Month</option>
 													<option value="1"
-													        @if(optional(optional(old('patient_dob')))['month'] == "1") selected @endif >
+																					@if(optional(optional(old('patient_dob')))['month'] == "1") selected @endif >
 														January
 													</option>
 													<option value="2"
-													        @if(optional(optional(old('patient_dob')))['month'] == "2") selected @endif >
+																					@if(optional(optional(old('patient_dob')))['month'] == "2") selected @endif >
 														February
 													</option>
 													<option value="3"
-													        @if(optional(old('patient_dob'))['month'] == "3") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "3") selected @endif >
 														March
 													</option>
 													<option value="4"
-													        @if(optional(old('patient_dob'))['month'] == "4") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "4") selected @endif >
 														April
 													</option>
 													<option value="5"
-													        @if(optional(old('patient_dob'))['month'] == "5") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "5") selected @endif >
 														May
 													</option>
 													<option value="6"
-													        @if(optional(old('patient_dob'))['month'] == "6") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "6") selected @endif >
 														June
 													</option>
 													<option value="7"
-													        @if(optional(old('patient_dob'))['month'] == "7") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "7") selected @endif >
 														July
 													</option>
 													<option value="8"
-													        @if(optional(old('patient_dob'))['month'] == "8") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "8") selected @endif >
 														August
 													</option>
 													<option value="9"
-													        @if(optional(old('patient_dob'))['month'] == "9") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "9") selected @endif >
 														September
 													</option>
 													<option value="10"
-													        @if(optional(old('patient_dob'))['month'] == "10") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "10") selected @endif >
 														October
 													</option>
 													<option value="11"
-													        @if(optional(old('patient_dob'))['month'] == "11") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "11") selected @endif >
 														November
 													</option>
 													<option value="12"
-													        @if(optional(old('patient_dob'))['month'] == "12") selected @endif >
+																					@if(optional(old('patient_dob'))['month'] == "12") selected @endif >
 														December
 													</option>
 												</select>
 											</div>
 											<div class="col p-0">
 												<input type="number"
-												       class="form-control border-left-0 border-right-0 p_date {{ $errors->has('patient_dob.day') ? ' is-invalid' : '' }}"
-												       name="patient_dob[day]" placeholder="Day"
-												       value="{{ optional(old('patient_dob'))['day'] }}"/>
+																			class="form-control border-left-0 border-right-0 p_date {{ $errors->has('patient_dob.day') ? ' is-invalid' : '' }}"
+																			name="patient_dob[day]" placeholder="Day"
+																			value="{{ optional(old('patient_dob'))['day'] }}"/>
 											</div>
 											<div class="col p-0">
 												<input type="number"
-												       class="form-control dob_year {{ $errors->has('patient_dob.year') ? ' is-invalid' : '' }}"
-												       name="patient_dob[year]" placeholder="Year"
-												       value="{{ optional(old('patient_dob'))['year'] }}"/>
+																			class="form-control dob_year {{ $errors->has('patient_dob.year') ? ' is-invalid' : '' }}"
+																			name="patient_dob[year]" placeholder="Year"
+																			value="{{ optional(old('patient_dob'))['year'] }}"/>
 											</div>
 										</div>
 										<div class="invalid-feedback">
@@ -207,7 +207,7 @@
 									<div class="col-auto col-sm-12 col-md-4 mb-2">
 										<label class="d-block">Gender</label>
 										<select name="patient_gender"
-										        class="form-control{{ $errors->has('patient_gender') ? ' is-invalid' : '' }}">
+																		class="form-control{{ $errors->has('patient_gender') ? ' is-invalid' : '' }}">
 											<option hidden selected value="">-- Select --</option>
 											<option value="1" {{old('patient_gender') == '1' ? 'selected' : ''}}>
 												Male
@@ -225,7 +225,7 @@
 									<label class="d-block">Diagnosis and Reason for Compassionate
 										Use</label>
 									<textarea maxlength="3000" name="reason" rows="5"
-									          class="form-control{{ $errors->has('reason') ? ' is-invalid' : '' }}">{!! old('reason') !!}</textarea>
+																			class="form-control{{ $errors->has('reason') ? ' is-invalid' : '' }}">{!! old('reason') !!}</textarea>
 									<div class="invalid-feedback">
 										{{ $errors->first('reason') }}
 									</div>
@@ -265,8 +265,8 @@
 										<small>(Optional)</small>
 									</label>
 									<textarea maxlength="3000" name="proposed_treatment_plan"
-									          class="form-control {{ $errors->has('proposed_treatment_plan') ? ' is-invalid' : '' }}"
-									          rows="5">{{ old('proposed_treatment_plan') }}</textarea>
+																			class="form-control {{ $errors->has('proposed_treatment_plan') ? ' is-invalid' : '' }}"
+																			rows="5">{{ old('proposed_treatment_plan') }}</textarea>
 									<div class="invalid-feedback">
 										{{ $errors->first('proposed_treatment_plan') }}
 									</div>
@@ -294,8 +294,8 @@
 											</label>
 										</div>
 										<input type="text"
-										       class="datepicker form-control {{ $errors->has('req_date') ? ' is-invalid' : '' }}"
-										       name="req_date" id="req_date" value="{{ old('req_date') }}"/>
+																	class="datepicker form-control {{ $errors->has('req_date') ? ' is-invalid' : '' }}"
+																	name="req_date" id="req_date" value="{{ old('req_date') }}"/>
 										<div class="invalid-feedback">
 											{{ $errors->first('req_date') }}
 										</div>
@@ -319,156 +319,156 @@
 @endsection
 @section('scripts')
 	<script>
-        $('.select2').select2();
+								$('.select2').select2();
 
-        function phoneValidate(event) {
-            var regex = new RegExp("^[0-9-!@#$%*?.()+]");
-            var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
-            if (!regex.test(key)) {
-                event.preventDefault();
-                return false;
-            } else {
-                return true;
-            }
-        }
+								function phoneValidate(event) {
+												var regex = new RegExp("^[0-9-!@#$%*?.()+]");
+												var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+												if (!regex.test(key)) {
+																event.preventDefault();
+																return false;
+												} else {
+																return true;
+												}
+								}
 
-        $(function () {
-            $("a.next").click(function () {
-                let currentLink = $('.nav-link.active');
-                setWizardStep(currentLink.index() + 1);
-            });
+								$(function () {
+												$("a.next").click(function () {
+																let currentLink = $('.nav-link.active');
+																setWizardStep(currentLink.index() + 1);
+												});
 
-            $("a.prev").click(function () {
-                let currentLink = $('.nav-link.active');
-                setWizardStep(currentLink.index() - 1);
-            });
+												$("a.prev").click(function () {
+																let currentLink = $('.nav-link.active');
+																setWizardStep(currentLink.index() - 1);
+												});
 
-            let jumped = false;
+												let jumped = false;
 
-            $(".tab-pane").each(function () {
-                let errorCount = $(this).find('.is-invalid').length;
-                if (errorCount > 0) {
-                    let link = $('a[aria-controls=' + $(this).attr('id') + ']');
-                    link.addClass('invalid');
-                    if (!jumped) {
-                        setWizardStep(link.index());
-                        jumped = true;
-                    }
-                }
-            });
+												$(".tab-pane").each(function () {
+																let errorCount = $(this).find('.is-invalid').length;
+																if (errorCount > 0) {
+																				let link = $('a[aria-controls=' + $(this).attr('id') + ']');
+																				link.addClass('invalid');
+																				if (!jumped) {
+																								setWizardStep(link.index());
+																								jumped = true;
+																				}
+																}
+												});
 
-            function setWizardStep(n) {
-                $('.wizardSteps a.nav-link:nth-child(' + (n + 1) + ')').click();
-            };
+												function setWizardStep(n) {
+																$('.wizardSteps a.nav-link:nth-child(' + (n + 1) + ')').click();
+												};
 
-            $('#dob_year_invalid').text("");
-            var current_year = new Date().getFullYear();
-            // console.log(current_year);
+												$('#dob_year_invalid').text("");
+												var current_year = new Date().getFullYear();
+												// console.log(current_year);
 
-            $(".p_date").keyup(function () {
-                var month = $(".p_date").val().length;
-                if (month != 2) {
+												$(".p_date").keyup(function () {
+																var month = $(".p_date").val().length;
+																if (month != 2) {
 
-                    $("#dob_year_invalid").text("Date must have 2 digits");
+																				$("#dob_year_invalid").text("Date must have 2 digits");
 
-                } else {
+																} else {
 
-                    if (parseInt($(".p_date").val()) < parseInt(1)) {
-                        $("#dob_year_invalid").text("Date is not allowed");
-                        return false;
-                    }
+																				if (parseInt($(".p_date").val()) < parseInt(1)) {
+																								$("#dob_year_invalid").text("Date is not allowed");
+																								return false;
+																				}
 
-                    if (parseInt($(".p_date").val()) > parseInt(31)) {
-                        $("#dob_year_invalid").text("Date is not allowed");
-                        return false;
-                    }
+																				if (parseInt($(".p_date").val()) > parseInt(31)) {
+																								$("#dob_year_invalid").text("Date is not allowed");
+																								return false;
+																				}
 
-                    $('#dob_year_invalid').text("");
+																				$('#dob_year_invalid').text("");
 
-                }
+																}
 
-            });
-            $(".dob_year").keyup(function () {
-                $("#dob_year_invalid").text("Year must have 4 digit!");
-                var year_length = $(".dob_year").val().length;
+												});
+												$(".dob_year").keyup(function () {
+																$("#dob_year_invalid").text("Year must have 4 digit!");
+																var year_length = $(".dob_year").val().length;
 
-                if (year_length != 4) {
+																if (year_length != 4) {
 
-                    $("#dob_year_invalid").text("Year must have 4 digit!");
-                } else {
+																				$("#dob_year_invalid").text("Year must have 4 digit!");
+																} else {
 
-                    if (parseInt($(".dob_year").val()) < parseInt(1910)) {
-                        $("#dob_year_invalid").text("Year is not allowed");
-                        return false;
-                    }
+																				if (parseInt($(".dob_year").val()) < parseInt(1910)) {
+																								$("#dob_year_invalid").text("Year is not allowed");
+																								return false;
+																				}
 
-                    if (parseInt($(".dob_year").val()) > parseInt(current_year)) {
-                        $("#dob_year_invalid").text("Year is not allowed");
-                        return false;
-                    }
+																				if (parseInt($(".dob_year").val()) > parseInt(current_year)) {
+																								$("#dob_year_invalid").text("Year is not allowed");
+																								return false;
+																				}
 
-                    $('#dob_year_invalid').text("");
+																				$('#dob_year_invalid').text("");
 
-                }
-            });
+																}
+												});
 
-            $("#pharmacySelect").click(function () {
-                if ($(this).val() == 'new') {
-                    document.getElementById("newPharmacy").scrollIntoView()
-                }
-            });
+												$("#pharmacySelect").click(function () {
+																if ($(this).val() == 'new') {
+																				document.getElementById("newPharmacy").scrollIntoView()
+																}
+												});
 
-            if ($('#pharmacySelect').val() == 'new') {
-                $('#newPharmacy').addClass('show');
-                $('#oldPharmacy').removeClass('show');
-            } else if ($('#pharmacySelect').val()) {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route( 'eac.portal.pharmacy.info' ) }}",
-                    data: {
-                        'pharmacy_id': $('#pharmacySelect').val(),
-                    },
-                    success: function (response) {
-                        $('#pharmaInfo').html(response);
-                    },
-                });
-            }
-            $('#pharmacySelect').change(function () {
-                if ($(this).val() == 'new') {
-                    $('#newPharmacy').addClass('show');
-                    $('#oldPharmacy').removeClass('show');
-                } else {
-                    $('#newPharmacy').removeClass('show');
-                    $('#oldPharmacy').addClass('show');
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route( 'eac.portal.pharmacy.info' ) }}",
-                        data: {
-                            'pharmacy_id': $(this).val(),
-                        },
-                        success: function (response) {
-                            $('#pharmaInfo').html(response);
-                        },
-                    });
-                }
-            });
+												if ($('#pharmacySelect').val() == 'new') {
+																$('#newPharmacy').addClass('show');
+																$('#oldPharmacy').removeClass('show');
+												} else if ($('#pharmacySelect').val()) {
+																$.ajax({
+																				type: "POST",
+																				url: "{{ route( 'eac.portal.pharmacy.info' ) }}",
+																				data: {
+																								'pharmacy_id': $('#pharmacySelect').val(),
+																				},
+																				success: function (response) {
+																								$('#pharmaInfo').html(response);
+																				},
+																});
+												}
+												$('#pharmacySelect').change(function () {
+																if ($(this).val() == 'new') {
+																				$('#newPharmacy').addClass('show');
+																				$('#oldPharmacy').removeClass('show');
+																} else {
+																				$('#newPharmacy').removeClass('show');
+																				$('#oldPharmacy').addClass('show');
+																				$.ajax({
+																								type: "POST",
+																								url: "{{ route( 'eac.portal.pharmacy.info' ) }}",
+																								data: {
+																												'pharmacy_id': $(this).val(),
+																								},
+																								success: function (response) {
+																												$('#pharmaInfo').html(response);
+																								},
+																				});
+																}
+												});
 
-            $('#pharmacist_unknown').change(function () {
-                if (this.checked) {
-                    $('.pharmacist_info').hide();
-                } else {
-                    $('.pharmacist_info').show();
-                }
-            });
+												$('#pharmacist_unknown').change(function () {
+																if (this.checked) {
+																				$('.pharmacist_info').hide();
+																} else {
+																				$('.pharmacist_info').show();
+																}
+												});
 
-            $('#pharmacy_unknown').change(function () {
-                if (this.checked) {
-                    $('#pharmacy_info').hide();
-                } else {
-                    $('#pharmacy_info').show();
-                }
-            });
+												$('#pharmacy_unknown').change(function () {
+																if (this.checked) {
+																				$('#pharmacy_info').hide();
+																} else {
+																				$('#pharmacy_info').show();
+																}
+												});
 
-        });
+								});
 	</script>
 @endsection

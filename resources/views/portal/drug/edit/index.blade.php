@@ -110,9 +110,10 @@
 	@include('include.alerts')
 	
 	<div class="viewData">
+		@yield('instructions')
 		<div class="row thisone m-0 mb-xl-5">
 			<div class="col-sm-3 col-xl-auto mb-2 mb-sm-0 p-0">
-				<div class="wizardSteps symbols nav flex-row flex-sm-column mt-sm-3" id="tab" role="tablist" aria-orientation="vertical">
+				<div class="wizardSteps symbols nav flex-row flex-sm-column" id="tab" role="tablist" aria-orientation="vertical">
 					<a class="nav-link complete active" id="xdetailsT" data-toggle="pill" href="#xdetails" role="tab" aria-controls="xdetails" aria-selected="true">
 						<span>Drug Details</span>
 					</a>
