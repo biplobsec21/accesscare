@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Note;
 use App\Http\Requests\Note\CreateRequest;
+use App\Traits\Notifier;
 
 /**
  * Class NoteController
@@ -19,6 +20,7 @@ class NoteController extends Controller
 	 * @param  \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
+    use Notifier;
 	public function store(CreateRequest $request)
 	{
 		$note = new Note();
@@ -28,6 +30,12 @@ class NoteController extends Controller
 		$note->physican_viewable = $request->input('physican_viewable') ?? 0;
 		$note->author_id = \Auth::user()->id;
 		$note->save();
+
+		if($note->PhysicianMember()->count() > 0){
+			// rid_notes is the mailer template 
+			//$this->createNotice('rid_notes', $note, $note->PhysicianMember());
+		}
+		
 		return redirect()->back();
 	}
 
