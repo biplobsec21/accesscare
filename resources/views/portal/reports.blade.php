@@ -8,12 +8,12 @@
 @endsection
 
 @section('precontent')
- <div class="bg-gradient-primary border-bottom">
-  <h4 class="p-3 mb-0 text-white">Generate Query Report</h4>
+ <div class="bg-light border-bottom">
+  <h4 class="p-3 mb-0 ">Generate Query Report</h4>
   <div class="row m-0">
-   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-primary">
+   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-secondary">
     <div class="p-3">
-     <div class="poppins mb-1 strong text-white">
+     <div class="poppins mb-1 strong ">
       Countries
      </div>
      <select class="form-control select2" type="text" name="filters[country_id]" multiple>
@@ -94,9 +94,9 @@
      </select>
     </div>
    </div>
-   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-primary">
+   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-secondary">
     <div class="p-3">
-     <div class="poppins mb-1 strong text-white">
+     <div class="poppins mb-1 strong ">
       Pharma Company
      </div>
      <select class="form-control select2" multiple type="text" name="filters[company_id]">
@@ -109,9 +109,9 @@
      </select>
     </div>
    </div>
-   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-primary">
+   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-secondary">
     <div class="p-3">
-     <div class="poppins mb-1 strong text-white">
+     <div class="poppins mb-1 strong ">
       Pharma Management Type
      </div>
      <select class="form-control" type="text" name="filters[company_management_status_id]">
@@ -121,9 +121,9 @@
      </select>
     </div>
    </div>
-   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-primary">
+   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-right border-secondary">
     <div class="p-3">
-     <div class="poppins mb-1 strong text-white">
+     <div class="poppins mb-1 strong ">
       Managed By
      </div>
      <select class="form-control select2" multiple type="text" name="filters[admin_id]">
@@ -137,9 +137,9 @@
      </select>
     </div>
    </div>
-   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-primary">
+   <div class="col-sm-auto col-lg pl-3 pr-3 border-top border-secondary">
     <div class="p-3">
-     <div class="poppins mb-1 strong text-white">
+     <div class="poppins mb-1 strong ">
       RID Status
      </div>
      <select class="form-control select2" multiple type="text" name="filters[rid_status]">
@@ -155,14 +155,14 @@
     </div>
    </div>
   </div>
-  <div class="bg-primary p-2 text-center">
+  <div class="bg-secondary p-2 text-center">
    <a href="#fauxJump" class="btn btn-success">
     <span class="fad fa-fw fa-wand-magic"></span> Generate Report
    </a>
   </div>
   <div class="p-3">
    <div class="d-flex justify-content-between flex-wrap align-items-center">
-    <h3 class="poppins mb-1 text-white">
+    <h3 class="poppins mb-1 ">
      1 - XX results for [QUERY]
     </h3>
     <div class="">
@@ -511,7 +511,125 @@
    <div class="titleBar">
     <h4 class="mb-3">@yield('title')</h4>
    </div>
-   search results
+   
+   <div class="row">
+    <div class="col-sm">
+     <div class="bg-gradient-orange p-3 p-xl-5 text-white mb-3">
+      a box to show things
+     </div>
+    </div>
+    <div class="col-sm">
+     <div class="bg-gradient-cyan p-3 p-xl-5 text-white mb-3">
+      a box to show things
+     </div>
+    </div>
+    <div class="col-sm">
+     <div class="bg-gradient-purple p-3 p-xl-5 text-white mb-3">
+      a box to show things
+     </div>
+    </div>
+   </div>
+   <div class="card card-body p-3 mb-3">
+    <div class="row">
+     <div class="col-sm-6 order-2 order-xl-1 col-xl-3 mb-3">
+      <h4 class="mb-3 poppins">
+       Requests
+      </h4>
+      <div class="chart-container d-none d-lg-block">
+       <canvas id="bar-chart-horizontal"></canvas>
+      </div>
+      <div class="row poppins">
+       <div class="col col-lg-12 mb-3">
+        <div class="xx p-3 mb-0">
+         stats
+        </div><!-- /.card -->
+       </div>
+       <div class="col col-lg-12 mb-3">
+        <div class="xx p-3 mb-0">
+         stats
+        </div><!-- /.card -->
+       </div>
+      </div>
+      <a href="#" class="btn btn-secondary d-lg-block">
+       button here
+      </a>
+     </div>
+     <div class="col-sm-12 order-1 order-xl-2 col-xl-6 mb-3">
+      {{-- <div class="chart-container" style="position: relative;">
+       <canvas id="mixedChart"></canvas>
+      </div> --}}
+      <div class="chart-container">
+       <canvas id="testChart"></canvas>
+      </div>
+     </div>
+     <div class="col-sm-6 order-3 col-xl-3 mb-3">
+      <h4 class="mb-3 poppins">
+       Users
+      </h4>
+      <div class="chart-container d-none d-lg-block">
+       <canvas id="doughnut"></canvas>
+      </div>
+      <div class="row poppins">
+       <div class="col col-lg-12 mb-3">
+        <div class="xx p-3 mb-0">
+         stats
+        </div><!-- /.card -->
+       </div>
+       <div class="col col-lg-12 mb-3">
+        <div class="xx p-3 mb-0">
+         stats
+        </div><!-- /.card -->
+       </div>
+      </div>
+      <a href="#" class="btn btn-secondary d-lg-block">
+       button here
+      </a>
+     </div>
+    </div><!-- /.row -->
+    <hr class="mt-3 mb-3" />
+    <div class="row">
+     <div class="col-sm-6 col-lg">
+      <div class="row ml-0 mr-0 mb-3 alert-secondary">
+       <div class="col-auto p-2 bg-secondary text-white">
+        [icon]
+       </div>
+       <div class="col p-2">
+        box
+       </div>
+      </div><!-- /.row -->
+     </div>
+     <div class="col-sm-6 col-lg">
+      <div class="row ml-0 mr-0 mb-3 alert-secondary">
+       <div class="col-auto p-2 bg-secondary text-white">
+        [icon]
+       </div>
+       <div class="col p-2">
+        box
+       </div>
+      </div><!-- /.row -->
+     </div>
+     <div class="col-sm-6 col-lg">
+      <div class="row ml-0 mr-0 mb-3 alert-secondary">
+       <div class="col-auto p-2 bg-secondary text-white">
+        [icon]
+       </div>
+       <div class="col p-2">
+        box
+       </div>
+      </div><!-- /.row -->
+     </div>
+     <div class="col-sm-6 col-lg">
+      <div class="row ml-0 mr-0 mb-3 alert-secondary">
+       <div class="col-auto p-2 bg-secondary text-white">
+        [icon]
+       </div>
+       <div class="col p-2">
+        box
+       </div>
+      </div><!-- /.row -->
+     </div>
+    </div><!-- /.row -->
+   </div>
   </div>
  </div>
 @endsection

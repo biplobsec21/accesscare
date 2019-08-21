@@ -12,12 +12,12 @@
   {{ $rid->patient_weight }}KG
  </div>
 @endif
-{{-- @if(isset($rid->ethnicity->name))
+@if(isset($rid->ethnicity->name))
  <div class="mb-2">
   <strong class="d-block">Patient Ethnicity</strong>
   {{ $rid->ethnicity->name }}
  </div>
-@endif --}}
+@endif
 @if(isset($rid->reason))
  <div class="mb-2">
   <strong class="d-block">Reason for Request</strong>

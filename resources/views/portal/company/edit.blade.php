@@ -10,17 +10,14 @@
 			:root {
 				--leftCol: 230px;
 				--rightCol: 750px;
-			}
-			
+			}			
 			.actionBar, .viewData {
 				max-width: calc(var(--leftCol) + var(--rightCol));
-			}
-			
+			}			
 			.viewData .row.thisone > [class*=col]:first-child {
 				max-width: var(--leftCol);
 				min-width: var(--leftCol);
-			}
-			
+			}			
 			.viewData .row.thisone > [class*=col]:last-child {
 				max-width: var(--rightCol);
 				min-width: var(--rightCol);
@@ -79,15 +76,13 @@
 			@yield('title')
 		</h6>
 		<h2 class="m-0">
-			{{ $company->name }}
-			<small>({{ $company->abbr }})</small>
+			{{ $company->name }} <small>({{ $company->abbr }})</small>
 		</h2>
 		<div class="small d-sm-none">
 			@if(!is_null($company->updated_at))
 				<strong>Last Updated:</strong>
 				@php
-					$time = $company->updated_at;
-					
+					$time = $company->updated_at;					
 					echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
 				@endphp
 			@endif
@@ -105,18 +100,15 @@
 				<div>
 					@if($company->status == 'Approved')
 						<a href="{{ route('eac.portal.company.suspend', $company->id) }}" class="btn btn-danger">
-							<i class="fal fa-ban"></i>
-							Suspend Company
+							<i class="fal fa-ban"></i> Suspend Company
 						</a>
 					@elseif($company->status == 'Pending')
 						<a href="{{ route('eac.portal.company.approve', $company->id) }}" class="btn btn-success">
-							<i class="fal fa-check"></i>
-							Approve Company
+							<i class="fal fa-check"></i> Approve Company
 						</a>
 					@elseif($company->status == 'Not Approved')
 						<a href="{{ route('eac.portal.company.reactivate', $company->id) }}" class="btn btn-success">
-							<i class="fas fa-redo"></i>
-							Reactivate Company
+							<i class="fas fa-redo"></i> Reactivate Company
 						</a>
 					@endif
 				</div>
@@ -144,8 +136,7 @@
 					<div class="alert-light text-dark pt-3 pl-3 pr-3">
 						<div class="row">
 							<div class="col col-xl-auto mb-3">
-								<strong>{{$company->name}}</strong>
-								({{$company->abbr}})
+								<strong>{{$company->name}}</strong> ({{$company->abbr}})
 								<span class="badge badge-{{$bColor}}">{{ $company->status }}</span>
 								<ul class="nav flex-row m-0">
 									@if($company->site)
@@ -178,8 +169,7 @@
 							<div class="order-3 order-md-2 col-md col-xl-auto ml-xl-auto mr-xl-auto mb-3">
 								@if(isset($company->address))
 									<div class="small">
-										{{ $company->address->addr1 }}{{$company->address->addr2 ? ', ' . $company->address->addr2 : "" }}
-										<br/>
+										{{ $company->address->addr1 }}{{$company->address->addr2 ? ', ' . $company->address->addr2 : "" }}<br/>
 										{{ $company->address->city }},
 										@if($company->address->state){{  $company->address->state->abbr }}@endif {{ $company->address->zipcode }}, {{ $company->address->country->name }}
 									</div>
@@ -204,8 +194,7 @@
 										</div>
 									</div>
 									<div class="col-sm-5 mb-3">
-										<label class="d-block label_required">Abbr
-											<span class="d-sm-none d-md-inline">eviation</span></label>
+										<label class="d-block label_required">Abbr</label>
 										<input type="text" class="form-control{{ $errors->has('abbr') ? ' is-invalid' : '' }}" name="abbr" value="{{ $company->abbr }}" placeholder="Abbreviation">
 										<div class="invalid-feedback">
 											{{ $errors->first('abbr') }}
@@ -287,8 +276,7 @@
 								<input type="hidden" name="company_id" value="{{$company->id}}">
 								<input type="hidden" name="address_id" value="{{$company->address_id}}">
 								<button class="btn btn-success" type="submit">
-									<i class="far fa-check"></i>
-									Update
+									<i class="far fa-check"></i> Update
 								</button>
 							</div>
 						</form>
@@ -298,16 +286,14 @@
 							{{ csrf_field() }}
 							<div class="card-body">
 								<h5 class="mb-3">
-									<strong>Description</strong>
-									to be viewed on the EAC website
+									<strong>Description</strong> to be viewed on the EAC website
 								</h5>
 								<textarea class="form-control basic-editor" name="desc" rows="10">{{ $company->desc }}</textarea>
 							</div>
 							<div class="card-footer d-flex justify-content-end">
 								<input type="hidden" name="company_id" value="{{$company->id}}">
 								<button class="btn btn-success" type="submit">
-									<i class="far fa-check"></i>
-									Update
+									<i class="far fa-check"></i> Update
 								</button>
 							</div>
 						</form>
@@ -358,12 +344,10 @@
 												</div>
 												<div class="card-footer alert-secondary p-2 d-flex justify-content-between">
 													<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editDept{{$department->id}}" title="Edit Department">
-														<i class="far fa-fw fa-edit"></i>
-														Edit
+														<i class="far fa-fw fa-edit"></i> Edit
 													</button>
 													<button type="button" class="btn btn-danger btn-sm" onclick="Confirm_Delete('{{$department->id}}')" href="#" title="Delete Department">
-														<i class="far fa-fw fa-times"></i>
-														Delete
+														<i class="far fa-fw fa-times"></i> Delete
 													</button>
 												</div>
 											</div>
@@ -373,8 +357,7 @@
 								</div>
 							@else
 								<p class="text-muted m-0">
-									<i class="fal fa-info-circle"></i>
-									No departments available
+									<i class="fal fa-info-circle"></i> No departments available
 								</p>
 							@endif
 						</div>

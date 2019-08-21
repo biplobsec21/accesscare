@@ -20,89 +20,83 @@
 			<strong>Dashboard,</strong>
 			<span class="text-info">{{\Auth::user()->first_name}}</span>
 		</h3>
-		<span class="badge badge-primary d-none d-md-inline">{{\Auth::user()->type->name}}</span>
+  <span class="small pt-1 pb-1 pl-3 pr-3 bg-primary text-white d-none d-md-inline">{{\Auth::user()->type->name}} User</span>
 	</div>
-
-	{{-- @if(\Auth::user()->type->name == 'Physician') --}}
- <pre>== 'Physician')</pre>
- <div class="row">
-  <div class="col-lg-9">
-   <div class="dashCards">
-  		<div class="row">
-  			<div class="col-sm mb-3 mb-xl-5">
-  				@include('portal.dashboard.rid-card')
-  			</div>
-  			<div class="col-sm mb-3 mb-xl-5">
-  				@include('portal.dashboard.group-card')
-  			</div>
-    </div>
-   </div>
- 		<div class="viewData">
- 			@include('portal.dashboard.rid-table')
- 		</div>
-  </div>
-  <div class="col-lg-3">
-   {{-- <h4 class="mb-3">Notes &amp; Correspondence</h4> --}}
-			@include('portal.dashboard.notes-card')
-  </div>
- </div><!-- /.row -->
-	{{-- @endif
-	@if(\Auth::user()->type->name == 'Pharmaceutical') --}}
- <pre>== 'Pharmaceutical')</pre>
- <div class="row">
-  <div class="col-lg-9">
-   <div class="dashCards">
-    <div class="row">
-     <div class="col-sm mb-3 mb-xl-5">
-  				@include('portal.dashboard.drug-card')
-  			</div>
-     <div class="col-sm mb-3 mb-xl-5">
-      @include('portal.dashboard.group-card')
+	@if(\Auth::user()->type->name == 'Physician')
+  <div class="row">
+   <div class="col-lg-9">
+    <div class="dashCards">
+   		<div class="row">
+   			<div class="col-sm mb-3 mb-xl-5">
+   				@include('portal.dashboard.rid-card')
+   			</div>
+   			<div class="col-sm mb-3 mb-xl-5">
+   				@include('portal.dashboard.group-card')
+   			</div>
      </div>
     </div>
+  		<div class="viewData">
+  			@include('portal.dashboard.rid-table')
+  		</div>
    </div>
-   <div class="viewData">
-    @include('portal.dashboard.drug-table')
+   <div class="col-lg-3">
+    {{-- <h4 class="mb-3">Notes &amp; Correspondence</h4> --}}
+ 			@include('portal.dashboard.notes-card')
    </div>
-  </div>
-  <div class="col-lg-3">
- 		@include('portal.dashboard.notes-card')
- 	</div>
- </div>
-	{{-- @endif
-	@if(\Auth::user()->type->name == 'Early Access Care') --}}
- <pre>== 'Early Access Care')</pre>
- <div class="dashCards">
-		<div class="row">
-			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
-				@include('portal.dashboard.rid-card')
-			</div>
-			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
-				@include('portal.dashboard.drug-card')
-			</div>
-			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
-				@include('portal.dashboard.user-card')
-			</div>
-   <div class="col-sm-6 col-xl mb-3 mb-xl-5">
-    @include('portal.dashboard.group-card')
+  </div><!-- /.row -->
+	@endif
+	@if(\Auth::user()->type->name == 'Pharmaceutical')
+  <div class="row">
+   <div class="col-lg-9">
+    <div class="dashCards">
+     <div class="row">
+      <div class="col-sm mb-3 mb-xl-5">
+   				@include('portal.dashboard.drug-card')
+   			</div>
+      <div class="col-sm mb-3 mb-xl-5">
+       @include('portal.dashboard.group-card')
+      </div>
+     </div>
+    </div>
+    <div class="viewData">
+     @include('portal.dashboard.drug-table')
+    </div>
    </div>
-		</div>
- </div>
- <div class="row">
-  <div class="col-lg-9">
- 		<div class="viewData">
-    <div class="table-responsive">
-     @include('portal.dashboard.shipment-table')
+   <div class="col-lg-3">
+  		@include('portal.dashboard.notes-card')
+  	</div>
+  </div><!-- /.row -->
+	@endif
+	@if(\Auth::user()->type->name == 'Early Access Care')
+  <div class="dashCards">
+ 		<div class="row">
+ 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+ 				@include('portal.dashboard.rid-card')
+ 			</div>
+ 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+ 				@include('portal.dashboard.drug-card')
+ 			</div>
+ 			<div class="col-sm-6 col-xl mb-3 mb-xl-5">
+ 				@include('portal.dashboard.user-card')
+ 			</div>
+    <div class="col-sm-6 col-xl mb-3 mb-xl-5">
+     @include('portal.dashboard.group-card')
     </div>
  		</div>
   </div>
-  <div class="col-lg-3">
-   @include('portal.dashboard.notes-card')
-  </div>
- </div>
-{{-- 	@endif --}}
-
-
+  <div class="row">
+   <div class="col-lg-9">
+  		<div class="viewData mt-0">
+     <div class="table-responsive">
+      @include('portal.dashboard.shipment-table')
+     </div>
+  		</div>
+   </div>
+   <div class="col-lg-3">
+    @include('portal.dashboard.notes-card')
+   </div>
+  </div><!-- /.row -->
+	@endif
 @endsection
 
 @section('scripts')
@@ -157,6 +151,7 @@
      ],
     },
     order: [[1, 'asc']],
+    dom: 't<"d-flex justify-content-between flex-wrap small p-2"ilp>'
    });
    $('#shipmentListTBL').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

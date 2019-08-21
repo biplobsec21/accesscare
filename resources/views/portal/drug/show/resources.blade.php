@@ -59,9 +59,11 @@
 					@endif
 				</td>
 				<td class="text-right">
-					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Resource{{$resource->id}}">
-						More Info
-					</button>
+     @if($resource->desc)
+ 					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Resource{{$resource->id}}">
+ 						More Info
+ 					</button>
+     @endif
 				</td>
 			</tr>
 		@endforeach
@@ -69,59 +71,27 @@
 	</table>
 </div>
 @foreach($drug->resources->sortBy('name') as $resource)
-	<div class="modal fade" id="Resource{{$resource->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header p-2">
-					<h5 class="m-0">
-						<label class="d-block">
+ @if($resource->desc)
+ 	<div class="modal fade" id="Resource{{$resource->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+ 		<div class="modal-dialog modal-dialog-centered" role="document">
+ 			<div class="modal-content">
+ 				<div class="modal-header p-2">
+ 					<h4 class="m-0">
 							{{ $resource->name }}
-						</label>
-					</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<i class="fal fa-times"></i>
-					</button>
-				</div>
-				<div class="modal-body p-3">
-					<label class="d-block">
-						Type
-					</label>
-					{{$resource->type && $resource->type->name ? $resource->type->name : ''}}
-					<label class="d-block">
-						Description
-					</label>
-					{{$resource->desc}}
-					<label class="d-block">
-						Status
-					</label>
-					@if($resource->active)
-						<span class="ml-2 badge badge-success">
-							Active
-						</span>
-					@else
-						<span class="ml-2 badge badge-light">
-							Inactive
-						</span>
-					@endif
-					<label class="d-block">
-						Is public
-					</label>
-					
-					@if($resource->public)
-						<span class="ml-2 badge badge-dark">
-							Yes
-						</span>
-					@else
-						<span class="ml-2 badge badge-light">
-							No
-						</span>
-					@endif
-				</div>
-				<div class="modal-footer p-2 d-flex justify-content-between">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="0">Cancel</button>
-					@include('include.portal.file-btns', ['id' => $resource->file_id])
-				</div>
-			</div>
-		</div>
-	</div>
+ 					</h4>
+ 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<i class="fal fa-times"></i>
+ 					</button>
+ 				</div>
+ 				<div class="modal-body p-3">
+ 					{{$resource->desc}}
+ 				</div>
+ 				<div class="modal-footer p-2 d-flex justify-content-between">
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="0">Cancel</button>
+ 					@include('include.portal.file-btns', ['id' => $resource->file_id])
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ @endif
 @endforeach

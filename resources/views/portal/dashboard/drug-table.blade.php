@@ -1,37 +1,41 @@
-<h3 class="mb-3">Investigative Drugs</h3>
 <div class="card mb-1 mb-md-4">
- <div class="card-header">
-  {{--
-   * * * PLEASE UTILIZE THIS PLUGIN * * * https://datatables.net/plug-ins/filtering/row-based/range_dates * * * 
-  --}}
-  <div class="row align-items-end">
-   <div class="col-sm col-xl-auto mb-2">
-    <label class="d-block">Company</label>
-    <select class="form-control" name="">
-     <option>-- Select --</option>
-     <option value="">Test 1</option>
-     <option value="">Test 2</option>
-     <option value="">Test 3</option>
-     <option value="">Test 4</option>
-    </select>
-   </div>
-   <div class="col-sm col-xl-auto mb-2">
-    <label class="d-block">Status</label>
-    <select class="form-control" name="">
-     <option>-- Select --</option>
-     <option value="">Test 1</option>
-     <option value="">Test 2</option>
-     <option value="">Test 3</option>
-     <option value="">Test 4</option>
-    </select>
-   </div>
-   <div class="col-sm-auto mb-2">
-    <button type="submit" name="" value="" class="btn btn-dark">
-     Apply Filter(s)
-    </button>
+ <div class="card-body">
+  <h3 class="mb-0 ">Investigative Drugs</h3>
+ </div>
+ @if(\Auth::user()->type->name == 'Early Access Care')
+  <div class="card-header">
+   {{--
+    * * * PLEASE UTILIZE THIS PLUGIN * * * https://datatables.net/plug-ins/filtering/row-based/range_dates * * * 
+   --}}
+   <div class="row align-items-end">
+    <div class="col-sm col-xl-auto mb-2">
+     <label class="d-block">Company</label>
+     <select class="form-control" name="">
+      <option>-- Select --</option>
+      <option value="">Test 1</option>
+      <option value="">Test 2</option>
+      <option value="">Test 3</option>
+      <option value="">Test 4</option>
+     </select>
+    </div>
+    <div class="col-sm col-xl-auto mb-2">
+     <label class="d-block">Status</label>
+     <select class="form-control" name="">
+      <option>-- Select --</option>
+      <option value="">Test 1</option>
+      <option value="">Test 2</option>
+      <option value="">Test 3</option>
+      <option value="">Test 4</option>
+     </select>
+    </div>
+    <div class="col-sm-auto mb-2">
+     <button type="submit" name="" value="" class="btn btn-dark">
+      Apply Filter(s)
+     </button>
+    </div>
    </div>
   </div>
- </div>
+ @endif
  <div class="table-responsive">
  	<table class="table table-sm table-striped table-hover drugtable" id="drugListTBL">
  		<thead>

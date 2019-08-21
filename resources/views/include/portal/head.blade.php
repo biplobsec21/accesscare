@@ -41,7 +41,13 @@
      </ul>
     </div>
     <hr class="m-3 d-none">
-    @include('include/portal/navigation')
+    @if(\Auth::user()->type->name == 'Physician')
+     @include('include/portal/physician-navigation')
+    @elseif(\Auth::user()->type->name == 'Pharmaceutical')
+     @include('include/portal/pharma-navigation')
+    @elseif(\Auth::user()->type->name == 'Early Access Care')
+     @include('include/portal/eac-navigation')
+    @endif
    </div>
    <div class="d-flex align-items-end">
     <div class="copyright text-center small p-3">

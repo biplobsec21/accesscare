@@ -59,22 +59,6 @@
        <input type="text" name="depot_addr1" placeholder="Address Line 1" class="form-control mb-1" required="required">
        <input type="text" name="depot_addr2" placeholder="Address Line 2" class="form-control">
       </div>
-      <!-- <div class="row">
-       <div class="col-sm col-md-8 col-lg-12 col-xl-7 mb-3">
-        <label class="d-block label_required">Country</label>
-        <select name="depot_country_id" class="form-control" required="required" id="country_id">
-         <option disabled hidden selected value="">-- Select --</option>
-         @foreach($countries as $country)
-          <option value="{{ $country->id }}">{{ $country->name }}</option>
-         @endforeach
-        </select>
-       </div>
-       <div class="col-sm col-md-4 col-lg-12 col-xl mb-3">
-        <label class="d-block label_required">City</label>
-       <input type="text" name="depot_city" placeholder="City" class="form-control" required="required">
-       </div>
-      </div> -->
-
       <div class="row">
        <div class="col-sm col-md-8 col-lg-12 col-xl-7 mb-3">
         <label class="d-block label_required">Country</label>
@@ -95,23 +79,6 @@
         </div>
        </div>
       </div>
-
-      <!-- <div class="row mb-3">
-       <div class="col-sm col-lg-7 mb-3" >
-        <label class="d-block label_required" id="lbl">State</label>
-        <select name="depot_state_province" class="form-control" required="required" id="state">
-         <option disabled hidden selected value="">-- Select --</option>
-         @foreach($states as $state)
-          <option value="{{ $state->id }}">{{ $state->name }}</option>
-         @endforeach
-        </select>
-       </div>
-       <div class="col-sm col-lg-5 mb-3">
-        <label class="d-block label_required">Postal Code</label>
-        <input type="text" name="depot_zip" placeholder="ZIP Code" class="form-control " required="required">
-       </div>
-      </div> --><!-- /.row -->
-
       <div class="row">
        <div class="col-sm col-lg-7 mb-3">
         <label class="d-block"  id="state_lbl">State</label>
