@@ -134,18 +134,20 @@
 												{{ $rid->patient_weight }}KG
 											</div>
 										@endif
+									</div>
+									<div class="row">
 										@if(isset($rid->ethnicity->name))
 											<div class="col-sm text-sm-center">
 												<label class="d-block">Ethnicity</label>
 												{{ $rid->ethnicity->name }}
 											</div>
 										@endif
-										@if(isset($rid->race->name))
+										{{-- @if(isset($rid->race->name)) --}}
 											<div class="col-sm text-sm-center">
 												<label class="d-block">Race</label>
-												{{ $rid->race->name }}
+												{{-- {{ $rid->race->name }} --}}
 											</div>
-										@endif
+										{{-- @endif --}}
 									</div>
 								</div>
 								<div class="card mb-0">
