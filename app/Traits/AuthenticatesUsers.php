@@ -158,7 +158,7 @@ trait AuthenticatesUsers
 	 */
 	protected function authenticated(Request $request, $user)
 	{
-		//
+        $this->setLastSeen();
 	}
 
 	/**
@@ -205,7 +205,7 @@ trait AuthenticatesUsers
 
     protected function setLastSeen()
     {
-        $user = User::where('id', '=', \Auth::user()->id)->firstOrFail();
+        $user = User::where('id', \Auth::user()->id)->firstOrFail();
         $user->last_seen = Carbon::now();
         $user->saveOrFail();
     }

@@ -68,7 +68,7 @@
         <th>Strength</th>
         <th>Unit</th>
         <th class="no-search">Status</th>
-        <th>Last Update</th>
+        <th>Created At</th>
         <th class="no-search no-sort"></th>
        </tr>
        </thead>

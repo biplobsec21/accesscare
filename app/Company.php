@@ -118,4 +118,16 @@ class Company extends Model
 	{
 		return $this->hasMany('App\\Department');
 	}
+
+	/**
+	 * Relationship for user_groups
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+	 */
+	public function user_groups()
+	{
+		return $this->belongsToMany('App\\UserGroup')
+			->using('App\\CompanyGroup')
+			->withPivot('id');
+	}
 }

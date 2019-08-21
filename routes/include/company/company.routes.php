@@ -25,7 +25,7 @@ Route::group([
 	Route::get('/show/{id}', [
 		'as' => 'eac.portal.company.show',
 		'uses' => 'CompanyController@show',
-	]);	
+	]);
 	Route::get('/suspend/{id}', [
 		'as' => 'eac.portal.company.suspend',
 		'uses' => 'CompanyController@suspend',
@@ -52,13 +52,13 @@ Route::group([
 		'as' => 'eac.portal.company.department.create',
 		'uses' => 'DepartmentController@store',
 	]);
-	
+
 	Route::match(['get','post'],'delete', ['as' => 'eac.portal.company.department.delete', 'uses' => 'DepartmentController@delete' ]);
 
 	Route::post('/department/update', [
 		'as' => 'eac.portal.company.department.update',
 		'uses' => 'DepartmentController@update',
-	]);	
+	]);
 	Route::post('/main/department/update', [
 		'as' => 'eac.portal.company.main.department.deptupdate',
 		'uses' => 'CompanyController@deptupdate',
@@ -69,19 +69,15 @@ Route::group([
 		'uses' => 'CompanyController@delete',
 	]);
 
-	Route::get('/user/assign/{company_id}/{user_id}', [
-		'as' => 'eac.portal.company.user.add',
+	Route::post('/user/assign/group', [
+		'as' => 'eac.portal.company.group.add',
 		'uses' => 'CompanyController@assignUser',
 	]);
-	Route::get('/user/remove/{company_id}/{user_id}', [
-		'as' => 'eac.portal.company.user.remove',
+	Route::get('/user/remove/group/{id}', [
+		'as' => 'eac.portal.company.group.remove',
 		'uses' => 'CompanyController@removeUser',
 	]);
-	Route::post('/assignmultiple/user', [
-		'as' => 'eac.portal.company.user.assignmultiple',
-		'uses' => 'CompanyController@PostassignUser',
-	]);
-	
+
 	/**
 	 * Ajax Routes
 	 */

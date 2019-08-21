@@ -62,5 +62,7 @@ class Notification extends Model
 			return Drug::where('id', $this->subject_id)->first();
 		else if(User::where('id', $this->subject_id)->first())
 			return User::where('id', $this->subject_id)->first();
+		else if(Note::where('id', $this->subject_id)->first())
+			return Note::where('id', $this->subject_id)->first();
 	}
 }

@@ -57,7 +57,7 @@
       <th>Name</th>
       <th class="no-search">Status</th>
       <th>Pharmacy</th>
-      <th>Last Update</th>
+      <th>Created At</th>
       <th class="no-sort no-search"></th>
      </tr>
      </thead>

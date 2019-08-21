@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Address;
 use App\Company;
+use App\CompanyGroup;
 use App\Country;
 use App\DataTables\DataTableResponse;
 use App\DataTables\DataTableRow;
@@ -76,6 +77,7 @@ class CompanyController extends Controller
 		$company = Company::where('id', $id)->first();
 		$countries = $this->getCountry();
 		$state = \App\State::all()->sortBy('name');
+		$groups = \App\UserGroup::all()->sortBy('name');
         $access = $this->companyAuth($company);
         if(!$access->gate('company.index.update'))
             return $this->abortNow();
@@ -84,6 +86,7 @@ class CompanyController extends Controller
 			'countries' => $countries,
 			'state' => $state,
             'access' => $access,
+			'groups' => $groups,
 		]);
 	}
 
@@ -94,13 +97,20 @@ class CompanyController extends Controller
 	 * @param  string $user_id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function assignUser($company_id, $user_id)
+	public function assignUser(Request $request)
 	{
-		$user = User::where('id', $user_id)->first();
-		$user->company_id = $company_id;
-		$user->save();
-		return redirect()->back()->with('confirm', 'User was added to company');
+		$isGroupAdded = CompanyGroup::where('user_group_id', $request->input('user_group_id'))->where('company_id', $request->input('company_id'))->first();
+		if($isGroupAdded){
+			return redirect()->back()->with("alert", ['type' => 'danger', 'msg' => 'Group Already added']);
+		}
+		$companyGroup = new CompanyGroup();
+		$companyGroup->id = $this->newID(CompanyGroup::class);
+		$companyGroup->company_id = $request->input('company_id');
+		$companyGroup->user_group_id = $request->input('user_group_id');
+		$companyGroup->save();
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Information Updated successfully']);
 	}
+
 	public function PostassignUser(Request $request)
 	{
 		$select_user = $request->select_users;
@@ -127,16 +137,11 @@ class CompanyController extends Controller
 	 * @param  string $user_id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function removeUser($company_id, $user_id)
+	public function removeUser($id)
 	{
-		$user = User::where('id', $user_id)->first();
-		if ($company_id !== $user->company_id) {
-			return redirect()->back()->with('error', 'Failed to remove user from company: user is not associated with this company.');
-		} else {
-			$user->company_id = 0;
-			$user->save();
-			return redirect()->back()->with('confirm', 'User was removed from company');
-		}
+		$ridGroup = CompanyGroup::where('id', $id)->first();
+		$ridGroup->delete();
+		return redirect()->back()->with("alert", ['type' => 'success', 'msg' => 'Group Unassigned']);
 	}
 
 	public function postCreate(CreateRequest $request)

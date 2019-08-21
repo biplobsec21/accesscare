@@ -90,6 +90,9 @@ trait AuthAssist
         foreach ($rid->user_groups as $group)
             if ($member = $group->members->where('id', $this->user->id)->first())
                 $access->pushAccess(json_decode($member->role->base_level));
+        if($rid->status->name == 'Completed')
+        	$access->setViewOnly();
+
         return $access;
     }
 
@@ -441,6 +444,25 @@ trait AuthAssist
             $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
 
         if ($access->gate('lot.index.update'))
+            return $access;
+        else
+            return $this->abortNow();
+    }
+
+    protected function generalAuth(string $gate = null) {
+        $this->user = Auth::user();
+        $access = new AuthCollection();
+        switch ($this->preGateCheck()) {
+            case 2;
+                $access->setAuthAll();
+                return $access;
+            case -1:
+                return $this->abortNow();
+        }
+        foreach ($this->user->groups() as $group)
+            $access->pushAccess(json_decode($group->members->where('id', $this->user->id)->first()->role->base_level));
+
+        if ($access->gate($gate) || $gate == null)
             return $access;
         else
             return $this->abortNow();

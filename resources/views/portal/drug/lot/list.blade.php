@@ -52,7 +52,7 @@
       <th>Dosage</th>
       <th>Depot</th>
       <th class="no-sort no-search">Stock</th>
-      <th>Last Update</th>
+      <th>Created At</th>
       <th class="no-sort no-search"></th>
      </tr>
      </thead>

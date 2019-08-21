@@ -22,15 +22,32 @@ class DataTableResponse
         $this->items = $items;
         $this->rows = collect([]);
         $this->total = $items->count();
+        $this->options = [];
         $this->run();
     }
 
     protected function run()
     {
+        $this->selectable();
         $this->search();
         $this->sort();
         $this->paginate();
         $this->build();
+    }
+
+    protected function selectable()
+    {
+        for ($i = 0; $i < $this->columns->count(); $i++) {
+            $col = $this->columns[$i];
+            if ($col['selectable'] === "false")
+                continue;
+            $this->options[$i] = [
+                'options' => $this->items->map(function ($value) use ($col) {
+                    return $this->getThroughModel($col['data'], $value);
+                })->unique()->sort()->values()->all(),
+                'value' => $col['search']['value']
+            ];
+        }
     }
 
     protected function build()
@@ -66,7 +83,7 @@ class DataTableResponse
                         break;
                 }
                 // add active or inactive badges
-                if($col['data'] === 'active'){
+                if ($col['data'] === 'active') {
                     $value = $this->getThroughModel($col['data'], $item) == '1'
                         ? '<span class="badge badge-success">Active'
                         : '<span class="badge badge-danger">Inactive';
@@ -74,9 +91,9 @@ class DataTableResponse
                     $row->setColumn($col['data'], $value);
                 }
                 // template view download
-                if($col['data'] === 'template'){
-                    if($item->file){ // check file exist
-                        $value =  view('include.portal.file-btns', ['id' => $item->file->id]);
+                if ($col['data'] === 'template') {
+                    if ($item->file) { // check file exist
+                        $value = view('include.portal.file-btns', ['id' => $item->file->id]);
                         $row->setColumn($col['data'], $value->render());
                     }
                 }
@@ -111,6 +128,7 @@ class DataTableResponse
         }
         $response->recordsFiltered = $this->filtered;
         $response->recordsTotal = $this->total;
+        $response->options = $this->options;
         return json_encode($response);
     }
 
@@ -134,7 +152,7 @@ class DataTableResponse
                 $sorted = collect($sorted->sortBy(function ($item) {
                     return $this->getThroughModel($this->columns[$this->order[0]['column']]['data'], $item);
                 })->values());
-                if($this->order[0]['dir'] == "desc")
+                if ($this->order[0]['dir'] == "desc")
                     $sorted = collect($sorted->reverse()->values());
                 break;
         }
@@ -155,7 +173,7 @@ class DataTableResponse
             $passed = true;
             foreach ($filters as $filter) {
                 $value = $this->getThroughModel($filter['data'], $model);
-                if (strpos(strtolower($value), strtolower($filter['value'])) === false)
+                if (strpos(strtolower($value), strtolower($filter['value'])) === false && strtolower(trim($value)) != strtolower(trim($filter['value'])))
                     $passed = false;
             }
             return $passed;

@@ -56,4 +56,20 @@ class Note extends Model
 	{
 		return $this->belongsTo('App\\User');
 	}
+	
+	public function PhysicianMember(){
+		$Members = collect();
+		$rid = \App\Rid::where('id',$this->subject_id)->firstOrFail();
+
+		if($rid->user_groups->count() > 0){
+			foreach($rid->user_groups as $userGroup){
+				if($userGroup->type->name == 'Physician'){
+					foreach($userGroup->users() as $user){
+						$Members->push($user);
+					}
+				}
+			}
+		}
+		return $Members;
+	}
 }

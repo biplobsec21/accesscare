@@ -32,7 +32,7 @@
   <a href="{{ route($page['createButton']) }}" class="btn btn-success">
    <i class="fad fa-fw fa-plus-square"></i>
    Add New
-  </a>{{-- 
+  </a>{{--
   <a href="{{ route($page['logsr']) }}" class="btn btn-secondary">
    <i class="fal fa-key"></i>
    Change Log
@@ -40,7 +40,7 @@
  </div><!-- end .actionBar -->
  
  <div class="viewData">
-  <div class="row"> 
+  <div class="row">
    <div class="order-lg-2 col-lg-2 col-xl-3">
    </div>
    <div class="order-lg-1 col-lg-10 col-xl-9">
@@ -63,7 +63,7 @@
        <tr>
         <th>Route</th>
         <th class="no-search">Active</th>
-        <th>Last Update</th>
+        <th>Created At</th>
         <th class="no-sort no-search"></th>
        </tr>
        </thead>
