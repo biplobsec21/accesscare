@@ -55,7 +55,13 @@
    <div id="wrapper">
     <div id="leftSide" class="aside">
      <nav class="p-3">
-      @include('include/portal/navigation')
+      @if(\Auth::user()->type->name == 'Physician')
+       @include('include/portal/physician-navigation')
+      @elseif(\Auth::user()->type->name == 'Pharmaceutical')
+       @include('include/portal/pharma-navigation')
+      @elseif(\Auth::user()->type->name == 'Early Access Care')
+       @include('include/portal/eac-navigation')
+      @endif
      </nav>
      <div class="bottom p-3">
       bottom of side

@@ -1,6 +1,8 @@
-<h3 class="mb-3">Pending Shipments</h3>
 <div class="card mb-1 mb-md-4">
- <div class="card-header">
+ <div class="card-body">
+  <h3 class="mb-0 ">Pending Shipments</h3>
+ </div>
+ <div class="alert-light p-3">
   {{--
    * * * PLEASE UTILIZE THIS PLUGIN * * * https://datatables.net/plug-ins/filtering/row-based/range_dates * * * 
   --}}
@@ -46,7 +48,7 @@
  	<table class="table table-sm table-striped table-hover w-100" id="shipmentListTBL">
  		<thead>
  		<tr>
- 			<th class="no-search no-sort"></th>
+ 			<th class="no-search no-sort">Date</th>
  			<th>RID Number</th>
  			<th>Drug Requested</th>
  			<th>Ship By</th>

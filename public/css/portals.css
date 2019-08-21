@@ -1125,9 +1125,6 @@ table.dataTable.table-sm .sorting:before, table.dataTable.table-sm .sorting_asc:
  border-radius: 0;
  border: none;
 }
-.card-header-tabs {
- margin-bottom: -0.85rem;
-}
 .card-header a:not(.btn):not(.nav-link):not(.dropdown-item) {
  display: block;
  margin: 0;

@@ -4,135 +4,259 @@
  QuasarEsh's Testing (test 1) Page
 @endsection
 
-@section('styles')
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
-@endsection
-
-
 @section('precontent')
 {{-- precontent --}}
 @endsection
 
 @section('content')
-<div class="row">
- <div class="col-sm">
-  <div class="bg-gradient-orange p-3 p-xl-5 text-white mb-3">
-   a box to show things
+ <pre>this is a drug view template</pre>
+ <div class="viewData">
+  <div class="border border-dark p-3">
+   <h4>overview/sticky info</h4>
+   <div class="row">
+    <div class="col-sm">
+     <h6>name</h6>
+     <h6>lab name</h6>
+     <h6>manuf</h6>
+    </div>
+    <div class="col-sm">
+     <h6>avail</h6>
+     <h6>country avail disp on website</h6>
+    </div>
+    <div class="col-sm">
+     <h6>pre-approval requirements</h6>
+     <h6>ship w/o app</h6>
+     <h6>remote visit</h6>
+    </div>
+   </div>
+  </div>
+  <ul class="nav flex-column flex-md-row" id="tab2o" role="tablist">
+   <li class="nav-item">
+    <a class="flex-fill poppins text-center nav-link active" id="applicationXo-tab" data-toggle="tab" href="#applicationXo" role="tab" aria-controls="applicationXo" aria-selected="true">
+     <div class="h4 mb-2">Application</div>
+     <div class="small">
+      internal description, components &amp; dosages, groups,<br />
+      depots &amp; lots, distribution schedule, required forms and view requests
+     </div>
+    </a>
+   </li>
+   <li class="nav-item">
+    <a class="flex-fill poppins text-center nav-link" id="publicXo-tab" data-toggle="tab" href="#publicXo" role="tab" aria-controls="publicXo" aria-selected="false">
+     <div class="h4 mb-2">Website</div>
+     <div class="small">
+      website description,<br />
+      drug image and reference documents
+     </div>
+    </a>
+   </li>
+  </ul>
+  <div class="tab-content" id="tab2oContent">
+   <div class="tab-pane fade show active" id="applicationXo" role="tabpanel" aria-labelledby="applicationXo-tab">
+    <div class="border border-light">
+     <div class="row">
+      <div class="col-md-4 col-lg">
+       <div class="justify-content-around nav flex-md-column" id="vert2-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="vert2-details-tab" data-toggle="pill" href="#vert2-details" role="tab" aria-controls="vert2-details" aria-selected="true">
+         Details
+        </a>
+        <a class="nav-link" id="vert2-depots-tab" data-toggle="pill" href="#vert2-depots" role="tab" aria-controls="vert2-depots" aria-selected="false">
+         Depots &amp; Storage Lots
+        </a>
+        <a class="nav-link" id="vert2-distribute-tab" data-toggle="pill" href="#vert2-distribute" role="tab" aria-controls="vert2-distribute" aria-selected="false">
+         Distribution Schedule
+        </a>
+        <a class="nav-link" id="vert2-forms-tab" data-toggle="pill" href="#vert2-forms" role="tab" aria-controls="vert2-forms" aria-selected="false">
+         Required Forms
+        </a>
+        <a class="nav-link" id="vert2-requests-tab" data-toggle="pill" href="#vert2-requests" role="tab" aria-controls="vert2-requests" aria-selected="false">
+        # of Requests
+        </a>
+       </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+       <div class="tab-content" id="vert2-tabContent">
+        <div class="tab-pane fade show active" id="vert2-details" role="tabpanel" aria-labelledby="vert2-details-tab">
+         <div class="row">
+          <div class="col-md-8 col-xl-9">
+           <div class="border border-danger p-4 mb-3">
+            - Components &amp; Dosages
+           </div>
+          </div>
+          <div class="col-md-4 col-xl-3">
+           <div class="border border-danger p-4 mb-3">
+            - Assigned Groups
+           </div>
+          </div>
+         </div>
+         <div class="border border-danger p-4 mb-3">
+          - Internal Description
+         </div>
+
+        </div>
+        <div class="tab-pane fade" id="vert2-depots" role="tabpanel" aria-labelledby="vert2-depots-tab">
+         Depots &amp; Storage Lots
+        </div>
+        <div class="tab-pane fade" id="vert2-distribute" role="tabpanel" aria-labelledby="vert2-distribute-tab">
+         Distribution Schedule
+        </div>
+        <div class="tab-pane fade" id="vert2-forms" role="tabpanel" aria-labelledby="vert2-forms-tab">
+         Required Forms
+        </div>
+        <div class="tab-pane fade" id="vert2-requests" role="tabpanel" aria-labelledby="vert2-requests-tab">
+         # of Requests
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="tab-pane fade" id="publicXo" role="tabpanel" aria-labelledby="publicXo-tab">
+    <div class="border border-light">
+     <div class="row">
+      <div class="col-md-8 col-xl-9">
+       <div class="row">
+        <div class="col-sm">
+         <div class="border border-danger p-4 mb-3">
+          - Website Description
+         </div>
+        </div>
+        <div class="col-sm-5 col-xl-3">
+         <div class="border border-danger p-4 mb-3">
+          - Drug image
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-4 col-xl-3">
+       <div class="border border-danger p-4 mb-3">
+        - Reference Documents
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
   </div>
  </div>
- <div class="col-sm">
-  <div class="bg-gradient-cyan p-3 p-xl-5 text-white mb-3">
-   a box to show things
+
+ <div class="row" style="margin-top: 25vh;">
+  <div class="col-sm">
+   <div class="bg-gradient-orange p-3 p-xl-5 text-white mb-3">
+    a box to show things
+   </div>
+  </div>
+  <div class="col-sm">
+   <div class="bg-gradient-cyan p-3 p-xl-5 text-white mb-3">
+    a box to show things
+   </div>
+  </div>
+  <div class="col-sm">
+   <div class="bg-gradient-purple p-3 p-xl-5 text-white mb-3">
+    a box to show things
+   </div>
   </div>
  </div>
- <div class="col-sm">
-  <div class="bg-gradient-purple p-3 p-xl-5 text-white mb-3">
-   a box to show things
-  </div>
+ <div class="card card-body p-3 mb-3">
+  <div class="row">
+   <div class="col-sm-6 order-2 order-xl-1 col-xl-3 mb-3">
+    <h4 class="mb-3 poppins">
+     Requests
+    </h4>
+    <div class="chart-container d-none d-lg-block">
+     <canvas id="bar-chart-horizontal"></canvas>
+    </div>
+    <div class="row poppins">
+     <div class="col col-lg-12 mb-3">
+      <div class="xx p-3 mb-0">
+       stats
+      </div><!-- /.card -->
+     </div>
+     <div class="col col-lg-12 mb-3">
+      <div class="xx p-3 mb-0">
+       stats
+      </div><!-- /.card -->
+     </div>
+    </div>
+    <a href="#" class="btn btn-primary d-lg-block">
+     button here
+    </a>
+   </div>
+   <div class="col-sm-12 order-1 order-xl-2 col-xl-6 mb-3">
+    {{-- <div class="chart-container" style="position: relative;">
+     <canvas id="mixedChart"></canvas>
+    </div> --}}
+    <div class="chart-container">
+     <canvas id="testChart"></canvas>
+    </div>
+   </div>
+   <div class="col-sm-6 order-3 col-xl-3 mb-3">
+    <h4 class="mb-3 poppins">
+     Users
+    </h4>
+    <div class="chart-container d-none d-lg-block">
+     <canvas id="doughnut"></canvas>
+    </div>
+    <div class="row poppins">
+     <div class="col col-lg-12 mb-3">
+      <div class="xx p-3 mb-0">
+       stats
+      </div><!-- /.card -->
+     </div>
+     <div class="col col-lg-12 mb-3">
+      <div class="xx p-3 mb-0">
+       stats
+      </div><!-- /.card -->
+     </div>
+    </div>
+    <a href="#" class="btn btn-primary d-lg-block">
+     button here
+    </a>
+   </div>
+  </div><!-- /.row -->
+  <hr class="mt-3 mb-3" />
+  <div class="row">
+   <div class="col-sm-6 col-lg">
+    <div class="row ml-0 mr-0 mb-3 alert-secondary">
+     <div class="col-auto p-2 bg-secondary text-white">
+      [icon]
+     </div>
+     <div class="col p-2">
+      box
+     </div>
+    </div><!-- /.row -->
+   </div>
+   <div class="col-sm-6 col-lg">
+    <div class="row ml-0 mr-0 mb-3 alert-secondary">
+     <div class="col-auto p-2 bg-secondary text-white">
+      [icon]
+     </div>
+     <div class="col p-2">
+      box
+     </div>
+    </div><!-- /.row -->
+   </div>
+   <div class="col-sm-6 col-lg">
+    <div class="row ml-0 mr-0 mb-3 alert-secondary">
+     <div class="col-auto p-2 bg-secondary text-white">
+      [icon]
+     </div>
+     <div class="col p-2">
+      box
+     </div>
+    </div><!-- /.row -->
+   </div>
+   <div class="col-sm-6 col-lg">
+    <div class="row ml-0 mr-0 mb-3 alert-secondary">
+     <div class="col-auto p-2 bg-secondary text-white">
+      [icon]
+     </div>
+     <div class="col p-2">
+      box
+     </div>
+    </div><!-- /.row -->
+   </div>
+  </div><!-- /.row -->
  </div>
-</div>
-<div class="card card-body p-3 mb-3">
- <div class="row">
-  <div class="col-sm-6 order-2 order-xl-1 col-xl-3 mb-3">
-   <h4 class="mb-3 poppins">
-    Requests
-   </h4>
-   <div class="chart-container d-none d-lg-block">
-    <canvas id="bar-chart-horizontal"></canvas>
-   </div>
-   <div class="row poppins">
-    <div class="col col-lg-12 mb-3">
-     <div class="xx p-3 mb-0">
-      stats
-     </div><!-- /.card -->
-    </div>
-    <div class="col col-lg-12 mb-3">
-     <div class="xx p-3 mb-0">
-      stats
-     </div><!-- /.card -->
-    </div>
-   </div>
-   <a href="#" class="btn btn-primary d-lg-block">
-    button here
-   </a>
-  </div>
-  <div class="col-sm-12 order-1 order-xl-2 col-xl-6 mb-3">
-   {{-- <div class="chart-container" style="position: relative;">
-    <canvas id="mixedChart"></canvas>
-   </div> --}}
-   <div class="chart-container">
-    <canvas id="testChart"></canvas>
-   </div>
-  </div>
-  <div class="col-sm-6 order-3 col-xl-3 mb-3">
-   <h4 class="mb-3 poppins">
-    Users
-   </h4>
-   <div class="chart-container d-none d-lg-block">
-    <canvas id="doughnut"></canvas>
-   </div>
-   <div class="row poppins">
-    <div class="col col-lg-12 mb-3">
-     <div class="xx p-3 mb-0">
-      stats
-     </div><!-- /.card -->
-    </div>
-    <div class="col col-lg-12 mb-3">
-     <div class="xx p-3 mb-0">
-      stats
-     </div><!-- /.card -->
-    </div>
-   </div>
-   <a href="#" class="btn btn-primary d-lg-block">
-    button here
-   </a>
-  </div>
- </div><!-- /.row -->
- <hr class="mt-3 mb-3" />
- <div class="row">
-  <div class="col-sm-6 col-lg">
-   <div class="row ml-0 mr-0 mb-3 alert-secondary">
-    <div class="col-auto p-2 bg-secondary text-white">
-     [icon]
-    </div>
-    <div class="col p-2">
-     box
-    </div>
-   </div><!-- /.row -->
-  </div>
-  <div class="col-sm-6 col-lg">
-   <div class="row ml-0 mr-0 mb-3 alert-secondary">
-    <div class="col-auto p-2 bg-secondary text-white">
-     [icon]
-    </div>
-    <div class="col p-2">
-     box
-    </div>
-   </div><!-- /.row -->
-  </div>
-  <div class="col-sm-6 col-lg">
-   <div class="row ml-0 mr-0 mb-3 alert-secondary">
-    <div class="col-auto p-2 bg-secondary text-white">
-     [icon]
-    </div>
-    <div class="col p-2">
-     box
-    </div>
-   </div><!-- /.row -->
-  </div>
-  <div class="col-sm-6 col-lg">
-   <div class="row ml-0 mr-0 mb-3 alert-secondary">
-    <div class="col-auto p-2 bg-secondary text-white">
-     [icon]
-    </div>
-    <div class="col p-2">
-     box
-    </div>
-   </div><!-- /.row -->
-  </div>
- </div><!-- /.row -->
-</div>
-content
+ content
 @endsection
 
 @section('scripts')
