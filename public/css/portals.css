@@ -1158,7 +1158,7 @@ table.dataTable.table-sm .sorting:before, table.dataTable.table-sm .sorting_asc:
 .list-group-item {
  padding: .5rem 1rem;
 }
-.list-group-item:not([class*=list-group-item-]) {
+.list-group-item:not([class*=list-group-item-]):not([class*=alert-]) {
  background-color: unset;
 }
 .card .list-group-item:last-of-type {
@@ -1627,7 +1627,7 @@ div.dataTables_wrapper div.dataTables_info {
 .wizardSteps .nav-link + .nav-link {
  margin-top: 1rem;
 }
-.wizardSteps .nav-link::before {
+.wizardSteps:not(.OFF) .nav-link::before {
  content: counter(wizard-counter);
  color: #949494;
  font-size: 1rem;
@@ -1702,16 +1702,16 @@ div.dataTables_wrapper div.dataTables_info {
  .wizardSteps {
   padding-left: 1rem;
  }
-.wizardSteps .list-group-item {
- padding-right: 0;
-}
+ .wizardSteps:not(.OFF) .list-group-item {
+  padding-right: 0;
+ }
 
 }
-.wizardSteps .list-group-item {
+.wizardSteps:not(.OFF) .list-group-item {
  border-color: #f1f1f1;
  position: relative;
 }
-.wizardSteps .list-group-item:before {
+.wizardSteps:not(.OFF) .list-group-item:before {
  content: '';
  width: 1px;
  background-color: #e1e1e1;
