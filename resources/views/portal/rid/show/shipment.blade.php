@@ -18,6 +18,9 @@
 	@access('rid.shipment.view')
 	<div class="pt-3 pl-3 pb-2 pr-3 alert-light text-dark border border-light">
 		<div class="row">
+			<div class="col-auto col-lg-3 mb-2 col-xl-auto text-lg-center mb-lg-0">
+				<span class="badge badge-{{$shipment->status->badge}}">{{ $shipment->status->name }}</span>
+			</div>
 			<div class="col col-md-auto col-lg-3 mb-2 col-xl-auto text-lg-center mb-lg-0">
 				<small class="upper d-block">Ship By</small>
 				@if($visit->shipment->ship_by_date)

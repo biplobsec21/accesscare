@@ -11,8 +11,9 @@
 					@endif
 				</div>
 				<div class="col">
-					<span class="badge badge-{{$bColor}}">{{ $visit->status->name }}
-						- {{ $visit->subStatus->name }}</span><br/>
+					<span class="badge badge-{{$bColor}}">
+						{{ $visit->status->name }}
+					</span><br/>
 					@access('rid.info.update')
 					<a href="#" class="btn btn-link btn-sm pt-0 pb-0" data-toggle="modal" data-target="#StatusChange">
 						Edit

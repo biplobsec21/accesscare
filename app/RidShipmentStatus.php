@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Andrew Mellor <andrew@quasars.com>
  */
-class RidSubStatus extends Model
+class RidShipmentStatus extends Model
 {
 
 
@@ -43,17 +43,5 @@ class RidSubStatus extends Model
 	 *
 	 * @var string
 	 */
-	protected $table = 'rid_sub_statuses';
-
-	/**
-	 * The prefix for the id
-	 *
-	 * @var string
-	 */
-	protected $prefix = "SUBSTATUS";
-
-	public function status()
-	{
-		return $this->belongsTo('App\\RidStatus');
-	}
+	protected $table = 'rid_shipment_statuses';
 }

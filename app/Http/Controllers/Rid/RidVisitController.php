@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Rid\CreateRequest;
 use App\Pharmacy;
 use App\Rid;
-use App\RidSubStatus;
+use App\RidVisitStatus;
 use App\RidVisit;
 use App\Traits\AuthAssist;
 use App\Traits\Notifier;
@@ -106,7 +106,7 @@ class RidVisitController extends Controller
 		$rid->drug_id = $drug->id;
 		$rid->physician_id = \Auth::user()->id;
 		$rid->status_id = \App\RidStatus::where('name', 'New')->firstOrFail()->id;
-		$rid->sub_status = \App\RidSubStatus::where('status_id', $rid->status_id)->firstOrFail()->id;
+		$rid->sub_status = \App\RidVisitStatus::where('status_id', $rid->status_id)->firstOrFail()->id;
 		$rid->req_date = $data['req_date'];
 		$rid->pharmacist_name = $data['pharmacist_name'];
 		$rid->pharmacist_phone = $data['pharmacist_phone'];
@@ -177,7 +177,7 @@ class RidVisitController extends Controller
 	public function setStatus()
 	{
 		$rid = RidVisit::where('id', $_POST['visit_id'])->firstOrFail();
-		$sub_status = RidSubStatus::where('id', $_POST['sub_status'])->firstOrFail();
+		$sub_status = RidVisitStatus::where('id', $_POST['sub_status'])->firstOrFail();
 		$status = $sub_status->status;
 		$rid->sub_status = $sub_status->id;
 		$rid->status_id = $status->id;

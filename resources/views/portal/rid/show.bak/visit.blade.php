@@ -26,7 +26,7 @@
 		<div class="row">
 			<div class="col-auto col-lg-3 mb-2 col-xl-auto text-lg-center mb-lg-0">
 				<span class="badge badge-{{$visit->status->badge}}">{{ $visit->status->name }}:
-					<small>{{ $visit->subStatus->name }}</small>
+					<small>{{ $visit->status->name }}</small>
 				</span>
 			</div>
 			<div class="col col-md-auto col-lg-3 mb-2 col-xl-auto text-lg-center mb-lg-0">

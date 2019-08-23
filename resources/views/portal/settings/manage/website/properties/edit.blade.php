@@ -256,7 +256,7 @@
 										</tr>
 										</thead>
 										<tbody>
-										@foreach(\App\RidMasterStatus::all() as $status)
+										@foreach(\App\RidStatus::all() as $status)
 											<tr>
 												<td>
 													<input type="text" class="form-control" name="status[{{$status->id}}][name]"

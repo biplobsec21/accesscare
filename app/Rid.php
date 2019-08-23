@@ -113,7 +113,7 @@ class Rid extends Model
 	 */
 	public function status()
 	{
-		return $this->belongsTo('App\\RidMasterStatus', 'status_id');
+		return $this->belongsTo('App\\RidStatus', 'status_id');
 	}
 
 	/**

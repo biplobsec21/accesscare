@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Andrew Mellor <andrew@quasars.com>
  */
-class RidMasterStatus extends Model
+class RidVisitStatus extends Model
 {
 
 
@@ -43,17 +43,5 @@ class RidMasterStatus extends Model
 	 *
 	 * @var string
 	 */
-	protected $table = 'rid_master_statuses';
-
-	/**
-	 * The prefix for the id
-	 *
-	 * @var string
-	 */
-	protected $prefix = "STATUS";
-
-	public function rids()
-	{
-		return $this->hasMany('App\\Rid', 'status_id');
-	}
+	protected $table = 'rid_visit_statuses';
 }

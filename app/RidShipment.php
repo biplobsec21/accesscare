@@ -108,6 +108,16 @@ class RidShipment extends Model
 		return $this->belongsTo('App\\Pharmacist');
 	}
 
+	/**
+	 * Relation for RidShipmentStatus
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	 */
+	public function status()
+	{
+		return $this->belongsTo('App\\RidShipmentStatus', 'status_id');
+	}
+
 	/*
 	 * Add relationship for rids to regimen
 	 *

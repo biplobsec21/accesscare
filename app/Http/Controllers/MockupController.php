@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Rid\CreateRequest;
 use App\Pharmacy;
 use App\Rid;
-use App\RidSubStatus;
+use App\RidVisitStatus;
 use App\RidVisit;
 use App\Traits\AuthAssist;
 use App\Traits\Notifier;

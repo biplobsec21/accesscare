@@ -17,12 +17,11 @@ use App\Http\Requests\Rid\CreateRequest;
 use App\Http\Requests\Rid\ResupplyCreateRequest;
 use App\Rid;
 use App\RidDocument;
-use App\RidMasterStatus;
+use App\RidStatus;
 use App\RidPostApprovalActions;
 use App\RidPostApprovalDocs;
 use App\RidShipment;
-use App\RidStatus;
-use App\RidSubStatus;
+use App\RidVisitStatus;
 use App\RidVisit;
 use App\Traits\AuthAssist;
 use App\Traits\Notifier;
@@ -54,7 +53,7 @@ class RidController extends Controller
     {
 
         if ($request->has('rid_status')) {
-            $sql = RidMasterStatus::Where('id', '=', $request->input('rid_status'))->first();
+            $sql = RidStatus::Where('id', '=', $request->input('rid_status'))->first();
             $title = $sql->name;
         } else {
             $title = 'All';
@@ -108,9 +107,7 @@ class RidController extends Controller
         $data = json_decode($_POST['data'], true);
         $drug = Drug::where('id', $data['drug_id'])->firstOrFail();
         $company = Company::where('id', $drug->company_id)->firstOrFail();
-        $newMasterStatus = \App\RidMasterStatus::where('index', '0')->firstOrFail();
-        $newSubstatus = \App\RidSubStatus::where('index', '0')->firstOrFail();
-        $newStatus = $newSubstatus->status;
+        $newMasterStatus = \App\RidStatus::where('index', '0')->firstOrFail();
 
         $rid = new Rid();
         $rid->id = $this->newID(Rid::class);
@@ -140,7 +137,7 @@ class RidController extends Controller
         $visit->physician_id = $data['physician_id'];
         $visit->visit_date = $data['req_date'];
         $visit->status_id = RidStatus::where('index', 0)->first()->id;
-        $visit->sub_status = RidSubStatus::where('index', 0)->first()->id;
+        $visit->sub_status = RidVisitStatus::where('index', 0)->first()->id;
         $visit->save();
         $visit->loadDocs();
         $shipment->save();
@@ -329,7 +326,7 @@ class RidController extends Controller
     public function setStatus()
     {
         $rid = Rid::where('id', $_POST['rid_id'])->firstOrFail();
-        $sub_status = RidSubStatus::where('id', $_POST['sub_status'])->firstOrFail();
+        $sub_status = RidVisitStatus::where('id', $_POST['sub_status'])->firstOrFail();
         $status = $sub_status->status;
         $rid->sub_status = $sub_status->id;
         $rid->status_id = $status->id;
@@ -385,7 +382,7 @@ class RidController extends Controller
     {
         return view('portal.rid.letter.edit', [
             'rid' => Rid::where('id', $id)->firstOrFail(),
-            'status' => RidMasterStatus::where('name', 'Approved')->firstOrFail(),
+            'status' => RidStatus::where('name', 'Approved')->firstOrFail(),
             'title' => 'Approved Letter',
             'template' => Mailer::where('name', 'rid_approved')->first(),
         ]);
@@ -395,7 +392,7 @@ class RidController extends Controller
     {
         return view('portal.rid.letter.edit', [
             'rid' => Rid::where('id', $id)->firstOrFail(),
-            'status' => RidMasterStatus::where('name', 'Completed')->firstOrFail(),
+            'status' => RidStatus::where('name', 'Completed')->firstOrFail(),
             'title' => 'Denied Letter',
             'template' => Mailer::where('name', 'rid_not_approved')->first(),
         ]);
@@ -405,7 +402,7 @@ class RidController extends Controller
     {
         return view('portal.rid.letter.edit', [
             'rid' => Rid::where('id', $id)->firstOrFail(),
-            'status' => RidMasterStatus::where('name', 'Pending')->firstOrFail(),
+            'status' => RidStatus::where('name', 'Pending')->firstOrFail(),
             'title' => 'More Info Letter',
             'template' => Mailer::where('name', 'rid_more_info')->first(),
         ]);
@@ -499,7 +496,7 @@ class RidController extends Controller
             $new_visit->supply_length = $request->supply_length;
             $new_visit->visit_date = $next_visit_date->toDateTimeString();;
             $new_visit->status_id = RidStatus::where('index', '0')->firstOrFail()->id;
-            $new_visit->sub_status = RidSubStatus::where('index', '0')->firstOrFail()->id;
+            $new_visit->sub_status = RidVisitStatus::where('index', '0')->firstOrFail()->id;
             $new_visit->save();
             $new_visit->loadDocs();
             $next_visit_date->addDays($request->supply_length);
@@ -618,7 +615,7 @@ class RidController extends Controller
     public function updateColors()
     {
         foreach ($_POST['status'] as $id => $val) {
-            $status = RidMasterStatus::where('id', $id)->first();
+            $status = RidStatus::where('id', $id)->first();
             $status->name = $val['name'];
             $status->badge = $val['badge'];
             $status->save();

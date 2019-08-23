@@ -42,7 +42,7 @@ use App\RidDocument;
 use App\RidRegimen;
 use App\RidShipment;
 use App\RidStatus;
-use App\RidSubStatus;
+use App\RidVisitStatus;
 use App\RidUser;
 use App\RidVisit;
 use App\Role;
@@ -1514,60 +1514,60 @@ class DBMigrate extends Command
         // param == "Hold" -> Fulfillment->Withdrew Consent
         if ($param == "Hold") {
             $rid_status = RidStatus::where('name', '=', "Fulfillment")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "Withdrew Consent")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "Withdrew Consent")->first()->id;
         }
         // param == "Resupplied" -> Treatment ->Ongoing
         if ($param == "Resupplied") {
             $rid_status = RidStatus::where('name', '=', "Fulfillment")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "Withdrew Consent")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "Withdrew Consent")->first()->id;
         }
         // param == "Approved" -> Treatment->Initiated
 
         if ($param == "Approved") {
             if ($param == "Approved" && $shipparam == 'Processed') {
                 $rid_status = RidStatus::where('name', '=', "Fulfillment")->first()->id;
-                $rid_sub_status = RidSubStatus::where('name', '=', "Shipped")->first()->id;
+                $rid_sub_status = RidVisitStatus::where('name', '=', "Shipped")->first()->id;
             } elseif ($param == "Approved" && $shipparam == 'In Process') {
                 $rid_status = RidStatus::where('name', '=', "Fulfillment")->first()->id;
 
                 try {
-                    $rid_sub_status = RidSubStatus::where('name', '=', "Received")->first()->id;
+                    $rid_sub_status = RidVisitStatus::where('name', '=', "Received")->first()->id;
                 } catch (\Exception $e) {
-                    $rid_s = new RidSubStatus();
-                    $rid_s->id = $rid_sub_status = $this::newID(RidSubStatus::class);
+                    $rid_s = new RidVisitStatus();
+                    $rid_s->id = $rid_sub_status = $this::newID(RidVisitStatus::class);
                     $rid_s->status_id = $rid_status;
                     $rid_s->name = 'Received';
                     $rid_s->saveOrFail();
                 }
             } else {
                 $rid_status = RidStatus::where('name', '=', "Treatment")->first()->id;
-                $rid_sub_status = RidSubStatus::where('name', '=', "Initiated")->first()->id;
+                $rid_sub_status = RidVisitStatus::where('name', '=', "Initiated")->first()->id;
             }
         }
         // param == "NotApproved" -> Completed->Not Approved
         if ($param == "NotApproved") {
             $rid_status = RidStatus::where('name', '=', "Completed")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "Not Approved")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "Not Approved")->first()->id;
         }
         // param == "PendingReview" -> Pending->EAC Review
         if ($param == "PendingReview") {
             $rid_status = RidStatus::where('name', '=', "Pending")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "EAC Review")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "EAC Review")->first()->id;
         }
         // param == "InProcess" -> Approved->Regimen Needed
         if ($param == "InProcess") {
             $rid_status = RidStatus::where('name', '=', "Approved")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "Regimen Needed")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "Regimen Needed")->first()->id;
         }
         // param == "InProcessResupply" -> Treatment -> Ongoing
         if ($param == "InProcessResupply") {
             $rid_status = RidStatus::where('name', '=', "Treatment")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "Ongoing")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "Ongoing")->first()->id;
         }
         // param == "InProcessResupply" -> Treatment -> Ongoing
         if ($param == "Docneeded") {
             $rid_status = RidStatus::where('name', '=', "Pending")->first()->id;
-            $rid_sub_status = RidSubStatus::where('name', '=', "Documents Needed")->first()->id;
+            $rid_sub_status = RidVisitStatus::where('name', '=', "Documents Needed")->first()->id;
         }
 
         return $rid_status . "__" . $rid_sub_status;

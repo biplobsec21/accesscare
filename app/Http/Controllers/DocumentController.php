@@ -56,7 +56,7 @@ class DocumentController extends Controller
             $this->createNotice('visit_docs_submitted', $document->visit, 'eac');
             $rid = $document->visit->rid;
             if ($rid->status->name == 'New') {
-                $rid->status_id = \App\RidMasterStatus::where('name', 'Pending')->firstOrFail()->id;
+                $rid->status_id = \App\RidStatus::where('name', 'Pending')->firstOrFail()->id;
                 $rid->save();
                 return redirect()->back()->with("alerts", [['type' => 'success', 'msg' => 'File Uploaded!'], ['type' => 'success', 'msg' => 'Status Set To Pending']]);
             }

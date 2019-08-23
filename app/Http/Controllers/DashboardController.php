@@ -9,7 +9,7 @@ use App\Ethnicity;
 use App\Log;
 use App\Rid;
 use App\ShippingCourier;
-use App\RidMasterStatus;
+use App\RidStatus;
 use App\State;
 use App\Traits\AuthAssist;
 use App\User;

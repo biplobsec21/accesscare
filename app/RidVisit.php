@@ -90,23 +90,13 @@ class RidVisit extends Model
 	}
 
 	/**
-	 * Relation for RidStatus
+	 * Relation for RidVisitStatus
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
 	 */
 	public function status()
 	{
-		return $this->belongsTo('App\\RidStatus', 'status_id');
-	}
-
-	/**
-	 * Relation for RidSubStatus
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
-	 */
-	public function subStatus()
-	{
-		return $this->belongsTo('App\\RidSubStatus', 'sub_status');
+		return $this->belongsTo('App\\RidVisitStatus', 'status_id');
 	}
 
 	/**

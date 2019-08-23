@@ -56,9 +56,4 @@ class RidStatus extends Model
 	{
 		return $this->hasMany('App\\Rid', 'status_id');
 	}
-
-	public function subStatuses()
-	{
-		return $this->hasMany('App\\RidSubStatus', 'status_id');
-	}
 }

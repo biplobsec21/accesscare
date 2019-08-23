@@ -114,7 +114,7 @@
                     <i class="fa-fw fas fa-caret-down"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
-                    @foreach(\App\RidMasterStatus::all() as $masterStatus)
+                    @foreach(\App\RidStatus::all() as $masterStatus)
                         <a class="dropdown-item" href="{{route('eac.portal.rid.changestatus', ['rid_id' => $rid->id,'status' => $masterStatus->id])}}">{{ $masterStatus->name}}</a>
                     @endforeach
                 </div>
