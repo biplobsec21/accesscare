@@ -1,6 +1,5 @@
-<div class="shadow-none card tab-pane fade" id="xship{{$shipment->id}}"
-     role="tabpanel" aria-labelledby="xship{{$shipment->id}}-tab">
-	<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 pl-sm-0 d-flex justify-content-between">
+<div class="shadow-none card tab-pane fade" id="xship{{$shipment->id}}" role="tabpanel" aria-labelledby="xship{{$shipment->id}}-tab">
+	<div class="bg-dark text-white pt-2 pb-2 pr-3 pl-3 d-flex justify-content-between">
 		<div class="">
 			<span class="text-upper">Shipment #{{$shipment_index}}</span>
 		</div>
@@ -11,7 +10,7 @@
 				<span class="fal fa-angle-double-down heartBeat animated infinite slow"></span> Expand Information
 			</a>
 			<a class="btn btn-info btn-sm" href="{{route('eac.portal.rid.shipment.edit', $shipment->id)}}">
-				Edit
+				Edit Shipment
 			</a>
 		</div>
 	</div>

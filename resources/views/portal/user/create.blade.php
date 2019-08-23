@@ -6,36 +6,29 @@
 
 @section('styles')
 	<style>
-		@media screen and (min-width: 1200px) {
-			:root {
-				--leftCol: 230px;
-				--rightCol: 675px;
-			}
-			
-			.actionBar, .instructions {
-				max-width: calc(var(--leftCol) + var(--rightCol));
-			}
-			
-			.viewData .row.thisone > [class*=col]:first-child {
-				width: var(--leftCol);
-			}
-			
-			.viewData .row.thisone > [class*=col]:last-child {
-				width: var(--rightCol);
-			}
-		}
-		
-		@media screen and (min-width: 1300px) {
-			:root {
-				--rightCol: 790px;
-			}
-		}
+  @media screen and (min-width: 1200px) {
+   :root {
+    --leftCol: 220px;
+    --rightCol: 700px;
+   }   
+   .actionBar, .viewData {
+    max-width: calc(var(--leftCol) + var(--rightCol));
+   }   
+   .viewData .row.thisone > [class*=col]:first-child {
+    width: var(--leftCol);
+   }   
+   .viewData .row.thisone > [class*=col]:last-child {
+    width: var(--rightCol);
+   }
+  }
 	</style>
 @endsection
 
-@section('instructions')
-	instructions
-@endsection
+{{-- @section('instructions')
+ <div class="instructions mb-3">
+ 	instructions here
+ </div>
+@endsection --}}
 
 @section('content')
 	<div class="titleBar">
@@ -63,15 +56,17 @@
 			<a href="{{ route('eac.portal.user.list') }}" class="btn btn-light">
 				User List
 			</a>
-		</div><!-- end .actionBar -->
+   <a href="{{ route('eac.portal.user.list') }}" class="ml-xl-auto btn btn-warning">
+    <i class="fal fa-times"></i>
+    Cancel
+   </a>{{-- added per request RP --}}
+  </div><!-- end .actionBar -->
 		
 		<div class="viewData">
-			<div class="instructions mb-3">
 				@yield('instructions')
-			</div>
-			<div class="row thisone m-0 mb-xl-5">
-				<div class="col-sm-3 col-xl-auto p-0 pr-sm-2 mb-2 mb-sm-0">
-					<div class="wizardSteps symbols nav flex-row flex-sm-column" id="tab" role="tablist" aria-orientation="vertical">
+   <div class="row thisone m-0 mb-xl-5">
+    <div class="col-sm-3 col-xl-auto mb-2 mb-sm-0 p-0">
+     <div class="wizardSteps nav flex-row flex-sm-column" id="tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="one-tab" data-toggle="pill" href="#one" role="tab" aria-controls="one" aria-selected="true">
 							<span>User Details</span>
 						</a>
@@ -83,57 +78,63 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-sm-8 col-lg-7 col-xl-auto p-0 pl-sm-2">
-					<div class="card tab-content wizardContent" id="tabContent">
+    <div class="col-sm-9 col-xl p-0">
+     <div class="card tab-content wizardContent">
 						<div class="tab-pane fade show active" id="one" role="tabpanel" aria-labelledby="one-tab">
 							<div class="card-body">
 								<h5 class="mb-3">
 									Please provide
 									<strong>user information</strong>
 								</h5>
-								<div class="row">
-									<div class="col-4">
-										<label class="d-block">Title</label>
-										<select class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title">
-											<option disabled hidden selected value="">-- Select --</option>
-											@foreach(config('eac.user.availableTitle') as $k => $v)
-												<option value="{{$k}}" {{ old('title') == $k ? 'selected' : '' }}>{{$v}}</option>
-											@endforeach
-										</select>
-										<div class="invalid-feedback">
-											{{ $errors->first('title') }}
-										</div>
-									</div>
-									<div class="col-4">
-										<label class="d-block label_required">First Name</label>
-										<input type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" placeholder="First Name"/>
-										<div class="invalid-feedback">
-											{{ $errors->first('first_name') }}
-										</div>
-									</div>
-									<div class="col-4">
-										<label class="d-block label_required">Last Name</label>
-										<input type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" placeholder="Last Name"/>
-										<div class="invalid-feedback">
-											{{ $errors->first('last_name') }}
-										</div>
-									</div>
-									<div class="col-8">
-										<label class="d-block label_required">Type of User</label>
-										<select class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type">
-											<option disabled hidden selected value="">-- Select --</option>
-											@foreach($user_types as $type)
-												<option value="{{$type->id}}" {{ old('type') == $type->id ? 'selected' : '' }}>
-													{{$type->name}}
-												</option>
-											@endforeach
-										</select>
-									</div>
-									<div class="col-4">
-										<label class="d-block">Delegate</label>
-										<input type="checkbox" name="is_delegate" class="form-control" value="1">
-									</div>
-								</div>
+        <div class="mb-3">
+         <div class="row">
+          <div class="col-auto">
+           <label class="d-block">Title</label>
+           <select class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title">
+            <option disabled hidden selected value="">-- Select --</option>
+            @foreach(config('eac.user.availableTitle') as $k => $v)
+             <option value="{{$k}}" {{ old('title') == $k ? 'selected' : '' }}>{{$v}}</option>
+            @endforeach
+           </select>
+          </div>
+          <div class="col">
+           <label class="d-block label_required">First Name</label>
+           <input type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" placeholder="First Name"/>
+           <div class="invalid-feedback">
+            {{ $errors->first('first_name') }}
+           </div>
+          </div>
+          <div class="col">
+           <label class="d-block label_required">Last Name</label>
+           <input type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" placeholder="Last Name"/>
+           <div class="invalid-feedback">
+            {{ $errors->first('last_name') }}
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="mb-3">
+         <div class="row">
+          <div class="col">
+           <label class="d-block label_required">Type of User</label>
+           <select class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type">
+            <option disabled hidden selected value="">-- Select --</option>
+            @foreach($user_types as $type)
+             <option value="{{$type->id}}" {{ old('type') == $type->id ? 'selected' : '' }}>
+              {{$type->name}}
+             </option>
+            @endforeach
+           </select>
+           <div class="invalid-feedback">
+            {{ $errors->first('type') }}
+           </div>
+          </div>
+          <div class="col-auto">
+           <label class="d-block">Delegate User?</label>
+           <input data-field="active" type="checkbox" data-toggle="toggle" data-off="No" data-on="Yes" data-onstyle="success" data-offstyle="secondary" data-width="100" name="is_delegate" value="1" />
+          </div>
+         </div>
+        </div>
 							</div>
 							<div class="card-footer d-flex justify-content-end p-2">
 								<a href="#" class="next btn btn-success">

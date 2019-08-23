@@ -295,7 +295,7 @@ class CountryController extends Controller {
     }
 
     public function manageindexes(){
-        $countryList = Country::orderBy('index','asc');
+        $countryList = Country::orderBy('index','asc')->get();
 
         return view('portal.settings.manage.country.manage_indexes')->with('countryList', $countryList);
     }

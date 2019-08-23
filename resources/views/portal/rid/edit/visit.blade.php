@@ -83,7 +83,7 @@
 		@php $visit_index = $visit->index; @endphp
 		@if(false)
 			<div role="alert"
-			     class="alert text-white {{$visit->requiredDocs()->count() == $visit->uploadedDocs()->count() ? 'bg-gradient-success border-success' : 'bg-gradient-danger border-danger'}} mb-0">
+				 class="alert text-white {{$visit->requiredDocs()->count() == $visit->uploadedDocs()->count() ? 'bg-gradient-success border-success' : 'bg-gradient-danger border-danger'}} mb-0">
 				<div class="row">
 					<div class="col-auto">
 						<h5 class="mb-0">
@@ -131,7 +131,7 @@
 		<div class="row thisone m-0 mb-xl-5">
 			<div class="col-sm-3 col-xl-auto p-0 mb-2 mb-sm-0">
 				<div class="wizardSteps symbols nav flex-row flex-sm-column mt-sm-3" id="tab" role="tablist"
-				     aria-orientation="vertical">
+					 aria-orientation="vertical">
 					<a class="nav-link active @if($visit->getDocStatus()) complete @endif" id="xdocumentsT"
 					   data-toggle="pill" href="#xdocuments" role="tab" aria-controls="xdocuments" aria-selected="true">
 						<span>Required Forms</span>
@@ -146,7 +146,7 @@
 				<div class="card tab-content wizardContent" id="tabContent">
 					@include('portal.rid.edit.visit_info')
 					<div class="tab-pane fade show active" id="xdocuments" role="tabpanel"
-					     aria-labelledby="xdocuments-tab">
+						 aria-labelledby="xdocuments-tab">
 						<div class="card-body">
 							@access('rid.document.view')
 							@include('portal.rid.edit.documents')
@@ -168,107 +168,107 @@
 
 @section('scripts')
 	<script>
-        $(function () {
-            $("a.next").click(function () {
-                let currentLink = $('.nav-link.active');
-                setWizardStep(currentLink.index() + 1);
-            });
+		$(function () {
+			$("a.next").click(function () {
+				let currentLink = $('.nav-link.active');
+				setWizardStep(currentLink.index() + 1);
+			});
 
-            $("a.prev").click(function () {
-                let currentLink = $('.nav-link.active');
-                setWizardStep(currentLink.index() - 1);
-            });
+			$("a.prev").click(function () {
+				let currentLink = $('.nav-link.active');
+				setWizardStep(currentLink.index() - 1);
+			});
 
-            let jumped = false;
+			let jumped = false;
 
-            $(".tab-pane").each(function () {
-                let errorCount = $(this).find('.is-invalid').length;
-                if (errorCount > 0) {
-                    let link = $('a[aria-controls=' + $(this).attr('id') + ']');
-                    link.addClass('invalid');
-                    if (!jumped) {
-                        setWizardStep(link.index());
-                        jumped = true;
-                    }
-                }
-            });
+			$(".tab-pane").each(function () {
+				let errorCount = $(this).find('.is-invalid').length;
+				if (errorCount > 0) {
+					let link = $('a[aria-controls=' + $(this).attr('id') + ']');
+					link.addClass('invalid');
+					if (!jumped) {
+						setWizardStep(link.index());
+						jumped = true;
+					}
+				}
+			});
 
-            function setWizardStep(n) {
-                $('.wizardSteps a.nav-link:nth-child(' + (n + 1) + ')').click();
-            }
-        });
+			function setWizardStep(n) {
+				$('.wizardSteps a.nav-link:nth-child(' + (n + 1) + ')').click();
+			}
+		});
 
-        function removeTemplateDocument($id, $e, $field_name) {
-            // $.ajax({
-            //   url: "{{route('eac.portal.rid.modal.document.remove')}}",
-            //   type: 'POST',
-            //   data: {
-            //     id: $id,
-            //     field: $field_name,
-            //   },
-            //   success: function () {
-            //     location.reload();
+		function removeTemplateDocument($id, $e, $field_name) {
+			// $.ajax({
+			//   url: "{{route('eac.portal.rid.modal.document.remove')}}",
+			//   type: 'POST',
+			//   data: {
+			//	 id: $id,
+			//	 field: $field_name,
+			//   },
+			//   success: function () {
+			//	 location.reload();
 
-            //     // if($field_name == 'upload_file'){
-            //     //   $e.target.parentNode.parentNode.parentNode.innerHTML = '<input class="form-control" type="file" name="' + $field_name + '" >';
-            //     // }else{
-            //     //   $e.target.parentNode.parentNode.innerHTML = '<input class="form-control" type="file" name="' + $field_name + '" >';
-            //     // }
-            //   }
-            // });
-            swal({
-                title: "Are you sure?",
-                text: "Want to delete it",
-                icon: "warning",
-                buttons: [
-                    'No, cancel it!',
-                    'Yes, I am sure!'
-                ],
-                dangerMode: true,
-            }).then(function (isConfirm) {
-                if (isConfirm) {
-                    swal({
-                        title: 'Successfull!',
-                        text: 'Content deleted!',
-                        icon: 'success'
-                    }).then(function () {
-                        $('.modal').modal('hide')
-                        $.ajax({
-                            url: "{{route('eac.portal.rid.modal.document.remove')}}",
-                            type: 'POST',
-                            data: {
-                                id: $id,
-                                field: $field_name,
-                            },
-                            success: function () {
+			//	 // if($field_name == 'upload_file'){
+			//	 //   $e.target.parentNode.parentNode.parentNode.innerHTML = '<input class="form-control" type="file" name="' + $field_name + '" >';
+			//	 // }else{
+			//	 //   $e.target.parentNode.parentNode.innerHTML = '<input class="form-control" type="file" name="' + $field_name + '" >';
+			//	 // }
+			//   }
+			// });
+			swal({
+				title: "Are you sure?",
+				text: "Want to delete it",
+				icon: "warning",
+				buttons: [
+					'No, cancel it!',
+					'Yes, I am sure!'
+				],
+				dangerMode: true,
+			}).then(function (isConfirm) {
+				if (isConfirm) {
+					swal({
+						title: 'Successfull!',
+						text: 'Content deleted!',
+						icon: 'success'
+					}).then(function () {
+						$('.modal').modal('hide')
+						$.ajax({
+							url: "{{route('eac.portal.rid.modal.document.remove')}}",
+							type: 'POST',
+							data: {
+								id: $id,
+								field: $field_name,
+							},
+							success: function () {
 
-                            }
-                        });
+							}
+						});
 
-                        swal.close();
+						swal.close();
 
-                        location.reload();
-                    });
+						location.reload();
+					});
 
-                } else {
-                    swal("Cancelled", "Operation cancelled", "error");
-                }
-            })
-        }
+				} else {
+					swal("Cancelled", "Operation cancelled", "error");
+				}
+			})
+		}
 
-        function removeTemplateDocument2($id, $e, $field_name) {
-            $.ajax({
-                url: "{{route('eac.portal.drug.modal.document.remove_file')}}",
-                type: 'POST',
-                data: {
-                    id: $id,
-                    field: $field_name,
-                },
-                success: function () {
-                    $e.target.parentNode.parentNode.innerHTML = '<input class="form-control" type="file" name="' + $field_name + '"/>'
-                }
-            });
-        }
+		function removeTemplateDocument2($id, $e, $field_name) {
+			$.ajax({
+				url: "{{route('eac.portal.drug.modal.document.remove_file')}}",
+				type: 'POST',
+				data: {
+					id: $id,
+					field: $field_name,
+				},
+				success: function () {
+					$e.target.parentNode.parentNode.innerHTML = '<input class="form-control" type="file" name="' + $field_name + '"/>'
+				}
+			});
+		}
 
 	</script>
 @endsection

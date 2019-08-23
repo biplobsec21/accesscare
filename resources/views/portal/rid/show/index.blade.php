@@ -186,49 +186,44 @@
 		@include('portal.rid.show.master')
 		@access('rid.visit.view')
 		@if($rid->shipments->count() > 0)
-			<div class="row justify-content-center justify-content-lg-start m-0 thisone">
-				<div class="col-sm-3 col-xl-auto p-0 mb-2 mb-sm-0">
-					<div class="wizardHead bg-dark text-white pt-2 pl-3 pb-2 h4">
-						<h4 class="mb-1">
-							RID Visits
-						</h4>
-					</div>
-					<div id="tab" role="tablist" aria-orientation="vertical"
-					     class="nav wizardSteps symbols flex-row flex-sm-column pl-0 OFF">
+			<h4 class="mb-1">
+				RID Shipments &amp; Visits
+			</h4>
+			<div class="row thisone">
+				<div class="col-sm-3 col-xl-auto mb-2">
+					<div id="tab" role="tablist" aria-orientation="vertical" class="nav wizardSteps symbols flex-row flex-sm-column pl-0 OFF">
 						@php $shipment_index = 1; @endphp
 						<ul class="list-group list-group-flush flex-row flex-sm-column">
 							@foreach($rid->shipmentsSorted() as $shipment)
-								<li class="list-group-item">
-									<span class="nav-link nav-rect {{$shipment->getTodo() === 'Ready'  ? 'complete' : ''}}"
+								<li class="list-group-item bg-white border-0 mb-3 p-2">
+         <a class="strong {{$shipment->getTodo() === 'Ready'  ? 'complete' : ''}}"
 									   id="xshipT{{$shipment->id}}" data-toggle="pill"
 									   href="#xship{{$shipment->id}}"
 									   role="tab" aria-controls="xship{{$shipment->id}}"
 									   aria-selected="false">
-										Shipment #{{$shipment_index}}
-									</span>
-									@foreach($shipment->visits->sortBy('index') as $visit)
-										<a class="nav-link {{$visit->getDocStatus() ? 'complete' : ''}}"
-										   id="xdetailsT{{$visit->index}}" data-toggle="pill"
-										   href="#xdetails{{$visit->index}}"
-										   role="tab" aria-controls="xdetails{{$visit->index}}"
-										   aria-selected="false">
-           <div class="d-md-flex justify-content-md-between align-items-md-center">
- 											<small class="text-upper">
+										Shipment {{$shipment_index}}
+									</a>
+         @if($shipment->visits->count() > 0)
+          <div class="d-flex flex-column ml-3">
+  									@foreach($shipment->visits->sortBy('index') as $visit)
+  										<a class="mb-1 {{$visit->getDocStatus() ? 'complete' : ''}}"
+  										   id="xdetailsT{{$visit->index}}" data-toggle="pill"
+  										   href="#xdetails{{$visit->index}}"
+  										   role="tab" aria-controls="xdetails{{$visit->index}}"
+  										   aria-selected="false">
              Visit #{{$visit->index == 0 ? 1 : $visit->index}}
-            </small>
-            @if($visit->visit_date)
-             <span class="small mono d-block d-md-inline">{{ $visit->visit_date }}</span>
-            @endif
-           </div>
-										</a>
-									@endforeach
-									@php $shipment_index ++; @endphp
+             @if($visit->visit_date) <small>({{ $visit->visit_date }})</small> @endif
+  										</a>
+  									@endforeach
+          </div>
+          @endif
+ 									@php $shipment_index ++; @endphp
 								</li>
 							@endforeach
 						</ul>
 					</div>
 				</div>
-				<div class="col-sm-9 col-xl p-0">
+				<div class="col-sm-9 col-xl ">
 					<div class="tab-content wizardContent" id="tabContent">
 						@php $shipment_index = 1; @endphp
 						@foreach($rid->shipmentsSorted() as $shipment)
