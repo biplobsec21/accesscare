@@ -15,6 +15,7 @@ use App\Phone;
 use App\RidVisit;
 use App\Traits\AuthAssist;
 use App\User;
+use App\UserType;
 use Illuminate\Http\Request;
 
 /**
@@ -77,7 +78,7 @@ class CompanyController extends Controller
 		$company = Company::where('id', $id)->first();
 		$countries = $this->getCountry();
 		$state = \App\State::all()->sortBy('name');
-		$groups = \App\UserGroup::all()->sortBy('name');
+		$groups = \App\UserGroup::where('type_id', UserType::where('name', 'Pharmaceutical')->first()->id)->get()->sortBy('name');
         $access = $this->companyAuth($company);
         if(!$access->gate('company.index.update'))
             return $this->abortNow();

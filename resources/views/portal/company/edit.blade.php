@@ -10,14 +10,14 @@
 			:root {
 				--leftCol: 230px;
 				--rightCol: 750px;
-			}			
+			}
 			.actionBar, .viewData {
 				max-width: calc(var(--leftCol) + var(--rightCol));
-			}			
+			}
 			.viewData .row.thisone > [class*=col]:first-child {
 				max-width: var(--leftCol);
 				min-width: var(--leftCol);
-			}			
+			}
 			.viewData .row.thisone > [class*=col]:last-child {
 				max-width: var(--rightCol);
 				min-width: var(--rightCol);
@@ -82,7 +82,7 @@
 			@if(!is_null($company->updated_at))
 				<strong>Last Updated:</strong>
 				@php
-					$time = $company->updated_at;					
+					$time = $company->updated_at;
 					echo $time->setTimezone(Session::get('time-zone'))->format('Y/m/d h:i A');
 				@endphp
 			@endif
@@ -127,7 +127,7 @@
 						<span>Departments</span>
 					</a>
 					<a class="nav-link @if($company->users->count() > 0) complete @endif" id="xusers-tab" data-toggle="pill" href="#xusers" role="tab" aria-controls="xusers" aria-selected="false">
-						<span>Assigned Users</span>
+						<span>Assigned Groups</span>
 					</a>
 				</div>
 			</div>
