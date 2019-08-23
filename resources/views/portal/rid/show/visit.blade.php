@@ -22,9 +22,9 @@
 	<div class="pt-3 pl-3 pb-2 pr-3 alert-light text-dark border border-light">
 		<div class="row">
 			<div class="col-auto col-lg-3 mb-2 col-xl-auto text-lg-center mb-lg-0">
-				<span class="badge badge-{{$visit->status->badge}}">
-					<small>{{ $visit->status->name }}</small>
-				</span>
+				{{-- <span class="badge badge-{{$visit->status->badge}}">{{ $visit->status->name }}:
+					<small>{{ $visit->subStatus->name }}</small>
+				</span> --}}
 			</div>
 			<div class="col col-md-auto col-lg-3 mb-2 col-xl-auto text-lg-center mb-lg-0">
 				<small class="d-block upper">Visit Date</small>

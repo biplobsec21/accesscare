@@ -1250,7 +1250,7 @@ table.dataTable.table-sm .sorting:before, table.dataTable.table-sm .sorting_asc:
 .card-header-tabs {
  margin-bottom: -0.85rem;
 }
-.card-header a:not(.btn):not(.nav-link):not(.dropdown-item) {
+.card-header a:not(.btn):not(.nav-link):not(.dropdown-item):not(.badge) {
  display: block;
  margin: 0;
  padding: 0;

@@ -145,30 +145,26 @@
       <div class="accordion mb-xl-5" id="shipmentX">
        @php $shipment_index = 1; @endphp
        @foreach($rid->shipmentsSorted() as $shipment)
-        <div class="card border-0 mb-3">
-         <div class="card-header p-2" id="heading{{$shipment->id}}">
-          <div class="row ml-n2 mr-n2 mb-1 poppins">
-           <div class="col pl-2 pr-2">
-            <div class="row ml-n2 mr-n2">
-             <div class="col pl-2 pr-2">
-              <a data-toggle="collapse" data-target="#visit{{$shipment->id}}" href="#visit{{$shipment->id}}" aria-expanded="true" aria-controls="visit{{$shipment->id}}">
-               Shipment {{$shipment_index}}
-              </a>
-             </div>
-             <div class="col-auto pl-2 pr-2">
-              <a data-toggle="collapse" data-target="#visit{{$shipment->id}}" href="#visit{{$shipment->id}}" aria-expanded="true" aria-controls="visit{{$shipment->id}}" class="badge border-dark text-dark border">
-               <span class="text-black-50 fal fa-link"></span> 
-               <strong>{{$shipment->visits->count()}}</strong> 
-               @if($shipment->visits->count() > 1)
-                Visits
-               @else
-                Visit
-               @endif
-              </a>
-             </div>
-            </div><!-- /.row -->
+        <div class="border border-light mb-3">
+         <div class="bg-light p-2 poppins" id="heading{{$shipment->id}}">
+          <div class="row">
+           <div class="col">
+            <a data-toggle="collapse" data-target="#visit{{$shipment->id}}" href="#visit{{$shipment->id}}" aria-expanded="true" aria-controls="visit{{$shipment->id}}">
+             Shipment {{$shipment_index}}
+            </a>
            </div>
-           <div class="col-auto pl-2 pr-2">
+           <div class="col-auto">
+            <a data-toggle="collapse" data-target="#visit{{$shipment->id}}" href="#visit{{$shipment->id}}" aria-expanded="true" aria-controls="visit{{$shipment->id}}" class="badge border-dark text-dark border">
+             <span class="text-black-50 fal fa-link"></span> 
+             <span class="text-warning">{{$shipment->visits->count()}}</span> 
+             @if($shipment->visits->count() > 1)
+              Visits
+             @else
+              Visit
+             @endif
+            </a>
+           </div>
+           <div class="col-sm-auto">
             @if(($shipment->delivery_date) || ($shipment->getTodo() === 'Ready'))
              <span class="badge badge-success">Complete</span>
             @else
@@ -176,28 +172,28 @@
             @endif
            </div>
           </div><!-- /.row -->
-          <div class="row flex-sm-nowrap ml-n2 mr-n2">
+          <div class="row">
            @access('rid.shipment.view')
-            <div class="col mb-1 pl-2 pr-2">
-             <small class="upper d-block poppins">Delivered</small>
+            <div class="col-sm">
+             <small class="upper d-block">Delivered On</small>
              @if($shipment->delivery_date)
-              {{\Carbon\Carbon::parse($shipment->delivery_date)->format(config('eac.date_format'))}}
+              <strong>{{\Carbon\Carbon::parse($shipment->delivery_date)->format(config('eac.date_format'))}}</strong>
              @else
-              <span class="text-muted">N/A</span>
+              <span>N/A</span>
              @endif
             </div>
            @endif
            @access('rid.regimen.view')
-            <div class="col-auto text-center col-sm mb-1 pl-2 pr-2">
-             <small class="upper d-block poppins">Components</small>
+            <div class="col-sm">
+             <small class="upper d-block">Components</small>
              {{$rid->drug->components->count()}}
             </div>
            @endif
            @access('rid.pharmacy.view')
-            <div class="col-sm-6 pl-2 pr-2">
-             <small class="upper d-block poppins">Pharmacy</small>
+            <div class="col-sm">
+             <small class="upper d-block">Pharmacy</small>
              @if($shipment->pharmacy)
-              <small>{{$shipment->pharmacy->name}}</small>
+              <strong>{{$shipment->pharmacy->name}}</strong>
              @else
               <small class="text-muted">N/A</small>
              @endif
@@ -207,23 +203,24 @@
          </div>
          @if($shipment->visits->count() > 0)
           <div id="visit{{$shipment->id}}" class="collapse @if($shipment_index == 1) show @endif" aria-labelledby="heading{{$shipment->id}}" data-parent="#shipmentX">
-           <div class="border-top bg-light">
-            <div class="d-flex justify-content-between flex-wrap p-2">
-             <h5 class="mb-0">View Shipment</h5>
-             <a class="" href="{{route('eac.portal.rid.shipment.edit', $shipment->id)}}">
+           <div class="border-top bg-light p-2">
+            <div class="mb-2 d-flex justify-content-between flex-wrap">
+             <h5 class="mb-0">Shipment Information</h5>
+             <a class="btn btn-link" href="{{route('eac.portal.rid.shipment.edit', $shipment->id)}}">
               Edit Shipment
              </a>
             </div>
-            <div class="p-2">
-             <div class="row">
-              <div class="col-xl">
-               @access('rid.regimen.view')
-                <div class="regimenBOX">
-                 <div class="row mb-2">
-                  <div class="col">
-                   <h6 class="strong mb-0">Regimen &amp; Frequency</h6>
-                  </div>
-                  <div class="col-auto">
+
+            <div class="HERE">                
+             <div class="d-flex flex-wrap">
+              @access('rid.regimen.view')
+               <div class="border border-info flex-fill p-2">
+                <div class="row align-items-center">
+                 <div class="col-sm">
+                  <div class="d-flex flex-wrap justify-content-between">
+                   <h5 class="mb-0">
+                    <strong>Regimen &amp; Frequency</strong>
+                   </h5>
                    @if(!$shipment->regimensNeeded()->count())
                     <span class="badge badge-success ">
                      <i class="fas fa-check"></i> Complete!
@@ -233,69 +230,66 @@
                      <i class="fas fa-exclamation-triangle"></i> Incomplete
                     </span>
                    @endif
-                  </div>
-                 </div><!-- /.row -->
-                 <div class="row flex-wrap">
-                  <div class="col-auto col-sm-3">
-                   <div class="text-center mb-2">
-                    <small class="upper d-block">Components</small>
-                    <strong>{{$rid->drug->components->count()}}</strong>
+                  </div><!-- /.d-flex -->
+                 </div>
+                 <div class="col-sm">
+                  <div class="row">
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block">Components</small>
+                     <strong>{{$rid->drug->components->count()}}</strong>
+                    </div>
                    </div>
-                   <div class="text-center mb-2">
-                    <small class="upper d-block">Regimens</small>
-                    <strong>{{$shipment ? $shipment->regimen->count() : '0'}}</strong>
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block">Regimens</small>
+                     <strong>{{$shipment ? $shipment->regimen->count() : '0'}}</strong>
+                    </div>
                    </div>
-                  </div>
-                  <div class="col col-sm-9">
-                   <div class="row">
-                    @foreach($rid->drug->components->sortBy('index') as $component)
-                     <div class="col-sm-6 mb-3">
-                      <div class="border border-white pt-1 pr-2 pl-2">
-                       <span class="badge p-0 text-info">{{$component->name}}</span>
-                       @if($regimen = $shipment->regimenWithComponent($component->id))
-                        @if($regimen->is_applicable == 1)
-                         <div class="small">
-                          <strong class="d-block">
-                           {{$regimen->lot->dosage->form->name}}, 
-                           {{(int)$regimen->lot->dosage->amount * (int)$regimen->quantity}}{{$regimen->lot->dosage->unit->name}}, 
-                           {{ $regimen->lot->dosage->strength->name }}
-                          </strong>
-                          taken every {{$regimen->frequency}}
-                          for {{$regimen->length}}
-                         </div>
-                         @if($regimen->lot)
-                          <div class="d-flex flex-wrap justify-content-between p-1 p-sm-2 mt-2 ml-n2 mr-n2 mb-n2 bg-white">
-                           @if($regimen->lot->depot)
-                            <small>{{ $regimen->lot->depot->name }}</small>
-                           @endif
-                           @if($regimen->lot->number)
-                            <small>Lot: {{ $regimen->lot->number }}</small>
-                           @endif
-                          </div>
-                         @endif
-                        @endif
-                        @if($regimen->is_applicable == 0)
-                         N/A
-                        @endif
-                       @endif
-                      </div>
-                     </div>
-                    @endforeach
-                   </div><!-- /.row -->
-                  </div>
-                 </div><!-- /.row -->
+                  </div><!-- /.row -->
+                 </div>
                 </div>
-                <pre class="text-danger">ESH - CONTINUE HERE</pre>
-               @endif
-              </div>
-              <div class="col-xl">
-               @access('rid.pharmacy.view')
-                <div class="pharmacyBOX">
-                 <div class="row">
-                  <div class="col">
-                   <h6 class="strong mb-0">Pharmacy</h6>
-                  </div>
-                  <div class="col-auto">
+                <ul class="list-group list-group-flush">
+                 @foreach($rid->drug->components->sortBy('index') as $component)
+                  <li class="list-group-item">
+                    <span class="badge badge-outline-dark">{{$component->name}}</span>
+                   @if($regimen = $shipment->regimenWithComponent($component->id))
+                    @if($regimen->is_applicable == 1)
+                      <strong class="d-block">
+                       {{(int)$regimen->lot->dosage->amount * (int)$regimen->quantity}}{{$regimen->lot->dosage->unit->name}}
+                       {{$regimen->lot->dosage->form->name}}
+                      </strong>
+                      taken every {{$regimen->frequency}}
+                      for {{$regimen->length}}
+                      <small>({{ $regimen->lot->dosage->strength->name }})</small>
+                      @if($regimen->lot->depot)
+                       <span class="d-block">{{ $regimen->lot->depot->name }}</span>
+                      @endif
+                      @if($regimen->lot->number)
+                       <small>
+                        Lot:
+                        <span>{{ $regimen->lot->number }}</span>
+                       </small>
+                      @endif
+                    @endif
+                    @if($regimen->is_applicable == 0)
+                     N/A
+                    @endif
+                   @else
+                   @endif
+                  </li>
+                 @endforeach
+                </ul>
+               </div>
+              @endif
+              @access('rid.pharmacy.view')
+               <div class="border border-info flex-fill p-2">
+                <div class="row align-items-center">
+                 <div class="col-sm">
+                  <div class="d-flex flex-wrap justify-content-between">
+                   <h5 class="mb-0">
+                    <strong>Pharmacy</strong>
+                   </h5>
                    @if($shipment->pharmacy && $shipment->pharmacist)
                     <span class="badge badge-success">
                      <i class="fas fa-check"></i> Complete!
@@ -305,161 +299,224 @@
                      <i class="fas fa-exclamation-triangle"></i> Incomplete
                     </span>
                    @endif
-                  </div>
-                 </div><!-- /.row -->
-                 <br />
-                 <div class="">
-                  @if($shipment->pharmacy)
-                   <strong>{{$shipment->pharmacy->name}}</strong>
-                   <small class="d-block">{!! $shipment->pharmacy->address->strDisplay()!!}</small>
-                  @else
-                   <small class="text-muted">N/A</small>
-                  @endif
+                  </div><!-- /.d-flex -->
                  </div>
-                 <div class="">
-                  <small class="upper d-block">Pharmacist</small>
-                  @if($shipment->pharmacist_id)
-                   <span class="d-block">{{ $shipment->pharmacist->name }}</span>
-                   <i class="fal fa-at"></i>
-                   <a target="_blank" href="mailto:{{ $shipment->pharmacist->email }}">
-                    {{ $shipment->pharmacist->email }}
-                   </a><br/>
-                   <i class="fal fa-phone"></i>
-                   <a href="tel:{{ $shipment->pharmacist->getPhone() }}">
-                    {{ $shipment->pharmacist->getPhone() }}
-                   </a>
-                  @else
-                   <small class="text-muted">N/A</small>
-                  @endif
-                 </div>
-                </div>
-               @endif
-              </div>
-              <div class="col-xl">
-               @access('rid.shipment.view')
-                @if($shipment)
-                 <div class="shipmentBOX">
+                 <div class="col-sm">
                   <div class="row">
-                   <div class="col">
-                    <h6 class="strong mb-0">Shipping Details</h6>
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block">Pharmacy</small>
+                     @if($shipment->pharmacy)
+                      <strong>{{$shipment->pharmacy->name}}</strong>
+                     @else
+                      <small class="text-muted">N/A</small>
+                     @endif
+                    </div>
                    </div>
-                   <div class="col-auto">
-                    @if($shipment->ship_by_date && $shipment->deliver_by_date && $shipment->courier_id)
-                     <span class="badge badge-success ">
-                      <i class="fas fa-check"></i> Complete!
-                     </span>
-                    @else
-                     <span class="badge badge-danger">
-                      <i class="fas fa-exclamation-triangle"></i> Incomplete
-                     </span>
-                    @endif
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block">Pharmacist</small>
+                     @if($shipment->pharmacist)
+                      <strong>{{$shipment->pharmacist->name}}</strong>
+                     @else
+                      <small class="text-muted">N/A</small>
+                     @endif
+                    </div>
                    </div>
                   </div><!-- /.row -->
-                  <div class="">
-                   <small class="upper d-block">Ship By</small>
+                 </div>
+                </div>
+                <div class="">
+                 <div class="row">
+                  <div class="col-sm-6 col-md-auto col-lg-4 mb-2">
+                   <label class="d-block">Pharmacy</label>
+                   @if($shipment->pharmacy)
+                    <div class="small">
+                     <span class="d-block font-italic">{{ $shipment->pharmacy->name }}</span>
+                     {!! $shipment->pharmacy->address->strDisplay()!!}
+                    </div>
+                   @else
+                    <span class="text-muted">N/A</span>
+                   @endif
+                  </div>
+                  <div class="col-sm-6 col-md-auto col-lg-4 mb-2">
+                   <label class="d-block">Pharmacist</label>
+                   @if($shipment->pharmacist_id)
+                    <span class="d-block font-italic">{{ $shipment->pharmacist->name }}</span>
+                    <i class="fal fa-at"></i>
+                    <a target="_blank" href="mailto:{{ $shipment->pharmacist->email }}">
+                     {{ $shipment->pharmacist->email }}
+                    </a><br/>
+                    <i class="fal fa-phone"></i>
+                    <a href="tel:{{ $shipment->pharmacist->getPhone() }}">
+                     {{ $shipment->pharmacist->getPhone() }}
+                    </a>
+                   @else
+                    <small class="text-muted">N/A</small>
+                   @endif
+                  </div>
+                 </div>
+                </div>
+               </div>
+              @endif
+              @access('rid.shipment.view')
+               <div class="border border-info flex-fill p-2">
+                <div class="row align-items-center">
+                 <div class="col-sm">
+                  <div class="d-flex flex-wrap justify-content-between">
+                   <h5 class="mb-0">
+                    <strong>Shipping Details</strong>
+                   </h5>
+                   @if($shipment->ship_by_date && $shipment->deliver_by_date && $shipment->courier_id)
+                    <span class="badge badge-success ">
+                     <i class="fas fa-check"></i> Complete!
+                    </span>
+                   @else
+                    <span class="badge badge-danger">
+                     <i class="fas fa-exclamation-triangle"></i> Incomplete
+                    </span>
+                   @endif
+                  </div><!-- /.d-flex -->
+                 </div>
+                 <div class="col-sm">
+                  <div class="row">
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block">Delivered On</small>
+                     @if($shipment->delivery_date)
+                      <strong>{{\Carbon\Carbon::parse($shipment->delivery_date)->format(config('eac.date_format'))}}</strong>
+                     @else
+                      <span>N/A</span>
+                     @endif
+                    </div>
+                   </div>
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block">Ship By</small>
+                     @if($shipment->ship_by_date)
+                      <strong>{{\Carbon\Carbon::parse($shipment->ship_by_date)->format(config('eac.date_format'))}}</strong>
+                     @else
+                      <span>N/A</span>
+                     @endif
+                    </div>
+                   </div>
+                   <div class="col text-center">
+                    <div class="">
+                     <small class="upper d-block"></small>
+                    </div>
+                   </div>
+                  </div><!-- /.row -->
+                 </div>
+                </div>
+                <div class="">
+                 <div class="row ">
+                  <div class="col text-center">
+                  </div>
+                  <div class="col text-center">
+                   <small class="upper d-block text-muted">Ship By</small>
                    @if($shipment->ship_by_date)
                     <strong>{{\Carbon\Carbon::parse($shipment->ship_by_date)->format(config('eac.date_format'))}}</strong>
                    @else
-                    <span class="text-muted">N/A</span>
+                    <span>N/A</span>
                    @endif
                   </div>
-                  <div class="">
-                   <small class="upper d-block">Shipped On</small>
+                  <div class="col text-center">
+                   <small class="upper d-block text-muted">Shipped On</small>
                    @if($shipment->shipped_on_date)
                     <strong>{{\Carbon\Carbon::parse($shipment->shipped_on_date)->format(config('eac.date_format'))}}</strong>
                    @else
-                    <span class="text-muted">N/A</span>
+                    <span>N/A</span>
                    @endif
                   </div>
-                  <div class="">
-                   <small class="upper d-block">Delivered On</small>
+                  <div class="col text-center">
+                   <small class="upper d-block text-muted">Delivered On</small>
                    @if($shipment->delivery_date)
                     <strong>{{\Carbon\Carbon::parse($shipment->delivery_date)->format(config('eac.date_format'))}}</strong>
                    @else
-                    <span class="text-muted">N/A</span>
-                   @endif
-                  </div>
-                  <div class="">
-                   <small class="upper d-block">Expected Delivery</small>
-                   @if($shipment->deliver_by_date)
-                    <strong>{{\Carbon\Carbon::parse($shipment->deliver_by_date)->format(config('eac.date_format'))}}</strong>
-                   @else
-                    <span class="text-muted">N/A</span>
-                   @endif
-                  </div>
-                  <div class="">
-                   <small class="upper d-block">Tracking Number</small>
-                   @if($shipment->tracking_number)
-                    <strong>{{ $shipment->tracking_number }}</strong>
-                   @else
-                    <span class="text-muted">N/A</span>
-                   @endif
-                  </div>
-                  <div class="">
-                   <small class="upper d-block">Courier</small>
-                   @if($shipment->courier)
-                    <strong>{{ $shipment->courier->name }}</strong>
-                   @else
-                    <span class="text-muted">N/A</span>
+                    <span>N/A</span>
                    @endif
                   </div>
                  </div>
-                @endif
-               @endif
-              </div>
-             </div>
+                 <div class="mb-2">
+                  <small class="upper d-block">Expected Delivery</small>
+                  @if($shipment->deliver_by_date)
+                   {{\Carbon\Carbon::parse($shipment->deliver_by_date)->format(config('eac.date_format'))}}
+                  @else
+                   <span class="text-muted">N/A</span>
+                  @endif
+                 </div>
+                 <div class="mb-2">
+                  <small class="upper d-block">Tracking Number</small>
+                  @if($shipment->tracking_number)
+                   {{ $shipment->tracking_number }}
+                  @else
+                   <span class="text-muted">N/A</span>
+                  @endif
+                 </div>
+                 <div class="mb-2">
+                  <small class="upper d-block">Courier</small>
+                  @if($shipment->courier)
+                   {{ $shipment->courier->name }}
+                  @else
+                   <span class="text-muted">N/A</span>
+                  @endif
+                 </div>
+                </div>
+               </div>
+              @endif
+             </div><!-- /.d-flex -->
             </div>
            </div>
 
 
-           @foreach($shipment->visits->sortBy('index') as $visit)
-            <div class="bg-white p-1">
-             <div class="row align-items-center">
-              <div class="col-sm-auto col-lg col-xl-2 order-md-1">
-               <div class="p-3 poppins">
-                <div class="h5 mb-0 strong">Visit #{{$visit->index == 0 ? 1 : $visit->index}}</div>
-                <a href="#" class="btn btn-link btn-sm">
-                 Edit Visit <span class="fal fa-angle-double-right"></span>
-                </a>
-                <br /><a class="mb-1 {{$visit->getDocStatus() ? 'complete' : ''}}" id="xdetailsT{{$visit->index}}" data-toggle="pill" href="#xdetails{{$visit->index}}" role="tab" aria-controls="xdetails{{$visit->index}}" aria-selected="false">
-                 view panel
-                </a>
+              @foreach($shipment->visits->sortBy('index') as $visit)
+               <div class="bg-white p-1">
+                <div class="row align-items-center">
+                 <div class="col-sm-auto col-lg col-xl-2 order-md-1">
+                  <div class="p-3 poppins">
+                   <div class="h5 mb-0 strong">Visit #{{$visit->index == 0 ? 1 : $visit->index}}</div>
+                   <a href="#" class="btn btn-link btn-sm">
+                    Edit Visit <span class="fal fa-angle-double-right"></span>
+                   </a>
+                   <br /><a class="mb-1 {{$visit->getDocStatus() ? 'complete' : ''}}" id="xdetailsT{{$visit->index}}" data-toggle="pill" href="#xdetails{{$visit->index}}" role="tab" aria-controls="xdetails{{$visit->index}}" aria-selected="false">
+                    view panel
+                   </a>
+                  </div>
+                 </div>
+                 <div class="col-sm-auto col-lg col-xl-auto order-md-3 order-lg-2 order-xl-3">
+                  <div class="d-flex justify-content-between poppins p-2">
+                   <div class="flex-fill text-center pl-2 pr-2">
+                    <h5 class="mb-0"><strong>{{$visit->requiredDocs()->count()}}</strong></h5>
+                    <span class="d-block">Requested Forms</span>
+                   </div>
+                   <div class="border-left">&nbsp;</div>
+                   <div class="flex-fill text-center pl-2 pr-2">
+                    <h5 class="mb-0"><strong>{{$visit->uploadedDocuments()->count()}}</strong></h5>
+                    <span class="d-block">Submitted</span>
+                   </div>
+                  </div><!-- /.d-flex -->
+                 </div>
+                 <div class="col-md col-lg-12 col-xl order-md-2 order-lg-3 order-xl-2">
+                  <div class="stepPro">
+                   <div class="completed">
+                    <div class="h5 poppins mb-0">Visit Date</div>
+                    <small>
+                     @if($visit->visit_date) {{ $visit->visit_date }} @elseif($visit->visit_date > date('Y-m-d')) Future visit @else Information Unavailable @endif
+                    </small>
+                   </div>
+                   <div class="{{$visit->getDocStatus() ? 'completed' : 'inprogress'}}">
+                    <div class="h5 poppins mb-0">Submit Forms</div>
+                    <small>Forms {{$visit->getDocStatus() ? 'have been submitted' : 'are requested'}} for this visit</small>
+                   </div>
+                   <div class="{{$visit->getDocStatus() ? 'completed' : 'notavail'}}">
+                    <div class="h5 poppins mb-0">Completed</div>
+                    <small>All requested forms have been submitted</small>
+                   </div>
+                  </div><!-- /.stepPro -->
+                 </div>
+                </div>
                </div>
-              </div>
-              <div class="col-sm-auto col-lg col-xl-auto order-md-3 order-lg-2 order-xl-3">
-               <div class="d-flex justify-content-between poppins p-2">
-                <div class="flex-fill text-center pl-2 pr-2">
-                 <h5 class="mb-0"><strong>{{$visit->requiredDocs()->count()}}</strong></h5>
-                 <span class="d-block">Requested Forms</span>
-                </div>
-                <div class="border-left">&nbsp;</div>
-                <div class="flex-fill text-center pl-2 pr-2">
-                 <h5 class="mb-0"><strong>{{$visit->uploadedDocuments()->count()}}</strong></h5>
-                 <span class="d-block">Submitted</span>
-                </div>
-               </div><!-- /.d-flex -->
-              </div>
-              <div class="col-md col-lg-12 col-xl order-md-2 order-lg-3 order-xl-2">
-               <div class="stepPro">
-                <div class="completed">
-                 <div class="h5 poppins mb-0">Visit Date</div>
-                 <small>
-                  @if($visit->visit_date) {{ $visit->visit_date }} @elseif($visit->visit_date > date('Y-m-d')) Future visit @else Information Unavailable @endif
-                 </small>
-                </div>
-                <div class="{{$visit->getDocStatus() ? 'completed' : 'inprogress'}}">
-                 <div class="h5 poppins mb-0">Submit Forms</div>
-                 <small>Forms {{$visit->getDocStatus() ? 'have been submitted' : 'are requested'}} for this visit</small>
-                </div>
-                <div class="{{$visit->getDocStatus() ? 'completed' : 'notavail'}}">
-                 <div class="h5 poppins mb-0">Completed</div>
-                 <small>All requested forms have been submitted</small>
-                </div>
-               </div><!-- /.stepPro -->
-              </div>
-             </div>
-            </div>
-           @endforeach
+              @endforeach
 
           </div>
          @endif
