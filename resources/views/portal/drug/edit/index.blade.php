@@ -120,9 +120,9 @@
 					<a class="nav-link complete" id="xavailabilityT" data-toggle="pill" href="#xavailability" role="tab" aria-controls="xavailability" aria-selected="false">
 						<span>Availability</span>
 					</a>
-					<a class="nav-link complete" id="xdrugImageT" data-toggle="pill" href="#xdrugImage" role="tab" aria-controls="xdrugImage" aria-selected="false">
+{{-- 					<a class="nav-link complete" id="xdrugImageT" data-toggle="pill" href="#xdrugImage" role="tab" aria-controls="xdrugImage" aria-selected="false">
 						<span>Drug Image</span>
-					</a>
+					</a> --}}
 					<a class="nav-link complete" id="xwebdescT" data-toggle="pill" href="#xwebdesc" role="tab" aria-controls="xwebdesc" aria-selected="false">
 						<span>Website Description</span>
 					</a>

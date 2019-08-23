@@ -123,11 +123,11 @@
 					   aria-controls="xavailability" aria-selected="true">
 						<span>Availability</span>
 					</a>
-					<a class="nav-link complete" id="xdrugImageT" data-toggle="pill" href="#xdrugImage"
+{{-- 					<a class="nav-link complete" id="xdrugImageT" data-toggle="pill" href="#xdrugImage"
 					   role="tab"
 					   aria-controls="xdrugImage" aria-selected="false">
 						<span>Drug Image</span>
-					</a>
+					</a> --}}
 					<a class="nav-link complete" id="xwebdescT" data-toggle="pill" href="#xwebdesc" role="tab"
 					   aria-controls="xwebdesc" aria-selected="false">
 						<span>Descriptions</span>
@@ -234,7 +234,7 @@
 							@endif
 						</div>
 					</div><!-- /.tab-pane -->
-					<div class="tab-pane fade" id="xdrugImage" role="tabpanel" aria-labelledby="xdrugimage-tab">
+	{{-- 				<div class="tab-pane fade" id="xdrugImage" role="tabpanel" aria-labelledby="xdrugimage-tab">
 						<div class="card-body">
 							<div class="pre-scrollable small">
 								@if(isset($drugLogo->name))
@@ -246,7 +246,7 @@
 								@endif
 							</div>
 						</div>
-					</div><!-- /.tab-pane -->
+					</div> --}}
 					<div class="tab-pane fade" id="xwebdesc" role="tabpanel" aria-labelledby="xwebdesc-tab">
 						<div class="card-body">
 							<h5>

@@ -81,10 +81,10 @@
 			<i class="fal fa-redo"></i>
 			Resend Welcome Email
 		</a>
-		@if(\Auth::user()->id === $user->id)
-			<a href="{{route('eac.auth.password.change', \Auth::user()->id)}}" class="btn btn-dark btn-block">
+		@if((Auth::user()->type->name == 'Early Access Care') || (\Auth::user()->id === $user->id))
+			<a href="{{route('eac.auth.password.change', \Auth::user()->id)}}" class="btn btn-dark">
+				<i class="fal fa-lock-alt"></i>
 				Modify Password
-				<i class="fa-fw fas fa-user-md"></i>
 			</a>
 		@endif
 		<a href="{{ route('eac.portal.user.show', $user->id) }}" class="ml-xl-auto btn btn-warning">

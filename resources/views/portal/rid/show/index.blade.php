@@ -41,30 +41,12 @@
 			:root {
 				--rightCol: 790px
 			}
-
-			#noteSlider .carousel-inner {
-				height: 150px;
-			}
-
-			#noteSlider .carousel-inner p {
-				font-size: 90%;
-				max-height: 125px;
-				overflow-y: scroll;
-			}
 		}
 
 		@media screen and (min-width: 1400px) {
 			:root {
 				--leftCol: 220px;
 				--rightCol: 900px;
-			}
-
-			#noteSlider .carousel-inner {
-				height: 125px;
-			}
-
-			#noteSlider .carousel-inner p {
-				max-height: 100px;
 			}
 		}
 

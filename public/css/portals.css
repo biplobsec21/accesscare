@@ -43,7 +43,6 @@ table a {
  position: relative;
 }
 .drag_container > li:before, ul.connectedSortable li:before {
- content: "\f142  \f142";
  padding-right: 5px;
  margin-left: -5px;
  color: #000;
@@ -51,6 +50,7 @@ table a {
  opacity: .4;
  font-weight: 500;
  font-size: 80%;
+ content: "\f142  \f142";
  font-family: "Font Awesome 5 Pro";
 }
 .drag_container > li:hover, ul.connectedSortable li:hover {

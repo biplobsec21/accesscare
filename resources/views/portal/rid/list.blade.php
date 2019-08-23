@@ -180,7 +180,8 @@
                         },
                     ],
                 },
-                order: [[0, 'asc']]
+                order: [[0, 'asc']],
+                stateSave: true
             });
         }); // end doc ready
     </script>
