@@ -107,6 +107,7 @@
 								Shipment {{$i}} -
 								<span class="shipment-date">
 									{{$shipment->deliver_by_date ?? 'N/A'}}
+
 								</span>
 								<a class="delete-shipment-btn badge badge-danger" href="#" style="display: none">
 									Delete
@@ -119,6 +120,9 @@
 										<input type="hidden" data-field="shipment_id" name="visits[{{$visit->id}}]" value="{{$shipment->id}}"/>
 										Visit {{$visit->index}} -
 										<span class="visit-date">{{$visit->visit_date}}</span>
+										<a class=" badge badge-danger text-white" href="#" onclick="ConfirmVisitDelete('{{$visit->id}}','{{$visit->parent_id}}')">
+											Delete
+										</a>
 									</li>
 								@endforeach
 							</ul>
@@ -215,4 +219,41 @@
 
         }
 	</script>
+<script>
+
+  function ConfirmVisitDelete(param,rid)
+  {
+    
+    swal({
+      title: "Are you sure?",
+      text: "Want to delete it",
+      icon: "warning",
+      buttons: [
+        'No, cancel it!',
+        'Yes, I am sure!'
+      ],
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        swal({
+          title: 'Successfull!',
+          text: 'Content deleted!',
+          icon: 'success'
+        }).then(function() {
+            $.get("{{route('eac.portal.rid.visit.delete')}}",
+              {
+               id: param
+             });
+            // return false;
+          // swal.close();
+
+          location.reload(); // <--- submit form programmatically
+        });
+      } else {
+        swal("Cancelled", "Operation cancelled", "error");
+      }
+    })
+  }
+</script>
 @endsection
+

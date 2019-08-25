@@ -108,6 +108,10 @@ Route::group([
 		'as' => 'eac.portal.rid.supply.update',
 		'uses' => 'RidController@updateSupply'
 	]);
+	Route::match(['get','post'],'deletevisit', [
+		'as' => 'eac.portal.rid.visit.delete', 
+		'uses' => 'RidController@visitDelete' 
+	]);
 	Route::post('/edit/save', [
 		'as' => 'eac.portal.rid.edit.save',
 		'uses' => 'RidController@writeDB',

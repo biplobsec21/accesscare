@@ -461,6 +461,17 @@ class RidController extends Controller
 
         return view('portal.rid.resupply.create', ['rid' => $rid, 'country' => $country, 'drug_supply' => $drug_supply]);
     }
+    public function visitDelete(Request $request){
+         $id = $request->id;
+        $resourceData = RidVisit::find($id);
+        if ($resourceData):
+            if ($resourceData->delete()):
+                return [
+                    'result' => 'success'
+                ];
+            endif;
+        endif;
+    }
 
     public function storeResupply(ResupplyCreateRequest $request)
     {
