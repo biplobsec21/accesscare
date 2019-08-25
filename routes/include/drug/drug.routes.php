@@ -92,6 +92,10 @@ Route::group([
 		'as' => 'eac.portal.drug.modal.component.create',
 		'uses' => 'DrugDosageController@storeComponent',
 	]);
+	Route::post('/modal/component/edit', [
+		'as' => 'eac.portal.drug.modal.component.edit',
+		'uses' => 'DrugDosageController@editComponent',
+	]);
 	
 	Route::match(['get','post'],'delete', [
 		'as' => 'eac.portal.drug.component.delete', 

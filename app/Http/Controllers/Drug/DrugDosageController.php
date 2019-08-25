@@ -78,6 +78,14 @@ class DrugDosageController extends Controller
 
 		return redirect()->back();
 	}
+	public function editComponent(Request $request)
+	{
+		$component = DrugComponent::where('drug_id', $request->input('drug_id'))->where('id', $request->input('componentId'))->firstOrFail();
+		$component->name = $request->input('name');
+		$component->active = ($request->input('active') == 'on') ? 1 : 0;
+		$component->save();
+		return redirect()->back();
+	}
 
 	/**
 	 * Display the management page
