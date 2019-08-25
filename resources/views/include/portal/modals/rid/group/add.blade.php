@@ -15,10 +15,42 @@
 					<div class="mb-3">
 						<label class="d-block label_required">User Group</label>
 						<select class="form-control" name="user_group_id" required="required">
-							<option disabled hidden selected value="">-- Select --</option>
+							<option disabled hidden selected value="">-- Select -- </option>
+							@if(\Auth::user()->type->name == 'Early Access Care')
 							@foreach($groups as $group)
 								<option value="{{$group->id}}">{{$group->name}}</option>
 							@endforeach
+							@endif
+
+
+							@if(\Auth::user()->type->name == 'Physician')
+							@foreach($groups as $group)
+								@if( $group->type->name == 'Physician')
+									@foreach($group->users() as $user)
+										@if($user->id == \Auth::user()->id)
+											<option value="{{$group->id}}">{{$group->name }}</option>
+										@endif
+									@endforeach
+								@endif
+							@endforeach
+							@endif
+
+							@if(\Auth::user()->type->name == 'Pharmaceutical')
+								@if($rid->drug->company)
+									@php
+										$Cgroup = \App\CompanyGroup::where('company_id',$rid->drug->company->id)->get();
+									@endphp
+
+									@if($Cgroup->count())
+										@foreach($Cgroup as $pharmaAssignGroup)
+											<option value="{{$pharmaAssignGroup->user_group->id}}">{{$pharmaAssignGroup->user_group->name }}</option>
+										@endforeach		
+									@endif
+								@endif
+							@endif	
+
+
+							
 						</select>
 						<input type="hidden" name="rid_id" value="{{ $rid->id }}"/>
 					</div>
